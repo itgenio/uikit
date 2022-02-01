@@ -34,7 +34,7 @@
 
   .dialog-title {
     .text-xl();
-    .font-bold();
+    font-weight: @font-weight-bold;
     text-align: center;
   }
 
@@ -59,40 +59,22 @@
   }
 
   .dialog-content {
-    background-color: @color-light-neutral-0;
+    background-color: var(--gkit-color-neutral-0);
   }
 
   .dialog-title {
-    color: @color-light-neutral-900;
+    color: var(--gkit-color-neutral-900);
   }
 
   .dialog-text {
-    color: @color-light-neutral-500;
+    color: var(--gkit-color-neutral-500);
   }
 
   .close-dialog-btn {
-    color: @color-light-neutral-200;
+    color: var(--gkit-color-neutral-200);
   }
 }
 
-.dark-mode .gkit-dialog {
-  .gkit-dialog-wrapper {
-    background-color: rgba(0, 0, 0, 0.65);
-  }
-
-  .dialog-content {
-    background-color: @color-dark-neutral-0;
-  }
-
-  .dialog-title {
-    color: @color-dark-neutral-900;
-  }
-
-  .dialog-text {
-    color: @color-dark-neutral-500;
-  }
-
-  .close-dialog-btn {
-    color: @color-dark-neutral-200;
-  }
+.dark-mode .gkit-dialog-wrapper {
+  background-color: rgba(0, 0, 0, 0.65);
 }

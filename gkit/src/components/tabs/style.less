@@ -4,9 +4,8 @@
 .gkit-tabs {
   display: flex;
   gap: 1.5rem;
-
+  font-weight: @font-weight-bold;
   .text-sm();
-  .font-bold();
 }
 
 .gkit-tab {
@@ -20,31 +19,16 @@
 }
 
 .gkit-tab {
-  color: @color-light-neutral-500;
+  color: var(--gkit-color-neutral-500);
 
   &:hover,
   &.hover {
-    color: @color-light-neutral-700;
-    border-bottom-color: @color-light-neutral-300;
+    color: var(--gkit-color-neutral-700);
+    border-bottom-color: var(--gkit-color-neutral-300);
   }
 
   &.selected {
-    color: @color-light-neutral-800;
-    border-bottom-color: @color-light-blue-500;
-  }
-}
-
-.dark-mode .gkit-tab {
-  color: @color-dark-neutral-500;
-
-  &:hover,
-  &.hover {
-    color: @color-dark-neutral-700;
-    border-bottom-color: @color-dark-neutral-300;
-  }
-
-  &.selected {
-    color: @color-dark-neutral-800;
-    border-bottom-color: @color-dark-blue-500;
+    color: var(--gkit-color-neutral-800);
+    border-bottom-color: var(--gkit-color-primary-500);
   }
 }

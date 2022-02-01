@@ -1,5 +1,6 @@
 @import (reference) "./neutralColors";
 @import (reference) "./blueColors";
+@import (reference) "./dangerColors";
 
 @unit-size: 0.25rem;
 
@@ -27,32 +28,14 @@
 @font-weight-normal: 400;
 @font-weight-bold: 600;
 
-//
-// Danger
-//
-
-// light
-@color-light-danger-surface: #fae6e6;
-@color-light-danger-border: #f5c9c9;
-@color-light-danger-hover: #bb0000;
-@color-light-danger-main: #ef4444;
-@color-light-danger-pressed: #700000;
-
-// dark
-@color-dark-danger-surface: #fae6e6;
-@color-dark-danger-border: #f5c9c9;
-@color-dark-danger-hover: #bb0000;
-@color-dark-danger-main: #ef4444;
-@color-dark-danger-pressed: #700000;
-
 html {
-  --gkit-text-size-xs: 0.75em;
-  --gkit-text-size-sm: 0.875em;
-  --gkit-text-size-base: 1em;
-  --gkit-text-size-lg: 1.125em;
-  --gkit-text-size-xl: 1.25em;
-  --gkit-text-size-2xl: 1.75em;
-  --gkit-text-size-3xl: 2.25em;
+  --gkit-text-size-xs: @text-size-xs;
+  --gkit-text-size-sm: @text-size-sm;
+  --gkit-text-size-base: @text-size-base;
+  --gkit-text-size-lg: @text-size-lg;
+  --gkit-text-size-xl: @text-size-xl;
+  --gkit-text-size-2xl: @text-size-2xl;
+  --gkit-text-size-3xl: @text-size-3xl;
 
   --gkit-color-neutral-0: @color-light-neutral-0;
   --gkit-color-neutral-50: @color-light-neutral-50;
@@ -76,9 +59,27 @@ html {
   --gkit-color-blue-700: @color-light-blue-700;
   --gkit-color-blue-800: @color-light-blue-800;
   --gkit-color-blue-900: @color-light-blue-900;
+
+  --gkit-color-primary-50: var(--gkit-color-blue-50);
+  --gkit-color-primary-100: var(--gkit-color-blue-100);
+  --gkit-color-primary-200: var(--gkit-color-blue-200);
+  --gkit-color-primary-300: var(--gkit-color-blue-300);
+  --gkit-color-primary-400: var(--gkit-color-blue-400);
+  --gkit-color-primary-500: var(--gkit-color-blue-500);
+  --gkit-color-primary-600: var(--gkit-color-blue-600);
+  --gkit-color-primary-700: var(--gkit-color-blue-700);
+  --gkit-color-primary-800: var(--gkit-color-blue-800);
+  --gkit-color-primary-900: var(--gkit-color-blue-900);
+
+  --gkit-color-danger-surface: @color-light-danger-surface;
+  --gkit-color-danger-border: @color-light-danger-border;
+  --gkit-color-danger-hover: @color-light-danger-hover;
+  --gkit-color-danger-main: @color-light-danger-main;
+  --gkit-color-danger-pressed: @color-light-danger-pressed;
 }
 
 //dark
+.dark-mode,
 html:not(.style-scope)[dark] {
   --gkit-color-neutral-0: @color-dark-neutral-0;
   --gkit-color-neutral-50: @color-dark-neutral-50;
@@ -102,4 +103,10 @@ html:not(.style-scope)[dark] {
   --gkit-color-blue-700: @color-dark-blue-700;
   --gkit-color-blue-800: @color-dark-blue-800;
   --gkit-color-blue-900: @color-dark-blue-900;
+
+  --gkit-color-danger-surface: @color-dark-danger-surface;
+  --gkit-color-danger-border: @color-dark-danger-border;
+  --gkit-color-danger-hover: @color-dark-danger-hover;
+  --gkit-color-danger-main: @color-dark-danger-main;
+  --gkit-color-danger-pressed: @color-dark-danger-pressed;
 }

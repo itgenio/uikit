@@ -12,7 +12,7 @@
     .outline();
     .outline-2();
     .outline-offset-2();
-    .outline-blue-700();
+    .outline-primary-700();
   }
 
   &.large {
@@ -54,23 +54,23 @@
 
 .gkit-btn {
   &.primary {
-    background-color: @color-light-blue-500;
-    color: @color-light-neutral-0;
+    background-color: var(--gkit-color-primary-500);
+    color: var(--gkit-color-neutral-0);
 
     &.icon {
       svg path {
-        fill: @color-light-neutral-0;
+        fill: var(--gkit-color-neutral-0);
       }
     }
 
     &.hover,
     &:hover {
-      background-color: @color-light-blue-600;
+      background-color: var(--gkit-color-primary-600);
     }
 
     &.active,
     &:active {
-      background-color: @color-light-blue-700;
+      background-color: var(--gkit-color-primary-700);
     }
 
     &[disabled] {
@@ -79,133 +79,53 @@
   }
 
   &.secondary {
-    background-color: @color-light-blue-50;
-    color: @color-light-blue-700;
+    background-color: var(--gkit-color-primary-50);
+    color: var(--gkit-color-primary-700);
 
     &.icon {
       svg path {
-        fill: @color-light-blue-700;
+        fill: var(--gkit-color-primary-700);
       }
     }
 
     &.hover,
     &:hover {
-      background-color: @color-light-blue-100;
+      background-color: var(--gkit-color-primary-100);
     }
 
     &.active,
     &:active {
-      background-color: @color-light-blue-200;
+      background-color: var(--gkit-color-primary-200);
     }
 
     &[disabled] {
-      background-color: @color-light-neutral-50;
-      color: @color-light-neutral-300;
+      background-color: var(--gkit-color-neutral-50);
+      color: var(--gkit-color-neutral-300);
     }
   }
 
   &.danger {
-    background-color: @color-light-danger-main;
-    color: @color-light-neutral-0;
+    background-color: var(--gkit-color-danger-main);
+    color: var(--gkit-color-neutral-0);
 
     &.icon {
       svg path {
-        fill: @color-light-neutral-0;
+        fill: var(--gkit-color-neutral-0);
       }
     }
 
     &.hover,
     &:hover {
-      background-color: @color-light-danger-hover;
+      background-color: var(--gkit-color-danger-hover);
     }
 
     &.active,
     &:active {
-      background-color: @color-light-danger-pressed;
+      background-color: var(--gkit-color-danger-pressed);
     }
 
     &[disabled] {
       opacity: 0.3;
-    }
-  }
-}
-
-.dark-mode {
-  .gkit-btn {
-    &.primary {
-      background-color: @color-dark-blue-500;
-      color: @color-dark-neutral-0;
-
-      &.icon {
-        svg path {
-          fill: @color-dark-neutral-0;
-        }
-      }
-
-      &.hover,
-      &:hover {
-        background-color: @color-dark-blue-600;
-      }
-
-      &.active,
-      &:active {
-        background-color: @color-dark-blue-700;
-      }
-
-      &[disabled] {
-        opacity: 0.3;
-      }
-    }
-
-    &.secondary {
-      background-color: @color-dark-blue-50;
-      color: @color-dark-blue-700;
-
-      &.icon {
-        svg path {
-          fill: @color-dark-blue-700;
-        }
-      }
-
-      &.hover,
-      &:hover {
-        background-color: @color-dark-blue-100;
-      }
-
-      &.active,
-      &:active {
-        background-color: @color-dark-blue-200;
-      }
-
-      &[disabled] {
-        background-color: @color-dark-neutral-50;
-        color: @color-dark-neutral-300;
-      }
-    }
-
-    &.danger {
-      background-color: @color-dark-danger-main;
-      color: @color-dark-neutral-0;
-
-      &.icon {
-        svg path {
-          fill: @color-dark-neutral-0;
-        }
-      }
-
-      &.hover,
-      &:hover {
-        background-color: @color-dark-danger-hover;
-      }
-
-      &.active,
-      &:active {
-        background-color: @color-dark-danger-pressed;
-      }
-
-      &[disabled] {
-        opacity: 0.3;
-      }
     }
   }
 }
