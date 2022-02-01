@@ -18,7 +18,11 @@ export function Colors() {
             <div className="modes">
               <div className="shadow-md">
                 {nums.map(n => (
-                  <div key={`${name}${n}`} className={`color bg-${name}-${n}`}>
+                  <div
+                    key={`${name}${n}`}
+                    className="color"
+                    style={{ backgroundColor: `var(--gkit-color-${name}-${n})` }}
+                  >
                     <pre>
                       <code style={{ userSelect: 'all' }} className="text-xs">{`text-${name}-${n}`}</code>
                     </pre>
@@ -27,7 +31,11 @@ export function Colors() {
               </div>
               <div className="shadow-md dark-mode">
                 {nums.map(n => (
-                  <div key={`${name}${n}`} className={`color bg-${name}-${n}`}>
+                  <div
+                    key={`${name}${n}`}
+                    className="color"
+                    style={{ backgroundColor: `var(--gkit-color-${name}-${n})` }}
+                  >
                     <pre>
                       <code style={{ userSelect: 'all' }} className="text-xs">{`text-${name}-${n}`}</code>
                     </pre>

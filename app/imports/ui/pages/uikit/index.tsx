@@ -14,7 +14,7 @@ const components = [Colors, Buttons, Panels, TabsExample, TextFields, Dialogs];
 export function UikitDemo() {
   const names = components.map(c => c.displayName);
 
-  const [c, setC] = useState(names[0]);
+  const [c, setC] = useState(names[1]);
 
   const Component = components.find(component => component.displayName === c);
 
@@ -22,7 +22,7 @@ export function UikitDemo() {
     <div className="uikit-page">
       <section>
         <header>
-          <span className="text-xl logo font-bold">UI_KIT</span>
+          <span className="text-xl logo">UI_KIT</span>
           <DarkModeButton />
         </header>
         <nav>
