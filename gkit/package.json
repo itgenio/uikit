@@ -1,18 +1,18 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "GKIT",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && NODE_ENV=production ts-node ./build.ts",
+    "build": "rimraf dist && NODE_ENV=production ts-node ./build.js",
     "tsc": "tsc",
     "prepack": "npm run build && npm run tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alex So",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.14",
     "@types/react": "^17.0.15",
@@ -20,11 +20,13 @@
     "esbuild": "^0.14.16",
     "esbuild-plugin-less": "^1.1.6",
     "rimraf": "^3.0.2",
-    "tiny-glob": "^0.2.9",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
     "react": "^17.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

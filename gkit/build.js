@@ -1,29 +1,22 @@
 const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
-const glob = require('tiny-glob');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
 
 (async () => {
-  const entryPoints = await glob('./src/icons/*.tsx');
-
   build({
     watch: isProduction
       ? false
       : {
-          onRebuild(error: any) {
+          onRebuild(error) {
             if (!error) {
               console.log('Build succeeded');
             }
           },
         },
-    entryPoints: [
-      path.resolve(__dirname, 'src/index.ts'),
-      path.resolve(__dirname, 'src/styles/index.less'),
-      ...entryPoints,
-    ],
+    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     outbase: 'src',
     bundle: true,
     format: 'esm',
@@ -34,5 +27,5 @@ const isProduction = process.env.NODE_ENV === 'production';
     loader: {
       '.ts': 'ts',
     },
-  }).catch((e: Error) => console.error(e.message));
+  }).catch(e => console.error(e.message));
 })();

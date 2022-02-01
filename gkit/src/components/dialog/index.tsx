@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
 import React from 'react';
-import { CloseIcon } from '../../icons/close';
+import { CloseIcon } from '../icons/close';
 
 type Props = React.PropsWithChildren<{
   title?: string;

@@ -1,3 +1,5 @@
+import './index.less';
+
 export * from './components/button';
 export * from './components/tabs';
 export * from './components/textField';
