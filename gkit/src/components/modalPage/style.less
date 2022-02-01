@@ -1,0 +1,101 @@
+@import (reference) "../../styles/variables";
+@import (reference) "../../styles/ui";
+
+.gkit-modal-page {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  .gkit-modal-page-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+  }
+
+  .modal-page-content {
+    position: relative;
+    width: 100%;
+    margin: 0.5rem;
+    .shadow-lg();
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+
+  .modal-page-header {
+  }
+
+  .modal-page-body {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .modal-page-footer {
+    margin-top: 0.5rem;
+  }
+
+  .modal-page-title {
+    .text-xl();
+    .font-bold();
+  }
+
+  .modal-page-text {
+    .text-base();
+  }
+
+  .close-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 1.25rem;
+    top: 1.25rem;
+    position: absolute;
+    cursor: pointer;
+  }
+}
+
+.gkit-modal-page {
+  .gkit-modal-page-wrapper {
+    background-color: rgba(107, 114, 128, 0.75);
+  }
+
+  .modal-page-content {
+    background-color: @color-light-neutral-50;
+  }
+
+  .modal-page-title {
+    color: @color-light-neutral-900;
+  }
+
+  .modal-page-text {
+    color: @color-light-neutral-500;
+  }
+
+  .close-btn {
+    color: @color-light-neutral-200;
+  }
+}
+
+.dark-mode .gkit-modal-page {
+  .gkit-modal-page-wrapper {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .modal-page-content {
+    background-color: @color-dark-neutral-50;
+  }
+
+  .modal-page-title {
+    color: @color-dark-neutral-900;
+  }
+
+  .modal-page-text {
+    color: @color-dark-neutral-500;
+  }
+
+  .close-btn {
+    color: @color-dark-neutral-200;
+  }
+}

@@ -1,0 +1,98 @@
+@import (reference) "../../styles/variables";
+@import (reference) "../../styles/ui";
+
+.gkit-dialog {
+  position: relative;
+
+  .gkit-dialog-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+  }
+
+  .dialog-content {
+    position: relative;
+    max-width: 50ch;
+    min-width: 260px; //TODO
+    .shadow-lg();
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    margin: auto;
+  }
+
+  .dialog-header {
+  }
+
+  .dialog-footer {
+    margin-top: 0.5rem;
+  }
+
+  .dialog-title {
+    .text-xl();
+    .font-bold();
+    text-align: center;
+  }
+
+  .dialog-text {
+    .text-base();
+    text-align: center;
+  }
+
+  .close-dialog-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    right: -2.25rem;
+    top: -2.25rem;
+    position: absolute;
+    cursor: pointer;
+  }
+}
+
+.gkit-dialog {
+  .gkit-dialog-wrapper {
+    background-color: rgba(107, 114, 128, 0.75);
+  }
+
+  .dialog-content {
+    background-color: @color-light-neutral-0;
+  }
+
+  .dialog-title {
+    color: @color-light-neutral-900;
+  }
+
+  .dialog-text {
+    color: @color-light-neutral-500;
+  }
+
+  .close-dialog-btn {
+    color: @color-light-neutral-200;
+  }
+}
+
+.dark-mode .gkit-dialog {
+  .gkit-dialog-wrapper {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .dialog-content {
+    background-color: @color-dark-neutral-0;
+  }
+
+  .dialog-title {
+    color: @color-dark-neutral-900;
+  }
+
+  .dialog-text {
+    color: @color-dark-neutral-500;
+  }
+
+  .close-dialog-btn {
+    color: @color-dark-neutral-200;
+  }
+}

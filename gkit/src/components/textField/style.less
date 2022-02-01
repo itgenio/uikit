@@ -1,0 +1,122 @@
+@import (reference) "../../styles/variables";
+@import (reference) "../../styles/ui";
+
+.gkit-text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    .text-base();
+    .font-bold();
+  }
+
+  .helper-text {
+    .text-sm();
+  }
+
+  input {
+    cursor: text;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    .text-base();
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+
+    &.full-width {
+      display: flex;
+    }
+
+    &.focus,
+    &:focus {
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-blue-700();
+    }
+
+    &::placeholder {
+      .text-base();
+    }
+  }
+}
+
+.gkit-text-field {
+  label {
+    color: @color-light-neutral-800;
+  }
+
+  &.disabled label {
+    color: @color-light-neutral-400;
+  }
+
+  .helper-text {
+    color: @color-light-neutral-500;
+  }
+
+  input {
+    border-color: @color-light-neutral-200;
+    background-color: @color-light-neutral-50;
+    color: @color-light-neutral-900;
+
+    &::placeholder {
+      color: @color-light-neutral-500;
+    }
+
+    &.hover,
+    &:hover {
+      border-color: @color-light-blue-500;
+    }
+
+    &[disabled] {
+      border-color: @color-light-neutral-100;
+      background-color: @color-light-neutral-100;
+      color: @color-light-neutral-300;
+
+      &::placeholder {
+        color: @color-light-neutral-200; //TODO
+      }
+    }
+  }
+}
+
+.dark-mode .gkit-text-field {
+  label {
+    color: @color-dark-neutral-800;
+  }
+
+  &.disabled label {
+    color: @color-dark-neutral-400;
+  }
+
+  .helper-text {
+    color: @color-dark-neutral-500;
+  }
+
+  input {
+    border-color: @color-dark-neutral-200;
+    background-color: @color-dark-neutral-50;
+    color: @color-dark-neutral-900;
+
+    &::placeholder {
+      color: @color-dark-neutral-500;
+    }
+
+    &.hover,
+    &:hover {
+      border-color: @color-dark-blue-500;
+    }
+
+    &[disabled] {
+      border-color: @color-dark-neutral-100;
+      background-color: @color-dark-neutral-100;
+      color: @color-dark-neutral-300;
+
+      &::placeholder {
+        color: @color-dark-neutral-200; //TODO
+      }
+    }
+  }
+}

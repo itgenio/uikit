@@ -1,0 +1,105 @@
+@import (reference) "./neutralColors";
+@import (reference) "./blueColors";
+
+@unit-size: 0.25rem;
+
+@text-size-xs: 0.75rem;
+@text-line-height-xs: 1.333;
+
+@text-size-sm: 0.875rem;
+@text-line-height-sm: 1.428;
+
+@text-size-base: 1rem;
+@text-line-height-base: 1.5;
+
+@text-size-lg: 1.125rem;
+@text-line-height-lg: 1.555;
+
+@text-size-xl: 1.25rem;
+@text-line-height-xl: 1.4;
+
+@text-size-2xl: 1.75rem;
+@text-line-height-2xl: 1.285;
+
+@text-size-3xl: 2.25rem;
+@text-line-height-3xl: 1.222;
+
+@font-weight-normal: 400;
+@font-weight-bold: 600;
+
+//
+// Danger
+//
+
+// light
+@color-light-danger-surface: #fae6e6;
+@color-light-danger-border: #f5c9c9;
+@color-light-danger-hover: #bb0000;
+@color-light-danger-main: #ef4444;
+@color-light-danger-pressed: #700000;
+
+// dark
+@color-dark-danger-surface: #fae6e6;
+@color-dark-danger-border: #f5c9c9;
+@color-dark-danger-hover: #bb0000;
+@color-dark-danger-main: #ef4444;
+@color-dark-danger-pressed: #700000;
+
+html {
+  --gkit-text-size-xs: 0.75em;
+  --gkit-text-size-sm: 0.875em;
+  --gkit-text-size-base: 1em;
+  --gkit-text-size-lg: 1.125em;
+  --gkit-text-size-xl: 1.25em;
+  --gkit-text-size-2xl: 1.75em;
+  --gkit-text-size-3xl: 2.25em;
+
+  --gkit-color-neutral-0: @color-light-neutral-0;
+  --gkit-color-neutral-50: @color-light-neutral-50;
+  --gkit-color-neutral-100: @color-light-neutral-100;
+  --gkit-color-neutral-200: @color-light-neutral-200;
+  --gkit-color-neutral-300: @color-light-neutral-300;
+  --gkit-color-neutral-400: @color-light-neutral-400;
+  --gkit-color-neutral-500: @color-light-neutral-500;
+  --gkit-color-neutral-600: @color-light-neutral-600;
+  --gkit-color-neutral-700: @color-light-neutral-700;
+  --gkit-color-neutral-800: @color-light-neutral-800;
+  --gkit-color-neutral-900: @color-light-neutral-900;
+
+  --gkit-color-blue-50: @color-light-blue-50;
+  --gkit-color-blue-100: @color-light-blue-100;
+  --gkit-color-blue-200: @color-light-blue-200;
+  --gkit-color-blue-300: @color-light-blue-300;
+  --gkit-color-blue-400: @color-light-blue-400;
+  --gkit-color-blue-500: @color-light-blue-500;
+  --gkit-color-blue-600: @color-light-blue-600;
+  --gkit-color-blue-700: @color-light-blue-700;
+  --gkit-color-blue-800: @color-light-blue-800;
+  --gkit-color-blue-900: @color-light-blue-900;
+}
+
+//dark
+html:not(.style-scope)[dark] {
+  --gkit-color-neutral-0: @color-dark-neutral-0;
+  --gkit-color-neutral-50: @color-dark-neutral-50;
+  --gkit-color-neutral-100: @color-dark-neutral-100;
+  --gkit-color-neutral-200: @color-dark-neutral-200;
+  --gkit-color-neutral-300: @color-dark-neutral-300;
+  --gkit-color-neutral-400: @color-dark-neutral-400;
+  --gkit-color-neutral-500: @color-dark-neutral-500;
+  --gkit-color-neutral-600: @color-dark-neutral-600;
+  --gkit-color-neutral-700: @color-dark-neutral-700;
+  --gkit-color-neutral-800: @color-dark-neutral-800;
+  --gkit-color-neutral-900: @color-dark-neutral-900;
+
+  --gkit-color-blue-50: @color-dark-blue-50;
+  --gkit-color-blue-100: @color-dark-blue-100;
+  --gkit-color-blue-200: @color-dark-blue-200;
+  --gkit-color-blue-300: @color-dark-blue-300;
+  --gkit-color-blue-400: @color-dark-blue-400;
+  --gkit-color-blue-500: @color-dark-blue-500;
+  --gkit-color-blue-600: @color-dark-blue-600;
+  --gkit-color-blue-700: @color-dark-blue-700;
+  --gkit-color-blue-800: @color-dark-blue-800;
+  --gkit-color-blue-900: @color-dark-blue-900;
+}

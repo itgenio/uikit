@@ -1,0 +1,53 @@
+@import (reference) "{}/imports/ui/stylesheets/variables";
+
+.uikit-page {
+  height: 100%;
+  display: flex;
+
+  & > section {
+    width: 150px;
+  }
+
+  header {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--gkit-color-neutral-200);
+    margin-bottom: 0.125rem;
+
+    .dark-mode-button {
+      margin-left: auto;
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .gkit-btn {
+      border-radius: 0;
+    }
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
+
+.uikit-page {
+  & > section {
+    background-color: var(--gkit-color-neutral-50);
+  }
+
+  header {
+    border-bottom-color: var(--gkit-color-neutral-200);
+  }
+
+  nav .gkit-btn {
+    &:hover,
+    &.selected {
+      background-color: var(--gkit-color-blue-100);
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "plugins": ["meteor", "prettier", "@typescript-eslint", "react-hooks", "@itgenio/import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:meteor/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@itgenio/import/typescript"
+  ],
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "avoid"
+      }
+    ],
+    "no-var": "error",
+    "meteor/no-session": 0,
+    "meteor/template-names": [2, "snake-case"],
+    "meteor/eventmap-params": [
+      2,
+      {
+        "templateInstanceParamName": "inst"
+      }
+    ],
+    "no-console": "off",
+    "prefer-rest-params": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "warn",
+    "react/jsx-boolean-value": "error",
+    "react/jsx-curly-brace-presence": "error",
+    "react/jsx-fragments": ["error", "element"],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": ["@material-ui/core"]
+      }
+    ],
+    "@itgenio/import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "meteor/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@itgenio/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "groups": ["builtin", "external", "parent", "sibling", "index"],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "topLevelOnly": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "react-hooks/rules-of-hooks": "error"
+      }
+    }
+  ],
+  "globals": {
+    "console": false
+  },
+  "settings": {
+    "import/resolver": "meteor",
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}
