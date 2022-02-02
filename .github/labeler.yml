@@ -1,0 +1,14 @@
+project:demo-app:
+  - app/*
+  - app/**/*
+
+project:uikit:
+  - gkit/*
+  - gkit/**/*
+
+project:uikit-components:
+  - gkit/src/components/*
+  - gkit/src/components/**/*
+
+project:uikit-styles:
+  - gkit/src/*.less
