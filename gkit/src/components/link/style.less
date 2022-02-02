@@ -1,0 +1,44 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-link {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: @font-weight-bold;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+
+  &.large {
+    .text-lg();
+  }
+
+  &.normal {
+    .text-base();
+  }
+
+  &.small {
+    .text-sm();
+  }
+}
+
+.gkit-link {
+  color: var(--gkit-color-primary-600);
+
+  &:visited {
+    color: var(--gkit-color-primary-600);
+  }
+
+  &.hover,
+  &:hover {
+    background-color: var(--gkit-color-primary-50);
+    border-bottom: 1px solid var(--gkit-color-primary-600);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: var(--gkit-color-neutral-300);
+    pointer-events: none;
+  }
+}

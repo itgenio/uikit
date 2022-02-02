@@ -8,13 +8,15 @@ import { Dialogs } from './components/dialogs';
 import { Panels } from './components/panels';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
+import { Links } from './components/links';
 
-const components = [Colors, Buttons, Panels, TabsExample, TextFields, Dialogs];
+const components = [Colors, Buttons, Links, Panels, TabsExample, TextFields, Dialogs];
+const DEFAULT = 2;
 
 export function UikitDemo() {
   const names = components.map(c => c.displayName);
 
-  const [c, setC] = useState(names[1]);
+  const [c, setC] = useState(names[DEFAULT]);
 
   const Component = components.find(component => component.displayName === c);
 
