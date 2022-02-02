@@ -16,6 +16,7 @@ type Props = React.PropsWithChildren<{
   helperText?: string;
   inputType?: 'text';
   required?: boolean;
+  idQa?: string;
 }>;
 
 const generateId = () => String(Date.now() * Math.random());
@@ -34,11 +35,13 @@ export function TextField({
   helperText,
   inputType = 'text',
   required,
+  idQa,
 }: Props) {
   const id = useMemo(() => generateId(), []);
 
   return (
     <div
+      id-qa={idQa}
       className={classNames('gkit-text-field', className, { hover, active, focus, 'full-width': fullWidth, disabled })}
     >
       {label && <label htmlFor={id}>{label}</label>}

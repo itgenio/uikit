@@ -16,6 +16,7 @@ type Props = React.PropsWithChildren<{
   asIcon?: boolean;
   className?: string;
   onClick?: () => void;
+  idQa?: string;
 }>;
 
 export function Button({
@@ -29,9 +30,11 @@ export function Button({
   asIcon,
   className,
   onClick,
+  idQa,
 }: Props) {
   return (
     <button
+      id-qa={idQa}
       disabled={disabled}
       className={classNames('gkit-btn', className, size, type, { hover, active, focus, icon: asIcon })}
       onClick={e => {
