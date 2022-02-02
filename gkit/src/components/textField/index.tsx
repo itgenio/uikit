@@ -7,16 +7,20 @@ type Props = React.PropsWithChildren<{
   hover?: boolean;
   active?: boolean;
   focus?: boolean;
+  error?: boolean;
   className?: string;
   value?: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   fullWidth?: boolean;
   label?: string;
-  helperText?: string;
-  inputType?: 'text';
+  helperText?: React.ReactNode;
+  inputType?: 'text' | 'password';
   required?: boolean;
   idQa?: string;
+  name?: string;
+  autoComplete?: string;
+  autoFocus?: boolean;
 }>;
 
 const generateId = () => String(Date.now() * Math.random());
@@ -29,6 +33,7 @@ export function TextField({
   disabled,
   active,
   focus,
+  error,
   className,
   onChange,
   label,
@@ -36,19 +41,29 @@ export function TextField({
   inputType = 'text',
   required,
   idQa,
+  name,
+  autoComplete,
+  autoFocus,
 }: Props) {
   const id = useMemo(() => generateId(), []);
 
   return (
     <div
       id-qa={idQa}
-      className={classNames('gkit-text-field', className, { hover, active, focus, 'full-width': fullWidth, disabled })}
+      className={classNames('gkit-text-field', className, {
+        hover,
+        active,
+        focus,
+        'full-width': fullWidth,
+        disabled,
+        error,
+      })}
     >
       {label && <label htmlFor={id}>{label}</label>}
       <input
         type={inputType}
         className={classNames({ hover, active, focus })}
-        {...{ value, required, id, placeholder, disabled, onChange }}
+        {...{ value, required, id, placeholder, disabled, onChange, autoFocus, name, autoComplete }}
       />
       {helperText && <span className="helper-text">{helperText}</span>}
     </div>
