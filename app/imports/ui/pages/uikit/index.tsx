@@ -25,6 +25,16 @@ export function UikitDemo() {
           <span className="text-xl logo">UI_KIT</span>
           <DarkModeButton />
         </header>
+        <div>
+          <button
+            className="gkit-btn small secondary icon"
+            onClick={() => {
+              document.body.classList.toggle('schema-green');
+            }}
+          >
+            Green
+          </button>
+        </div>
         <nav>
           {names.map(name => (
             <button

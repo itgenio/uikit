@@ -1,5 +1,6 @@
 @import (reference) "./neutralColors";
 @import (reference) "./blueColors";
+@import (reference) "./greenColors";
 @import (reference) "./dangerColors";
 
 @unit-size: 0.25rem;
@@ -60,6 +61,17 @@ html {
   --gkit-color-blue-800: @color-light-blue-800;
   --gkit-color-blue-900: @color-light-blue-900;
 
+  --gkit-color-green-50: @color-light-green-50;
+  --gkit-color-green-100: @color-light-green-100;
+  --gkit-color-green-200: @color-light-green-200;
+  --gkit-color-green-300: @color-light-green-300;
+  --gkit-color-green-400: @color-light-green-400;
+  --gkit-color-green-500: @color-light-green-500;
+  --gkit-color-green-600: @color-light-green-600;
+  --gkit-color-green-700: @color-light-green-700;
+  --gkit-color-green-800: @color-light-green-800;
+  --gkit-color-green-900: @color-light-green-900;
+
   --gkit-color-primary-50: var(--gkit-color-blue-50);
   --gkit-color-primary-100: var(--gkit-color-blue-100);
   --gkit-color-primary-200: var(--gkit-color-blue-200);
@@ -71,11 +83,11 @@ html {
   --gkit-color-primary-800: var(--gkit-color-blue-800);
   --gkit-color-primary-900: var(--gkit-color-blue-900);
 
-  --gkit-color-danger-surface: @color-light-danger-surface;
-  --gkit-color-danger-border: @color-light-danger-border;
-  --gkit-color-danger-hover: @color-light-danger-hover;
-  --gkit-color-danger-main: @color-light-danger-main;
-  --gkit-color-danger-pressed: @color-light-danger-pressed;
+  --gkit-color-danger-surface: @color-danger-50;
+  --gkit-color-danger-border: @color-danger-100;
+  --gkit-color-danger-hover: @color-danger-500;
+  --gkit-color-danger-main: @color-danger-700;
+  --gkit-color-danger-pressed: @color-danger-900;
 }
 
 //dark
@@ -104,9 +116,14 @@ html:not(.style-scope)[dark] {
   --gkit-color-blue-800: @color-dark-blue-800;
   --gkit-color-blue-900: @color-dark-blue-900;
 
-  --gkit-color-danger-surface: @color-dark-danger-surface;
-  --gkit-color-danger-border: @color-dark-danger-border;
-  --gkit-color-danger-hover: @color-dark-danger-hover;
-  --gkit-color-danger-main: @color-dark-danger-main;
-  --gkit-color-danger-pressed: @color-dark-danger-pressed;
+  --gkit-color-green-50: @color-dark-green-50;
+  --gkit-color-green-100: @color-dark-green-100;
+  --gkit-color-green-200: @color-dark-green-200;
+  --gkit-color-green-300: @color-dark-green-300;
+  --gkit-color-green-400: @color-dark-green-400;
+  --gkit-color-green-500: @color-dark-green-500;
+  --gkit-color-green-600: @color-dark-green-600;
+  --gkit-color-green-700: @color-dark-green-700;
+  --gkit-color-green-800: @color-dark-green-800;
+  --gkit-color-green-900: @color-dark-green-900;
 }
