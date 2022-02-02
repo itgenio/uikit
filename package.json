@@ -7,7 +7,7 @@
   "scripts": {
     "format": "pretty-quick",
     "check-format": "pretty-quick --check",
-    "lint": "eslint './editor-app/imports/**/*.tsx' './editor-app/imports/**/*.ts' './editor-app/imports/**/*.js'"
+    "lint": "eslint './app/imports/**/*.tsx' './app/imports/**/*.ts' './gkit/src/**/*.tsx' './gkit/src/**/*.ts'"
   },
   "author": "Alex So",
   "license": "ISC",
