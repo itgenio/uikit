@@ -5,10 +5,10 @@ import { DarkModeButton } from '../../components/darkModeButton';
 import { Buttons } from './components/buttons';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
+import { Links } from './components/links';
 import { Panels } from './components/panels';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
-import { Links } from './components/links';
 
 const components = [Colors, Buttons, Links, Panels, TabsExample, TextFields, Dialogs];
 const DEFAULT = 2;
