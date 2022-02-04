@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "GKIT",
   "main": "dist/index.js",
   "files": [
@@ -14,9 +14,6 @@
   },
   "author": "Alex So",
   "license": "MIT",
-  "dependencies": {
-    "focus-trap-react": "^8.9.1"
-  },
   "devDependencies": {
     "@types/node": "^17.0.14",
     "@types/react": "^17.0.15",
