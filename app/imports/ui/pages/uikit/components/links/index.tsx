@@ -7,11 +7,13 @@ export function Links() {
 
   const renderState = (state: string, props: any = {}, content?: any) => {
     return (
-      <Fragment>
+      <Fragment key={state}>
         <div>{state}</div>
-        <div key={`${state}`} className="row">
+
+        <div className="row">
           {sizes.map(size => {
             const p = { ...props, size };
+
             return (
               <Link key={`${state}${size}`} {...p} href="/" onClick={() => console.log(`click on button`)}>
                 {content ?? size}
@@ -35,9 +37,11 @@ export function Links() {
         <div>
           <span className="title">State</span>
         </div>
+
         <div>
           <span className="title">Primary</span>
         </div>
+
         {states.map(([name, props]) => renderState(name, props))}
       </div>
     </div>

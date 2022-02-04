@@ -8,7 +8,7 @@ export function Buttons() {
 
   const renderState = (state: string, props: any = {}, content?: any) => {
     return (
-      <Fragment>
+      <Fragment key={state}>
         <div>{state}</div>
         {types.map(type => (
           <div key={`${state}${type}`} className="row">

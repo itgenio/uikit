@@ -1,5 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
+import FocusTrap from 'focus-trap-react';
 import React from 'react';
 import { CloseIcon } from '../icons/close';
 
@@ -29,7 +30,7 @@ export function ModalPage({ className, asBlock, children, onClose, open }: Props
 
   return open === false ? null : (
     <div
-      className="gkit-modal-page"
+      className={classNames('gkit-modal-page', { 'as-block': asBlock })}
       onClick={e => {
         e.preventDefault();
         e.stopPropagation();
@@ -38,15 +39,17 @@ export function ModalPage({ className, asBlock, children, onClose, open }: Props
       {asBlock ? (
         render()
       ) : (
-        <div
-          className={classNames('gkit-modal-page-wrapper', className)}
-          onClick={e => {
-            e.stopPropagation();
-            e.preventDefault();
-          }}
-        >
-          {render()}
-        </div>
+        <FocusTrap>
+          <div
+            className={classNames('gkit-modal-page-wrapper', className)}
+            onClick={e => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+          >
+            {render()}
+          </div>
+        </FocusTrap>
       )}
     </div>
   );
