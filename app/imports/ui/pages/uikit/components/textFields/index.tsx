@@ -5,15 +5,10 @@ import { TextField } from '@itgenio/gkit';
 export function TextFields() {
   const renderState = (state: string, props: any = {}, value?: string | number) => {
     return (
-      <Fragment>
+      <Fragment key={state}>
         <div>{state}</div>
 
-        <TextField
-          key={`${state}`}
-          {...props}
-          onChange={e => console.log(`onChange: ${e.target.value}`)}
-          value={value}
-        />
+        <TextField {...props} onChange={e => console.log(`onChange: ${e.target.value}`)} value={value} />
       </Fragment>
     );
   };

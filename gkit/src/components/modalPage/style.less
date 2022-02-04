@@ -2,9 +2,11 @@
 @import (reference) "../../ui";
 
 .gkit-modal-page {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
+  &:not(.as-block) {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+  }
 
   .gkit-modal-page-wrapper {
     position: absolute;

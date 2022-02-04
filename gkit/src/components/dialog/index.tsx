@@ -1,5 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
+import FocusTrap from 'focus-trap-react';
 import React from 'react';
 import { CloseIcon } from '../icons/close';
 
@@ -17,6 +18,7 @@ export function Dialog({ className, asBlock, children, onClose, open }: Props) {
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
         <CloseIcon />
       </button>
+
       {children}
     </div>
   );
@@ -26,15 +28,17 @@ export function Dialog({ className, asBlock, children, onClose, open }: Props) {
       {asBlock ? (
         render()
       ) : (
-        <div
-          className={classNames('gkit-dialog-wrapper', className)}
-          onClick={e => {
-            e.stopPropagation();
-            onClose?.();
-          }}
-        >
-          {render()}
-        </div>
+        <FocusTrap>
+          <div
+            className={classNames('gkit-dialog-wrapper', className)}
+            onClick={e => {
+              e.stopPropagation();
+              onClose?.();
+            }}
+          >
+            {render()}
+          </div>
+        </FocusTrap>
       )}
     </div>
   );
