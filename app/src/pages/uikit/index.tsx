@@ -12,7 +12,7 @@ import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 
 const components = [Colors, Buttons, Links, Panels, TabsExample, TextFields, Dialogs, ModalPages];
-const DEFAULT = 2;
+const DEFAULT = 0;
 
 export function UikitDemo() {
   const names = components.map(c => c.displayName);

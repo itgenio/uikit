@@ -3,31 +3,24 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "start": "cross-env TZ=UTC TOOL_NODE_FLAGS=--max-old-space-size=4096 meteor --exclude-archs web.browser.legacy --port 3010",
-    "build": "cross-env DISABLE_CLIENT_STATS=true METEOR_DISABLE_OPTIMISTIC_CACHING=1 TOOL_NODE_FLAGS=--max-old-space-size=4096 meteor build --architecture=os.linux.x86_64 --server-only ./build",
+    "dev": "vite --port 3004",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "docker:build": "docker build -t asosnovskiy/gkit:latest -f ./Dockerfile ./build/",
-    "tsc": "tsc --noEmit --skipLibCheck",
-    "deploy": "cross-env TOOL_NODE_FLAGS=--max-old-space-size=4096 DEPLOY_HOSTNAME=eu-west-1.galaxy.meteor.com meteor deploy gkit.eu.meteorapp.com --free --mongo --exclude-archs web.browser.legacy --cache-build"
-  },
-  "meteor": {
-    "mainModule": {
-      "client": "imports/startup/client/index.js",
-      "server": "imports/startup/server/index.js"
-    }
+    "tsc": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
     "@itgenio/gkit": "file:../gkit",
     "classnames": "^2.3.1",
-    "meteor-node-stubs": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@types/meteor": "^2.0.2",
-    "@types/react": "^17.0.15",
-    "@types/react-dom": "^17.0.9",
-    "cross-env": "^7.0.3",
-    "typescript": "^4.5.4"
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@vitejs/plugin-react": "^1.0.7",
+    "less": "^4.1.2",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2"
   }
 }

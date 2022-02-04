@@ -1,8 +1,7 @@
 {
-  "plugins": ["meteor", "prettier", "@typescript-eslint", "react-hooks", "@itgenio/import"],
+  "plugins": ["prettier", "@typescript-eslint", "react-hooks", "@itgenio/import"],
   "extends": [
     "eslint:recommended",
-    "plugin:meteor/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
@@ -30,14 +29,6 @@
       }
     ],
     "no-var": "error",
-    "meteor/no-session": 0,
-    "meteor/template-names": [2, "snake-case"],
-    "meteor/eventmap-params": [
-      2,
-      {
-        "templateInstanceParamName": "inst"
-      }
-    ],
     "no-console": "off",
     "prefer-rest-params": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -84,11 +75,6 @@
       {
         "pathGroups": [
           {
-            "pattern": "meteor/**",
-            "group": "external",
-            "position": "after"
-          },
-          {
             "pattern": "@itgenio/**",
             "group": "external",
             "position": "after"
@@ -115,7 +101,6 @@
     "console": false
   },
   "settings": {
-    "import/resolver": "meteor",
     "react": {
       "pragma": "React",
       "version": "detect"

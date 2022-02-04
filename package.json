@@ -7,7 +7,7 @@
   "scripts": {
     "format": "pretty-quick",
     "check-format": "pretty-quick --check",
-    "lint": "eslint './app/imports/**/*.tsx' './app/imports/**/*.ts' './gkit/src/**/*.tsx' './gkit/src/**/*.ts'"
+    "lint": "eslint './app/src/**/*.tsx' './gkit/src/**/*.tsx' './gkit/src/**/*.ts'"
   },
   "author": "Alex So",
   "license": "ISC",
@@ -21,7 +21,6 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-meteor": "^7.3.0",
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
