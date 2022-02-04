@@ -21,7 +21,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     bundle: true,
     format: 'esm',
     splitting: true,
-    external: ['react'],
+    external: ['react', 'react-dom', 'classnames', 'prop-types'],
     outdir: path.resolve(__dirname, 'dist'),
     plugins: [lessLoader({})],
     loader: {
