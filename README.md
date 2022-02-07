@@ -11,3 +11,7 @@
 и
 
 `meteor npm i`
+
+## Релиз пакета
+
+`npm version patch && npm publish`
