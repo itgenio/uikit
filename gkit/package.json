@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "GKIT",
   "main": "dist/index.js",
   "files": [
