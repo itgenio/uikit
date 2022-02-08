@@ -4,7 +4,8 @@ import React from 'react';
 
 type Sizes = 'small' | 'normal' | 'large';
 
-type Types = 'primary' | 'secondary' | 'danger';
+//                                    ( without bg )            ( with border )
+type Types = 'primary' | 'secondary' | 'linkSecondary' | 'danger' | 'neutral' | 'linkNeutral';
 
 type Props = React.PropsWithChildren<{
   size?: Sizes;

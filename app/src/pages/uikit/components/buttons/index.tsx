@@ -4,7 +4,7 @@ import { Button } from '@itgenio/gkit';
 
 export function Buttons() {
   const sizes = ['small', 'normal', 'large'];
-  const types = ['primary', 'secondary', 'danger'];
+  const types = ['primary', 'secondary', 'danger', 'linkSecondary', 'neutral', 'linkNeutral'];
 
   const renderState = (state: string, props: any = {}, content?: any) => {
     return (
@@ -58,6 +58,15 @@ export function Buttons() {
         </div>
         <div>
           <span className="title">Danger</span>
+        </div>
+        <div>
+          <span className="title">LinkSecondary</span>
+        </div>
+        <div>
+          <span className="title">Neutral</span>
+        </div>
+        <div>
+          <span className="title">LinkNeutral</span>
         </div>
         {states.map(([name, props, content]) => renderState(name, props, content))}
       </div>

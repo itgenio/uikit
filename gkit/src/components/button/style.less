@@ -6,13 +6,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 
   &.focus,
   &:focus {
     .outline();
     .outline-2();
     .outline-offset-2();
-    .outline-primary-700();
+    .outline-primary-300();
   }
 
   &.large {
@@ -53,28 +54,26 @@
 }
 
 .gkit-btn {
-  &.primary {
-    background-color: var(--gkit-color-primary-500);
-    color: var(--gkit-color-neutral-0);
+  &[disabled] {
+    opacity: 0.4;
+  }
 
-    &.icon {
-      svg path {
-        fill: var(--gkit-color-neutral-0);
-      }
+  &.primary {
+    background-color: var(--gkit-color-light-primary-500);
+    color: var(--gkit-color-light-neutral-0);
+
+    &.icon svg path {
+      fill: currentColor;
     }
 
     &.hover,
     &:hover {
-      background-color: var(--gkit-color-primary-600);
+      background-color: var(--gkit-color-light-primary-600);
     }
 
     &.active,
     &:active {
-      background-color: var(--gkit-color-primary-700);
-    }
-
-    &[disabled] {
-      opacity: 0.3;
+      background-color: var(--gkit-color-light-primary-700);
     }
   }
 
@@ -82,36 +81,79 @@
     background-color: var(--gkit-color-primary-50);
     color: var(--gkit-color-primary-700);
 
-    &.icon {
-      svg path {
-        fill: var(--gkit-color-primary-700);
-      }
+    &.icon svg path {
+      fill: currentColor;
+    }
+
+    &.hover,
+    &:hover,
+    &.active,
+    &:active {
+      background-color: var(--gkit-color-primary-100);
+    }
+  }
+
+  &.linkSecondary {
+    background-color: transparent;
+    color: var(--gkit-color-primary-700);
+
+    &.icon svg path {
+      fill: currentColor;
+    }
+
+    &.hover,
+    &:hover,
+    &.active,
+    &:active {
+      background-color: var(--gkit-color-primary-50);
+    }
+  }
+
+  &.neutral {
+    background-color: transparent;
+    color: var(--gkit-color-neutral-800);
+    border: 1px solid var(--gkit-color-neutral-200);
+
+    &.icon svg path {
+      fill: currentColor;
     }
 
     &.hover,
     &:hover {
-      background-color: var(--gkit-color-primary-100);
+      background-color: var(--gkit-color-neutral-100);
     }
 
     &.active,
     &:active {
-      background-color: var(--gkit-color-primary-200);
+      background-color: var(--gkit-color-neutral-200);
+    }
+  }
+
+  &.linkNeutral {
+    background-color: transparent;
+    color: var(--gkit-color-neutral-800);
+
+    &.icon svg path {
+      fill: currentColor;
     }
 
-    &[disabled] {
-      background-color: var(--gkit-color-neutral-50);
-      color: var(--gkit-color-neutral-300);
+    &.hover,
+    &:hover {
+      background-color: var(--gkit-color-neutral-100);
+    }
+
+    &.active,
+    &:active {
+      background-color: var(--gkit-color-neutral-200);
     }
   }
 
   &.danger {
     background-color: var(--gkit-color-danger-700);
-    color: var(--gkit-color-neutral-0);
+    color: var(--gkit-color-light-neutral-0);
 
-    &.icon {
-      svg path {
-        fill: var(--gkit-color-neutral-0);
-      }
+    &.icon svg path {
+      fill: currentColor;
     }
 
     &.hover,
@@ -122,10 +164,6 @@
     &.active,
     &:active {
       background-color: var(--gkit-color-danger-900);
-    }
-
-    &[disabled] {
-      opacity: 0.3;
     }
   }
 }
