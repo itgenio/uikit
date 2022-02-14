@@ -4,19 +4,20 @@ import classNames from 'classnames';
 import React from 'react';
 
 export type TabsProps<T = any, C extends typeof Tab = typeof Tab> = {
-  children?: (React.ReactElement<TabProps, C> | null)[];
+  children?: (React.ReactElement<TabProps, C> | null | false)[];
   value?: T;
   onChange: (newValue: T) => void;
   className?: string;
+  idQa?: string;
 };
 
-type TabPropsAll = { value: any; label?: string } & any;
+type TabPropsAll = { value: any; label?: string; idQa?: string } & any;
 
 export type TabProps = React.PropsWithChildren<Pick<TabPropsAll, 'value'>>;
 
-export function Tabs({ children, onChange, value, className }: TabsProps) {
+export function Tabs({ children, onChange, value, className, idQa }: TabsProps) {
   return (
-    <div className={classNames('gkit-tabs', className)}>
+    <div className={classNames('gkit-tabs', className)} id-qa={idQa}>
       {React.Children.map(
         children,
         child =>
@@ -32,12 +33,13 @@ export function Tabs({ children, onChange, value, className }: TabsProps) {
   );
 }
 
-export function Tab({ children, value, onClick, label, selected, ...props }: TabProps & any) {
+export function Tab({ children, value, onClick, label, selected, idQa, ...props }: TabProps & any) {
   return (
     <div
       className={classNames('gkit-tab', { selected })}
       data-value={value}
       onClick={() => onClick?.(value)}
+      id-qa={idQa}
       {...props}
     >
       {label ?? children}
