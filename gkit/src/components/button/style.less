@@ -8,6 +8,17 @@
   align-items: center;
   gap: 0.5rem;
 
+  //normal
+  .text-base();
+  border-radius: 0.625rem;
+  padding: 0.5rem 1.5rem;
+  min-width: 6rem;
+
+  &.icon {
+    padding: 0.75rem;
+    min-width: unset;
+  }
+
   &.focus,
   &:focus {
     .outline();
@@ -28,18 +39,6 @@
     }
   }
 
-  &.normal {
-    .text-base();
-    border-radius: 0.625rem;
-    padding: 0.5rem 1.5rem;
-    min-width: 6rem;
-
-    &.icon {
-      padding: 0.75rem;
-      min-width: unset;
-    }
-  }
-
   &.small {
     .text-sm();
     border-radius: 0.5rem;
@@ -49,6 +48,33 @@
     &.icon {
       padding: 0.625rem;
       min-width: unset;
+    }
+  }
+}
+
+.gkit-btn-group {
+  display: inline-flex;
+
+  & > .gkit-btn:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left: none;
+  }
+
+  & > .gkit-btn:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  & > .gkit-btn {
+    &.primary,
+    &.secondary,
+    &.danger,
+    &.linkSecondary,
+    &.linkNeutral {
+      &:not(:last-child) {
+        margin-right: 1px;
+      }
     }
   }
 }

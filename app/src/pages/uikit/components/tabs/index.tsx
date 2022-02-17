@@ -12,7 +12,7 @@ export function TabsExample() {
       <section className="bg-neutral-0">
         <Tabs value={t} onChange={newVal => setT(newVal)}>
           {tabs.map(tab => (
-            <Tab key={tab} value={tab}>
+            <Tab key={tab} value={tab} idQa={tab}>
               {tab}
             </Tab>
           ))}
@@ -22,7 +22,7 @@ export function TabsExample() {
       <section className="bg-neutral-100">
         <Tabs value={t} onChange={newVal => setT(newVal)}>
           {tabs.map(tab => (
-            <Tab key={tab} value={tab}>
+            <Tab key={tab} value={tab} idQa={tab}>
               {tab}
             </Tab>
           ))}
@@ -33,7 +33,7 @@ export function TabsExample() {
         <section className="bg-neutral-100">
           <Tabs value={t} onChange={newVal => setT(newVal)}>
             {tabs.map(tab => (
-              <Tab key={tab} value={tab}>
+              <Tab key={tab} value={tab} idQa={tab}>
                 {tab}
               </Tab>
             ))}

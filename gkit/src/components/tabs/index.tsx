@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 export type TabsProps<T = any, C extends typeof Tab = typeof Tab> = {
-  children?: (React.ReactElement<TabProps, C> | null | false)[];
+  children?: (React.ReactElement<TabProps, C> | null | false) | (React.ReactElement<TabProps, C> | null | false)[];
   value?: T;
   onChange: (newValue: T) => void;
   className?: string;

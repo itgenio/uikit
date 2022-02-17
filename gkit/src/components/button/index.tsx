@@ -18,6 +18,7 @@ type Props = React.PropsWithChildren<{
   className?: string;
   onClick?: () => void;
   idQa?: string;
+  disablePrevent?: boolean;
 }>;
 
 export function Button({
@@ -32,6 +33,7 @@ export function Button({
   className,
   onClick,
   idQa,
+  disablePrevent,
 }: Props) {
   return (
     <button
@@ -39,11 +41,37 @@ export function Button({
       disabled={disabled}
       className={classNames('gkit-btn', className, size, type, { hover, active, focus, icon: asIcon })}
       onClick={e => {
-        e.preventDefault();
-        onClick?.();
+        if (onClick) {
+          !disablePrevent && e.preventDefault();
+          onClick();
+        }
       }}
     >
       {children}
     </button>
+  );
+}
+
+type ButtonGroupProps<C extends typeof Button = typeof Button> = {
+  children?: (React.ReactElement<Props, C> | null | false) | (React.ReactElement<Props, C> | null | false)[];
+  className?: string;
+  idQa?: string;
+} & Pick<Props, 'size' | 'type' | 'asIcon'>;
+
+export function ButtonGroup({ idQa, className, size, type, asIcon, children }: ButtonGroupProps) {
+  return (
+    <div className={classNames('gkit-btn-group', className)} id-qa={idQa}>
+      {React.Children.map(
+        children,
+        child =>
+          child &&
+          React.cloneElement(child, {
+            ...child.props,
+            size: size ?? child.props.size,
+            type: type ?? child.props.type,
+            asIcon: asIcon ?? child.props.asIcon,
+          })
+      )}
+    </div>
   );
 }
