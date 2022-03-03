@@ -72,7 +72,7 @@ export function TextField({
       {dataList && (
         <datalist id={id}>
           {dataList.map(value => (
-            <option value={value} />
+            <option key={value} value={value} />
           ))}
         </datalist>
       )}
