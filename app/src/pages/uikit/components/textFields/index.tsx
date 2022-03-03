@@ -22,6 +22,7 @@ export function TextFields() {
     ['Active with text', { active: true, placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
     ['Disabled', { disabled: true, placeholder: 'Placeholder', label: 'Label' }],
     ['Disabled with text', { disabled: true, placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
+    ['Datalist', { placeholder: 'Placeholder', label: 'Label', dataList: ['Hello', 'World', 'Gavana'] }],
   ] as const;
 
   return (
