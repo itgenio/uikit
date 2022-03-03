@@ -65,12 +65,12 @@ export function TextField({
       <input
         type={inputType}
         className={classNames({ hover, active, focus })}
-        list={id}
+        list={id + 'list'}
         {...{ value, required, id, placeholder, disabled, onChange, autoFocus, name, autoComplete }}
       />
       {helperText && <span className="helper-text">{helperText}</span>}
       {dataList && (
-        <datalist id={id}>
+        <datalist id={id + 'list'}>
           {dataList.map(value => (
             <option key={value} value={value} />
           ))}
