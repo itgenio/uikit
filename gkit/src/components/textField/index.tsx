@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { HTMLInputTypeAttribute, useMemo } from 'react';
 
 type Props = React.PropsWithChildren<{
   disabled?: boolean;
@@ -15,7 +15,7 @@ type Props = React.PropsWithChildren<{
   fullWidth?: boolean;
   label?: string;
   helperText?: React.ReactNode;
-  inputType?: 'text' | 'password';
+  inputType?: HTMLInputTypeAttribute;
   required?: boolean;
   idQa?: string;
   name?: string;
