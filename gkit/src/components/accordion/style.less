@@ -1,0 +1,92 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-accordion{
+  width: 43.5rem;
+  padding: 2rem 1.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--gkit-color-light-neutral-200);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 6px 6px -6px rgba(0, 0, 0, 0.15);
+
+  summary{
+    list-style-type: none;
+    font-size: @text-size-base;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    color: var(--gkit-color-light-neutral-900);
+    display: flex;
+
+    span{
+      border: 2px solid #10B981;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      margin-right: 1.18rem;
+
+      .check{
+        display: inline-block;
+        width: 0.625rem;
+        height: 1.12rem;
+        border: solid var(--gkit-color-light-green-500);
+        border-width: 0 2px 2px 0;
+        transform: rotate( 45deg);
+        border-radius: 0;
+        position: absolute;
+        top: 0.5rem;
+        left: 0.93rem;
+      }
+    }
+
+    &:after{
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0.2rem;
+      font-size: @text-size-3xl;
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTYuNTkgOC41OUwxMiAxMy4xNyA3LjQxIDguNTkgNiAxMGw2IDYgNi02eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=") no-repeat 50% 50% / 1em 1em;
+      width: 1em;
+      height: 1em;
+      transition: transform .5s;
+    }
+    div{
+      p{
+        font-size: @text-size-sm;
+        font-weight: 400;
+        color: var(--gkit-color-light-neutral-500);
+      }
+    }
+  }
+
+  &[open]{
+    background-color: var(--gkit-color-light-neutral-0);
+    font-weight: 400;
+    font-size: @text-size-base;
+    letter-spacing: -0.011em;
+    color: var(--gkit-color-light-neutral-600);
+  }
+
+  &[open] summary:after{
+    transform: scale(1,-1);
+  }
+
+  .text{
+    margin-top: 1rem;
+  }
+
+  label{
+    p{
+      font-weight: 400;
+      font-size: @text-size-sm;
+      line-height: @text-line-height-xs;
+      letter-spacing: -0.006em;
+      margin: 1rem 1.5rem 0 0;
+      color: var(--gkit-color-light-neutral-500);
+    }
+
+    span{
+      color: var(--gkit-color-light-blue-500);
+      font-weight: 600;
+    }
+  }
+}
