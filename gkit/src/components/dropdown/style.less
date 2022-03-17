@@ -1,0 +1,139 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.container{
+  display: flex;
+
+  .wrapper{
+    width: 14.5rem;
+    display: flex;
+  }
+
+  .gkit-dropDown {
+    color: var(--gkit-color-light-neutral-800);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-right: 2rem;
+    border: 1px solid var(--gkit-color-neutral-200);
+    border-radius: 8px;
+
+    span{
+      padding: 0.5rem 0.81rem 0.5rem 1rem;
+    }
+
+    .checkBox1{
+      .indicator1 {
+        color: var(--gkit-color-green-600);
+        padding: 0 1.21rem 0 0;
+      }
+    }
+
+    .checkBox {
+      background-color: var(--gkit-color-light-neutral-0);
+      width: 1.25rem;
+      height: 1.25rem;
+      margin: 0.5rem 0 0.5rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--gkit-color-light-neutral-300);
+
+      &.hover,
+      &.focus {
+        background-color: var(--gkit-color-light-green-50);
+        border: 1px solid var(--gkit-color-light-green-500);
+      }
+
+      &.checked {
+        background-color: var(--gkit-color-light-green-500);
+        border: 1px solid var(--gkit-color-light-green-500);
+      }
+
+      &.disabled {
+        background-color: var(--gkit-color-light-neutral-100);
+      }
+
+      .indicator {
+        color: var( --gkit-color-neutral-0);
+        //background-color: var(--gkit-color-light-green-500);
+        //border-radius: 8px;
+        width: 15px;
+        position: relative;
+        top: 0;
+        right: 0.87rem;
+      }
+    }
+
+    &.hover,
+    &.focus {
+      background-color: var(--gkit-color-light-neutral-100);
+    }
+
+    &.focus {
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      outline-color: var(--gkit-color-green-200);
+    }
+
+    &.disabled {
+      color: var(--gkit-color-light-neutral-300);
+    }
+  }
+}
+
+.button-menu{
+  all: unset;
+  border-radius: 8px;
+  border: 1px solid var(--gkit-color-neutral-200);
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gkit-color-light-neutral-800);
+  background-color: var(--gkit-color-light-neutral-0);
+  box-shadow: 0 0 0 2px var(--gkit-color-light-neutral-0);
+}
+
+.menu{
+  min-width: 19.5rem;
+  background-color: var(--gkit-color-light-neutral-0);
+  border-radius: 8px;
+  padding: 0.25rem;
+  position: absolute;
+  top: 0;
+  left: 4.68rem;
+  display: grid;
+  box-shadow: 0 0.25rem 0.75rem 0.12rem rgba(0, 0, 0, 0.1);
+
+  .label-menu{
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--gkit-color-light-neutral-500);
+  }
+
+  .checkboxItem{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--gkit-color-light-neutral-800);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    position: relative;
+
+    &:focus {
+      background-color: var(--gkit-color-light-neutral-100);
+      color: var(--gkit-color-light-neutral-800);
+    }
+  }
+
+  .itemIndicator{
+    position: absolute;
+    right: 0;
+    margin: 1.18rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gkit-color-light-green-600);
+  }
+}

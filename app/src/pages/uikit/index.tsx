@@ -8,6 +8,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
+import { Dropdowns } from './components/dropdowns';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
@@ -30,6 +31,7 @@ const components = [
   ModalPages,
   Toggles,
   Accordions,
+  Dropdowns,
 ];
 const DEFAULT = 0;
 

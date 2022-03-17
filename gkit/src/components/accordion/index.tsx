@@ -27,7 +27,7 @@ export function Accordion({
     <details className={classNames(className, 'gkit-accordion')}>
       <summary>
         <span>
-          <span className="check"></span>
+          <span className="check"/>
         </span>
         <div>
           {title}

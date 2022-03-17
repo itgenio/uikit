@@ -10,3 +10,4 @@ export * from './components/link';
 export * from './components/modalPage';
 export * from './components/toggle';
 export * from './components/accordion';
+export * from './components/dropdown';
