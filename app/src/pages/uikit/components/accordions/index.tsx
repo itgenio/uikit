@@ -1,28 +1,41 @@
 import React, { Fragment } from 'react';
-import { Accordion } from '@itgenio/gkit';
+import {
+  AccordionDetails,
+  AccordionIcon,
+  AccordionTitle,
+  AccordionText,
+  AccordionSummary,
+  AccordionLabelProjects,
+  AccordionProjects,
+} from '@itgenio/gkit';
 
 export function Accordions() {
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (props: any = {}) => {
     return (
-      <Fragment key={state}>
-        <div>{state}</div>
-        <Accordion {...props} />
+      <Fragment>
+        <AccordionDetails>
+          <AccordionSummary>
+            <AccordionIcon />
+            <AccordionTitle {...props}>1. Знакомство с HTML</AccordionTitle>
+          </AccordionSummary>
+          <AccordionText>
+            Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
+            обусловливает важность переосмысления внешнеэкономических политик.
+          </AccordionText>
+          <AccordionLabelProjects {...props}>
+            <AccordionProjects countProject={props.countProject}>Выполненных проектов</AccordionProjects>
+            <AccordionProjects countProject={props.countCompleted}>Контрольный проект</AccordionProjects>
+          </AccordionLabelProjects>
+        </AccordionDetails>
       </Fragment>
     );
   };
 
   const states = [
     [
-      '',
       {
-        title: '1. Знакомство с HTML',
         status: 'Пройдено',
-        label:
-          'Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени обусловливает\n' +
-          '      важность переосмысления внешнеэкономических политик.',
-        completedProjects: 'Выполненных проектов',
-        controlProject: 'Контрольный проект',
-        countProject: '15',
+        countProject: 15,
         countCompleted: '2/2',
       },
     ],
@@ -30,7 +43,7 @@ export function Accordions() {
 
   return (
     <div className="accordion">
-      <div>{states.map(([name, props]) => renderState(name, props))}</div>
+      <div>{states.map(([props]) => renderState(props))}</div>
     </div>
   );
 }

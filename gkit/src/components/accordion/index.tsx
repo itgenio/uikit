@@ -1,48 +1,54 @@
 import './style.less';
-import classNames from 'classnames';
 import React from 'react';
 
 type Props = {
   className?: string;
   label?: string;
-  title?: string;
   status?: string;
+  children?: React.PropsWithChildren<any>;
   completedProjects?: string;
   controlProject?: string;
   countProject?: number;
-  countCompleted?: number;
+  countCompleted?: string;
 };
 
-export function Accordion({
-  label,
-  title,
-  status,
-  className,
-  completedProjects,
-  controlProject,
-  countProject,
-  countCompleted,
-}: Props) {
+export function AccordionDetails({ children }: Props) {
+  return <details className="gkit-accordion">{children}</details>;
+}
+
+export function AccordionSummary({ children }: Props) {
+  return <summary>{children}</summary>;
+}
+
+export function AccordionIcon() {
   return (
-    <details className={classNames(className, 'gkit-accordion')}>
-      <summary>
-        <span>
-          <span className="check"/>
-        </span>
-        <div>
-          {title}
-          <p>{status}</p>
-        </div>
-      </summary>
-      <p className="text">{label}</p>
-      <label>
-        <p>
-          {completedProjects}: <span>{countProject}</span>
-        </p>
-        <p>
-          {controlProject}: <span>{countCompleted} Выполнено</span>
-        </p>
-      </label>
-    </details>
+    <span>
+      <span className="check" />
+    </span>
+  );
+}
+
+export function AccordionTitle({ status, children }: Props) {
+  return (
+    <div>
+      {children}
+      <p>{status}</p>
+    </div>
+  );
+}
+
+export function AccordionText({ children }: Props) {
+  return <p className="text">{children}</p>;
+}
+
+export function AccordionLabelProjects({ children }: Props) {
+  return <label>{children}</label>;
+}
+
+export function AccordionProjects({ children, countProject }: Props) {
+  return (
+    <p>
+      {children}: <span>{countProject}</span>
+    </p>
   );
 }

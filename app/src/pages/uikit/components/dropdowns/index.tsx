@@ -1,13 +1,20 @@
 import React, { Fragment } from 'react';
 import './style.less';
-import { DropdownItem } from '@itgenio/gkit/';
+import {
+  DropdownItemCheck,
+  DropdownItemCheckbox,
+  DropdownMenu,
+  DropdownMenuChapter,
+  DropdownMenuSeparator,
+} from '@itgenio/gkit';
 
 export function Dropdowns() {
   const renderState = (state: string, props: any = {}) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-        <DropdownItem {...props} />
+        <DropdownItemCheck {...props} />
+        <DropdownItemCheckbox {...props} />
       </Fragment>
     );
   };
@@ -22,13 +29,23 @@ export function Dropdowns() {
   return (
     <div className="dropdown">
       <div className="grid">
-        <div>
-          <span className="title">State</span>
-        </div>
-        <div>
-          <span className="title">Dropdown Menu Item</span>
-        </div>
         {states.map(([name, props]) => renderState(name, props))}
+        <div className="dropdown-menu">
+          <DropdownMenu label="Dropdown Menu">
+            <DropdownMenuChapter>Раздел 1</DropdownMenuChapter>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownMenuChapter>Раздел 2</DropdownMenuChapter>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+            <DropdownMenuSeparator />
+            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
+          </DropdownMenu>
+        </div>
       </div>
     </div>
   );
