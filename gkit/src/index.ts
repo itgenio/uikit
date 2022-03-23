@@ -11,3 +11,4 @@ export * from './components/modalPage';
 export * from './components/toggle';
 export * from './components/accordion';
 export * from './components/dropdown';
+export * from './components/notification';

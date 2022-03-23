@@ -1,0 +1,47 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.notification-container {
+  padding: 1rem 0;
+  width: 27.5rem;
+  border: 1px solid var(--gkit-color-light-neutral-200);
+  background: var(--gkit-color-light-neutral-0);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 5px 8px 8px 5px;
+
+  .notification-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 1.25rem 0 1.375rem;
+
+    h3 {
+      font-size: 1rem;
+      color: var(--gkit-color-light-neutral-800);
+      margin-left: 1.125rem;
+      width: 100%;
+    }
+  }
+
+  .notification-content {
+    padding: 0 1rem 0 3.75rem;
+    .notification-text {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      letter-spacing: -0.006em;
+      color: var(--gkit-color-light-neutral-600);
+      margin: 0.5rem 0 1rem;
+    }
+
+    .notification-button-container {
+      display: flex;
+      flex-direction: row;
+      button {
+        font-weight: 600;
+        font-size: 0.875rem;
+        margin-right: 1rem;
+        color: var(--gkit-color-light-neutral-800);
+      }
+    }
+  }
+}

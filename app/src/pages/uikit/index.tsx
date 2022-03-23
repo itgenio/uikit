@@ -11,6 +11,7 @@ import { Dialogs } from './components/dialogs';
 import { Dropdowns } from './components/dropdowns';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
+import { Notifications } from './components/notifications';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
 import { TabsExample } from './components/tabs';
@@ -32,6 +33,7 @@ const components = [
   Toggles,
   Accordions,
   Dropdowns,
+  Notifications,
 ];
 const DEFAULT = 0;
 
