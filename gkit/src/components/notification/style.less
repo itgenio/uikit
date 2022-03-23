@@ -1,13 +1,68 @@
 @import (reference) "../../variables";
-@import (reference) "../../ui";
 
 .notification-container {
   padding: 1rem 0;
   width: 27.5rem;
-  border: 1px solid var(--gkit-color-light-neutral-200);
-  background: var(--gkit-color-light-neutral-0);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  border-radius: 5px 8px 8px 5px;
+
+  &.error{
+    .notification-title .icon path {
+      fill: var(--gkit-color-danger-500);
+    }
+  }
+
+  &.warning{
+    .notification-title .icon path {
+      fill: #F97316;
+    }
+  }
+
+  &.success{
+    .notification-title .icon path {
+      fill: var(--gkit-color-light-green-500);
+    }
+  }
+
+  &.info{
+    .notification-title .icon path {
+      fill: var(--gkit-color-light-blue-500);
+    }
+  }
+
+  &.inline {
+    border-radius: 8px;
+    border: 0;
+    &.error{
+      background-color: var(--gkit-color-danger-50);
+    }
+    &.warning{
+      background-color: #FFF7ED;
+    }
+    &.success{
+      background-color: var(--gkit-color-light-green-50);
+    }
+    &.info{
+      background-color: var(--gkit-color-light-blue-50);
+    }
+  }
+
+  &.toast {
+    background: var(--gkit-color-light-neutral-0);
+    border: 1px solid var(--gkit-color-light-neutral-200);
+    border-radius: 5px 8px 8px 5px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    &.error{
+      border-left: 4px solid var(--gkit-color-danger-500);
+    }
+    &.warning{
+      border-left: 4px solid #F97316;
+    }
+    &.success{
+      border-left: 4px solid var(--gkit-color-light-green-500);
+    }
+    &.info{
+      border-left: 4px solid var(--gkit-color-light-blue-500);
+    }
+  }
 
   .notification-title {
     display: flex;
