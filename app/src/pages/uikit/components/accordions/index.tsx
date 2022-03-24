@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   AccordionLabelProjects,
   AccordionProjects,
+  AccordionChevron,
 } from '@itgenio/gkit';
 
 export function Accordions() {
@@ -16,7 +17,10 @@ export function Accordions() {
         <AccordionDetails>
           <AccordionSummary>
             <AccordionIcon />
-            <AccordionTitle {...props}>1. Знакомство с HTML</AccordionTitle>
+            <AccordionTitle icon {...props}>
+              1. Знакомство с HTML
+            </AccordionTitle>
+            <AccordionChevron />
           </AccordionSummary>
           <AccordionText>
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени

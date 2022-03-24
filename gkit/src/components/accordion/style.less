@@ -17,40 +17,18 @@
     position: relative;
     color: var(--gkit-color-light-neutral-900);
     display: flex;
+    align-items: center;
 
-    span{
-      border: 2px solid #10B981;
-      width: 2.4rem;
-      height: 2.4rem;
-      border-radius: 50%;
+    .icon-check{
       margin-right: 1.18rem;
-
-      .check{
-        display: inline-block;
-        width: 0.625rem;
-        height: 1.12rem;
-        border: solid var(--gkit-color-light-green-500);
-        border-width: 0 2px 2px 0;
-        transform: rotate( 45deg);
-        border-radius: 0;
-        position: absolute;
-        top: 0.5rem;
-        left: 0.93rem;
-      }
     }
 
-    &:after{
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 0.2rem;
-      font-size: @text-size-3xl;
-      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTYuNTkgOC41OUwxMiAxMy4xNyA3LjQxIDguNTkgNiAxMGw2IDYgNi02eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=") no-repeat 50% 50% / 1em 1em;
-      width: 1em;
-      height: 1em;
+    .icon-chevron{
       transition: transform .5s;
     }
+
     div{
+      width: 100%;
       p{
         font-size: @text-size-sm;
         font-weight: 400;
@@ -63,11 +41,10 @@
     background-color: var(--gkit-color-light-neutral-0);
     font-weight: 400;
     font-size: @text-size-base;
-    letter-spacing: -0.011em;
     color: var(--gkit-color-light-neutral-600);
   }
 
-  &[open] summary:after{
+  &[open] summary .icon-chevron{
     transform: scale(1,-1);
   }
 
@@ -80,7 +57,6 @@
       font-weight: 400;
       font-size: @text-size-sm;
       line-height: @text-line-height-xs;
-      letter-spacing: -0.006em;
       margin: 1rem 1.5rem 0 0;
       color: var(--gkit-color-light-neutral-500);
     }
