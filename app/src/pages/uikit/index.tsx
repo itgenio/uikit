@@ -14,6 +14,7 @@ import { ModalPages } from './components/modalPages';
 import { Notifications } from './components/notifications';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
+import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
@@ -34,6 +35,7 @@ const components = [
   Accordions,
   Dropdowns,
   Notifications,
+  Switchers,
 ];
 const DEFAULT = 0;
 

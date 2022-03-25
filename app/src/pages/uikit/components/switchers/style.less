@@ -1,0 +1,15 @@
+.uikit-page .switcher {
+  @styles-count: 1;
+
+  .grid {
+    display: grid;
+    grid-template-columns: min-content repeat(@styles-count, max-content);
+    grid-template-rows: auto repeat(auto-fit, min-content);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    align-items: center;
+  }
+  .switcher-group{
+    margin-top: 1rem;
+  }
+}

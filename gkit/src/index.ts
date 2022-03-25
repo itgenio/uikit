@@ -12,3 +12,4 @@ export * from './components/toggle';
 export * from './components/accordion';
 export * from './components/dropdown';
 export * from './components/notification';
+export * from './components/switcher';
