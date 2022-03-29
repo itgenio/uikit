@@ -2,11 +2,13 @@ import './style.less';
 import React, { Fragment } from 'react';
 import { SwitcherContainer, SwitcherItem, SwitcherCircle } from '@itgenio/gkit';
 
+type SwitcherProps = Parameters<typeof SwitcherContainer>[0];
+
 const sizes = ['medium', 'large'];
 const types = ['normal'];
 
 export function Switchers() {
-  const renderState = (state: string, props: any = {}, index: number) => {
+  const renderState = (state: string, props: SwitcherProps, index: number) => {
     return (
       <Fragment key={index}>
         <div>{state}</div>
@@ -38,11 +40,11 @@ export function Switchers() {
     );
   };
 
-  const states = [
+  const states: [string, SwitcherProps][] = [
     ['Normal', { normal: true }],
     ['Hover', { hover: true }],
     ['Active', { active: true }],
-  ] as const;
+  ];
 
   return (
     <div className="switcher">

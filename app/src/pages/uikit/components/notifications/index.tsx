@@ -10,10 +10,12 @@ import {
   NotificationButton,
 } from '@itgenio/gkit';
 
+type NotificationProps = Parameters<typeof NotificationContainer>[0];
+
 export function Notifications() {
   const types = ['inline', 'toast'];
 
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (state: string, props: NotificationProps) => {
     return (
       <Fragment key={state}>
         {types.map(type => {
@@ -42,12 +44,12 @@ export function Notifications() {
     );
   };
 
-  const states = [
+  const states: [string, NotificationProps][] = [
     ['Error', { status: 'error' }],
     ['Warning', { status: 'warning' }],
     ['Success', { status: 'success' }],
     ['Info', { status: 'info' }],
-  ] as const;
+  ];
 
   return (
     <div className="notification">

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { Toggle } from '@itgenio/gkit';
 
+type ToggleProps = Parameters<typeof Toggle>[0];
+
 export function Toggles() {
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (state: string, props: ToggleProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
@@ -13,13 +15,13 @@ export function Toggles() {
     );
   };
 
-  const states = [
+  const states: [string, ToggleProps][] = [
     ['Normal', {}],
     ['Hover', { hover: true }],
     ['Checked', { checked: true }],
     ['Disabled', { disabled: true, checked: false }],
     ['Disabled+Checked', { disabled: true, checked: true }],
-  ] as const;
+  ];
 
   return (
     <div className="toggle">

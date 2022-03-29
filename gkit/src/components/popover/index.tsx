@@ -4,7 +4,6 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import React from 'react';
 
 type Props = React.PropsWithChildren<{
-  children?: React.PropsWithChildren<any>;
   placeholder?: string;
   open?: boolean;
   whiteBackground?: boolean;

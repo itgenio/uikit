@@ -2,8 +2,10 @@ import './style.less';
 import React, { Fragment } from 'react';
 import { Checkbox } from '@itgenio/gkit';
 
+type CheckboxProps = Parameters<typeof Checkbox>[0];
+
 export function Checkboxes() {
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (state: string, props: CheckboxProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
@@ -14,13 +16,13 @@ export function Checkboxes() {
     );
   };
 
-  const states = [
+  const states: [string, CheckboxProps][] = [
     ['Normal', {}],
     ['Hover', { hover: true }],
     ['Checked', { checked: true }],
     ['Disabled', { disabled: true, checked: false }],
     ['Disabled+Checked', { disabled: true, checked: true }],
-  ] as const;
+  ];
 
   return (
     <div className="checkboxes">

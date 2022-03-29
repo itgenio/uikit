@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { RadioButton } from '@itgenio/gkit';
 
+type RadioButtonProps = Parameters<typeof RadioButton>[0];
+
 export function RadioButtons() {
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (state: string, props: RadioButtonProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
@@ -13,13 +15,13 @@ export function RadioButtons() {
     );
   };
 
-  const states = [
+  const states: [string, RadioButtonProps][] = [
     ['Normal', {}],
     ['Hover', { hover: true }],
     ['Checked', { checked: true }],
     ['Disabled', { disabled: true, checked: false }],
     ['Disabled+Checked', { disabled: true, checked: true }],
-  ] as const;
+  ];
 
   return (
     <div className="radioButtons">

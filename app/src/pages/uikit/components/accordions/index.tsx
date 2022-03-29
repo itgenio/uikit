@@ -10,8 +10,10 @@ import {
   AccordionChevronIcon,
 } from '@itgenio/gkit';
 
+type AccordionProps = Parameters<typeof AccordionTitle>[0];
+
 export function Accordions() {
-  const renderState = (props: any = {}, index: number) => {
+  const renderState = (props: AccordionProps, index: number) => {
     return (
       <Fragment key={index}>
         <AccordionDetails>
@@ -27,23 +29,15 @@ export function Accordions() {
             обусловливает важность переосмысления внешнеэкономических политик.
           </AccordionText>
           <AccordionLabelProjects {...props}>
-            <AccordionProjects countProject={props.countProject}>Выполненных проектов</AccordionProjects>
-            <AccordionProjects countProject={props.countCompleted}>Контрольный проект</AccordionProjects>
+            <AccordionProjects countProject="15">Выполненных проектов</AccordionProjects>
+            <AccordionProjects countProject="2/2">Контрольный проект</AccordionProjects>
           </AccordionLabelProjects>
         </AccordionDetails>
       </Fragment>
     );
   };
 
-  const states = [
-    [
-      {
-        status: 'Пройдено',
-        countProject: 15,
-        countCompleted: '2/2',
-      },
-    ],
-  ] as const;
+  const states: [AccordionProps][] = [[{ status: 'Пройдено' }]];
 
   return (
     <div className="accordion">

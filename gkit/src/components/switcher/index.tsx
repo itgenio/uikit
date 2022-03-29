@@ -4,13 +4,10 @@ import classNames from 'classnames';
 import React from 'react';
 import { SwitcherIcon } from '../icons/switcherIcon';
 
-type Types = 'normal' | 'hover' | 'active';
-
 type Props = React.PropsWithChildren<{
-  children?: React.PropsWithChildren<any>;
   value?: string;
   size?: string;
-  type?: Types;
+  type?: string;
   normal?: boolean;
   hover?: boolean;
   active?: boolean;

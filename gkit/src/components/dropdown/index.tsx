@@ -12,7 +12,6 @@ type Props = React.PropsWithChildren<{
   focus?: boolean;
   label?: string;
   className?: string;
-  children?: React.PropsWithChildren<any>;
 }>;
 
 export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: Props) => {

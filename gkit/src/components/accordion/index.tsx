@@ -4,8 +4,7 @@ import { CheckIcon, ChevronIcon } from '../icons/accordionIcon';
 
 type Props = React.PropsWithChildren<{
   status?: string;
-  children?: React.PropsWithChildren<any>;
-  countProject?: number;
+  countProject?: string;
   icon?: boolean;
 }>;
 

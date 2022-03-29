@@ -8,7 +8,6 @@ type Props = React.PropsWithChildren<{
   checked?: boolean;
   onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
   idQa?: string;
-  children?: React.PropsWithChildren<any>;
 }>;
 
 export function Toggle({ children, hover, disabled, checked, idQa, onChange }: Props) {

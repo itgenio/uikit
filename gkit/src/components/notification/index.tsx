@@ -3,12 +3,9 @@ import classNames from 'classnames';
 import React from 'react';
 import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
 
-type Types = 'inline' | 'toast';
-
 type Props = React.PropsWithChildren<{
   onClose?: () => void;
-  children?: React.PropsWithChildren<any>;
-  type?: Types;
+  type?: string;
   status?: string;
   idQa?: string;
 }>;
