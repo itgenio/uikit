@@ -8,18 +8,17 @@ import {
   AccordionLabelProjects,
   AccordionProjects,
   AccordionChevronIcon,
+  AccordionTitleProps,
 } from '@itgenio/gkit';
 
-type AccordionProps = Parameters<typeof AccordionTitle>[0];
-
 export function Accordions() {
-  const renderState = (props: AccordionProps, index: number) => {
+  const renderState = (titleProps: AccordionTitleProps, index: number) => {
     return (
       <Fragment key={index}>
         <AccordionDetails>
           <AccordionSummary>
             <AccordionCheckIcon />
-            <AccordionTitle icon {...props}>
+            <AccordionTitle icon {...titleProps}>
               1. Знакомство с HTML
             </AccordionTitle>
             <AccordionChevronIcon />
@@ -28,7 +27,7 @@ export function Accordions() {
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
             обусловливает важность переосмысления внешнеэкономических политик.
           </AccordionText>
-          <AccordionLabelProjects {...props}>
+          <AccordionLabelProjects>
             <AccordionProjects countProject="15">Выполненных проектов</AccordionProjects>
             <AccordionProjects countProject="2/2">Контрольный проект</AccordionProjects>
           </AccordionLabelProjects>
@@ -37,7 +36,7 @@ export function Accordions() {
     );
   };
 
-  const states: [AccordionProps][] = [[{ status: 'Пройдено' }]];
+  const states: [AccordionTitleProps][] = [[{ status: 'Пройдено' }]];
 
   return (
     <div className="accordion">
