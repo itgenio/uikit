@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import './style.less';
+import React, { Fragment } from 'react';
 import {
   NotificationContainer,
   NotificationHeader,

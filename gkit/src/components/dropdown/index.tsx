@@ -1,11 +1,11 @@
+import './style.less';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import './style.less';
 import React from 'react';
 
-type Props = {
+type Props = React.PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   checked?: boolean;
@@ -13,7 +13,7 @@ type Props = {
   label?: string;
   className?: string;
   children?: React.PropsWithChildren<any>;
-};
+}>;
 
 export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: Props) => {
   return (

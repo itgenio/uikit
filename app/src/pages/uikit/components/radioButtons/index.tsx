@@ -6,17 +6,19 @@ export function RadioButtons() {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-        <RadioButton {...props} onChange={() => console.log('click on radio button')} />
+        <RadioButton {...props} onChange={() => console.log('click on radio button')}>
+          label
+        </RadioButton>
       </Fragment>
     );
   };
 
   const states = [
-    ['Normal', { label: 'label' }],
-    ['Hover', { hover: true, label: 'label' }],
-    ['Checked', { checked: true, label: 'label' }],
-    ['Disabled', { disabled: true, checked: false, label: 'label' }],
-    ['Disabled+Checked', { disabled: true, checked: true, label: 'label' }],
+    ['Normal', {}],
+    ['Hover', { hover: true }],
+    ['Checked', { checked: true }],
+    ['Disabled', { disabled: true, checked: false }],
+    ['Disabled+Checked', { disabled: true, checked: true }],
   ] as const;
 
   return (

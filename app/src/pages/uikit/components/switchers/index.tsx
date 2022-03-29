@@ -1,14 +1,14 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { SwitcherContainer, SwitcherItem, SwitcherIcon } from '@itgenio/gkit';
+import { SwitcherContainer, SwitcherItem, SwitcherCircle } from '@itgenio/gkit';
 
 const sizes = ['medium', 'large'];
 const types = ['normal'];
 
 export function Switchers() {
-  const renderState = (state: string, props: any = {}) => {
+  const renderState = (state: string, props: any = {}, index: number) => {
     return (
-      <Fragment key={state}>
+      <Fragment key={index}>
         <div>{state}</div>
         {types.map(type => (
           <div key={`${state}${type}`}>
@@ -16,17 +16,17 @@ export function Switchers() {
               const p = { ...props, size, type };
               return (
                 <React.Fragment key={`${state}${size}${type}`}>
-                  <SwitcherContainer key={`${size}`} {...p}>
+                  <SwitcherContainer {...p}>
                     <SwitcherItem {...p}>Toggle Item</SwitcherItem>
                   </SwitcherContainer>
-                  <SwitcherContainer key={`${size}`} {...p}>
+                  <SwitcherContainer {...p}>
                     <SwitcherItem {...p}>
-                      <SwitcherIcon /> Toggle Item
+                      <SwitcherCircle /> Toggle Item
                     </SwitcherItem>
                   </SwitcherContainer>
-                  <SwitcherContainer key={`${size}`} {...p}>
+                  <SwitcherContainer {...p}>
                     <SwitcherItem {...p}>
-                      <SwitcherIcon />
+                      <SwitcherCircle />
                     </SwitcherItem>
                   </SwitcherContainer>
                 </React.Fragment>
@@ -48,14 +48,14 @@ export function Switchers() {
     <div className="switcher">
       <div className="grid">
         <div className="switcher">
-          <div className="grid">{states.map(([name, props]) => renderState(name, props))}</div>
+          <div className="grid">{states.map(([name, props], index) => renderState(name, props, index))}</div>
         </div>
       </div>
       <div className="switcher-group">
         {sizes.map(size => {
           const p = { size };
           return (
-            <SwitcherContainer key={`${size}`} {...p}>
+            <SwitcherContainer key={`${size}`}>
               <SwitcherItem {...p} value="left">
                 Toggle Item
               </SwitcherItem>

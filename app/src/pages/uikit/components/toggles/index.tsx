@@ -6,17 +6,19 @@ export function Toggles() {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-        <Toggle {...props} onChange={() => console.log('click on toggle')} />
+        <Toggle {...props} onChange={() => console.log('click on toggle')}>
+          label
+        </Toggle>
       </Fragment>
     );
   };
 
   const states = [
-    ['Normal', { label: 'label' }],
-    ['Hover', { hover: true, label: 'label' }],
-    ['Checked', { checked: true, label: 'label' }],
-    ['Disabled', { disabled: true, checked: false, label: 'label' }],
-    ['Disabled+Checked', { disabled: true, checked: true, label: 'label' }],
+    ['Normal', {}],
+    ['Hover', { hover: true }],
+    ['Checked', { checked: true }],
+    ['Disabled', { disabled: true, checked: false }],
+    ['Disabled+Checked', { disabled: true, checked: true }],
   ] as const;
 
   return (

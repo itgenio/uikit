@@ -2,22 +2,28 @@ import './style.less';
 import classNames from 'classnames';
 import React from 'react';
 
-type Props = {
+type Props = React.PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   checked?: boolean;
-  className?: string;
   onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
   idQa?: string;
-  label?: string;
-};
+  children?: React.PropsWithChildren<any>;
+}>;
 
-export function Toggle({ label, hover, disabled, checked, className, idQa, onChange }: Props) {
+export function Toggle({ children, hover, disabled, checked, idQa, onChange }: Props) {
   return (
-    <label className={classNames(className, 'gkit-switch', { hover, focus })}>
-      <input type="checkbox" id-qa={idQa} disabled={disabled} checked={checked} onChange={onChange} />
+    <label className="gkit-toggle">
+      <input
+        className={classNames('toggle-input', { hover, disabled, checked })}
+        type="checkbox"
+        disabled={disabled}
+        checked={checked}
+        id-qa={idQa}
+        onChange={onChange}
+      />
       <span className="slider round" />
-      <span>{label}</span>
+      <span className={classNames('toggle-text', { disabled, checked })}>{children}</span>
     </label>
   );
 }

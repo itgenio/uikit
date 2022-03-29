@@ -13,3 +13,4 @@ export * from './components/accordion';
 export * from './components/dropdown';
 export * from './components/notification';
 export * from './components/switcher';
+export * from './components/popover';

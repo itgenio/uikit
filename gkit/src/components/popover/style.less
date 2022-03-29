@@ -1,0 +1,92 @@
+@import (reference) "../../variables";
+
+.popover-content {
+  border-radius: 8px;
+  padding: 1rem;
+  width: 20rem;
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.1);
+
+  .popover-close {
+    height: 1.56rem;
+    width: 1.56rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gkit-color-light-neutral-800);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .popover-header {
+    color: var(--gkit-color-light-neutral-900);
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+
+  .popover-text {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--gkit-color-light-neutral-600);
+    margin-top: 0.5rem;
+  }
+
+  .popover-fieldset {
+    all: unset;
+    gap: 0.25rem;
+    flex-direction: column;
+
+    .popover-label {
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: var(--gkit-color-light-neutral-800);
+      margin-top: 1rem;
+    }
+
+    .popover-input {
+      width: 18rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      border-radius: 10px;
+      padding: 0 0.625rem;
+      font-size: 0.875rem;
+      color: #111827;
+      border: 1px solid var(--gkit-color-light-neutral-200);
+      height: 2.5rem;
+    }
+  }
+
+  .popover-separator {
+    height: 1px;
+    background-color: var(--gkit-color-light-neutral-200);
+    margin: 1.25rem 0;
+  }
+
+  .popover-button-container {
+    width: 100%;
+    display: flex;
+    margin: 1rem 0 0.5rem;
+    justify-content: center;
+
+    .popover-button {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 10px;
+    }
+
+    .popover-button:first-child {
+      margin-right: 0.625rem;
+    }
+  }
+
+  .popover-arrow {
+    fill: var(--gkit-color-light-neutral-0);
+  }
+}

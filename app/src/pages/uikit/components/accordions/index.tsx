@@ -1,26 +1,26 @@
 import React, { Fragment } from 'react';
 import {
   AccordionDetails,
-  AccordionIcon,
+  AccordionCheckIcon,
   AccordionTitle,
   AccordionText,
   AccordionSummary,
   AccordionLabelProjects,
   AccordionProjects,
-  AccordionChevron,
+  AccordionChevronIcon,
 } from '@itgenio/gkit';
 
 export function Accordions() {
-  const renderState = (props: any = {}) => {
+  const renderState = (props: any = {}, index: number) => {
     return (
-      <Fragment>
+      <Fragment key={index}>
         <AccordionDetails>
           <AccordionSummary>
-            <AccordionIcon />
+            <AccordionCheckIcon />
             <AccordionTitle icon {...props}>
               1. Знакомство с HTML
             </AccordionTitle>
-            <AccordionChevron />
+            <AccordionChevronIcon />
           </AccordionSummary>
           <AccordionText>
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
@@ -47,7 +47,7 @@ export function Accordions() {
 
   return (
     <div className="accordion">
-      <div>{states.map(([props]) => renderState(props))}</div>
+      <div>{states.map(([props], index) => renderState(props, index))}</div>
     </div>
   );
 }
