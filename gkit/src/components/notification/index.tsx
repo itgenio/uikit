@@ -5,11 +5,10 @@ import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
 
 export type NotificationProps = PropsWithChildren<{ status?: string }>;
 
-type NotificationContainerProps = NotificationProps &
-  PropsWithChildren<{
-    type?: string;
-    idQa?: string;
-  }>;
+type NotificationContainerProps = NotificationProps & {
+  type?: string;
+  idQa?: string;
+};
 
 export function NotificationContainer({ children, type, status, idQa }: NotificationContainerProps) {
   return (

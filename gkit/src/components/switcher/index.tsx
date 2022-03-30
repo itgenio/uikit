@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { SwitcherIcon } from '../icons/switcherIcon';
 
-export type SwitcherProps = SwitcherContainerProps & PropsWithChildren<{ hover?: boolean; active?: boolean }>;
+export type SwitcherProps = SwitcherContainerProps & { hover?: boolean; active?: boolean };
 
 type SwitcherContainerProps = PropsWithChildren<{ normal?: boolean }>;
 
@@ -20,12 +20,11 @@ export function SwitcherContainer({ children, normal }: SwitcherContainerProps) 
   );
 }
 
-type SwitcherItemProps = SwitcherProps &
-  PropsWithChildren<{
-    value?: string;
-    size?: string;
-    type?: string;
-  }>;
+type SwitcherItemProps = SwitcherProps & {
+  value?: string;
+  size?: string;
+  type?: string;
+};
 
 export function SwitcherItem({ children, value, size, type, hover, active }: SwitcherItemProps) {
   return (

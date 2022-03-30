@@ -5,13 +5,12 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-export type DropdownItemProps = DropdownMenuProps &
-  PropsWithChildren<{
-    disabled?: boolean;
-    hover?: boolean;
-    checked?: boolean;
-    focus?: boolean;
-  }>;
+export type DropdownItemProps = DropdownMenuProps & {
+  disabled?: boolean;
+  hover?: boolean;
+  checked?: boolean;
+  focus?: boolean;
+};
 
 export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: DropdownItemProps) => {
   return (
