@@ -9,12 +9,14 @@ import {
   NotificationButtonContainer,
   NotificationButton,
   NotificationProps,
+  NotificationContainerProps,
+  Types,
 } from '@itgenio/gkit';
 
 export function Notifications() {
-  const types = ['inline', 'toast'];
+  const types: Types[] = ['inline', 'toast'];
 
-  const renderState = (state: string, statusProps: NotificationProps) => {
+  const renderState = (state: string, statusProps: NotificationContainerProps) => {
     return (
       <Fragment key={state}>
         {types.map(type => {

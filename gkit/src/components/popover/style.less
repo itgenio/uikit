@@ -1,6 +1,6 @@
 @import (reference) "../../variables";
 
-.popover-content {
+.gkit-popover-content {
   border-radius: 8px;
   padding: 1rem;
   width: 20rem;
@@ -79,6 +79,14 @@
       line-height: 1.5rem;
       padding: 0.5rem 1.5rem;
       border-radius: 10px;
+      color: var(--gkit-color-light-neutral-0);
+      background: var(--gkit-color-light-green-500);
+
+      &.whiteBackground {
+        color: var(--gkit-color-light-neutral-800) !important;
+        background: var(--gkit-color-light-neutral-0) !important;
+        border: 1px solid var(--gkit-color-light-neutral-200) !important;
+      }
     }
 
     .popover-button:first-child {

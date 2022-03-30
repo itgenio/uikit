@@ -1,4 +1,5 @@
 import './style.less';
+import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { CheckIcon, ChevronIcon } from '../icons/accordionIcon';
 
@@ -17,11 +18,8 @@ export function AccordionCheckIcon() {
 export type AccordionTitleProps = PropsWithChildren<{ status?: string; icon?: boolean }>;
 
 export function AccordionTitle({ status, icon, children }: AccordionTitleProps) {
-  const divStyle = {
-    fontSize: `${icon ? '1rem' : '1.25rem'}`,
-  };
   return (
-    <div style={divStyle}>
+    <div className={classNames('accordion-title', { icon })}>
       {children}
       <p>{status}</p>
     </div>

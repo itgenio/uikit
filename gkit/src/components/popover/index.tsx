@@ -1,4 +1,5 @@
 import './style.less';
+import classNames from 'classnames';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import React, { PropsWithChildren } from 'react';
@@ -15,7 +16,7 @@ export function PopoverTrigger({ children }: PropsWithChildren<{}>) {
 
 export function PopoverContent({ children }: PropsWithChildren<{}>) {
   return (
-    <PopoverPrimitive.Content className="popover-content" sideOffset={5}>
+    <PopoverPrimitive.Content className="gkit-popover-content" sideOffset={5}>
       {children}
       <PopoverPrimitive.Arrow className="popover-arrow" />
       <PopoverPrimitive.Close className="popover-close">
@@ -53,16 +54,7 @@ export function PopoverButtonContainer({ children }: PropsWithChildren<{}>) {
 type PopoverButtonProps = PropsWithChildren<{ whiteBackground?: boolean }>;
 
 export function PopoverButton({ children, whiteBackground }: PopoverButtonProps) {
-  const style = {
-    color: `${whiteBackground ? '#1F2737' : 'white'}`,
-    background: `${whiteBackground ? 'white' : '#10B981'}`,
-    border: `${whiteBackground ? '1px solid #E4E6EB' : ''}`,
-  };
-  return (
-    <button style={style} className="popover-button">
-      {children}
-    </button>
-  );
+  return <button className={classNames('popover-button', { whiteBackground })}>{children}</button>;
 }
 
 export const PopoverSeparator = () => {

@@ -3,24 +3,26 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
 
-export type NotificationProps = PropsWithChildren<{ status?: string }>;
+type Statuses = 'success' | 'warning' | 'error' | 'info';
+export type NotificationProps = PropsWithChildren<{ status?: Statuses }>;
 
-type NotificationContainerProps = NotificationProps & {
-  type?: string;
+export type Types = 'toast' | 'inline';
+export type NotificationContainerProps = NotificationProps & {
+  type?: Types;
   idQa?: string;
 };
 
 export function NotificationContainer({ children, type, status, idQa }: NotificationContainerProps) {
   return (
-    <div id-qa={idQa} className={classNames('notification-container', status, type)}>
+    <div id-qa={idQa} className={classNames('gkit-notification-container', status, type)}>
       {children}
     </div>
   );
 }
 
-type AccordionTitleProps = PropsWithChildren<{ onClose?: () => void }>;
+type NotificationHeaderProps = PropsWithChildren<{ onClose?: () => void }>;
 
-export function NotificationHeader({ children, onClose }: AccordionTitleProps) {
+export function NotificationHeader({ children, onClose }: NotificationHeaderProps) {
   return (
     <div className="notification-title">
       <NotificationIcon />

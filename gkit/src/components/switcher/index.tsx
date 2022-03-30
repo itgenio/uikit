@@ -11,7 +11,7 @@ type SwitcherContainerProps = PropsWithChildren<{ normal?: boolean }>;
 export function SwitcherContainer({ children, normal }: SwitcherContainerProps) {
   return (
     <ToggleGroupPrimitive.Root
-      className={classNames('switcher-container', { normal })}
+      className={classNames('gkit-switcher-container', { normal })}
       type="single"
       defaultValue="left"
     >
