@@ -36,11 +36,11 @@ export function Accordions() {
     );
   };
 
-  const states: [AccordionTitleProps][] = [[{ status: 'Пройдено' }]];
+  const states: AccordionTitleProps[] = [{ status: 'Пройдено' }];
 
   return (
     <div className="accordion">
-      <div>{states.map(([props], index) => renderState(props, index))}</div>
+      <div>{states.map((props, index) => renderState(props, index))}</div>
     </div>
   );
 }

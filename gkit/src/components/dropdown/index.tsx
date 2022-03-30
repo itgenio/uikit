@@ -3,18 +3,17 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = React.PropsWithChildren<{
-  disabled?: boolean;
-  hover?: boolean;
-  checked?: boolean;
-  focus?: boolean;
-  label?: string;
-  className?: string;
-}>;
+export type DropdownItemProps = DropdownMenuProps &
+  PropsWithChildren<{
+    disabled?: boolean;
+    hover?: boolean;
+    checked?: boolean;
+    focus?: boolean;
+  }>;
 
-export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: Props) => {
+export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: DropdownItemProps) => {
   return (
     <label className={classNames('gkit-dropdown', { hover, focus, disabled })}>
       <span className="dropdown-text">{label ?? children}</span>
@@ -27,7 +26,7 @@ export const DropdownItemCheck = ({ children, label, hover, disabled, checked, f
   );
 };
 
-export const DropdownItemCheckbox = ({ children, label, hover, disabled, checked, focus }: Props) => {
+export const DropdownItemCheckbox = ({ children, label, hover, disabled, checked, focus }: DropdownItemProps) => {
   return (
     <label className={classNames('gkit-dropdown', { hover, focus, disabled })}>
       <CheckboxPrimitive.Root
@@ -44,7 +43,9 @@ export const DropdownItemCheckbox = ({ children, label, hover, disabled, checked
   );
 };
 
-export const DropdownMenu = ({ children, label }: Props) => {
+type DropdownMenuProps = PropsWithChildren<{ label?: string }>;
+
+export const DropdownMenu = ({ children, label }: DropdownMenuProps) => {
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>
@@ -55,7 +56,7 @@ export const DropdownMenu = ({ children, label }: Props) => {
   );
 };
 
-export const DropdownMenuChapter = ({ children }: Props) => {
+export const DropdownMenuChapter = ({ children }: PropsWithChildren<{}>) => {
   return <DropdownMenuPrimitive.Label className="dropdown-chapter">{children}</DropdownMenuPrimitive.Label>;
 };
 

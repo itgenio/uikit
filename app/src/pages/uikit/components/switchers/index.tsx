@@ -1,8 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { SwitcherContainer, SwitcherItem, SwitcherCircle } from '@itgenio/gkit';
-
-type SwitcherProps = Parameters<typeof SwitcherContainer>[0];
+import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherProps } from '@itgenio/gkit';
 
 const sizes = ['medium', 'large'];
 const types = ['normal'];
@@ -54,7 +52,7 @@ export function Switchers() {
         </div>
       </div>
       <div className="switcher-group">
-        {sizes.map(size => {
+        {sizes.map((size: string) => {
           const p = { size };
           return (
             <SwitcherContainer key={`${size}`}>

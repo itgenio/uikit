@@ -1,16 +1,17 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
 
-type Props = React.PropsWithChildren<{
-  onClose?: () => void;
-  type?: string;
-  status?: string;
-  idQa?: string;
-}>;
+export type NotificationProps = PropsWithChildren<{ status?: string }>;
 
-export function NotificationContainer({ children, type, status, idQa }: Props) {
+type NotificationContainerProps = NotificationProps &
+  PropsWithChildren<{
+    type?: string;
+    idQa?: string;
+  }>;
+
+export function NotificationContainer({ children, type, status, idQa }: NotificationContainerProps) {
   return (
     <div id-qa={idQa} className={classNames('notification-container', status, type)}>
       {children}
@@ -18,7 +19,9 @@ export function NotificationContainer({ children, type, status, idQa }: Props) {
   );
 }
 
-export function NotificationHeader({ children, onClose }: Props) {
+type AccordionTitleProps = PropsWithChildren<{ onClose?: () => void }>;
+
+export function NotificationHeader({ children, onClose }: AccordionTitleProps) {
   return (
     <div className="notification-title">
       <NotificationIcon />
@@ -30,22 +33,22 @@ export function NotificationHeader({ children, onClose }: Props) {
   );
 }
 
-export function NotificationTitle({ children }: Props) {
+export function NotificationTitle({ children }: PropsWithChildren<{}>) {
   return <h3>{children}</h3>;
 }
 
-export function NotificationContent({ children }: Props) {
+export function NotificationContent({ children }: PropsWithChildren<{}>) {
   return <div className="notification-content">{children}</div>;
 }
 
-export function NotificationText({ children }: Props) {
+export function NotificationText({ children }: PropsWithChildren<{}>) {
   return <p className="notification-text">{children}</p>;
 }
 
-export function NotificationButtonContainer({ children }: Props) {
+export function NotificationButtonContainer({ children }: PropsWithChildren<{}>) {
   return <div className="notification-button-container">{children}</div>;
 }
 
-export function NotificationButton({ children }: Props) {
+export function NotificationButton({ children }: PropsWithChildren<{}>) {
   return <button>{children}</button>;
 }

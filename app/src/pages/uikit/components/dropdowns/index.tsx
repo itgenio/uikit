@@ -6,12 +6,11 @@ import {
   DropdownMenu,
   DropdownMenuChapter,
   DropdownMenuSeparator,
+  DropdownItemProps,
 } from '@itgenio/gkit';
 
-type DropdownProps = Parameters<typeof DropdownItemCheck>[0];
-
 export function Dropdowns() {
-  const renderState = (state: string, props: DropdownProps = {}) => {
+  const renderState = (state: string, props: DropdownItemProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
@@ -21,7 +20,7 @@ export function Dropdowns() {
     );
   };
 
-  const states: [string, DropdownProps][] = [
+  const states: [string, DropdownItemProps][] = [
     ['Normal', { label: 'Dropdown Option' }],
     ['Hover', { hover: true, label: 'Dropdown Option' }],
     ['Focus', { focus: true, label: 'Dropdown Option' }],

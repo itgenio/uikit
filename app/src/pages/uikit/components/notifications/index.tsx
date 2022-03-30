@@ -8,22 +8,21 @@ import {
   NotificationText,
   NotificationButtonContainer,
   NotificationButton,
+  NotificationProps,
 } from '@itgenio/gkit';
-
-type NotificationProps = Parameters<typeof NotificationContainer>[0];
 
 export function Notifications() {
   const types = ['inline', 'toast'];
 
-  const renderState = (state: string, props: NotificationProps) => {
+  const renderState = (state: string, statusProps: NotificationProps) => {
     return (
       <Fragment key={state}>
         {types.map(type => {
-          const p = { ...props, type };
+          const p = { ...statusProps, type };
           return (
             <div key={`${state}${type}`} className="row">
               <NotificationContainer key={`${state}${type}`} {...p}>
-                <NotificationHeader {...p}>
+                <NotificationHeader>
                   <NotificationTitle>Notification message title</NotificationTitle>
                 </NotificationHeader>
                 <NotificationContent>
@@ -60,7 +59,7 @@ export function Notifications() {
         <div>
           <span className="title">Toast</span>
         </div>
-        {states.map(([name, props]) => renderState(name, props))}
+        {states.map(([name, status]) => renderState(name, status))}
       </div>
     </div>
   );

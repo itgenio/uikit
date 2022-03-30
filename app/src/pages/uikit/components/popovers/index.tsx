@@ -50,7 +50,9 @@ export function Popovers() {
             Поповер используется для позиционирования элементов, привязанных к координате или якорю.
           </PopoverText>
           <PopoverSeparator />
-          <Toggle checked>Шумоподавление</Toggle>
+          <Toggle checked onChange={() => console.log('click on toggle')}>
+            Шумоподавление
+          </Toggle>
           <PopoverText>Приглушает посторонние звуки, слышен только ваш голос</PopoverText>
         </PopoverContent>
       </PopoverRoot>

@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
-import { Toggle } from '@itgenio/gkit';
-
-type ToggleProps = Parameters<typeof Toggle>[0];
+import { Toggle, ToggleProps } from '@itgenio/gkit';
 
 export function Toggles() {
   const renderState = (state: string, props: ToggleProps) => {

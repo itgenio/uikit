@@ -1,19 +1,14 @@
 import './style.less';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { SwitcherIcon } from '../icons/switcherIcon';
 
-type Props = React.PropsWithChildren<{
-  value?: string;
-  size?: string;
-  type?: string;
-  normal?: boolean;
-  hover?: boolean;
-  active?: boolean;
-}>;
+export type SwitcherProps = SwitcherContainerProps & PropsWithChildren<{ hover?: boolean; active?: boolean }>;
 
-export function SwitcherContainer({ children, normal }: Props) {
+type SwitcherContainerProps = PropsWithChildren<{ normal?: boolean }>;
+
+export function SwitcherContainer({ children, normal }: SwitcherContainerProps) {
   return (
     <ToggleGroupPrimitive.Root
       className={classNames('switcher-container', { normal })}
@@ -25,7 +20,14 @@ export function SwitcherContainer({ children, normal }: Props) {
   );
 }
 
-export function SwitcherItem({ children, value, size, type, hover, active }: Props) {
+type SwitcherItemProps = SwitcherProps &
+  PropsWithChildren<{
+    value?: string;
+    size?: string;
+    type?: string;
+  }>;
+
+export function SwitcherItem({ children, value, size, type, hover, active }: SwitcherItemProps) {
   return (
     <ToggleGroupPrimitive.Item className={classNames('switcher-item', size, type, { hover, active })} value={value}>
       <span className="switcher-span">{children}</span>

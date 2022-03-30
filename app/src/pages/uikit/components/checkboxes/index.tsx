@@ -1,8 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Checkbox } from '@itgenio/gkit';
-
-type CheckboxProps = Parameters<typeof Checkbox>[0];
+import { Checkbox, CheckboxProps } from '@itgenio/gkit';
 
 export function Checkboxes() {
   const renderState = (state: string, props: CheckboxProps) => {

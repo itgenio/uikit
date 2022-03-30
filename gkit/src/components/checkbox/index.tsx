@@ -1,8 +1,8 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = React.PropsWithChildren<{
+export type CheckboxProps = PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   checked?: boolean;
@@ -10,7 +10,7 @@ type Props = React.PropsWithChildren<{
   idQa?: string;
 }>;
 
-export function Checkbox({ children, hover, disabled, checked, idQa, onChange }: Props) {
+export function Checkbox({ children, hover, disabled, checked, idQa, onChange }: CheckboxProps) {
   return (
     <label className="gkit-checkbox">
       <input

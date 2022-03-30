@@ -1,23 +1,19 @@
 import './style.less';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = React.PropsWithChildren<{
-  placeholder?: string;
-  open?: boolean;
-  whiteBackground?: boolean;
-}>;
+type PopoverRootProps = PropsWithChildren<{ open?: boolean }>;
 
-export function PopoverRoot({ children, open }: Props) {
+export function PopoverRoot({ children, open }: PopoverRootProps) {
   return <PopoverPrimitive.Root open={open}>{children}</PopoverPrimitive.Root>;
 }
 
-export function PopoverTrigger({ children }: Props) {
+export function PopoverTrigger({ children }: PropsWithChildren<{}>) {
   return <PopoverPrimitive.Trigger>{children}</PopoverPrimitive.Trigger>;
 }
 
-export function PopoverContent({ children }: Props) {
+export function PopoverContent({ children }: PropsWithChildren<{}>) {
   return (
     <PopoverPrimitive.Content className="popover-content" sideOffset={5}>
       {children}
@@ -29,15 +25,17 @@ export function PopoverContent({ children }: Props) {
   );
 }
 
-export function PopoverHeader({ children }: Props) {
+export function PopoverHeader({ children }: PropsWithChildren<{}>) {
   return <div className="popover-header">{children}</div>;
 }
 
-export function PopoverText({ children }: Props) {
+export function PopoverText({ children }: PropsWithChildren<{}>) {
   return <div className="popover-text">{children}</div>;
 }
 
-export function PopoverInput({ children, placeholder }: Props) {
+type PopoverInputProps = PropsWithChildren<{ placeholder?: string }>;
+
+export function PopoverInput({ children, placeholder }: PopoverInputProps) {
   return (
     <fieldset className="popover-fieldset">
       <label htmlFor="username" className="popover-label">
@@ -48,11 +46,13 @@ export function PopoverInput({ children, placeholder }: Props) {
   );
 }
 
-export function PopoverButtonContainer({ children }: Props) {
+export function PopoverButtonContainer({ children }: PropsWithChildren<{}>) {
   return <div className="popover-button-container">{children}</div>;
 }
 
-export function PopoverButton({ children, whiteBackground }: Props) {
+type PopoverButtonProps = PropsWithChildren<{ whiteBackground?: boolean }>;
+
+export function PopoverButton({ children, whiteBackground }: PopoverButtonProps) {
   const style = {
     color: `${whiteBackground ? '#1F2737' : 'white'}`,
     background: `${whiteBackground ? 'white' : '#10B981'}`,

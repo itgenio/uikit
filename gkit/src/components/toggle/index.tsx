@@ -1,8 +1,8 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = React.PropsWithChildren<{
+export type ToggleProps = PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   checked?: boolean;
@@ -10,7 +10,7 @@ type Props = React.PropsWithChildren<{
   idQa?: string;
 }>;
 
-export function Toggle({ children, hover, disabled, checked, idQa, onChange }: Props) {
+export function Toggle({ children, hover, disabled, checked, idQa, onChange }: ToggleProps) {
   return (
     <label className="gkit-toggle">
       <input

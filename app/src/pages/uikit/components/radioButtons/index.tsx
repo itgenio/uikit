@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
-import { RadioButton } from '@itgenio/gkit';
-
-type RadioButtonProps = Parameters<typeof RadioButton>[0];
+import { RadioButton, RadioButtonProps } from '@itgenio/gkit';
 
 export function RadioButtons() {
   const renderState = (state: string, props: RadioButtonProps) => {
