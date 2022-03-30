@@ -8,19 +8,17 @@ import {
   NotificationText,
   NotificationButtonContainer,
   NotificationButton,
-  NotificationProps,
   NotificationContainerProps,
-  Types,
 } from '@itgenio/gkit';
 
 export function Notifications() {
-  const types: Types[] = ['inline', 'toast'];
+  const types = ['inline', 'toast'] as const;
 
-  const renderState = (state: string, statusProps: NotificationContainerProps) => {
+  const renderState = (state: string, props: NotificationContainerProps) => {
     return (
       <Fragment key={state}>
         {types.map(type => {
-          const p = { ...statusProps, type };
+          const p = { ...props, type };
           return (
             <div key={`${state}${type}`} className="row">
               <NotificationContainer key={`${state}${type}`} {...p}>
@@ -32,9 +30,9 @@ export function Notifications() {
                     Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
                   </NotificationText>
                   <NotificationButtonContainer>
-                    <NotificationButton>Кнопка</NotificationButton>
-                    <NotificationButton>Кнопка</NotificationButton>
-                    <NotificationButton>Кнопка</NotificationButton>
+                    <NotificationButton onClick={() => console.log('click on button1')}>Кнопка</NotificationButton>
+                    <NotificationButton onClick={() => console.log('click on button2')}>Кнопка</NotificationButton>
+                    <NotificationButton onClick={() => console.log('click on button3')}>Кнопка</NotificationButton>
                   </NotificationButtonContainer>
                 </NotificationContent>
               </NotificationContainer>
@@ -45,7 +43,7 @@ export function Notifications() {
     );
   };
 
-  const states: [string, NotificationProps][] = [
+  const states: [string, NotificationContainerProps][] = [
     ['Error', { status: 'error' }],
     ['Warning', { status: 'warning' }],
     ['Success', { status: 'success' }],

@@ -7,15 +7,16 @@ export type RadioButtonProps = PropsWithChildren<{
   hover?: boolean;
   checked?: boolean;
   onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
   idQa?: string;
 }>;
 
-export function RadioButton({ children, hover, disabled, checked, idQa, onChange }: RadioButtonProps) {
+export function RadioButton({ children, hover, disabled, checked, idQa, onChange, className }: RadioButtonProps) {
   return (
-    <label className={classNames('gkit-radio-button')}>
+    <label className={classNames('gkit-radio-button', className)}>
       <input
         type="radio"
-        className={classNames('radio-input', { hover })}
+        className={classNames('radio-input', className, { hover })}
         id-qa={idQa}
         disabled={disabled}
         checked={checked}

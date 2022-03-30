@@ -4,17 +4,18 @@ import React, { PropsWithChildren } from 'react';
 import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
 
 type Statuses = 'success' | 'warning' | 'error' | 'info';
-export type NotificationProps = PropsWithChildren<{ status?: Statuses }>;
+type Types = 'toast' | 'inline';
 
-export type Types = 'toast' | 'inline';
-export type NotificationContainerProps = NotificationProps & {
+export type NotificationContainerProps = PropsWithChildren<{
+  status?: Statuses;
   type?: Types;
+  className?: string;
   idQa?: string;
-};
+}>;
 
-export function NotificationContainer({ children, type, status, idQa }: NotificationContainerProps) {
+export function NotificationContainer({ children, type, status, className, idQa }: NotificationContainerProps) {
   return (
-    <div id-qa={idQa} className={classNames('gkit-notification-container', status, type)}>
+    <div id-qa={idQa} className={classNames('gkit-notification-container', className, status, type)}>
       {children}
     </div>
   );
@@ -50,6 +51,8 @@ export function NotificationButtonContainer({ children }: PropsWithChildren<{}>)
   return <div className="notification-button-container">{children}</div>;
 }
 
-export function NotificationButton({ children }: PropsWithChildren<{}>) {
-  return <button>{children}</button>;
+type NotificationButtonProps = PropsWithChildren<{ onClick?: () => void }>;
+
+export function NotificationButton({ children, onClick }: NotificationButtonProps) {
+  return <button onClick={onClick}>{children}</button>;
 }

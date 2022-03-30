@@ -15,11 +15,11 @@ export function AccordionCheckIcon() {
   return <CheckIcon />;
 }
 
-export type AccordionTitleProps = PropsWithChildren<{ status?: string; icon?: boolean }>;
+export type AccordionTitleProps = PropsWithChildren<{ status?: string; icon?: boolean; className?: string }>;
 
-export function AccordionTitle({ status, icon, children }: AccordionTitleProps) {
+export function AccordionTitle({ status, icon, children, className }: AccordionTitleProps) {
   return (
-    <div className={classNames('accordion-title', { icon })}>
+    <div className={classNames('accordion-title', className, { icon })}>
       {children}
       <p>{status}</p>
     </div>

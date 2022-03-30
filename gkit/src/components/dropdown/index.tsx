@@ -10,11 +10,20 @@ export type DropdownItemProps = DropdownMenuProps & {
   hover?: boolean;
   checked?: boolean;
   focus?: boolean;
+  className?: string;
 };
 
-export const DropdownItemCheck = ({ children, label, hover, disabled, checked, focus }: DropdownItemProps) => {
+export const DropdownItemCheck = ({
+  children,
+  label,
+  hover,
+  disabled,
+  checked,
+  focus,
+  className,
+}: DropdownItemProps) => {
   return (
-    <label className={classNames('gkit-dropdown', { hover, focus, disabled })}>
+    <label className={classNames('gkit-dropdown', className, { hover, focus, disabled })}>
       <span className="dropdown-text">{label ?? children}</span>
       <CheckboxPrimitive.Root disabled={disabled} checked={checked} className="dropdown-checkbox">
         <CheckboxPrimitive.Indicator className="dropdown-indicator">
@@ -25,9 +34,17 @@ export const DropdownItemCheck = ({ children, label, hover, disabled, checked, f
   );
 };
 
-export const DropdownItemCheckbox = ({ children, label, hover, disabled, checked, focus }: DropdownItemProps) => {
+export const DropdownItemCheckbox = ({
+  children,
+  label,
+  hover,
+  disabled,
+  checked,
+  focus,
+  className,
+}: DropdownItemProps) => {
   return (
-    <label className={classNames('gkit-dropdown', { hover, focus, disabled })}>
+    <label className={classNames('gkit-dropdown', className, { hover, focus, disabled })}>
       <CheckboxPrimitive.Root
         disabled={disabled}
         checked={checked}
