@@ -10,8 +10,12 @@ export function PopoverRoot({ children, open }: PopoverRootProps) {
   return <PopoverPrimitive.Root open={open}>{children}</PopoverPrimitive.Root>;
 }
 
-export function PopoverTrigger({ children }: PropsWithChildren<{}>) {
-  return <PopoverPrimitive.Trigger>{children}</PopoverPrimitive.Trigger>;
+type PopoverTriggerProps = PropsWithChildren<{ className?: string }>;
+
+export function PopoverTrigger({ children, className }: PopoverTriggerProps) {
+  return (
+    <PopoverPrimitive.Trigger className={classNames('popover-trigger', className)}>{children}</PopoverPrimitive.Trigger>
+  );
 }
 
 export function PopoverContent({ children }: PropsWithChildren<{}>) {
@@ -34,27 +38,10 @@ export function PopoverText({ children }: PropsWithChildren<{}>) {
   return <div className="popover-text">{children}</div>;
 }
 
-type PopoverInputProps = PropsWithChildren<{ placeholder?: string }>;
+type PopoverButtonContainerProps = PropsWithChildren<{ className?: string }>;
 
-export function PopoverInput({ children, placeholder }: PopoverInputProps) {
-  return (
-    <fieldset className="popover-fieldset">
-      <label htmlFor="username" className="popover-label">
-        {children}
-      </label>
-      <input className="popover-input" type="text" name="username" placeholder={placeholder} />
-    </fieldset>
-  );
-}
-
-export function PopoverButtonContainer({ children }: PropsWithChildren<{}>) {
-  return <div className="popover-button-container">{children}</div>;
-}
-
-type PopoverButtonProps = PropsWithChildren<{ whiteBackground?: boolean; className?: string }>;
-
-export function PopoverButton({ children, whiteBackground, className }: PopoverButtonProps) {
-  return <button className={classNames('popover-button', className, { whiteBackground })}>{children}</button>;
+export function PopoverButtonContainer({ children, className }: PopoverButtonContainerProps) {
+  return <div className={classNames('popover-button-container', className)}>{children}</div>;
 }
 
 export const PopoverSeparator = () => {

@@ -33,17 +33,3 @@ export function AccordionText({ children }: PropsWithChildren<{}>) {
 export function AccordionChevronIcon() {
   return <ChevronIcon />;
 }
-
-export function AccordionLabelProjects({ children }: PropsWithChildren<{}>) {
-  return <label>{children}</label>;
-}
-
-export type AccordionProjectsProps = PropsWithChildren<{ countProject?: string }>;
-
-export function AccordionProjects({ children, countProject }: AccordionProjectsProps) {
-  return (
-    <p>
-      {children}: <span>{countProject}</span>
-    </p>
-  );
-}

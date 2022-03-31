@@ -1,3 +1,4 @@
+import './style.less';
 import React, { Fragment } from 'react';
 import {
   AccordionDetails,
@@ -5,8 +6,6 @@ import {
   AccordionTitle,
   AccordionText,
   AccordionSummary,
-  AccordionLabelProjects,
-  AccordionProjects,
   AccordionChevronIcon,
   AccordionTitleProps,
 } from '@itgenio/gkit';
@@ -27,10 +26,14 @@ export function Accordions() {
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
             обусловливает важность переосмысления внешнеэкономических политик.
           </AccordionText>
-          <AccordionLabelProjects>
-            <AccordionProjects countProject="15">Выполненных проектов</AccordionProjects>
-            <AccordionProjects countProject="2/2">Контрольный проект</AccordionProjects>
-          </AccordionLabelProjects>
+          <div className="accordion-div">
+            <p>
+              Выполненных проектов: <span>15</span>
+            </p>
+            <p>
+              Контрольный проект: <span>2/2 Выполнено</span>
+            </p>
+          </div>
         </AccordionDetails>
       </Fragment>
     );
