@@ -11,7 +11,7 @@
     appearance: none;
     -webkit-appearance: none;
     margin-right: 0.75rem;
-    background-color: var(--gkit-color-light-neutral-0);
+    background-color: var(--gkit-color-neutral-0);
 
     &:before {
       content: "";
@@ -37,38 +37,38 @@
 
     &:checked:before {
       transition: 0.5s border-color ease;
-      border: 1px solid var(--gkit-color-green-400);
+      border: 1px solid var(--gkit-color-light-primary-400);
     }
 
     &:checked:after {
       transform: scale(1);
       animation: toggleOnRadio 0.2s ease forwards;
-      background-color: var(--gkit-color-light-green-500);
+      background-color: var(--gkit-color-light-primary-500);
     }
     &.hover,
     &:hover {
-      background-color: var(--gkit-color-green-50);
+      background-color: var(--gkit-color-light-primary-50);
       border-radius: 50%;
     }
     &.hover:before,
     &:hover:before {
-      border: 1px solid var(--gkit-color-green-400);
+      border: 1px solid var(--gkit-color-light-primary-400);
     }
 
     &:disabled:before {
-      border-color: var(--gkit-color-light-neutral-300);
-      background-color: var(--gkit-color-light-neutral-100);
+      border-color: var(--gkit-color-neutral-300);
+      background-color: var(--gkit-color-neutral-100);
     }
 
     &:disabled + span {
-      color: var(--gkit-color-light-neutral-400);
+      color: var(--gkit-color-neutral-400);
     }
 
     &:checked:disabled:before {
-      background-color: var(--gkit-color-light-neutral-100);
+      background-color: var(--gkit-color-neutral-100);
     }
     &:checked:disabled:after {
-      background-color: var(--gkit-color-light-neutral-400);
+      background-color: var(--gkit-color-neutral-400);
     }
   }
 }

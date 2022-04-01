@@ -5,9 +5,9 @@
   width: 43.5rem;
   padding: 2rem 1.75rem;
   border-radius: 8px;
-  border: 1px solid var(--gkit-color-light-neutral-200);
+  border: 1px solid var(--gkit-color-neutral-200);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 6px 6px -6px rgba(0, 0, 0, 0.15);
-  background-color: var(--gkit-color-light-neutral-0);
+  background-color: var(--gkit-color-neutral-0);
 
   summary {
     list-style-type: none;
@@ -15,11 +15,12 @@
     font-weight: 600;
     cursor: pointer;
     position: relative;
-    color: var(--gkit-color-light-neutral-900);
+    color: var(--gkit-color-neutral-900);
     display: flex;
     align-items: center;
 
     .icon-check {
+      color: var(--gkit-color-light-primary-500);
       margin-right: 1.18rem;
     }
 
@@ -39,16 +40,16 @@
       p {
         font-size: @text-size-sm;
         font-weight: 400;
-        color: var(--gkit-color-light-neutral-500);
+        color: var(--gkit-color-neutral-500);
       }
     }
   }
 
   &[open] {
-    background-color: var(--gkit-color-light-neutral-0);
+    background-color: var(--gkit-color-neutral-0);
     font-weight: 400;
     font-size: @text-size-base;
-    color: var(--gkit-color-light-neutral-600);
+    color: var(--gkit-color-neutral-600);
   }
 
   &[open] summary .icon-chevron {
