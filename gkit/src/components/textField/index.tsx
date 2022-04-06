@@ -22,6 +22,7 @@ type Props = React.PropsWithChildren<{
   autoComplete?: string;
   autoFocus?: boolean;
   dataList?: string[];
+  maxLength?: number;
 }>;
 
 const generateId = () => String(Date.now() * Math.random());
@@ -46,6 +47,7 @@ export function TextField({
   autoComplete,
   autoFocus,
   dataList,
+  maxLength,
 }: Props) {
   const id = useMemo(() => generateId(), []);
 
@@ -66,7 +68,7 @@ export function TextField({
         type={inputType}
         className={classNames({ hover, active, focus })}
         list={id + 'list'}
-        {...{ value, required, id, placeholder, disabled, onChange, autoFocus, name, autoComplete }}
+        {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
       />
       {helperText && <span className="helper-text">{helperText}</span>}
       {dataList && (
