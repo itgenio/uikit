@@ -31,6 +31,7 @@
     "no-var": "error",
     "no-console": "off",
     "prefer-rest-params": "warn",
+    "react/no-unknown-property": 0,
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-use-before-define": "off",

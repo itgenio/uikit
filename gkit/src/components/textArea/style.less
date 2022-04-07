@@ -1,0 +1,91 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-text-area-container {
+  display: flex;
+  flex-direction: column;
+
+  .text-area-label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+
+    &.small {
+      font-size: 0.875rem;
+    }
+  }
+
+  .text-area {
+    height: auto;
+    border-radius: 12px;
+    background: var(--gkit-color-neutral-0);
+    border: 1px solid var(--gkit-color-neutral-200);
+    color: var(--gkit-color-neutral-900);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    outline: none;
+
+    &.both {
+      resize: both;
+    }
+
+    &.horizontal {
+      resize: horizontal;
+    }
+
+    &.vertical {
+      resize: vertical;
+    }
+
+    &.small {
+      font-size: 0.875rem;
+      border-radius: 10px;
+    }
+
+    &::placeholder {
+      color: var(--gkit-color-neutral-500);
+    }
+
+    &.hover,
+    &:hover {
+      border: 1px solid var(--gkit-color-light-primary-500);
+    }
+
+    &.focus,
+    &:focus {
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-primary-300();
+    }
+
+    &.filled {
+      &::placeholder {
+        color: var(--gkit-color-neutral-900);
+      }
+    }
+
+    &.error {
+      border: 1px solid var(--gkit-color-danger-500);
+      &::placeholder {
+        color: var(--gkit-color-neutral-900);
+      }
+    }
+
+    &.disabled {
+      background: var(--gkit-color-neutral-100);
+      &:hover {
+        border: 1px solid var(--gkit-color-neutral-200);
+      }
+      &::placeholder {
+        color: var(--gkit-color-neutral-300);
+      }
+    }
+  }
+
+  .text-area-description {
+    margin-top: 0.5rem;
+    color: var(--gkit-color-neutral-500);
+    font-size: 0.875rem;
+  }
+}
