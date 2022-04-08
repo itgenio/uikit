@@ -21,7 +21,15 @@ const isProduction = process.env.NODE_ENV === 'production';
     bundle: true,
     format: 'esm',
     splitting: true,
-    external: ['react', 'react-dom', 'classnames', 'focus-trap-react'],
+    external: [
+      'react',
+      'react-dom',
+      'classnames',
+      'focus-trap-react',
+      '@radix-ui/react-checkbox',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-icons',
+    ],
     outdir: path.resolve(__dirname, 'dist'),
     plugins: [lessLoader({})],
     loader: {
