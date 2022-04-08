@@ -1,0 +1,62 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-accordion-details {
+  width: 43.5rem;
+  padding: 2rem 1.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--gkit-color-neutral-200);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 6px 6px -6px rgba(0, 0, 0, 0.15);
+  background-color: var(--gkit-color-neutral-0);
+
+  summary {
+    list-style-type: none;
+    font-size: @text-size-base;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    color: var(--gkit-color-neutral-900);
+    display: flex;
+    align-items: center;
+
+    .icon-check {
+      color: var(--gkit-color-light-primary-500);
+      margin-right: 1.18rem;
+    }
+
+    .accordion-title {
+      font-size: 1.25rem;
+      &.icon {
+        font-size: 1rem !important;
+      }
+    }
+
+    .icon-chevron {
+      transition: transform 0.5s;
+    }
+
+    div {
+      width: 100%;
+      p {
+        font-size: @text-size-sm;
+        font-weight: 400;
+        color: var(--gkit-color-neutral-500);
+      }
+    }
+  }
+
+  &[open] {
+    background-color: var(--gkit-color-neutral-0);
+    font-weight: 400;
+    font-size: @text-size-base;
+    color: var(--gkit-color-neutral-600);
+  }
+
+  &[open] summary .icon-chevron {
+    transform: scale(1, -1);
+  }
+
+  .text {
+    margin-top: 1rem;
+  }
+}
