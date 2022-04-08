@@ -11,11 +11,7 @@ export function TextAreas() {
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
-          return (
-            <TextArea key={size} {...p}>
-              {size} Desc
-            </TextArea>
-          );
+          return <TextArea key={size} {...p} description={`${size} Desc`} />;
         })}
       </Fragment>
     );

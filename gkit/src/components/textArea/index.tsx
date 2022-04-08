@@ -1,15 +1,16 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { PropsWithChildren } from 'react';
+import React, { useMemo } from 'react';
+import { generateId } from '../utils/generateId';
 
-export type TextAreaProps = PropsWithChildren<{
+export type TextAreaProps = {
   size?: string;
   resize?: string;
-  maxlength?: number;
+  maxLength?: number;
   rows?: number;
   cols?: number;
   name?: string;
-  onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
   required?: boolean;
   label?: string;
@@ -23,13 +24,12 @@ export type TextAreaProps = PropsWithChildren<{
   placeholder?: string;
   className?: string;
   idQa?: string;
-}>;
+};
 
 export function TextArea({
-  children,
   size = 'large',
   resize = 'both',
-  maxlength,
+  maxLength,
   cols = 32,
   rows = 5,
   name,
@@ -47,15 +47,19 @@ export function TextArea({
   className,
   idQa,
 }: TextAreaProps) {
+  const id = useMemo(() => generateId(), []);
+
   return (
     <div id-qa={idQa} className="gkit-text-area-container">
-      <label htmlFor={`${label}${size}`} className={classNames('text-area-label', size)}>
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className={classNames('text-area-label', size)}>
+          {label}
+        </label>
+      )}
       <textarea
-        id={`${label}${size}`}
-        onChange={() => onChange}
-        {...{ value, maxlength, placeholder, disabled, name, rows, cols, required }}
+        id={id}
+        onChange={onChange}
+        {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
         className={classNames('text-area', className, size, resize, {
           hover,
           focus,
@@ -65,7 +69,7 @@ export function TextArea({
           placeholder,
         })}
       />
-      <label className="text-area-description">{description ?? children}</label>
+      {description && <label className="text-area-description">{description}</label>}
     </div>
   );
 }
