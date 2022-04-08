@@ -1,0 +1,52 @@
+@import (reference) "../../variables";
+
+.gkit-popover-content {
+  border-radius: 8px;
+  padding: 1rem;
+  width: 20rem;
+  box-shadow: 0 4px 12px 2px var(--gkit-color-neutral-300);
+  background-color: var(--gkit-color-neutral-0);
+
+  .popover-close {
+    height: 1.56rem;
+    width: 1.56rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gkit-color-neutral-800);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .popover-header {
+    color: var(--gkit-color-neutral-900);
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+
+  .popover-text {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--gkit-color-neutral-600);
+    margin-top: 0.5rem;
+  }
+
+  .popover-separator {
+    height: 1px;
+    background-color: var(--gkit-color-neutral-200);
+    margin: 1.25rem 0;
+  }
+
+  .popover-button-container {
+    display: flex;
+    margin: 1rem 0 0.5rem;
+    justify-content: center;
+  }
+
+  .popover-arrow {
+    fill: var(--gkit-color-neutral-0);
+  }
+}
