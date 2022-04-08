@@ -11,8 +11,20 @@ import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
+import { Toggles } from './components/toggles';
 
-const components = [Colors, Buttons, ButtonGroups, Links, Panels, TabsExample, TextFields, Dialogs, ModalPages];
+const components = [
+  Colors,
+  Buttons,
+  ButtonGroups,
+  Links,
+  Panels,
+  TabsExample,
+  TextFields,
+  Dialogs,
+  ModalPages,
+  Toggles,
+];
 const DEFAULT = 0;
 
 export function UikitDemo() {
