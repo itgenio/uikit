@@ -8,11 +8,23 @@ import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
+import { Notifications } from './components/notifications';
 import { Panels } from './components/panels';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 
-const components = [Colors, Buttons, ButtonGroups, Links, Panels, TabsExample, TextFields, Dialogs, ModalPages];
+const components = [
+  Colors,
+  Buttons,
+  ButtonGroups,
+  Links,
+  Panels,
+  TabsExample,
+  TextFields,
+  Dialogs,
+  ModalPages,
+  Notifications,
+];
 const DEFAULT = 0;
 
 export function UikitDemo() {
