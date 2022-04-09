@@ -6,7 +6,7 @@ export type CheckboxProps = PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   checked?: boolean;
-  onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
   idQa?: string;
 }>;
