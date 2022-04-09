@@ -28,9 +28,11 @@ export function NotificationHeader({ children, onClose }: NotificationHeaderProp
     <div className="notification-title">
       <NotificationIcon />
       {children}
-      <button className="notification-close-btn" onClick={onClose}>
-        <NotificationClose />
-      </button>
+      {onClose && (
+        <button className="notification-close-btn" onClick={onClose}>
+          <NotificationClose />
+        </button>
+      )}
     </div>
   );
 }

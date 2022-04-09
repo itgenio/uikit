@@ -22,7 +22,7 @@ export function Notifications() {
           return (
             <div key={`${state}${type}`} className="row">
               <NotificationContainer key={`${state}${type}`} {...p}>
-                <NotificationHeader>
+                <NotificationHeader onClose={() => console.log('click')}>
                   <NotificationTitle>Notification message title</NotificationTitle>
                 </NotificationHeader>
                 <NotificationContent>
