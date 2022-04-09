@@ -22,7 +22,7 @@ export function Checkbox({ children, hover, disabled, checked, idQa, onChange, c
         checked={checked}
         onChange={onChange}
       />
-      <span>{children}</span>
+      <span className="checkbox-span">{children}</span>
     </label>
   );
 }
