@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { HTMLInputTypeAttribute, useMemo } from 'react';
 
 type Props = React.PropsWithChildren<{
   disabled?: boolean;
@@ -15,13 +15,14 @@ type Props = React.PropsWithChildren<{
   fullWidth?: boolean;
   label?: string;
   helperText?: React.ReactNode;
-  inputType?: 'text' | 'password';
+  inputType?: HTMLInputTypeAttribute;
   required?: boolean;
   idQa?: string;
   name?: string;
   autoComplete?: string;
   autoFocus?: boolean;
   dataList?: string[];
+  maxLength?: number;
 }>;
 
 const generateId = () => String(Date.now() * Math.random());
@@ -46,6 +47,7 @@ export function TextField({
   autoComplete,
   autoFocus,
   dataList,
+  maxLength,
 }: Props) {
   const id = useMemo(() => generateId(), []);
 
@@ -66,7 +68,7 @@ export function TextField({
         type={inputType}
         className={classNames({ hover, active, focus })}
         list={id + 'list'}
-        {...{ value, required, id, placeholder, disabled, onChange, autoFocus, name, autoComplete }}
+        {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
       />
       {helperText && <span className="helper-text">{helperText}</span>}
       {dataList && (
