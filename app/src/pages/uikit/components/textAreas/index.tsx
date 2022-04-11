@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { TextArea, TextAreaProps } from '@itgenio/gkit';
+import { TextAreaContainer, TextArea, TextAreaProps } from '@itgenio/gkit';
 
 export function TextAreas() {
   const sizes = ['small', 'large'];
@@ -11,19 +11,23 @@ export function TextAreas() {
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
-          return <TextArea key={size} {...p} description={`${size} Desc`} />;
+          return (
+            <TextAreaContainer key={size} {...p} description={`${size} Desc`}>
+              <TextArea {...p} placeholder="placeholder" />
+            </TextAreaContainer>
+          );
         })}
       </Fragment>
     );
   };
 
   const states: [string, TextAreaProps][] = [
-    ['Normal', { placeholder: 'placeholder', label: 'Label1' }],
-    ['Hover', { hover: true, placeholder: 'placeholder', label: 'Label2' }],
-    ['Focused', { focus: true, placeholder: 'placeholder', label: 'Label3' }],
-    ['Filled', { filled: true, placeholder: 'placeholder', label: 'Label4' }],
-    ['Error', { error: true, placeholder: 'placeholder', label: 'Label5' }],
-    ['Disabled', { disabled: true, placeholder: 'placeholder', label: 'Label6' }],
+    ['Normal', { label: 'Label1' }],
+    ['Hover', { hover: true, label: 'Label2' }],
+    ['Focused', { focus: true, label: 'Label3' }],
+    ['Filled', { filled: true, label: 'Label4' }],
+    ['Error', { error: true, label: 'Label5' }],
+    ['Disabled', { disabled: true, label: 'Label6' }],
   ];
 
   return (

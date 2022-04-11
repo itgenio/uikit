@@ -7,11 +7,11 @@
 
   .text-area-label {
     margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: @font-weight-bold;
+    .text-base();
 
     &.small {
-      font-size: 0.875rem;
+      .text-sm();
     }
   }
 
@@ -21,7 +21,7 @@
     border: 1px solid var(--gkit-color-neutral-200);
     color: var(--gkit-color-neutral-900);
     padding: 0.75rem 1rem;
-    font-size: 1rem;
+    .text-base();
     outline: none;
 
     &.both {
@@ -37,7 +37,7 @@
     }
 
     &.small {
-      font-size: 0.875rem;
+      .text-sm();
       border-radius: 10px;
     }
 
@@ -85,6 +85,6 @@
   .text-area-description {
     margin-top: 0.5rem;
     color: var(--gkit-color-neutral-500);
-    font-size: 0.875rem;
+    .text-sm();
   }
 }

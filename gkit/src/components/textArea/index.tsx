@@ -1,10 +1,10 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
-import { generateId } from '../utils/generateId';
+import React, { PropsWithChildren } from 'react';
 
-export type TextAreaProps = {
+export type TextAreaProps = PropsWithChildren<{
   size?: string;
+  id?: number;
   resize?: string;
   maxLength?: number;
   rows?: number;
@@ -24,9 +24,32 @@ export type TextAreaProps = {
   placeholder?: string;
   className?: string;
   idQa?: string;
-};
+}>;
+
+export function TextAreaContainer({
+  children,
+  id,
+  size = 'large',
+  label,
+  description,
+  className,
+  idQa,
+}: TextAreaProps) {
+  return (
+    <div id-qa={idQa} className="gkit-text-area-container">
+      {label && (
+        <label htmlFor={`${id}`} className={classNames('text-area-label', className, size)}>
+          {label}
+        </label>
+      )}
+      {children}
+      {description && <label className="text-area-description">{description}</label>}
+    </div>
+  );
+}
 
 export function TextArea({
+  id,
   size = 'large',
   resize = 'both',
   maxLength,
@@ -36,8 +59,6 @@ export function TextArea({
   onChange,
   value,
   required,
-  label,
-  description,
   hover,
   focus,
   filled,
@@ -45,31 +66,20 @@ export function TextArea({
   disabled,
   placeholder,
   className,
-  idQa,
 }: TextAreaProps) {
-  const id = useMemo(() => generateId(), []);
-
   return (
-    <div id-qa={idQa} className="gkit-text-area-container">
-      {label && (
-        <label htmlFor={id} className={classNames('text-area-label', size)}>
-          {label}
-        </label>
-      )}
-      <textarea
-        id={id}
-        onChange={onChange}
-        {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
-        className={classNames('text-area', className, size, resize, {
-          hover,
-          focus,
-          filled,
-          error,
-          disabled,
-          placeholder,
-        })}
-      />
-      {description && <label className="text-area-description">{description}</label>}
-    </div>
+    <textarea
+      id={`${id}`}
+      onChange={onChange}
+      {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
+      className={classNames('text-area', className, size, resize, {
+        hover,
+        focus,
+        filled,
+        error,
+        placeholder,
+        disabled,
+      })}
+    />
   );
 }
