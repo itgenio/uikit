@@ -28,5 +28,5 @@ export function AccordionTitle({ status, icon, children, className }: AccordionT
 }
 
 export function AccordionText({ children }: PropsWithChildren<{}>) {
-  return <p className="text">{children}</p>;
+  return <p className="accordion-text">{children}</p>;
 }
