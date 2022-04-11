@@ -22,7 +22,7 @@ export function RadioButton({ children, hover, disabled, checked, idQa, onChange
         checked={checked}
         onChange={onChange}
       />
-      <span className="radio-button-span">{children}</span>
+      {children && <span className="radio-button-span">{children}</span>}
     </label>
   );
 }
