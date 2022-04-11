@@ -1,14 +1,7 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import {
-  AccordionDetails,
-  AccordionCheckIcon,
-  AccordionTitle,
-  AccordionText,
-  AccordionSummary,
-  AccordionChevronIcon,
-  AccordionTitleProps,
-} from '@itgenio/gkit';
+import { AccordionDetails, AccordionTitle, AccordionText, AccordionSummary, AccordionTitleProps } from '@itgenio/gkit';
+import { CheckIcon } from '../icons/checkIcon';
 
 export function Accordions() {
   const renderState = (titleProps: AccordionTitleProps, index: number) => {
@@ -16,11 +9,10 @@ export function Accordions() {
       <Fragment key={index}>
         <AccordionDetails>
           <AccordionSummary>
-            <AccordionCheckIcon />
+            <CheckIcon />
             <AccordionTitle icon {...titleProps}>
               1. Знакомство с HTML
             </AccordionTitle>
-            <AccordionChevronIcon />
           </AccordionSummary>
           <AccordionText>
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
