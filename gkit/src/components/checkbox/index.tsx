@@ -17,12 +17,12 @@ export function Checkbox({ children, hover, disabled, checked, idQa, onChange, c
       <input
         type="checkbox"
         id-qa={idQa}
-        className={classNames('filled', className, { hover })}
+        className={classNames({ hover })}
         disabled={disabled}
         checked={checked}
         onChange={onChange}
       />
-      <span className="checkbox-span">{children}</span>
+      {children && <span className="checkbox-span">{children}</span>}
     </label>
   );
 }
