@@ -1,22 +1,25 @@
 import './style.less';
-import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+import {
+  ToggleGroupSingleProps,
+  ToggleGroupMultipleProps,
+  Root as ToggleRoot,
+  Item as ToggleItem,
+} from '@radix-ui/react-toggle-group';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { CircleIcon } from '../icons/circle';
 
-type Types = 'single' | 'multiple';
+type TogglePropsKeys = 'type' | 'defaultValue' | 'onValueChange';
 
-type SwitcherContainerProps = PropsWithChildren<{
-  className?: string;
-  defaultValue?: string;
-  type?: Types;
-}>;
+type ToggleProps = Pick<ToggleGroupSingleProps, TogglePropsKeys> | Pick<ToggleGroupMultipleProps, TogglePropsKeys>;
 
-export function SwitcherContainer({ children, className, defaultValue, type = 'single' }: SwitcherContainerProps) {
+type SwitcherContainerProps = PropsWithChildren<{ className?: string } & ToggleProps>;
+
+export function SwitcherContainer({ children, className, ...toggleProps }: SwitcherContainerProps) {
   return (
-    <ToggleGroupPrimitive.Root className={classNames('gkit-switcher-container', className)} {...{ defaultValue, type }}>
+    <ToggleRoot className={classNames('gkit-switcher-container', className)} {...toggleProps}>
       {children}
-    </ToggleGroupPrimitive.Root>
+    </ToggleRoot>
   );
 }
 
@@ -30,14 +33,11 @@ export type SwitcherItemProps = PropsWithChildren<{
   className?: string;
 }>;
 
-export function SwitcherItem({ children, value, size, hover, active, className }: SwitcherItemProps) {
+export function SwitcherItem({ children, value, size = 'medium', hover, active, className }: SwitcherItemProps) {
   return (
-    <ToggleGroupPrimitive.Item
-      className={classNames('switcher-item', className, size, { hover, active })}
-      value={value}
-    >
+    <ToggleItem className={classNames('switcher-item', className, size, { hover, active })} value={value}>
       {children && <span className="switcher-span">{children}</span>}
-    </ToggleGroupPrimitive.Item>
+    </ToggleItem>
   );
 }
 
