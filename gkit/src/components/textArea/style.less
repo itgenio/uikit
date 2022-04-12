@@ -15,76 +15,162 @@
     }
   }
 
-  .text-area {
-    border-radius: 12px;
-    background: var(--gkit-color-neutral-0);
-    border: 1px solid var(--gkit-color-neutral-200);
-    color: var(--gkit-color-neutral-900);
-    padding: 0.75rem 1rem;
-    .text-base();
-    outline: none;
-
-    &.both {
-      resize: both;
-    }
-
-    &.horizontal {
-      resize: horizontal;
-    }
-
-    &.vertical {
-      resize: vertical;
-    }
-
-    &.small {
-      .text-sm();
-      border-radius: 10px;
-    }
-
-    &::placeholder {
-      color: var(--gkit-color-neutral-500);
-    }
-
-    &.hover,
-    &:hover {
-      border: 1px solid var(--gkit-color-light-primary-500);
-    }
-
-    &.focus,
-    &:focus {
-      .outline();
-      .outline-2();
-      .outline-offset-2();
-      .outline-primary-300();
-    }
-
-    &.filled {
-      &::placeholder {
-        color: var(--gkit-color-neutral-900);
-      }
-    }
-
-    &.error {
-      border: 1px solid var(--gkit-color-danger-500);
-      &::placeholder {
-        color: var(--gkit-color-neutral-900);
-      }
-    }
-
-    &.disabled {
-      background: var(--gkit-color-neutral-100);
-      &:hover {
-        border: 1px solid var(--gkit-color-neutral-200);
-      }
-      &::placeholder {
-        color: var(--gkit-color-neutral-300);
-      }
-    }
-  }
-
   .text-area-description {
     margin-top: 0.5rem;
     color: var(--gkit-color-neutral-500);
     .text-sm();
   }
+}
+
+//=====================
+
+.text-area {
+  border-radius: 12px;
+  background: var(--gkit-color-neutral-0);
+  border: 1px solid var(--gkit-color-neutral-200);
+  color: var(--gkit-color-neutral-900);
+  padding: 0.75rem 1rem;
+  .text-base();
+  outline: none;
+
+  &.both {
+    resize: both;
+  }
+
+  &.horizontal {
+    resize: horizontal;
+  }
+
+  &.vertical {
+    resize: vertical;
+  }
+
+  .hover,
+  :hover {
+    border: 1px solid var(--gkit-color-light-primary-500);
+  }
+}
+
+//=====================
+.select {
+  min-width: 19.5rem;
+  border: 1px solid var(--gkit-color-neutral-200);
+  border-radius: 0.75rem;
+  .text-base();
+  position: relative;
+  cursor: pointer;
+  background: var(--gkit-color-neutral-0);
+  padding: 0 0.25rem;
+
+  &._active {
+    position: absolute;
+    z-index: 1;
+
+    &:after {
+      transform: rotate(-135deg);
+    }
+  }
+
+  &:after {
+    content: '';
+    width: .5em;
+    height: .5em;
+    margin-right: 1.25rem;
+    border-bottom: 1px solid var(--gkit-color-neutral-700);
+    border-right: 1px solid var(--gkit-color-neutral-700);
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    transform: rotate(45deg);
+  }
+
+  &-option {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    .text-base();
+
+    &:hover {
+      background: var(--gkit-color-neutral-100);
+      border-radius: 0.75rem;
+    }
+  }
+
+  &-selected {
+    padding: 0.75rem 1rem;
+    &.small {
+      padding: 0.625rem 0.75rem;
+    }
+  }
+
+  &.placeholder {
+    color: var(--gkit-color-neutral-500);
+  }
+
+  &.hover,
+  &:hover {
+    border: 1px solid var(--gkit-color-light-primary-500);
+  }
+
+  &.filled {
+    &.placeholder {
+      color: var(--gkit-color-neutral-900);
+    }
+  }
+
+  &.error {
+    &.placeholder {
+      color: var(--gkit-color-neutral-900);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    &.placeholder {
+      color: var(--gkit-color-neutral-300);
+    }
+  }
+}
+//==============
+.small {
+  .text-sm();
+  border-radius: 10px;
+}
+
+&::placeholder {
+  color: var(--gkit-color-neutral-500);
+}
+
+.focus,
+:focus {
+  .outline();
+  .outline-2();
+  .outline-offset-2();
+  .outline-primary-300();
+}
+
+.filled {
+  &::placeholder {
+    color: var(--gkit-color-neutral-900);
+  }
+}
+
+.error {
+  border: 1px solid var(--gkit-color-danger-500);
+  &::placeholder {
+    color: var(--gkit-color-neutral-900);
+  }
+}
+
+.disabled {
+  background: var(--gkit-color-neutral-100);
+  &:hover {
+    border: 1px solid var(--gkit-color-neutral-200);
+  }
+  &::placeholder {
+    color: var(--gkit-color-neutral-300);
+  }
+}
+
+.wrapper-select{
+  display: block;
 }

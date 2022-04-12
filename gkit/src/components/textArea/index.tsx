@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 
 export type TextAreaProps = PropsWithChildren<{
   size?: string;
@@ -23,6 +23,7 @@ export type TextAreaProps = PropsWithChildren<{
   disabled?: boolean;
   placeholder?: string;
   className?: string;
+  options?: any;
   idQa?: string;
 }>;
 
@@ -81,5 +82,74 @@ export function TextArea({
         disabled,
       })}
     />
+  );
+}
+
+export function Selector({
+  id,
+  size = 'large',
+  onChange,
+  hover,
+  focus,
+  filled,
+  error,
+  disabled = false,
+  placeholder,
+  options,
+  className,
+}: TextAreaProps) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(placeholder);
+
+  const handleDropdownClick = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
+  return (
+    <div className="wrapper-select">
+      <div
+        className={classNames(className, size, open ? 'select _active' : 'select', {
+          hover,
+          focus,
+          filled,
+          error,
+          placeholder,
+          disabled,
+        })}
+        id={`${id}`}
+        onClick={handleDropdownClick}
+      >
+        <div className={classNames('select-selected', size)}>{value}</div>
+
+        {open && (
+          <div className="select-dropdown">
+            {options.map((option, index) => {
+              return (
+                <SelectOption
+                  key={index}
+                  text={option.text}
+                  onClick={e => {
+                    console.log(e);
+                    setValue(e.target.innerText);
+                    setOpen(false);
+                    e.stopPropagation();
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+type SelectOptionProps = { text?: string; onClick?: () => void };
+
+function SelectOption({ text, onClick }: SelectOptionProps) {
+  return (
+    <div className="select-option" onClick={onClick}>
+      {text}
+    </div>
   );
 }

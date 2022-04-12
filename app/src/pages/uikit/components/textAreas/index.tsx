@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { TextAreaContainer, TextArea, TextAreaProps } from '@itgenio/gkit';
+import { TextAreaContainer, TextArea, Selector, TextAreaProps } from '@itgenio/gkit';
 
 export function TextAreas() {
   const sizes = ['small', 'large'];
@@ -13,7 +13,7 @@ export function TextAreas() {
           const p = { ...props, size };
           return (
             <TextAreaContainer key={size} {...p} description={`${size} Desc`}>
-              <TextArea {...p} placeholder="placeholder" />
+              <Selector {...p} placeholder="placeholder" options={options} />
             </TextAreaContainer>
           );
         })}
@@ -29,6 +29,8 @@ export function TextAreas() {
     ['Error', { error: true, label: 'Label5' }],
     ['Disabled', { disabled: true, label: 'Label6' }],
   ];
+
+  const options = [{ text: 'Select Option1' }, { text: 'Select Option2' }, { text: 'Select Option3' }];
 
   return (
     <div className="textAreas">
