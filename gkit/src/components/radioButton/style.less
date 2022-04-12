@@ -12,6 +12,7 @@
     appearance: none;
     -webkit-appearance: none;
     background-color: var(--gkit-color-neutral-0);
+    cursor: pointer;
 
     &:before {
       content: "";
@@ -45,11 +46,13 @@
       animation: toggleOnRadio 0.2s ease forwards;
       background-color: var(--gkit-color-light-primary-500);
     }
+
     &.hover,
     &:hover {
       background-color: var(--gkit-color-light-primary-50);
       border-radius: 50%;
     }
+
     &.hover:before,
     &:hover:before {
       border: 1px solid var(--gkit-color-light-primary-400);
@@ -67,6 +70,7 @@
     &:checked:disabled:before {
       background-color: var(--gkit-color-neutral-100);
     }
+
     &:checked:disabled:after {
       background-color: var(--gkit-color-neutral-400);
     }
