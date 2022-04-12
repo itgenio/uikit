@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from 'react';
 import { ChevronIcon } from '../icons/chevron';
 
 export function AccordionDetails({ children }: PropsWithChildren<{}>) {
-  return <details className="gkit-accordion-details">{children}</details>;
+  return <details className="gkit-accordion">{children}</details>;
 }
 
 export function AccordionSummary({ children }: PropsWithChildren<{}>) {
