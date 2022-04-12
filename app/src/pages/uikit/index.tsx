@@ -11,6 +11,7 @@ import { Dialogs } from './components/dialogs';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
+import { RadioButtons } from './components/radioButtons';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 
@@ -26,6 +27,7 @@ const components = [
   ModalPages,
   Checkboxes,
   Accordions,
+  RadioButtons,
 ];
 const DEFAULT = 0;
 
