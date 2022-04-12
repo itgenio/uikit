@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { DarkModeButton } from '../../components/darkModeButton';
+import { Accordions } from './components/accordions';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Colors } from './components/colors';
@@ -12,7 +13,18 @@ import { Panels } from './components/panels';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 
-const components = [Colors, Buttons, ButtonGroups, Links, Panels, TabsExample, TextFields, Dialogs, ModalPages];
+const components = [
+  Colors,
+  Buttons,
+  ButtonGroups,
+  Links,
+  Panels,
+  TabsExample,
+  TextFields,
+  Dialogs,
+  ModalPages,
+  Accordions,
+];
 const DEFAULT = 0;
 
 export function UikitDemo() {
