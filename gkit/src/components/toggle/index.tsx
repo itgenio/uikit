@@ -17,9 +17,13 @@ export function Toggle({ children, hover, disabled, checked, idQa, onChange, cla
       <input
         className={classNames('toggle-input', { hover, disabled, checked })}
         type="checkbox"
-        {...{ onChange, checked, disabled }}
+        onChange={onChange}
+        checked={checked}
+        disabled={disabled}
       />
+
       <span className="slider round" />
+
       {children && <span className={classNames('toggle-text', { disabled, checked })}>{children}</span>}
     </label>
   );
