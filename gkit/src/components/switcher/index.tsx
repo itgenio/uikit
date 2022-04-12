@@ -2,42 +2,47 @@ import './style.less';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { SwitcherIcon } from '../icons/switcherIcon';
+import { CircleIcon } from '../icons/circle';
 
-export type SwitcherProps = SwitcherContainerProps & { hover?: boolean; active?: boolean };
+type Types = 'single' | 'multiple';
 
-type SwitcherContainerProps = PropsWithChildren<{ normal?: boolean; className?: string }>;
+type SwitcherContainerProps = PropsWithChildren<{
+  className?: string;
+  defaultValue?: string;
+  type?: Types;
+}>;
 
-export function SwitcherContainer({ children, normal, className }: SwitcherContainerProps) {
+export function SwitcherContainer({ children, className, defaultValue, type = 'single' }: SwitcherContainerProps) {
   return (
-    <ToggleGroupPrimitive.Root
-      className={classNames('gkit-switcher-container', className, { normal })}
-      type="single"
-      defaultValue="left"
-    >
+    <ToggleGroupPrimitive.Root className={classNames('gkit-switcher-container', className)} {...{ defaultValue, type }}>
       {children}
     </ToggleGroupPrimitive.Root>
   );
 }
 
-type SwitcherItemProps = SwitcherProps & {
-  value?: string;
-  size?: string;
-  type?: string;
-  className?: string;
-};
+type Sizes = 'medium' | 'large';
 
-export function SwitcherItem({ children, value, size, type, hover, active, className }: SwitcherItemProps) {
+export type SwitcherItemProps = PropsWithChildren<{
+  value?: string;
+  size?: Sizes;
+  hover?: boolean;
+  active?: boolean;
+  className?: string;
+}>;
+
+export function SwitcherItem({ children, value, size, hover, active, className }: SwitcherItemProps) {
   return (
     <ToggleGroupPrimitive.Item
-      className={classNames('switcher-item', className, size, type, { hover, active })}
+      className={classNames('switcher-item', className, size, { hover, active })}
       value={value}
     >
-      <span className="switcher-span">{children}</span>
+      {children && <span className="switcher-span">{children}</span>}
     </ToggleGroupPrimitive.Item>
   );
 }
 
-export function SwitcherCircle() {
-  return <SwitcherIcon />;
+type SwitcherCircleProps = { className?: string };
+
+export function SwitcherCircle({ className }: SwitcherCircleProps) {
+  return <CircleIcon className={classNames(className)} />;
 }

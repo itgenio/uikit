@@ -1,61 +1,54 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherProps } from '@itgenio/gkit';
+import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherItemProps } from '@itgenio/gkit';
 
 const sizes = ['medium', 'large'];
-const types = ['normal'];
 
 export function Switchers() {
-  const renderState = (state: string, props: SwitcherProps, index: number) => {
+  const renderState = (state: string, props: SwitcherItemProps, index: number) => {
     return (
       <Fragment key={index}>
         <div>{state}</div>
-        {types.map(type => (
-          <div key={`${state}${type}`}>
-            {sizes.map(size => {
-              const p = { ...props, size, type };
-              return (
-                <React.Fragment key={`${state}${size}${type}`}>
-                  <SwitcherContainer {...p}>
-                    <SwitcherItem {...p}>Toggle Item</SwitcherItem>
-                  </SwitcherContainer>
-                  <SwitcherContainer {...p}>
-                    <SwitcherItem {...p}>
-                      <SwitcherCircle /> Toggle Item
-                    </SwitcherItem>
-                  </SwitcherContainer>
-                  <SwitcherContainer {...p}>
-                    <SwitcherItem {...p}>
-                      <SwitcherCircle />
-                    </SwitcherItem>
-                  </SwitcherContainer>
-                </React.Fragment>
-              );
-            })}
-          </div>
-        ))}
+        <div>
+          {sizes.map(size => {
+            const p = { ...props, size };
+            return (
+              <React.Fragment key={`${state}${size}`}>
+                <SwitcherContainer>
+                  <SwitcherItem {...p}>Toggle Item</SwitcherItem>
+                </SwitcherContainer>
+                <SwitcherContainer>
+                  <SwitcherItem {...p}>
+                    <SwitcherCircle className="switcher-circle" /> Toggle Item
+                  </SwitcherItem>
+                </SwitcherContainer>
+                <SwitcherContainer>
+                  <SwitcherItem {...p}>
+                    <SwitcherCircle />
+                  </SwitcherItem>
+                </SwitcherContainer>
+              </React.Fragment>
+            );
+          })}
+        </div>
       </Fragment>
     );
   };
 
-  const states: [string, SwitcherProps][] = [
-    ['Normal', { normal: true }],
+  const states: [string, SwitcherItemProps][] = [
+    ['Normal', {}],
     ['Hover', { hover: true }],
     ['Active', { active: true }],
   ];
 
   return (
     <div className="switcher">
-      <div className="grid">
-        <div className="switcher">
-          <div className="grid">{states.map(([name, props], index) => renderState(name, props, index))}</div>
-        </div>
-      </div>
+      <div className="grid">{states.map(([name, props], index) => renderState(name, props, index))}</div>
       <div className="switcher-group">
-        {sizes.map((size: string) => {
+        {sizes.map(size => {
           const p = { size };
           return (
-            <SwitcherContainer key={`${size}`}>
+            <SwitcherContainer key={`${size}`} defaultValue="left">
               <SwitcherItem {...p} value="left">
                 Toggle Item
               </SwitcherItem>
