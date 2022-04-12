@@ -27,7 +27,7 @@ const components = [
   ModalPages,
   Checkboxes,
   Accordions,
-  RadioButtons
+  RadioButtons,
 ];
 const DEFAULT = 0;
 
