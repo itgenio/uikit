@@ -14,6 +14,7 @@ import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
+import { Toggles } from './components/toggles';
 
 const components = [
   Colors,
@@ -28,6 +29,7 @@ const components = [
   Checkboxes,
   Accordions,
   RadioButtons,
+  Toggles,
 ];
 const DEFAULT = 0;
 

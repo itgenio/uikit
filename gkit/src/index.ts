@@ -9,3 +9,4 @@ export * from './components/modalPage';
 export * from './components/checkbox';
 export * from './components/accordion';
 export * from './components/radioButton';
+export * from './components/toggle';
