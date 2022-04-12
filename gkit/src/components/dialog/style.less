@@ -13,7 +13,7 @@
   .dialog-content {
     position: relative;
     max-width: 50ch;
-    min-width: 260px; //TODO
+    min-width: 260px;
     .shadow-lg();
     border-radius: 1rem;
     padding: 2rem 1.5rem;
@@ -21,7 +21,6 @@
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 1rem;
-
     margin: auto;
   }
 
@@ -50,6 +49,72 @@
     top: -2.25rem;
     position: absolute;
     cursor: pointer;
+  }
+}
+
+@media @mobile-portrait {
+  .gkit-dialog-wrapper {
+    padding-top: 2.5rem;
+
+    .dialog-content {
+      border-radius: 1rem 1rem 0 0;
+      padding: 1.5rem 1rem 1rem;
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      animation-name: contentUp;
+      animation-duration: 0.5s;
+
+      @keyframes contentUp {
+        0% {
+          height: 0;
+          padding: 0;
+        }
+        100% {
+          height: 30%;
+        }
+      }
+
+      .close-dialog-btn {
+        right: 1.2rem;
+        top: 1.5rem;
+
+        .close-icon {
+          width: 1rem;
+          height: 1rem;
+
+          path {
+            fill: var(--gkit-color-neutral-800);
+          }
+        }
+      }
+
+      .dialog-header {
+        margin-bottom: 1rem;
+      }
+
+      .dialog-title {
+        text-align: start;
+      }
+
+      .dialog-body {
+        background-color: var(--gkit-color-blue-50);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        overflow-y: scroll;
+        max-height: 550px;
+      }
+
+      .dialog-text {
+        color: var(--gkit-color-blue-700);
+      }
+
+      .dialog-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+      }
+    }
   }
 }
 
