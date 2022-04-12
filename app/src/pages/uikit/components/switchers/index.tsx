@@ -9,6 +9,7 @@ export function Switchers() {
     return (
       <Fragment key={index}>
         <div>{state}</div>
+
         <div>
           {sizes.map(size => {
             const p = { size, ...props };
