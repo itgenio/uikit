@@ -6,4 +6,5 @@ export * from './components/textField';
 export * from './components/dialog';
 export * from './components/link';
 export * from './components/modalPage';
+export * from './components/checkbox';
 export * from './components/accordion';

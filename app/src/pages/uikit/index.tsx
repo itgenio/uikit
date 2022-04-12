@@ -5,6 +5,7 @@ import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
+import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
 import { Links } from './components/links';
@@ -23,6 +24,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Checkboxes,
   Accordions,
 ];
 const DEFAULT = 0;
