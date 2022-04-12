@@ -2,13 +2,16 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { DarkModeButton } from '../../components/darkModeButton';
+import { Accordions } from './components/accordions';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
+import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
+import { RadioButtons } from './components/radioButtons';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
@@ -23,6 +26,9 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Checkboxes,
+  Accordions,
+  RadioButtons,
   Toggles,
 ];
 const DEFAULT = 0;
