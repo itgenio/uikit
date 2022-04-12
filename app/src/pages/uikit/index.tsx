@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { DarkModeButton } from '../../components/darkModeButton';
+import { Accordions } from './components/accordions';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
@@ -24,6 +25,7 @@ const components = [
   Dialogs,
   ModalPages,
   Checkboxes,
+  Accordions,
 ];
 const DEFAULT = 0;
 
