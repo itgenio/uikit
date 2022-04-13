@@ -1,4 +1,4 @@
-.popover {
+.uikit-page .popover {
   display: grid;
   grid-template-columns: 300px 300px 300px;
   column-gap: 2rem;
@@ -9,7 +9,7 @@
 }
 
 .popover-container-button {
-  margin-top: 1.5rem !important;
+  margin-top: 1.5rem;
 }
 
 .popover-button:first-child {
@@ -18,4 +18,29 @@
 
 .trigger-button {
   margin: 0 auto;
+}
+
+.popover-header {
+  color: var(--gkit-color-neutral-900);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.popover-text {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--gkit-color-neutral-600);
+  margin-top: 0.5rem;
+}
+
+.popover-separator {
+  height: 1px;
+  background-color: var(--gkit-color-neutral-200);
+  margin: 1.25rem 0;
+}
+
+.popover-button-container {
+  display: flex;
+  margin: 1rem 0 0.5rem;
+  justify-content: center;
 }

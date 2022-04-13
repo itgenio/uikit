@@ -1,18 +1,17 @@
 import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { CloseIcon } from '../icons/close';
 
-type Props = React.PropsWithChildren<{
-  title?: string;
+type DialogProps = PropsWithChildren<{
   className?: string;
   asBlock?: boolean;
   onClose?: () => void;
   open?: boolean;
 }>;
 
-export function Dialog({ className, asBlock, children, onClose, open }: Props) {
+export function Dialog({ className, asBlock, children, onClose, open }: DialogProps) {
   const render = () => (
     <div className="dialog-content" onClick={e => e.stopPropagation()}>
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
@@ -44,22 +43,24 @@ export function Dialog({ className, asBlock, children, onClose, open }: Props) {
   );
 }
 
-export function DialogTitle({ title, children }: React.PropsWithChildren<{ title?: string }>) {
+type DialogTitleProps = PropsWithChildren<{ title?: string }>;
+
+export function DialogTitle({ title, children }: DialogTitleProps) {
   return <h3 className="dialog-title">{title ?? children}</h3>;
 }
 
-export function DialogText(props: React.PropsWithChildren<any>) {
+export function DialogText(props: PropsWithChildren<{}>) {
   return <p className="dialog-text">{props.children}</p>;
 }
 
-export function DialogHeader(props: React.PropsWithChildren<any>) {
+export function DialogHeader(props: PropsWithChildren<{}>) {
   return <div className="dialog-header">{props.children}</div>;
 }
 
-export function DialogBody(props: React.PropsWithChildren<any>) {
+export function DialogBody(props: PropsWithChildren<{}>) {
   return <div className="dialog-body">{props.children}</div>;
 }
 
-export function DialogFooter(props: React.PropsWithChildren<any>) {
+export function DialogFooter(props: PropsWithChildren<{}>) {
   return <div className="dialog-footer">{props.children}</div>;
 }

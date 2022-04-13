@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.28",
+  "version": "0.0.30",
   "description": "GKIT",
   "main": "dist/index.js",
   "files": [
@@ -15,7 +15,6 @@
   "author": "Alex So",
   "license": "MIT",
   "dependencies": {
-    "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-popover": "^0.1.6",
     "focus-trap-react": "^8.9.1"
   },

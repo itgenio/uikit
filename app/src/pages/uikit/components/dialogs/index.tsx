@@ -38,7 +38,7 @@ export function Dialogs() {
 
         <Dialog open={open} onClose={() => setOpen(false)}>
           <DialogHeader>
-            <DialogTitle title="Complex" />
+            <DialogTitle title="Title" />
           </DialogHeader>
 
           <DialogBody>
@@ -46,11 +46,12 @@ export function Dialogs() {
           </DialogBody>
 
           <DialogFooter>
-            <div className="flex gap-4 items-start">
-              <Button type="secondary">Ok</Button>
-
-              <Button type="danger">Not OK</Button>
-            </div>
+            <Button type="neutral" size="large">
+              Добавить
+            </Button>
+            <Button type="primary" size="large">
+              Добавить
+            </Button>
           </DialogFooter>
         </Dialog>
       </div>

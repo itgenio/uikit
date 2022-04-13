@@ -1,49 +1,33 @@
 import './style.less';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
+import { CloseIcon } from '../icons/close';
 
-type PopoverRootProps = PropsWithChildren<{ open?: boolean }>;
+type PopoverRootProps = PropsWithChildren<{ open?: boolean; onOpenChange?: (open: boolean) => void }>;
 
-export function PopoverRoot({ children, open }: PopoverRootProps) {
-  return <PopoverPrimitive.Root open={open}>{children}</PopoverPrimitive.Root>;
-}
-
-type PopoverTriggerProps = PropsWithChildren<{ className?: string }>;
-
-export function PopoverTrigger({ children, className }: PopoverTriggerProps) {
+export function PopoverRoot({ children, open, onOpenChange }: PopoverRootProps) {
   return (
-    <PopoverPrimitive.Trigger className={classNames('popover-trigger', className)}>{children}</PopoverPrimitive.Trigger>
+    <PopoverPrimitive.Root onOpenChange={onOpenChange} open={open}>
+      {children}
+    </PopoverPrimitive.Root>
   );
 }
 
-export function PopoverContent({ children }: PropsWithChildren<{}>) {
+type PopoverProps = PropsWithChildren<{ className?: string }>;
+
+export function PopoverTrigger({ children, className }: PopoverProps) {
+  return <PopoverPrimitive.Trigger className={classNames(className)}>{children}</PopoverPrimitive.Trigger>;
+}
+
+export function PopoverContent({ children, className }: PopoverProps) {
   return (
-    <PopoverPrimitive.Content className="gkit-popover-content" sideOffset={5}>
+    <PopoverPrimitive.Content className={classNames('gkit-popover-content', className)} sideOffset={5}>
       {children}
       <PopoverPrimitive.Arrow className="popover-arrow" />
       <PopoverPrimitive.Close className="popover-close">
-        <Cross2Icon />
+        <CloseIcon />
       </PopoverPrimitive.Close>
     </PopoverPrimitive.Content>
   );
 }
-
-export function PopoverHeader({ children }: PropsWithChildren<{}>) {
-  return <div className="popover-header">{children}</div>;
-}
-
-export function PopoverText({ children }: PropsWithChildren<{}>) {
-  return <div className="popover-text">{children}</div>;
-}
-
-type PopoverButtonContainerProps = PropsWithChildren<{ className?: string }>;
-
-export function PopoverButtonContainer({ children, className }: PopoverButtonContainerProps) {
-  return <div className={classNames('popover-button-container', className)}>{children}</div>;
-}
-
-export const PopoverSeparator = () => {
-  return <div className="popover-separator" />;
-};
