@@ -41,8 +41,6 @@ export function SwitcherItem({ children, value, size = 'medium', hover, active, 
   );
 }
 
-type SwitcherCircleProps = { className?: string };
-
-export function SwitcherCircle({ className }: SwitcherCircleProps) {
-  return <CircleIcon className={classNames(className)} />;
+export function SwitcherCircle() {
+  return <CircleIcon />;
 }
