@@ -1,9 +1,53 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-export type TextAreaProps = PropsWithChildren<{
-  size?: string;
+type Sizes = 'small' | 'large';
+
+export type SelectMenuItemProps = { key?: string; text?: string };
+
+export type StateProps = {
+  size?: Sizes;
+  hover?: boolean;
+  active?: boolean;
+  focus?: boolean;
+  filled?: boolean;
+  error?: boolean;
+  disabled?: boolean;
+};
+
+type ContainerInputsProps = PropsWithChildren<{
+  idQa?: string;
+  id?: number;
+  label?: string;
+  size?: Sizes;
+  description?: string;
+  className?: string;
+}>;
+
+export function ContainerInputs({
+  children,
+  id,
+  size = 'large',
+  label,
+  description,
+  className,
+  idQa,
+}: ContainerInputsProps) {
+  return (
+    <div id-qa={idQa} className={classNames('gkit-container-inputs', className)}>
+      {label && (
+        <label htmlFor={`${id}`} className={classNames('container-inputs-label', size)}>
+          {label}
+        </label>
+      )}
+      {children}
+      {description && <label className="container-inputs-description">{description}</label>}
+    </div>
+  );
+}
+
+type TextAreaProps = {
   id?: number;
   resize?: string;
   maxLength?: number;
@@ -13,41 +57,9 @@ export type TextAreaProps = PropsWithChildren<{
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
   required?: boolean;
-  label?: string;
-  description?: string;
-  hover?: boolean;
-  active?: boolean;
-  focus?: boolean;
-  filled?: boolean;
-  error?: boolean;
-  disabled?: boolean;
   placeholder?: string;
   className?: string;
-  options?: any;
-  idQa?: string;
-}>;
-
-export function TextAreaContainer({
-  children,
-  id,
-  size = 'large',
-  label,
-  description,
-  className,
-  idQa,
-}: TextAreaProps) {
-  return (
-    <div id-qa={idQa} className="gkit-text-area-container">
-      {label && (
-        <label htmlFor={`${id}`} className={classNames('text-area-label', className, size)}>
-          {label}
-        </label>
-      )}
-      {children}
-      {description && <label className="text-area-description">{description}</label>}
-    </div>
-  );
-}
+} & StateProps;
 
 export function TextArea({
   id,
@@ -85,7 +97,15 @@ export function TextArea({
   );
 }
 
-export function Selector({
+type SelectProps = {
+  id?: number;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  placeholder?: string;
+  className?: string;
+  options?: SelectMenuItemProps[];
+} & StateProps;
+
+export function Select({
   id,
   size = 'large',
   onChange,
@@ -97,59 +117,61 @@ export function Selector({
   placeholder,
   options,
   className,
-}: TextAreaProps) {
+}: SelectProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(placeholder);
+  const [value, setValue] = useState('');
+  const root = useRef(null);
 
   const handleDropdownClick = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
+  useEffect(() => {
+    const onClick = e => root.current.contains(e.target) || setOpen(false);
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
-    <div className="wrapper-select">
-      <div
-        className={classNames(className, size, open ? 'select _active' : 'select', {
-          hover,
-          focus,
-          filled,
-          error,
-          placeholder,
-          disabled,
-        })}
-        id={`${id}`}
-        onClick={handleDropdownClick}
-      >
-        <div className={classNames('select-selected', size)}>{value}</div>
+    <div
+      ref={root}
+      className={classNames(className, size, open ? 'select _active' : 'select', {
+        hover,
+        focus,
+        filled,
+        error,
+        disabled,
+      })}
+      id={`${id}`}
+      onClick={handleDropdownClick}
+    >
+      <input
+        readOnly
+        className={classNames('select-input', size, { filled, error, disabled })}
+        placeholder={placeholder}
+        defaultValue={value}
+      />
 
-        {open && (
-          <div className="select-dropdown">
-            {options.map((option, index) => {
-              return (
-                <SelectOption
-                  key={index}
-                  text={option.text}
-                  onClick={e => {
-                    console.log(e);
-                    setValue(e.target.innerText);
-                    setOpen(false);
-                    e.stopPropagation();
-                  }}
-                />
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-type SelectOptionProps = { text?: string; onClick?: () => void };
-
-function SelectOption({ text, onClick }: SelectOptionProps) {
-  return (
-    <div className="select-option" onClick={onClick}>
-      {text}
+      {open && (
+        <div className="select-dropdown">
+          {options.map((option, index) => {
+            return (
+              <div
+                className="select-option"
+                key={index}
+                onClick={e => {
+                  onChange(e.target.innerText);
+                  setValue((e.target as HTMLElement).innerText);
+                  setOpen(false);
+                  e.stopPropagation();
+                }}
+              >
+                {option.text}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

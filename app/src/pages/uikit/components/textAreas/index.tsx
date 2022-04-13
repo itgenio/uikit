@@ -1,40 +1,56 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { TextAreaContainer, TextArea, Selector, TextAreaProps } from '@itgenio/gkit';
+import { ContainerInputs, TextArea, Select, TextField, SelectMenuItemProps, StateProps } from '@itgenio/gkit';
 
 export function TextAreas() {
-  const sizes = ['small', 'large'];
+  const sizes = ['small', 'large'] as const;
 
-  const renderState = (state: string, props: TextAreaProps) => {
+  const renderState = (state: string, props: StateProps, index: number) => {
     return (
-      <Fragment key={state}>
+      <Fragment key={index}>
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
           return (
-            <TextAreaContainer key={size} {...p} description={`${size} Desc`}>
-              <Selector {...p} placeholder="placeholder" options={options} />
-            </TextAreaContainer>
+            <ContainerInputs key={size} size={size} label="label" description={`${size} Desc`}>
+              <TextField {...p} placeholder="placeholder" />
+            </ContainerInputs>
+          );
+        })}
+        {sizes.map(size => {
+          const p = { ...props, size };
+          return (
+            <ContainerInputs key={size} size={size} label="label" description={`${size} Desc`}>
+              <Select {...p} placeholder="placeholder" options={options} onChange={value => console.log(value)} />
+            </ContainerInputs>
+          );
+        })}
+        {sizes.map(size => {
+          const p = { ...props, size };
+          return (
+            <ContainerInputs key={size} {...p} label="label" description={`${size} Desc`}>
+              <TextArea {...p} placeholder="placeholder" />
+            </ContainerInputs>
           );
         })}
       </Fragment>
     );
   };
 
-  const states: [string, TextAreaProps][] = [
-    ['Normal', { label: 'Label1' }],
-    ['Hover', { hover: true, label: 'Label2' }],
-    ['Focused', { focus: true, label: 'Label3' }],
-    ['Filled', { filled: true, label: 'Label4' }],
-    ['Error', { error: true, label: 'Label5' }],
-    ['Disabled', { disabled: true, label: 'Label6' }],
+  const states: { state: string; props?: StateProps }[] = [
+    { state: 'Normal' },
+    { state: 'Hover', props: { hover: true } },
+    { state: 'Focused', props: { focus: true } },
+    { state: 'Filled', props: { filled: true } },
+    { state: 'Error', props: { error: true } },
+    { state: 'Disabled', props: { disabled: true } },
   ];
 
-  const options = [{ text: 'Select Option1' }, { text: 'Select Option2' }, { text: 'Select Option3' }];
+  const options: [SelectMenuItemProps][] = [{ text: 'Option1' }, { text: 'Option2' }, { text: 'Option3' }];
 
   return (
     <div className="textAreas">
-      <div className="grid">{states.map(([name, props]) => renderState(name, props))}</div>
+      <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
     </div>
   );
 }
