@@ -1,53 +1,48 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import {
-  NotificationContainer,
-  NotificationHeader,
-  NotificationTitle,
-  NotificationContent,
-  NotificationText,
-  NotificationButtonContainer,
-  NotificationButton,
-  NotificationContainerProps,
-} from '@itgenio/gkit';
+import { NotificationContainer, NotificationHeader, NotificationContainerProps, Button } from '@itgenio/gkit';
 
 export function Notifications() {
   const types = ['inline', 'toast'] as const;
 
-  const renderState = (state: string, props: NotificationContainerProps) => {
+  const renderState = (state: string, props: NotificationContainerProps, index: number) => {
     return (
-      <Fragment key={state}>
+      <Fragment key={index}>
         {types.map(type => {
           const p = { ...props, type };
           return (
-            <div key={`${state}${type}`} className="row">
-              <NotificationContainer key={`${state}${type}`} {...p}>
-                <NotificationHeader onClose={() => console.log('click')}>
-                  <NotificationTitle>Notification message title</NotificationTitle>
-                </NotificationHeader>
-                <NotificationContent>
-                  <NotificationText>
-                    Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
-                  </NotificationText>
-                  <NotificationButtonContainer>
-                    <NotificationButton onClick={() => console.log('click on button1')}>Кнопка</NotificationButton>
-                    <NotificationButton onClick={() => console.log('click on button2')}>Кнопка</NotificationButton>
-                    <NotificationButton onClick={() => console.log('click on button3')}>Кнопка</NotificationButton>
-                  </NotificationButtonContainer>
-                </NotificationContent>
-              </NotificationContainer>
-            </div>
+            <NotificationContainer key={`${state}${type}`} {...p}>
+              <NotificationHeader onClose={() => console.log('click')}>
+                <h3 className="notification-title-h3">Notification message title</h3>
+              </NotificationHeader>
+              <div className="notification-content">
+                <p className="notification-text">
+                  Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
+                </p>
+                <div className="notification-button-container">
+                  <Button size="small" type="linkNeutral">
+                    Кнопка
+                  </Button>
+                  <Button size="small" type="linkNeutral">
+                    Кнопка
+                  </Button>
+                  <Button size="small" type="linkNeutral">
+                    Кнопка
+                  </Button>
+                </div>
+              </div>
+            </NotificationContainer>
           );
         })}
       </Fragment>
     );
   };
 
-  const states: [string, NotificationContainerProps][] = [
-    ['Error', { status: 'error' }],
-    ['Warning', { status: 'warning' }],
-    ['Success', { status: 'success' }],
-    ['Info', { status: 'info' }],
+  const states: { state: string; props?: NotificationContainerProps }[] = [
+    { state: 'Error', props: { status: 'error' } },
+    { state: 'Warning', props: { status: 'warning' } },
+    { state: 'Success', props: { status: 'success' } },
+    { state: 'Info', props: { status: 'info' } },
   ];
 
   return (
@@ -59,7 +54,7 @@ export function Notifications() {
         <div>
           <span className="title">Toast</span>
         </div>
-        {states.map(([name, status]) => renderState(name, status))}
+        {states.map(({ state, props = {} }, index) => renderState(state, props, index))}
       </div>
     </div>
   );

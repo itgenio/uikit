@@ -1,7 +1,8 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { NotificationClose, NotificationIcon } from '../icons/notificationIcon';
+import { CircleNotificationIcon } from '../icons/circleNotification';
+import { CloseIcon } from '../icons/close';
 
 type Statuses = 'success' | 'warning' | 'error' | 'info';
 type Types = 'toast' | 'inline';
@@ -21,40 +22,18 @@ export function NotificationContainer({ children, type, status, className, idQa 
   );
 }
 
-type NotificationHeaderProps = PropsWithChildren<{ onClose?: () => void }>;
+type NotificationHeaderProps = PropsWithChildren<{ onClose?: () => void; className?: string }>;
 
-export function NotificationHeader({ children, onClose }: NotificationHeaderProps) {
+export function NotificationHeader({ children, onClose, className }: NotificationHeaderProps) {
   return (
-    <div className="notification-title">
-      <NotificationIcon />
+    <div className={classNames('notification-title', className)}>
+      <CircleNotificationIcon />
       {children}
       {onClose && (
-        <button className="notification-close-btn" onClick={onClose}>
-          <NotificationClose />
+        <button onClick={onClose}>
+          <CloseIcon />
         </button>
       )}
     </div>
   );
-}
-
-export function NotificationTitle({ children }: PropsWithChildren<{}>) {
-  return <h3>{children}</h3>;
-}
-
-export function NotificationContent({ children }: PropsWithChildren<{}>) {
-  return <div className="notification-content">{children}</div>;
-}
-
-export function NotificationText({ children }: PropsWithChildren<{}>) {
-  return <p className="notification-text">{children}</p>;
-}
-
-export function NotificationButtonContainer({ children }: PropsWithChildren<{}>) {
-  return <div className="notification-button-container">{children}</div>;
-}
-
-type NotificationButtonProps = PropsWithChildren<{ onClick?: () => void }>;
-
-export function NotificationButton({ children, onClick }: NotificationButtonProps) {
-  return <button onClick={onClick}>{children}</button>;
 }

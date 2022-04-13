@@ -4,43 +4,48 @@
 .gkit-notification-container {
   padding: 1rem 0;
   width: 27.5rem;
+  cursor: pointer;
 
   &.error {
-    .notification-title .icon path {
-      fill: var(--gkit-color-danger-500);
+    .circle-notification-icon {
+      color: var(--gkit-color-danger-500);
     }
   }
 
   &.warning {
-    .notification-title .icon path {
-      fill: var(--gkit-color-orange-500);
+    .circle-notification-icon {
+      color: var(--gkit-color-orange-500);
     }
   }
 
   &.success {
-    .notification-title .icon path {
-      fill: var(--gkit-color-light-green-500);
+    .circle-notification-icon {
+      color: var(--gkit-color-light-green-500);
     }
   }
 
   &.info {
-    .notification-title .icon path {
-      fill: var(--gkit-color-light-blue-500);
+    .circle-notification-icon {
+      color: var(--gkit-color-light-blue-500);
     }
   }
 
   &.inline {
     border-radius: 8px;
     border: 0;
+
     &.error {
       background-color: var(--gkit-color-danger-50);
     }
+
     &.warning {
       background-color: var(--gkit-color-orange-50);
     }
+
     &.success {
       background-color: var(--gkit-color-green-50);
     }
+
     &.info {
       background-color: var(--gkit-color-blue-50);
     }
@@ -51,15 +56,19 @@
     border: 1px solid var(--gkit-color-neutral-200);
     border-radius: 5px 8px 8px 5px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+
     &.error {
       border-left: 4px solid var(--gkit-color-danger-500);
     }
+
     &.warning {
       border-left: 4px solid var(--gkit-color-orange-500);
     }
+
     &.success {
       border-left: 4px solid var(--gkit-color-light-green-500);
     }
+
     &.info {
       border-left: 4px solid var(--gkit-color-light-blue-500);
     }
@@ -67,35 +76,14 @@
 
   .notification-title {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    align-items: center;
     margin: 0 1.25rem 0 1.375rem;
 
-    h3 {
-      .text-base();
-      color: var(--gkit-color-neutral-800);
-      margin-left: 1.125rem;
-      width: 100%;
-    }
-  }
-
-  .notification-content {
-    padding: 0 1rem 0 3.75rem;
-    .notification-text {
-      .text-sm();
-      color: var(--gkit-color-neutral-600);
-      margin: 0.5rem 0 1rem;
-    }
-
-    .notification-button-container {
-      display: flex;
-      flex-direction: row;
-      button {
-        font-weight: @font-weight-bold;
-        .text-sm();
-        margin-right: 1rem;
-        color: var(--gkit-color-neutral-800);
-      }
+    .close-icon {
+      width: 0.78rem;
+      height: 0.78rem;
+      cursor: pointer;
+      color: var(--gkit-color-neutral-500);
     }
   }
 }
