@@ -20,7 +20,7 @@ export function Switchers() {
                 </SwitcherContainer>
                 <SwitcherContainer type="single">
                   <SwitcherItem {...p}>
-                    <SwitcherCircle className="switcher-circle" /> Toggle Item
+                    <SwitcherCircle /> Toggle Item
                   </SwitcherItem>
                 </SwitcherContainer>
                 <SwitcherContainer type="single">
