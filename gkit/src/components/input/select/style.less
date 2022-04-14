@@ -1,0 +1,126 @@
+@import (reference) "../../../variables";
+@import (reference) "../../../ui";
+
+.select {
+  font-family: "Nunito Sans", serif;
+  border: 1px solid var(--gkit-color-neutral-200);
+  position: relative;
+  cursor: pointer;
+  background: var(--gkit-color-neutral-0);
+
+  &.small {
+    .text-sm();
+    border-radius: 0.625rem;
+  }
+
+  &.large {
+    .text-base();
+    border-radius: 0.75rem;
+  }
+
+  &._active {
+    &:after {
+      transform: rotate(-135deg);
+    }
+  }
+
+  &:after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 1.25rem;
+    border-bottom: 1px solid var(--gkit-color-neutral-700);
+    border-right: 1px solid var(--gkit-color-neutral-700);
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    transform: rotate(45deg);
+  }
+
+  .select-input {
+    all: unset;
+    min-width: 19.5rem;
+    box-sizing: border-box;
+
+    &.small {
+      padding: 0.625rem 0.75rem;
+      border-radius: 0.625rem;
+    }
+
+    &.large {
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+    }
+
+    &.filled,
+    &.error {
+      &::placeholder {
+        color: var(--gkit-color-neutral-900);
+      }
+    }
+
+    &.error {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &.disabled {
+      background: var(--gkit-color-neutral-100);
+
+      &::placeholder {
+        color: var(--gkit-color-neutral-300);
+      }
+    }
+  }
+
+  .select-dropdown {
+    padding: 0.25rem;
+    position: absolute;
+    z-index: 1;
+    background: var(--gkit-color-neutral-0);
+    border: 1px solid var(--gkit-color-neutral-200);
+    border-radius: 0.75rem;
+    margin-top: 5px;
+    min-width: 19.5rem;
+
+    .select-option {
+      padding: 0.5rem 1rem;
+
+      &.small {
+        .text-sm();
+        border-radius: 0.625rem;
+      }
+
+      &.large {
+        .text-base();
+        border-radius: 0.75rem;
+      }
+
+      &:hover {
+        background: var(--gkit-color-neutral-100);
+      }
+    }
+  }
+
+  &.hover,
+  &:hover {
+    border: 1px solid var(--gkit-color-light-primary-500);
+  }
+
+  &.focus,
+  :focus {
+    .outline();
+    .outline-2();
+    .outline-offset-2();
+    .outline-primary-600();
+  }
+
+  &.error {
+    border: 1px solid var(--gkit-color-danger-500);
+  }
+
+  &.disabled {
+    pointer-events: none;
+  }
+}

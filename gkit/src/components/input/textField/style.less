@@ -1,5 +1,5 @@
-@import (reference) "../../variables";
-@import (reference) "../../ui";
+@import (reference) "../../../variables";
+@import (reference) "../../../ui";
 
 .gkit-text-field {
   display: flex;
@@ -35,6 +35,18 @@
       .outline-2();
       .outline-offset-2();
       .outline-primary-700();
+    }
+
+    &.error {
+      border: 1px solid var(--gkit-color-danger-500);
+
+      &:hover {
+        border: 1px solid var(--gkit-color-danger-500);
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
 
     &::placeholder {

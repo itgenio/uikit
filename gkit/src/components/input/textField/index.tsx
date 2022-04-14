@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { HTMLInputTypeAttribute, useMemo } from 'react';
-import { generateId } from '../utils/generateId';
+import { generateId } from '../../utils/generateId';
 
 type Props = React.PropsWithChildren<{
   disabled?: boolean;
@@ -65,7 +65,7 @@ export function TextField({
       {label && <label htmlFor={id}>{label}</label>}
       <input
         type={inputType}
-        className={classNames({ hover, active, focus })}
+        className={classNames({ hover, active, focus, error })}
         list={id + 'list'}
         {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
       />

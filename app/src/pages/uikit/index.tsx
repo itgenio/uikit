@@ -8,12 +8,12 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
+import { TextAreas } from './components/inputs';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
 import { TabsExample } from './components/tabs';
-import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
 
