@@ -2,9 +2,6 @@ import './index.less';
 
 export * from './components/button';
 export * from './components/tabs';
-export * from './components/inputs/textField';
-export * from './components/inputs/textArea';
-export * from './components/inputs/select';
 export * from './components/dialog';
 export * from './components/link';
 export * from './components/modalPage';
