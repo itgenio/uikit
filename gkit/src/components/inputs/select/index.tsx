@@ -10,7 +10,7 @@ export type SelectMenuItemProps = { label?: string; value: string | number };
 
 type SelectProps = {
   label?: string;
-  description?: string;
+  helperText?: string;
   idQa?: string;
   onChange?: (value: EventTarget) => void;
   placeholder?: string;
@@ -28,7 +28,7 @@ type SelectProps = {
 export function Select({
   size = 'large',
   label,
-  description,
+  helperText,
   idQa,
   onChange,
   hover,
@@ -56,10 +56,10 @@ export function Select({
   }, []);
 
   return (
-    <InputsContainer {...{ id, size, label, description, idQa }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa }}>
       <div
         ref={root}
-        className={classNames(className, size, open ? 'select _active' : 'select', {
+        className={classNames(className, size, open ? 'gkit-select _active' : 'gkit-select', {
           hover,
           focus,
           filled,

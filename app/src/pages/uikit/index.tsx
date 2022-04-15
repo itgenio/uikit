@@ -8,7 +8,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
-import { TextAreas } from './components/inputs';
+import { Inputs } from './components/inputs';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
@@ -27,7 +27,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
-  TextAreas,
+  Inputs,
   Checkboxes,
   Accordions,
   RadioButtons,

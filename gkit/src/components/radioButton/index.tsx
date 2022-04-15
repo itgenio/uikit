@@ -16,7 +16,7 @@ export function RadioButton({ children, hover, disabled, checked, idQa, onChange
     <label className={classNames('gkit-radio-button', className)}>
       <input
         type="radio"
-        className={classNames('radio-input', { hover })}
+        className={classNames('radio-inputs', { hover })}
         id-qa={idQa}
         disabled={disabled}
         checked={checked}

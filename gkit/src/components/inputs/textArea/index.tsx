@@ -14,7 +14,7 @@ type TextAreaProps = {
   cols?: number;
   name?: string;
   label?: string;
-  description?: string;
+  helperText?: string;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
   required?: boolean;
@@ -33,7 +33,7 @@ export function TextArea({
   idQa,
   size = 'large',
   label,
-  description,
+  helperText,
   resize = 'both',
   maxLength,
   cols = 32,
@@ -52,12 +52,12 @@ export function TextArea({
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
   return (
-    <InputsContainer {...{ id, size, label, description, idQa }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa }}>
       <textarea
         id={id}
         onChange={onChange}
         {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
-        className={classNames('text-area', className, size, resize, {
+        className={classNames('gkit-text-area', className, size, resize, {
           hover,
           focus,
           filled,

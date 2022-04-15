@@ -9,19 +9,28 @@ type InputsContainerProps = PropsWithChildren<{
   id?: string;
   label?: string;
   size?: Sizes;
-  description?: string;
+  helperText?: string;
+  fullWidth?: boolean;
 }>;
 
-export function InputsContainer({ children, id, size = 'large', label, description, idQa }: InputsContainerProps) {
+export function InputsContainer({
+  children,
+  id,
+  size = 'large',
+  label,
+  helperText,
+  fullWidth,
+  idQa,
+}: InputsContainerProps) {
   return (
-    <div id-qa={idQa} className="gkit-inputs-container">
+    <div id-qa={idQa} className={classNames('gkit-inputs-container', { 'full-width': fullWidth })}>
       {label && (
         <label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
         </label>
       )}
       {children}
-      {description && <label className="inputs-container-description">{description}</label>}
+      {helperText && <span className="inputs-container-description">{helperText}</span>}
     </div>
   );
 }

@@ -12,7 +12,7 @@ type InputsProps = {
   disabled?: boolean;
 };
 
-export function TextAreas() {
+export function Inputs() {
   const sizes = ['small', 'large'] as const;
 
   const renderState = (state: string, props: InputsProps, index: number) => {
@@ -20,7 +20,8 @@ export function TextAreas() {
       <Fragment key={index}>
         <div>{state}</div>
         {sizes.map(size => {
-          return <TextField key={size} {...props} placeholder="Placeholder" label="Label" helperText="Desc" />;
+          const p = { ...props, size };
+          return <TextField key={size} {...p} placeholder="Placeholder" label="Label" helperText="Desc" />;
         })}
         {sizes.map(size => {
           const p = { ...props, size };
@@ -30,7 +31,7 @@ export function TextAreas() {
               {...p}
               placeholder="Placeholder"
               label="Label"
-              description="Desc"
+              helperText="Desc"
               options={options}
               onChange={value => console.log(value)}
             />
@@ -38,7 +39,7 @@ export function TextAreas() {
         })}
         {sizes.map(size => {
           const p = { ...props, size };
-          return <TextArea {...p} placeholder="Placeholder" key={size} label="Label" description="Desc" />;
+          return <TextArea {...p} placeholder="Placeholder" key={size} label="Label" helperText="Desc" />;
         })}
       </Fragment>
     );
@@ -62,4 +63,4 @@ export function TextAreas() {
   );
 }
 
-TextAreas.displayName = 'TextAreas';
+Inputs.displayName = 'Inputs';

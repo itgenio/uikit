@@ -2,6 +2,9 @@ import './style.less';
 import classNames from 'classnames';
 import React, { HTMLInputTypeAttribute, useMemo } from 'react';
 import { generateId } from '../../utils/generateId';
+import { InputsContainer } from '../components/inputsContainer';
+
+type Sizes = 'small' | 'large';
 
 type Props = React.PropsWithChildren<{
   disabled?: boolean;
@@ -13,9 +16,10 @@ type Props = React.PropsWithChildren<{
   value?: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  size?: Sizes;
   fullWidth?: boolean;
   label?: string;
-  helperText?: React.ReactNode;
+  helperText?: string;
   inputType?: HTMLInputTypeAttribute;
   required?: boolean;
   idQa?: string;
@@ -28,6 +32,7 @@ type Props = React.PropsWithChildren<{
 
 export function TextField({
   value,
+  size = 'large',
   fullWidth,
   placeholder,
   hover,
@@ -51,25 +56,13 @@ export function TextField({
   const id = useMemo(() => generateId(), []);
 
   return (
-    <div
-      id-qa={idQa}
-      className={classNames('gkit-text-field', className, {
-        hover,
-        active,
-        focus,
-        'full-width': fullWidth,
-        disabled,
-        error,
-      })}
-    >
-      {label && <label htmlFor={id}>{label}</label>}
+    <InputsContainer {...{ id, size, fullWidth, label, idQa, helperText }}>
       <input
         type={inputType}
-        className={classNames({ hover, active, focus, error })}
+        className={classNames('gkit-text-field', className, size, { hover, active, focus, error })}
         list={id + 'list'}
         {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
       />
-      {helperText && <span className="helper-text">{helperText}</span>}
       {dataList && (
         <datalist id={id + 'list'}>
           {dataList.map(value => (
@@ -77,6 +70,6 @@ export function TextField({
           ))}
         </datalist>
       )}
-    </div>
+    </InputsContainer>
   );
 }
