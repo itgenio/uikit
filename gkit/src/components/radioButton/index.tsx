@@ -13,15 +13,15 @@ export type RadioButtonProps = PropsWithChildren<{
 
 export function RadioButton({ children, hover, disabled, checked, idQa, onChange, className }: RadioButtonProps) {
   return (
-    <label className={classNames('gkit-radio-button', className)}>
+    <label className={classNames('gkit-radio-button', className)} id-qa={idQa}>
       <input
         type="radio"
-        className={classNames('radio-inputs', { hover })}
-        id-qa={idQa}
+        className={classNames('radio-input', { hover })}
         disabled={disabled}
         checked={checked}
         onChange={onChange}
       />
+
       {children && <span className="radio-button-span">{children}</span>}
     </label>
   );
