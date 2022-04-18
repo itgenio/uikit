@@ -44,7 +44,7 @@ export function Select({
   defaultValue,
 }: SelectProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue || '');
   const id = useMemo(() => generateId(), []);
   const ref = useRef(null);
 
@@ -83,7 +83,7 @@ export function Select({
                   onChange(option.value);
                 }}
               >
-                {option.label ?? option.value}
+                {option.label}
               </div>
             ))}
           </div>

@@ -36,7 +36,11 @@ export function Selects() {
     { state: 'Disabled', props: { disabled: true } },
   ];
 
-  const options: SelectMenuItemProps[] = [{ value: 'Option1' }, { value: 'Option2' }, { value: 'Option3' }];
+  const options: SelectMenuItemProps[] = [
+    { label: 'Option1', value: '1' },
+    { label: 'Option2', value: '2' },
+    { label: 'Option3', value: '3' },
+  ];
 
   return (
     <div className="selects">
