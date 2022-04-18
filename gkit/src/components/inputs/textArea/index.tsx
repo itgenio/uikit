@@ -6,7 +6,7 @@ import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-type TextAreaProps = {
+export type TextAreaProps = {
   idQa?: string;
   resize?: string;
   maxLength?: number;
@@ -52,12 +52,12 @@ export function TextArea({
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
   return (
-    <InputsContainer {...{ id, size, label, helperText, idQa }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
       <textarea
         id={id}
         onChange={onChange}
         {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
-        className={classNames('gkit-text-area', className, size, resize, {
+        className={classNames('gkit-text-area', size, resize, {
           hover,
           focus,
           filled,

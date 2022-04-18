@@ -9,16 +9,14 @@
   background: var(--gkit-color-neutral-0);
 
   &.small {
-    .text-sm();
     border-radius: 0.625rem;
   }
 
   &.large {
-    .text-base();
     border-radius: 0.75rem;
   }
 
-  &._active {
+  &.active {
     &:after {
       transform: rotate(-135deg);
     }
@@ -45,11 +43,13 @@
     &.small {
       padding: 0.625rem 0.75rem;
       border-radius: 0.625rem;
+      .text-sm();
     }
 
     &.large {
       padding: 0.75rem 1rem;
       border-radius: 0.75rem;
+      .text-base();
     }
 
     &.filled,
@@ -121,6 +121,6 @@
   }
 
   &.disabled {
-    pointer-events: none;
+    border: 1px solid var(--gkit-color-neutral-200);
   }
 }

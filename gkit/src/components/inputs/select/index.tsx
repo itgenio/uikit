@@ -1,18 +1,19 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
+import useOnClickOutside from 'use-onclickoutside';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-export type SelectMenuItemProps = { label?: string; value: string | number };
+export type SelectMenuItemProps = { label: string; value: string | number };
 
-type SelectProps = {
+export type SelectProps = {
   label?: string;
   helperText?: string;
   idQa?: string;
-  onChange?: (value: EventTarget) => void;
+  onChange?: (value: string | number) => void;
   placeholder?: string;
   className?: string;
   size?: Sizes;
@@ -23,10 +24,12 @@ type SelectProps = {
   error?: boolean;
   disabled?: boolean;
   options?: SelectMenuItemProps[];
+  defaultValue?: string | number;
 };
 
 export function Select({
   size = 'large',
+  className,
   label,
   helperText,
   idQa,
@@ -38,62 +41,51 @@ export function Select({
   disabled,
   placeholder,
   options,
-  className,
+  defaultValue,
 }: SelectProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const root = useRef(null);
+  const [value, setValue] = useState(defaultValue);
   const id = useMemo(() => generateId(), []);
+  const ref = useRef(null);
 
-  const handleDropdownClick = () => {
-    open ? setOpen(false) : setOpen(true);
-  };
-
-  useEffect(() => {
-    const onClick = e => root.current.contains(e.target) || setOpen(false);
-    document.addEventListener('click', onClick);
-    return () => document.removeEventListener('click', onClick);
-  }, []);
+  useOnClickOutside(ref, () => setOpen(false));
 
   return (
-    <InputsContainer {...{ id, size, label, helperText, idQa }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
       <div
-        ref={root}
-        className={classNames(className, size, open ? 'gkit-select _active' : 'gkit-select', {
+        ref={ref}
+        className={classNames('gkit-select', size, {
+          active: open,
           hover,
           focus,
-          filled,
           error,
           disabled,
         })}
-        onClick={handleDropdownClick}
       >
         <input
           readOnly
           id={id}
           className={classNames('select-input', size, { filled, error, disabled })}
-          placeholder={placeholder}
-          defaultValue={value}
+          {...{ placeholder, disabled, value }}
+          onClick={() => setOpen(!open)}
         />
 
-        {open && (
+        {open && !disabled && (
           <div className="select-dropdown">
-            {options.map((option, index) => {
-              return (
-                <div
-                  className={classNames('select-option', size)}
-                  key={index}
-                  onClick={e => {
-                    onChange(e.target);
-                    setValue((e.target as HTMLElement).innerText);
-                    setOpen(false);
-                    e.stopPropagation();
-                  }}
-                >
-                  {option.value}
-                </div>
-              );
-            })}
+            {options.map((option, index) => (
+              <div
+                className={classNames('select-option', size)}
+                key={index}
+                onClick={e => {
+                  e.stopPropagation();
+                  setOpen(!open);
+                  setValue(option.value);
+                  onChange(option.value);
+                }}
+              >
+                {option.label ?? option.value}
+              </div>
+            ))}
           </div>
         )}
       </div>

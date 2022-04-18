@@ -15,7 +15,8 @@
   "author": "Alex So",
   "license": "MIT",
   "dependencies": {
-    "focus-trap-react": "^8.9.1"
+    "focus-trap-react": "^8.9.1",
+    "use-onclickoutside": "^0.4.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",

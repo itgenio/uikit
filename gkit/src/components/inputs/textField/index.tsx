@@ -56,10 +56,10 @@ export function TextField({
   const id = useMemo(() => generateId(), []);
 
   return (
-    <InputsContainer {...{ id, size, fullWidth, label, idQa, helperText }}>
+    <InputsContainer {...{ id, size, label, idQa, helperText, className }}>
       <input
         type={inputType}
-        className={classNames('gkit-text-field', className, size, { hover, active, focus, error })}
+        className={classNames('gkit-text-field', size, { 'full-width': fullWidth, hover, active, focus, error })}
         list={id + 'list'}
         {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
       />
