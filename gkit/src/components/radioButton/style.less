@@ -1,0 +1,97 @@
+@import (reference) "../../variables";
+@radioButton-size: 24px;
+
+.gkit-radio-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type="radio"] {
+    overflow: hidden;
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--gkit-color-neutral-0);
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      border: 1px solid var(--gkit-color-neutral-300);
+      display: inline-block;
+      width: @radioButton-size;
+      height: @radioButton-size;
+      border-radius: 50%;
+      transition: transform 0.15s;
+      vertical-align: middle;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: scale(0);
+    }
+
+    &:checked:before {
+      transition: 0.5s border-color ease;
+      border: 1px solid var(--gkit-color-light-primary-400);
+    }
+
+    &:checked:after {
+      transform: scale(1);
+      animation: toggleOnRadio 0.2s ease forwards;
+      background-color: var(--gkit-color-light-primary-500);
+    }
+
+    &.hover,
+    &:hover {
+      background-color: var(--gkit-color-light-primary-50);
+      border-radius: 50%;
+    }
+
+    &.hover:before,
+    &:hover:before {
+      border: 1px solid var(--gkit-color-light-primary-400);
+    }
+
+    &:disabled:before {
+      border-color: var(--gkit-color-neutral-300);
+      background-color: var(--gkit-color-neutral-100);
+    }
+
+    &:disabled + span {
+      color: var(--gkit-color-neutral-400);
+    }
+
+    &:checked:disabled:before {
+      background-color: var(--gkit-color-neutral-100);
+    }
+
+    &:checked:disabled:after {
+      background-color: var(--gkit-color-neutral-400);
+    }
+  }
+  .radio-button-span {
+    margin-left: 0.75rem;
+  }
+}
+
+@keyframes toggleOnRadio {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}

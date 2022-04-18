@@ -1,52 +1,37 @@
 import './style.less';
-import React, { Fragment } from 'react';
-import {
-  DropdownItemCheck,
-  DropdownItemCheckbox,
-  DropdownMenu,
-  DropdownMenuChapter,
-  DropdownMenuSeparator,
-  DropdownItemProps,
-} from '@itgenio/gkit';
+import React from 'react';
+import { DropdownMenu, DropdownTrigger, DropdownContent, DropdownCheckboxItem, Button } from '@itgenio/gkit';
 
 export function Dropdowns() {
-  const renderState = (state: string, props: DropdownItemProps) => {
-    return (
-      <Fragment key={state}>
-        <div>{state}</div>
-        <DropdownItemCheck {...props} />
-        <DropdownItemCheckbox {...props} />
-      </Fragment>
-    );
-  };
+  const [checked, setChecked] = React.useState(false);
 
-  const states: [string, DropdownItemProps][] = [
-    ['Normal', { label: 'Dropdown Option' }],
-    ['Hover', { hover: true, label: 'Dropdown Option' }],
-    ['Focus', { focus: true, label: 'Dropdown Option' }],
-    ['Checked', { checked: true, label: 'Dropdown Option' }],
-    ['Disabled', { disabled: true, label: 'Dropdown Option' }],
-  ];
   return (
     <div className="dropdown">
       <div className="grid">
-        {states.map(([name, props]) => renderState(name, props))}
-        <div className="dropdown-menu">
-          <DropdownMenu label="Dropdown Menu">
-            <DropdownMenuChapter>Раздел 1</DropdownMenuChapter>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownMenuChapter>Раздел 2</DropdownMenuChapter>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-            <DropdownMenuSeparator />
-            <DropdownItemCheck>Dropdown Option</DropdownItemCheck>
-          </DropdownMenu>
-        </div>
+        <DropdownMenu defaultOpen>
+          <DropdownTrigger>
+            <Button type="neutral">Dropdown Menu</Button>
+          </DropdownTrigger>
+          <DropdownContent>
+            <label className="dropdown-chapter">Раздел 1</label>
+            <DropdownCheckboxItem
+              checked={checked}
+              onCheckedChange={setChecked}
+              onSelect={e => console.log(e.target.innerText)}
+            >
+              Dropdown Option1
+            </DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <label className="dropdown-chapter">Раздел 2</label>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
+          </DropdownContent>
+        </DropdownMenu>
       </div>
     </div>
   );

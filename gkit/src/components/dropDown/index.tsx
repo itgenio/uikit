@@ -1,81 +1,97 @@
 import './style.less';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
+import { CheckmarkIcon } from '../icons/checkmark';
 
-export type DropdownItemProps = DropdownMenuProps & {
-  disabled?: boolean;
-  hover?: boolean;
-  checked?: boolean;
-  focus?: boolean;
-  className?: string;
-};
+type DropdownMenuProps = PropsWithChildren<{
+  id?: string;
+  dir?: 'ltr' | 'rtl';
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  defaultOpen?: boolean;
+  idQa?: string;
+}>;
 
-export const DropdownItemCheck = ({
+export const DropdownMenu = ({
   children,
-  label,
-  hover,
-  disabled,
-  checked,
-  focus,
-  className,
-}: DropdownItemProps) => {
+  id,
+  dir = 'ltr',
+  open,
+  onOpenChange,
+  defaultOpen,
+  idQa,
+}: DropdownMenuProps) => {
   return (
-    <label className={classNames('gkit-dropdown', className, { hover, focus, disabled })}>
-      <span className="dropdown-text">{label ?? children}</span>
-      <CheckboxPrimitive.Root disabled={disabled} checked={checked} className="dropdown-checkbox">
-        <CheckboxPrimitive.Indicator className="dropdown-indicator">
-          <CheckIcon className="icon-without-border" />
-        </CheckboxPrimitive.Indicator>
-      </CheckboxPrimitive.Root>
-    </label>
-  );
-};
-
-export const DropdownItemCheckbox = ({
-  children,
-  label,
-  hover,
-  disabled,
-  checked,
-  focus,
-  className,
-}: DropdownItemProps) => {
-  return (
-    <label className={classNames('gkit-dropdown', className, { hover, focus, disabled })}>
-      <CheckboxPrimitive.Root
-        disabled={disabled}
-        checked={checked}
-        className={classNames('dropdown-checkbox checkbox', { hover, focus, disabled, checked })}
-      >
-        <CheckboxPrimitive.Indicator className="dropdown-indicator">
-          <CheckIcon className="icon-without-border icon" />
-        </CheckboxPrimitive.Indicator>
-      </CheckboxPrimitive.Root>
-      <span className="dropdown-text">{label ?? children}</span>
-    </label>
-  );
-};
-
-type DropdownMenuProps = PropsWithChildren<{ label?: string }>;
-
-export const DropdownMenu = ({ children, label }: DropdownMenuProps) => {
-  return (
-    <DropdownMenuPrimitive.Root>
-      <DropdownMenuPrimitive.Trigger asChild>
-        <button className="dropdown-menu-button">{label}</button>
-      </DropdownMenuPrimitive.Trigger>
-      <DropdownMenuPrimitive.Content className="dropdown-menu-content">{children}</DropdownMenuPrimitive.Content>
+    <DropdownMenuPrimitive.Root id-qa={idQa} {...{ id, open, dir, onOpenChange, defaultOpen }}>
+      {children}
     </DropdownMenuPrimitive.Root>
   );
 };
 
-export const DropdownMenuChapter = ({ children }: PropsWithChildren<{}>) => {
-  return <DropdownMenuPrimitive.Label className="dropdown-chapter">{children}</DropdownMenuPrimitive.Label>;
+type DropdownTriggerProps = PropsWithChildren<{ asChild?: boolean }>;
+
+export const DropdownTrigger = ({ children, asChild = false }: DropdownTriggerProps) => {
+  return <DropdownMenuPrimitive.Trigger {...{ asChild }}>{children}</DropdownMenuPrimitive.Trigger>;
 };
 
-export const DropdownMenuSeparator = () => {
-  return <DropdownMenuPrimitive.Separator className="dropdown-separator" />;
+type DropdownContentProps = PropsWithChildren<{
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  sideOffset?: number;
+  align?: 'start' | 'center' | 'end';
+  alignOffset?: number;
+  avoidCollisions?: boolean;
+  className?: string;
+}>;
+
+export const DropdownContent = ({
+  children,
+  side = 'bottom',
+  sideOffset = 0,
+  align = 'center',
+  alignOffset = 0,
+  avoidCollisions = true,
+  className,
+}: DropdownContentProps) => {
+  return (
+    <DropdownMenuPrimitive.Content
+      className={classNames('gkit-dropdown-content', className)}
+      {...{ side, sideOffset, align, alignOffset, avoidCollisions }}
+    >
+      {children}
+    </DropdownMenuPrimitive.Content>
+  );
+};
+
+type DropdownItemProps = PropsWithChildren<{
+  disabled?: boolean;
+  checked?: boolean;
+  asChild?: boolean;
+  className?: string;
+  onCheckedChange?: (checked: boolean) => void;
+  onSelect?: (e: Event) => void;
+}>;
+
+export const DropdownCheckboxItem = ({
+  children,
+  disabled,
+  checked,
+  onCheckedChange,
+  onSelect,
+  asChild = false,
+  className,
+}: DropdownItemProps) => {
+  return (
+    <div className="dropdown-container-checkbox-item">
+      <DropdownMenuPrimitive.CheckboxItem
+        {...{ disabled, checked, onCheckedChange, onSelect, asChild, className }}
+        className={classNames('dropdown-checkbox-item', className)}
+      >
+        {children && <span className="dropdown-text">{children}</span>}
+        <DropdownMenuPrimitive.ItemIndicator>
+          <CheckmarkIcon />
+        </DropdownMenuPrimitive.ItemIndicator>
+      </DropdownMenuPrimitive.CheckboxItem>
+    </div>
+  );
 };
