@@ -14,11 +14,7 @@ export function Dropdowns() {
           </DropdownTrigger>
           <DropdownContent>
             <label className="dropdown-chapter">Раздел 1</label>
-            <DropdownCheckboxItem
-              checked={checked}
-              onCheckedChange={setChecked}
-              onSelect={e => console.log(e.target.innerText)}
-            >
+            <DropdownCheckboxItem checked={checked} onCheckedChange={setChecked}>
               Dropdown Option1
             </DropdownCheckboxItem>
             <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
