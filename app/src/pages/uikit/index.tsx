@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
+import { Badges } from './components/badges';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
@@ -30,6 +31,7 @@ const components = [
   Accordions,
   RadioButtons,
   Toggles,
+  Badges,
 ];
 const DEFAULT = 0;
 
