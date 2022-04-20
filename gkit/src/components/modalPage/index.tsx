@@ -61,42 +61,59 @@ export function ModalPageTitle({
   title,
   children,
   className,
-}: React.PropsWithChildren<{ title?: string; className?: string }>) {
+  idQa,
+}: React.PropsWithChildren<{ title?: string; className?: string; idQa?: string }>) {
   return (
-    <h3 id-qa="modal-page-title" className={classNames('modal-page-title', className)}>
+    <h3 id-qa={idQa} className={classNames('modal-page-title', className)}>
       {title ?? children}
     </h3>
   );
 }
 
-export function ModalPageText(props: React.PropsWithChildren<any>) {
+export function ModalPageText({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
   return (
-    <p id-qa="modal-page-text" className="modal-page-text">
-      {props.children}
+    <p id-qa={idQa} className={classNames('modal-page-text', className)}>
+      {children}
     </p>
   );
 }
 
-export function ModalPageHeader(props: React.PropsWithChildren<any>) {
+export function ModalPageHeader({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
   return (
-    <div id-qa="modal-page-header" className="modal-page-header">
-      {props.children}
+    <div id-qa={idQa} className={classNames('modal-page-header', className)}>
+      {children}
     </div>
   );
 }
 
-export function ModalPageBody(props: React.PropsWithChildren<{ className?: string }>) {
+export function ModalPageBody({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
   return (
-    <div id-qa="modal-page-body" className={classNames('modal-page-body', props.className)}>
-      {props.children}
+    <div id-qa={idQa} className={classNames('modal-page-body', className)}>
+      {children}
     </div>
   );
 }
 
-export function ModalPageFooter(props: React.PropsWithChildren<any>) {
+export function ModalPageFooter({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
   return (
-    <div id-qa="modal-page-footer" className="modal-page-footer">
-      {props.children}
+    <div id-qa={idQa} className={classNames('modal-page-footer', className)}>
+      {children}
     </div>
   );
 }

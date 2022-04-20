@@ -91,7 +91,7 @@ export function TextField({
         }}
       />
       {helperText && (
-        <span id-qa={`helper-text-${idQaForInput}`} className="helper-text">
+        <span id-qa={idQaForInput ? `helper-text-${idQaForInput}` : 'helper-text'} className="helper-text">
           {helperText}
         </span>
       )}
