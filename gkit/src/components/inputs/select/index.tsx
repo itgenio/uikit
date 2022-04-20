@@ -7,13 +7,15 @@ import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-export type SelectMenuItemProps = { label: string; value: string | number };
+type Values = string | number;
+
+export type SelectMenuItemProps = { label: string; value: Values };
 
 export type SelectProps = {
   label?: string;
   helperText?: string;
   idQa?: string;
-  onChange?: (value: string | number) => void;
+  onChange?: (value: Values) => void;
   placeholder?: string;
   className?: string;
   size?: Sizes;
@@ -24,7 +26,7 @@ export type SelectProps = {
   error?: boolean;
   disabled?: boolean;
   options?: SelectMenuItemProps[];
-  defaultValue?: string | number;
+  value?: Values;
 };
 
 export function Select({
@@ -41,10 +43,9 @@ export function Select({
   disabled,
   placeholder,
   options,
-  defaultValue,
+  value,
 }: SelectProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue || '');
   const id = useMemo(() => generateId(), []);
   const ref = useRef(null);
 
@@ -79,7 +80,6 @@ export function Select({
                 onClick={e => {
                   e.stopPropagation();
                   setOpen(!open);
-                  setValue(option.value);
                   onChange(option.value);
                 }}
               >

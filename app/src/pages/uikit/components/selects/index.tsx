@@ -1,9 +1,10 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Select, SelectProps, SelectMenuItemProps } from '@itgenio/gkit';
 
 export function Selects() {
   const sizes = ['small', 'large'] as const;
+  const [value, setValue] = useState<string | number>('');
 
   const renderState = (state: string, props: SelectProps, index: number) => {
     return (
@@ -19,7 +20,8 @@ export function Selects() {
               label="Label"
               helperText="Desc"
               options={options}
-              onChange={value => console.log(value)}
+              value={value}
+              onChange={value => setValue(value)}
             />
           );
         })}
