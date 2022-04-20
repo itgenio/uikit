@@ -16,12 +16,12 @@ export function ModalPages() {
   return (
     <div className="modalPages bg-neutral-50">
       <div className="grid">
-        <ModalPage asBlock>
-          <ModalPageHeader>
-            <ModalPageTitle title="ModalPage with footer" />
+        <ModalPage asBlock idQa="custom-modal-id-qa">
+          <ModalPageHeader idQa="modal-header">
+            <ModalPageTitle title="ModalPage with footer" idQa="modal-title" />
           </ModalPageHeader>
 
-          <ModalPageFooter>
+          <ModalPageFooter idQa="modal-footer">
             <div className="flex gap-4 items-start">
               <Button type="secondary">Ok</Button>
 

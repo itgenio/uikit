@@ -10,18 +10,20 @@ type Props = React.PropsWithChildren<{
   asBlock?: boolean;
   onClose?: () => void;
   open?: boolean;
+  idQa?: string;
 }>;
 
-export function ModalPage({ className, asBlock, children, onClose, open }: Props) {
+export function ModalPage({ className, asBlock, children, onClose, open, idQa }: Props) {
   const render = () => (
     <div
       className="modal-page-content"
+      id-qa={idQa || 'modal-page-content'}
       onClick={e => {
         e.preventDefault();
         e.stopPropagation();
       }}
     >
-      <button className="close-btn" onClick={() => onClose?.()}>
+      <button className="close-btn" id-qa="close-icon-btn" onClick={() => onClose?.()}>
         <CloseIcon />
       </button>
       {children}
@@ -59,22 +61,59 @@ export function ModalPageTitle({
   title,
   children,
   className,
-}: React.PropsWithChildren<{ title?: string; className?: string }>) {
-  return <h3 className={classNames('modal-page-title', className)}>{title ?? children}</h3>;
+  idQa,
+}: React.PropsWithChildren<{ title?: string; className?: string; idQa?: string }>) {
+  return (
+    <h3 id-qa={idQa} className={classNames('modal-page-title', className)}>
+      {title ?? children}
+    </h3>
+  );
 }
 
-export function ModalPageText(props: React.PropsWithChildren<any>) {
-  return <p className="modal-page-text">{props.children}</p>;
+export function ModalPageText({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
+  return (
+    <p id-qa={idQa} className={classNames('modal-page-text', className)}>
+      {children}
+    </p>
+  );
 }
 
-export function ModalPageHeader(props: React.PropsWithChildren<any>) {
-  return <div className="modal-page-header">{props.children}</div>;
+export function ModalPageHeader({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
+  return (
+    <div id-qa={idQa} className={classNames('modal-page-header', className)}>
+      {children}
+    </div>
+  );
 }
 
-export function ModalPageBody(props: React.PropsWithChildren<{ className?: string }>) {
-  return <div className={classNames('modal-page-body', props.className)}>{props.children}</div>;
+export function ModalPageBody({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
+  return (
+    <div id-qa={idQa} className={classNames('modal-page-body', className)}>
+      {children}
+    </div>
+  );
 }
 
-export function ModalPageFooter(props: React.PropsWithChildren<any>) {
-  return <div className="modal-page-footer">{props.children}</div>;
+export function ModalPageFooter({
+  className,
+  idQa,
+  children,
+}: React.PropsWithChildren<{ className?: string; idQa?: string }>) {
+  return (
+    <div id-qa={idQa} className={classNames('modal-page-footer', className)}>
+      {children}
+    </div>
+  );
 }
