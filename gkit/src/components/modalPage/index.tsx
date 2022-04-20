@@ -10,18 +10,20 @@ type Props = React.PropsWithChildren<{
   asBlock?: boolean;
   onClose?: () => void;
   open?: boolean;
+  idQa?: string;
 }>;
 
-export function ModalPage({ className, asBlock, children, onClose, open }: Props) {
+export function ModalPage({ className, asBlock, children, onClose, open, idQa }: Props) {
   const render = () => (
     <div
       className="modal-page-content"
+      id-qa={idQa || 'modal-page-content'}
       onClick={e => {
         e.preventDefault();
         e.stopPropagation();
       }}
     >
-      <button className="close-btn" onClick={() => onClose?.()}>
+      <button className="close-btn" id-qa="close-icon-btn" onClick={() => onClose?.()}>
         <CloseIcon />
       </button>
       {children}
@@ -60,21 +62,41 @@ export function ModalPageTitle({
   children,
   className,
 }: React.PropsWithChildren<{ title?: string; className?: string }>) {
-  return <h3 className={classNames('modal-page-title', className)}>{title ?? children}</h3>;
+  return (
+    <h3 id-qa="modal-page-title" className={classNames('modal-page-title', className)}>
+      {title ?? children}
+    </h3>
+  );
 }
 
 export function ModalPageText(props: React.PropsWithChildren<any>) {
-  return <p className="modal-page-text">{props.children}</p>;
+  return (
+    <p id-qa="modal-page-text" className="modal-page-text">
+      {props.children}
+    </p>
+  );
 }
 
 export function ModalPageHeader(props: React.PropsWithChildren<any>) {
-  return <div className="modal-page-header">{props.children}</div>;
+  return (
+    <div id-qa="modal-page-header" className="modal-page-header">
+      {props.children}
+    </div>
+  );
 }
 
 export function ModalPageBody(props: React.PropsWithChildren<{ className?: string }>) {
-  return <div className={classNames('modal-page-body', props.className)}>{props.children}</div>;
+  return (
+    <div id-qa="modal-page-body" className={classNames('modal-page-body', props.className)}>
+      {props.children}
+    </div>
+  );
 }
 
 export function ModalPageFooter(props: React.PropsWithChildren<any>) {
-  return <div className="modal-page-footer">{props.children}</div>;
+  return (
+    <div id-qa="modal-page-footer" className="modal-page-footer">
+      {props.children}
+    </div>
+  );
 }

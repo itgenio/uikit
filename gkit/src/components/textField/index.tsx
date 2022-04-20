@@ -18,11 +18,14 @@ type Props = React.PropsWithChildren<{
   inputType?: HTMLInputTypeAttribute;
   required?: boolean;
   idQa?: string;
+  idQaForInput?: string;
   name?: string;
   autoComplete?: string;
   autoFocus?: boolean;
   dataList?: string[];
   maxLength?: number;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }>;
 
 const generateId = () => String(Date.now() * Math.random());
@@ -43,11 +46,14 @@ export function TextField({
   inputType = 'text',
   required,
   idQa,
+  idQaForInput,
   name,
   autoComplete,
   autoFocus,
   dataList,
   maxLength,
+  onFocus,
+  onBlur,
 }: Props) {
   const id = useMemo(() => generateId(), []);
 
@@ -65,12 +71,30 @@ export function TextField({
     >
       {label && <label htmlFor={id}>{label}</label>}
       <input
+        id-qa={idQaForInput}
         type={inputType}
         className={classNames({ hover, active, focus })}
         list={id + 'list'}
-        {...{ value, required, id, placeholder, maxLength, disabled, onChange, autoFocus, name, autoComplete }}
+        {...{
+          value,
+          required,
+          id,
+          placeholder,
+          onFocus,
+          onBlur,
+          maxLength,
+          disabled,
+          onChange,
+          autoFocus,
+          name,
+          autoComplete,
+        }}
       />
-      {helperText && <span className="helper-text">{helperText}</span>}
+      {helperText && (
+        <span id-qa={`helper-text-${idQaForInput}`} className="helper-text">
+          {helperText}
+        </span>
+      )}
       {dataList && (
         <datalist id={id + 'list'}>
           {dataList.map(value => (
