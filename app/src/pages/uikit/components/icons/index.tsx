@@ -1,5 +1,5 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { CheckMarkIcon, MobilePhoneIcon } from '@itgenio/gkit';
 
 export function Icons() {
