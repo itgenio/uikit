@@ -9,10 +9,10 @@ type CircleIcon = SvgIconProps & {
 
 export function CircleIcon({ className, normal, hover, ...props }: CircleIcon) {
   return (
-    <SvgIcon className={classNames('switcher-icon', className, { normal, hover })} viewBox="0 0 16 16" {...props}>
+    <SvgIcon className={classNames('switcher-icon', className, { normal, hover })} viewBox="0 0 20 20" {...props}>
       <path
-        d="M8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1ZM0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8Z"
-        fill=""
+        d="M10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17C13.866 17 17 13.866 17 10C17 6.13401 13.866 3 10 3ZM2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10Z"
+        fill="currentColor"
       />
     </SvgIcon>
   );

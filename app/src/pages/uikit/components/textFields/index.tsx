@@ -14,7 +14,10 @@ export function TextFields() {
   };
 
   const states = [
-    ['Normal', { placeholder: 'Placeholder', label: 'Label', helperText: 'Helper text' }],
+    [
+      'Normal',
+      { placeholder: 'Placeholder', label: 'Label', helperText: 'Helper text', idQaForInput: 'id-qa for input' },
+    ],
     ['Normal with text', { placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
     ['Hover', { hover: true, placeholder: 'Placeholder', label: 'Label' }],
     ['Focused', { focus: true, placeholder: 'Placeholder', label: 'Label' }],
