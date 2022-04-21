@@ -32,9 +32,9 @@ export function Badge({
 }: BadgeProps) {
   return (
     <span id-qa={idQa} onClick={onDelete} className={classNames('gkit-badge', className, size, color, variant)}>
-      {icon === 'star' ? <StarIcon /> : null}
+      {icon === 'star' && <StarIcon />}
       {label}
-      {icon === 'remove' ? <CloseIcon /> : null}
+      {icon === 'remove' && <CloseIcon />}
     </span>
   );
 }

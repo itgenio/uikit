@@ -11,3 +11,4 @@ export * from './components/accordion';
 export * from './components/radioButton';
 export * from './components/toggle';
 export * from './components/badge';
+export * from './components/icons';
