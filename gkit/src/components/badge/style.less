@@ -6,12 +6,12 @@
   align-items: center;
   border-radius: 0.75rem;
   font-weight: @font-weight-bold;
-  font-family: "Nunito Sans", serif;
-  cursor: pointer;
+  cursor: default;
 
   .close-icon {
     width: 0.53rem;
     height: 0.53rem;
+    cursor: pointer;
   }
 
   &.small {
@@ -20,8 +20,8 @@
     gap: 0 0.25rem;
 
     .star-icon {
-      width: 0.625rem;
-      height: 0.625rem;
+      width: 0.75rem;
+      height: 0.75rem;
     }
   }
 
@@ -31,27 +31,35 @@
     gap: 0 0.25rem;
 
     .star-icon {
-      width: 0.81rem;
-      height: 0.81rem;
+      width: 1rem;
+      height: 1rem;
     }
   }
 
-  &.outlined {
+  &.secondary {
     &.neutral {
       background-color: var(--gkit-color-neutral-50);
       color: var(--gkit-color-neutral-800);
 
       .close-icon {
         color: var(--gkit-color-neutral-400);
+
+        &:hover {
+          color: var(--gkit-color-neutral-300);
+        }
       }
     }
 
-    &.primary {
+    &.green {
       background-color: var(--gkit-color-green-50);
       color: var(--gkit-color-green-800);
 
       .close-icon {
         color: var(--gkit-color-green-400);
+
+        &:hover {
+          color: var(--gkit-color-green-300);
+        }
       }
     }
 
@@ -61,6 +69,10 @@
 
       .close-icon {
         color: var(--gkit-color-blue-400);
+
+        &:hover {
+          color: var(--gkit-color-blue-300);
+        }
       }
     }
 
@@ -70,6 +82,10 @@
 
       .close-icon {
         color: var(--gkit-color-purple-400);
+
+        &:hover {
+          color: var(--gkit-color-purple-300);
+        }
       }
     }
 
@@ -79,6 +95,10 @@
 
       .close-icon {
         color: var(--gkit-color-orange-400);
+
+        &:hover {
+          color: var(--gkit-color-orange-300);
+        }
       }
     }
 
@@ -88,26 +108,38 @@
 
       .close-icon {
         color: var(--gkit-color-danger-400);
+
+        &:hover {
+          color: var(--gkit-color-danger-300);
+        }
       }
     }
   }
 
-  &.inline {
+  &.primary {
     &.neutral {
       background-color: var(--gkit-color-neutral-500);
       color: var(--gkit-color-neutral-0);
 
       .close-icon {
         color: var(--gkit-color-neutral-200);
+
+        &:hover {
+          color: var(--gkit-color-neutral-300);
+        }
       }
     }
 
-    &.primary {
+    &.green {
       background-color: var(--gkit-color-green-500);
       color: var(--gkit-color-neutral-0);
 
       .close-icon {
         color: var(--gkit-color-green-100);
+
+        &:hover {
+          color: var(--gkit-color-green-300);
+        }
       }
     }
 
@@ -117,6 +149,10 @@
 
       .close-icon {
         color: var(--gkit-color-blue-100);
+
+        &:hover {
+          color: var(--gkit-color-blue-300);
+        }
       }
     }
 
@@ -126,6 +162,10 @@
 
       .close-icon {
         color: var(--gkit-color-purple-100);
+
+        &:hover {
+          color: var(--gkit-color-purple-300);
+        }
       }
     }
 
@@ -135,6 +175,10 @@
 
       .close-icon {
         color: var(--gkit-color-orange-100);
+
+        &:hover {
+          color: var(--gkit-color-orange-300);
+        }
       }
     }
 
@@ -144,6 +188,10 @@
 
       .close-icon {
         color: var(--gkit-color-danger-100);
+
+        &:hover {
+          color: var(--gkit-color-danger-300);
+        }
       }
     }
   }

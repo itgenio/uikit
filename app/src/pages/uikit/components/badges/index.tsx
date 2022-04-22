@@ -1,10 +1,10 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Badge, BadgeProps } from '@itgenio/gkit';
+import { Badge, StarIcon, BadgeProps } from '@itgenio/gkit';
 
 export function Badges() {
   const sizes = ['small', 'large'] as const;
-  const colors = ['neutral', 'primary', 'blue', 'purple', 'orange', 'danger'] as const;
+  const colors = ['neutral', 'green', 'blue', 'purple', 'orange', 'danger'] as const;
 
   const renderState = (state: string, props: BadgeProps, index: number) => {
     return (
@@ -19,12 +19,26 @@ export function Badges() {
 
             {sizes.map(size => {
               const p = { ...props, color, size };
-              return <Badge key={`${color}${size}`} {...p} icon="star" />;
+              return (
+                <Badge key={`${color}${size}`} {...p}>
+                  <StarIcon /> Badge
+                </Badge>
+              );
             })}
 
             {sizes.map(size => {
               const p = { ...props, color, size };
-              return <Badge key={`${color}${size}`} {...p} icon="remove" onDelete={() => console.log('delete')} />;
+              return (
+                <Badge
+                  key={`${color}${size}`}
+                  {...p}
+                  onClick={() => console.log('click')}
+                  onDelete={e => {
+                    e.stopPropagation();
+                    console.log('delete');
+                  }}
+                />
+              );
             })}
           </div>
         ))}
@@ -33,8 +47,8 @@ export function Badges() {
   };
 
   const states: { state: string; props?: BadgeProps }[] = [
-    { state: 'Outline', props: { variant: 'outlined', label: 'Badge' } },
-    { state: 'Inline', props: { variant: 'inline', label: 'Badge' } },
+    { state: 'Secondary', props: { type: 'secondary', label: 'Badge' } },
+    { state: 'Primary', props: { type: 'primary', label: 'Badge' } },
   ];
 
   return (

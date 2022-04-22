@@ -1,40 +1,38 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { CloseIcon } from '../icons/close';
-import { StarIcon } from '../icons/star';
 
 type Sizes = 'small' | 'large';
 type Colors = 'neutral' | 'primary' | 'blue' | 'purple' | 'orange' | 'danger';
-type Icons = 'star' | 'remove';
-type Variants = 'outlined' | 'inline';
+type Type = 'secondary' | 'primary';
 
-export type BadgeProps = {
+export type BadgeProps = PropsWithChildren<{
   size?: Sizes;
   color?: Colors;
-  icon?: Icons;
-  variant?: Variants;
+  type?: Type;
   label?: string;
   onDelete?: () => void;
+  onClick?: () => void;
   className?: string;
   idQa?: string;
-};
+}>;
 
 export function Badge({
+  children,
   size = 'large',
   color = 'neutral',
-  variant = 'outlined',
+  type = 'secondary',
   label,
   onDelete,
   className,
   idQa,
-  icon,
+  onClick,
 }: BadgeProps) {
   return (
-    <span id-qa={idQa} onClick={onDelete} className={classNames('gkit-badge', className, size, color, variant)}>
-      {icon === 'star' && <StarIcon />}
-      {label}
-      {icon === 'remove' && <CloseIcon />}
+    <span id-qa={idQa} onClick={onClick} className={classNames('gkit-badge', className, size, color, type)}>
+      {children ?? label}
+      {onDelete && <CloseIcon onClick={onDelete} />}
     </span>
   );
 }
