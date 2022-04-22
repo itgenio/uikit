@@ -19,11 +19,7 @@ export function Badges() {
 
             {sizes.map(size => {
               const p = { ...props, color, size };
-              return (
-                <Badge key={`${color}${size}`} {...p}>
-                  <StarIcon /> Badge
-                </Badge>
-              );
+              return <Badge key={`${color}${size}`} {...p} icon={<StarIcon />} />;
             })}
 
             {sizes.map(size => {

@@ -7,7 +7,7 @@ export type SvgIconProps = React.PropsWithChildren<{
   viewBox?: string;
   alt?: string;
   fill?: string;
-  onClick?: (e: any) => void;
+  onClick?: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }>;
 
 export function SvgIcon({ children, className, viewBox, alt, fill, onClick }: SvgIconProps) {
