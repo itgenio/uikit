@@ -9,7 +9,7 @@ type Sizes = 'small' | 'large';
 
 type Values = string | number;
 
-export type SelectMenuItemProps = { label: string; value: Values };
+export type SelectOptionProps = { label: string; value: Values };
 
 export type SelectProps = {
   label?: string;
@@ -25,7 +25,7 @@ export type SelectProps = {
   filled?: boolean;
   error?: boolean;
   disabled?: boolean;
-  options?: SelectMenuItemProps[];
+  options?: SelectOptionProps[];
   value?: Values;
 };
 
@@ -47,7 +47,7 @@ export function Select({
 }: SelectProps) {
   const [open, setOpen] = useState(false);
   const id = useMemo(() => generateId(), []);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(ref, () => setOpen(false));
 
