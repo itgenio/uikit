@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from 'react';
 import { CloseIcon } from '../icons/close';
 
 type Sizes = 'small' | 'large';
-type Colors = 'neutral' | 'primary' | 'blue' | 'purple' | 'orange' | 'danger';
+type Colors = 'neutral' | 'green' | 'blue' | 'purple' | 'orange' | 'danger';
 type Type = 'secondary' | 'primary';
 
 export type BadgeProps = PropsWithChildren<{
@@ -32,7 +32,14 @@ export function Badge({
   return (
     <span id-qa={idQa} onClick={onClick} className={classNames('gkit-badge', className, size, color, type)}>
       {children ?? label}
-      {onDelete && <CloseIcon onClick={onDelete} />}
+      {onDelete && (
+        <CloseIcon
+          onClick={e => {
+            e.stopPropagation();
+            onDelete();
+          }}
+        />
+      )}
     </span>
   );
 }

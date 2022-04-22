@@ -33,8 +33,7 @@ export function Badges() {
                   key={`${color}${size}`}
                   {...p}
                   onClick={() => console.log('click')}
-                  onDelete={e => {
-                    e.stopPropagation();
+                  onDelete={() => {
                     console.log('delete');
                   }}
                 />

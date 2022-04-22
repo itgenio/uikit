@@ -14,6 +14,7 @@ import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
+import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
@@ -28,6 +29,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Switchers,
   Checkboxes,
   Accordions,
   RadioButtons,
