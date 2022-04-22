@@ -3,78 +3,63 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-type TooltipContainerProps = PropsWithChildren<{
-  defaultOpen?: boolean;
-  open?: boolean;
-  delayDuration?: number;
-  onOpenChange?: (open: boolean) => void;
-  idQa?: string;
-}>;
+type TooltipContainerPropsKeys = 'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange';
+type TooltipContainerPickProps = Pick<TooltipPrimitive.TooltipProps, TooltipContainerPropsKeys>;
+
+type TooltipContainerProps = PropsWithChildren<
+  {
+    idQa?: string;
+  } & TooltipContainerPickProps
+>;
 
 export function TooltipContainer({
   children,
-  defaultOpen,
-  open,
-  delayDuration = 0,
-  onOpenChange,
   idQa,
+  delayDuration = 0,
+  ...TooltipContainerPropsKeys
 }: TooltipContainerProps) {
   return (
-    <TooltipPrimitive.Root id-qa={idQa} {...{ defaultOpen, open, delayDuration, onOpenChange }}>
+    <TooltipPrimitive.Root id-qa={idQa} {...{ delayDuration }} {...TooltipContainerPropsKeys}>
       {children}
     </TooltipPrimitive.Root>
   );
 }
 
-type TooltipTriggerProps = PropsWithChildren<{ asChild?: boolean; className?: string }>;
+type TooltipTriggerPickProps = Pick<TooltipPrimitive.TooltipTriggerProps, 'asChild'>;
+type TooltipTriggerProps = PropsWithChildren<{} & TooltipTriggerPickProps>;
 
-export function TooltipTrigger({ children, asChild = false, className }: TooltipTriggerProps) {
-  return (
-    <TooltipPrimitive.Trigger className={classNames(className)} {...{ asChild }}>
-      {children}
-    </TooltipPrimitive.Trigger>
-  );
+export function TooltipTrigger({ children, ...TooltipTriggerPickProps }: TooltipTriggerProps) {
+  return <TooltipPrimitive.Trigger {...TooltipTriggerPickProps}>{children}</TooltipPrimitive.Trigger>;
 }
 
-export type TooltipContentProps = PropsWithChildren<{
-  className?: string;
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  sideOffset?: number;
-  align?: 'start' | 'center' | 'end';
-  alignOffset?: number;
-  avoidCollisions?: boolean;
-  collisionTolerance?: number;
-  offset?: number;
-}>;
+type TooltipContentPropsKeys =
+  | 'side'
+  | 'align'
+  | 'sideOffset'
+  | 'alignOffset'
+  | 'avoidCollisions'
+  | 'collisionTolerance';
+type TooltipContentPickProps = Pick<TooltipPrimitive.TooltipContentProps, TooltipContentPropsKeys>;
 
-export function TooltipContent({
-  children,
-  className,
-  side = 'bottom',
-  sideOffset = 0,
-  align = 'center',
-  alignOffset = 0,
-  avoidCollisions = true,
-  collisionTolerance = 0,
-  offset,
-}: TooltipContentProps) {
+export type TooltipContentProps = PropsWithChildren<
+  {
+    className?: string;
+    offset?: number;
+  } & TooltipContentPickProps
+>;
+
+export function TooltipContent({ children, className, offset, ...TooltipPropsKeys }: TooltipContentProps) {
   return (
-    <TooltipPrimitive.Content
-      className={classNames('gkit-tooltip', className)}
-      {...{ side, sideOffset, align, alignOffset, avoidCollisions, collisionTolerance }}
-    >
+    <TooltipPrimitive.Content className={classNames('gkit-tooltip', className)} {...TooltipPropsKeys}>
       {children}
-      <ArrowIcon {...{ offset }} />
+      <TooltipArrow {...{ offset }} />
     </TooltipPrimitive.Content>
   );
 }
 
-type ArrowIconProps = {
-  width?: number;
-  height?: number;
-  offset?: number;
-};
+type TooltipArrowPropsKeys = 'width' | 'height' | 'offset';
+type TooltipArrowProps = Pick<TooltipPrimitive.TooltipArrowProps, TooltipArrowPropsKeys>;
 
-export function ArrowIcon({ width = 16, height = 7, offset = 6 }: ArrowIconProps) {
+function TooltipArrow({ width = 16, height = 7, offset = 6 }: TooltipArrowProps) {
   return <TooltipPrimitive.Arrow className="tooltip-arrow" {...{ width, height, offset }} />;
 }
