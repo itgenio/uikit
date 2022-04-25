@@ -3,8 +3,10 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-type TooltipContainerPropsKeys = 'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange';
-type TooltipContainerPickProps = Pick<TooltipPrimitive.TooltipProps, TooltipContainerPropsKeys>;
+type TooltipContainerPickProps = Pick<
+  TooltipPrimitive.TooltipProps,
+  'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange'
+>;
 
 type TooltipContainerProps = PropsWithChildren<{ idQa?: string } & TooltipContainerPickProps>;
 
@@ -23,14 +25,10 @@ export function TooltipTrigger({ children, className, asChild }: TooltipTriggerP
   return <TooltipPrimitive.Trigger {...{ className, asChild }}>{children}</TooltipPrimitive.Trigger>;
 }
 
-type TooltipContentPropsKeys =
-  | 'side'
-  | 'align'
-  | 'sideOffset'
-  | 'alignOffset'
-  | 'avoidCollisions'
-  | 'collisionTolerance';
-type TooltipContentPickProps = Pick<TooltipPrimitive.TooltipContentProps, TooltipContentPropsKeys>;
+type TooltipContentPickProps = Pick<
+  TooltipPrimitive.TooltipContentProps,
+  'side' | 'align' | 'sideOffset' | 'alignOffset' | 'avoidCollisions' | 'collisionTolerance'
+>;
 
 export type TooltipContentProps = PropsWithChildren<{ className?: string; offset?: number } & TooltipContentPickProps>;
 
@@ -43,8 +41,7 @@ export function TooltipContent({ children, className, offset, ...props }: Toolti
   );
 }
 
-type TooltipArrowPropsKeys = 'width' | 'height' | 'offset';
-type TooltipArrowProps = Pick<TooltipPrimitive.TooltipArrowProps, TooltipArrowPropsKeys>;
+type TooltipArrowProps = Pick<TooltipPrimitive.TooltipArrowProps, 'width' | 'height' | 'offset'>;
 
 function TooltipArrow({ width = 16, height = 7, offset = 6 }: TooltipArrowProps) {
   return <TooltipPrimitive.Arrow className="tooltip-arrow" {...{ width, height, offset }} />;
