@@ -27,6 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       'classnames',
       'focus-trap-react',
       '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-toggle-group',
     ],
     outdir: path.resolve(__dirname, 'dist'),
     plugins: [lessLoader({})],

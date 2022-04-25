@@ -9,10 +9,12 @@ import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
 import { Dropdowns } from './components/dropDowns';
+import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
+import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
@@ -28,10 +30,12 @@ const components = [
   Dialogs,
   ModalPages,
   Dropdowns,
+  Switchers,
   Checkboxes,
   Accordions,
   RadioButtons,
   Toggles,
+  Icons,
 ];
 const DEFAULT = 0;
 
