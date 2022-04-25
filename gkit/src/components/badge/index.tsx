@@ -31,7 +31,11 @@ export function Badge({
   onClick,
 }: BadgeProps) {
   return (
-    <span id-qa={idQa} onClick={onClick} className={classNames('gkit-badge', className, size, color, type)}>
+    <span
+      id-qa={idQa}
+      onClick={onClick}
+      className={classNames('gkit-badge', className, size, color, type, { onClick })}
+    >
       {icon}
       {label}
       {onDelete && (
