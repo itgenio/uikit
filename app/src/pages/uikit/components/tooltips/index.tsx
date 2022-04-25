@@ -3,9 +3,9 @@ import React from 'react';
 import { TooltipContainer, TooltipTrigger, TooltipContent, TooltipContentProps } from '@itgenio/gkit';
 
 export function Tooltips() {
-  const renderState = (trigger: string, props: TooltipContentProps) => {
+  const renderState = (trigger: string, props: TooltipContentProps, index: number) => {
     return (
-      <TooltipContainer>
+      <TooltipContainer key={`${index}`}>
         <TooltipTrigger>{trigger}</TooltipTrigger>
         <TooltipContent {...props}>
           <div className="title">Заголовок тултипа</div>
@@ -32,7 +32,7 @@ export function Tooltips() {
 
   return (
     <div className="tooltips">
-      <div className="grid">{states.map(({ trigger, props = {} }) => renderState(trigger, props))}</div>
+      <div className="grid">{states.map(({ trigger, props = {} }, index) => renderState(trigger, props, index))}</div>
     </div>
   );
 }
