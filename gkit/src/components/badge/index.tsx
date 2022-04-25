@@ -8,7 +8,7 @@ type Colors = 'neutral' | 'green' | 'blue' | 'purple' | 'orange' | 'danger';
 type Type = 'secondary' | 'primary';
 
 export type BadgeProps = {
-  icon?: React.ReactElement<SVGSVGElement>;
+  icon?: React.ReactNode;
   size?: Sizes;
   color?: Colors;
   type?: Type;
@@ -35,12 +35,14 @@ export function Badge({
       {icon}
       {label}
       {onDelete && (
-        <CloseIcon
+        <button
           onClick={e => {
             e.stopPropagation();
             onDelete();
           }}
-        />
+        >
+          <CloseIcon />
+        </button>
       )}
     </span>
   );

@@ -7,10 +7,9 @@ export type SvgIconProps = React.PropsWithChildren<{
   viewBox?: string;
   alt?: string;
   fill?: string;
-  onClick?: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }>;
 
-export function SvgIcon({ children, className, viewBox, alt, fill, onClick }: SvgIconProps) {
+export function SvgIcon({ children, className, viewBox, alt, fill }: SvgIconProps) {
   return (
     <svg
       focusable={false}
@@ -20,7 +19,6 @@ export function SvgIcon({ children, className, viewBox, alt, fill, onClick }: Sv
       aria-hidden={alt ? undefined : true}
       role={alt ? 'img' : undefined}
       fill={fill}
-      onClick={onClick}
     >
       {alt != null && <title>{alt}</title>}
       {children}
