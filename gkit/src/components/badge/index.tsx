@@ -34,7 +34,7 @@ export function Badge({
     <span
       id-qa={idQa}
       onClick={onClick}
-      className={classNames('gkit-badge', className, size, color, type, { onClick })}
+      className={classNames('gkit-badge', className, size, color, type, { clickable: !!onClick })}
     >
       {icon}
       {label}
