@@ -1,58 +1,38 @@
 import './style.less';
 import React from 'react';
-import { PopoverRoot, PopoverTrigger, PopoverContent, TextField, Toggle, Button } from '@itgenio/gkit';
+import { Popover, PopoverProps, Button } from '@itgenio/gkit';
 
 export function Popovers() {
+  const content: React.ReactNode = (
+    <div>
+      <div className="popover-header">Заголовок</div>
+      <div className="popover-text">
+        Popover используется для позиционирования элементов, привязанных к координате или якорю.
+      </div>
+      <div className="popover-button-container">
+        <Button className="popover-button">Сохранить</Button>
+        <Button type="neutral">Пропустить</Button>
+      </div>
+    </div>
+  );
+
+  const renderState = (trigger: string, props: PopoverProps, index: number) => {
+    return (
+      <Popover key={`${index}`} {...props}>
+        {trigger}
+      </Popover>
+    );
+  };
+
+  const states: { trigger: string; props: PopoverProps }[] = [
+    { trigger: 'bottom end', props: { side: 'bottom', offset: 16, align: 'end', open: true, content: content } },
+    { trigger: 'left start', props: { side: 'left', align: 'start', open: true, content: content } },
+    { trigger: 'left center', props: { side: 'left', align: 'center', content: content } },
+    { trigger: 'bottom center', props: { side: 'bottom', offset: 16, align: 'center', content: content } },
+  ];
   return (
     <div className="popover">
-      <PopoverRoot onOpenChange={(open: boolean) => console.log(open)}>
-        <PopoverTrigger>
-          <Button className="trigger-button" type="neutral" size="small">
-            Click
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <TextField className="popover-textField" placeholder="Денис" label="Имя" />
-          <TextField placeholder="Смирнов" label="Фамилия" />
-          <div className="popover-button-container popover-container-button">
-            <Button className="popover-button">Сохранить</Button>
-            <Button type="neutral">Отменить</Button>
-          </div>
-        </PopoverContent>
-      </PopoverRoot>
-
-      <PopoverRoot open>
-        <PopoverTrigger>
-          <Button className="trigger-button" type="neutral" size="small">
-            Popover open
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <div className="popover-header">Заголовок</div>
-          <div className="popover-text">
-            Popover используется для позиционирования элементов, привязанных к координате или якорю.
-          </div>
-          <div className="popover-button-container">
-            <Button className="popover-button">Сохранить</Button>
-            <Button type="neutral">Пропустить</Button>
-          </div>
-        </PopoverContent>
-      </PopoverRoot>
-
-      <PopoverRoot open>
-        <PopoverTrigger />
-        <PopoverContent>
-          <div className="popover-header">Проверка связи</div>
-          <div className="popover-text">
-            Popover используется для позиционирования элементов, привязанных к координате или якорю.
-          </div>
-          <div className="popover-separator" />
-          <Toggle checked onChange={() => console.log('click on toggle')}>
-            Шумоподавление
-          </Toggle>
-          <div className="popover-text">Приглушает посторонние звуки, слышен только ваш голос</div>
-        </PopoverContent>
-      </PopoverRoot>
+      <div className="grid">{states.map(({ trigger, props }, index) => renderState(trigger, props, index))}</div>
     </div>
   );
 }

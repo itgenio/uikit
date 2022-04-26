@@ -13,15 +13,15 @@ export type CheckboxProps = PropsWithChildren<{
 
 export function Checkbox({ children, hover, disabled, checked, idQa, onChange, className }: CheckboxProps) {
   return (
-    <label className={classNames('gkit-checkbox', className)}>
+    <label className={classNames('gkit-checkbox', className)} id-qa={idQa}>
       <input
         type="checkbox"
-        id-qa={idQa}
         className={classNames({ hover })}
         disabled={disabled}
         checked={checked}
         onChange={onChange}
       />
+
       {children && <span className="checkbox-span">{children}</span>}
     </label>
   );
