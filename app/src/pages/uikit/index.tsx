@@ -18,6 +18,7 @@ import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
+import { Tooltips } from './components/tooltips';
 
 const components = [
   Colors,
@@ -34,6 +35,7 @@ const components = [
   Accordions,
   RadioButtons,
   Toggles,
+  Tooltips,
   Badges,
   Icons,
 ];
