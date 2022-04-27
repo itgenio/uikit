@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
+import { Badges } from './components/badges';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
@@ -14,6 +15,7 @@ import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
 import { Selects } from './components/selects';
+import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
@@ -30,11 +32,13 @@ const components = [
   Dialogs,
   ModalPages,
   TextAreas,
+  Switchers,
   Checkboxes,
   Accordions,
   RadioButtons,
   Toggles,
   Selects,
+  Badges,
   Icons,
 ];
 const DEFAULT = 0;

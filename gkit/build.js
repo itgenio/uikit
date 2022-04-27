@@ -21,7 +21,14 @@ const isProduction = process.env.NODE_ENV === 'production';
     bundle: true,
     format: 'esm',
     splitting: true,
-    external: ['react', 'react-dom', 'classnames', 'focus-trap-react', 'use-onclickoutside'],
+    external: [
+      'react',
+      'react-dom',
+      'classnames',
+      'focus-trap-react',
+      'use-onclickoutside',
+      '@radix-ui/react-toggle-group',
+    ],
     outdir: path.resolve(__dirname, 'dist'),
     plugins: [lessLoader({})],
     loader: {
