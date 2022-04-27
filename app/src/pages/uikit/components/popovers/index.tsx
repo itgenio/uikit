@@ -3,7 +3,7 @@ import React from 'react';
 import { Popover, PopoverProps, Button } from '@itgenio/gkit';
 
 export function Popovers() {
-  const content: React.ReactNode = (
+  const content = (
     <div>
       <div className="popover-header">Заголовок</div>
       <div className="popover-text">
@@ -18,17 +18,17 @@ export function Popovers() {
 
   const renderState = (trigger: string, props: PopoverProps, index: number) => {
     return (
-      <Popover key={`${index}`} {...props}>
+      <Popover key={`${index}`} idQa="id-qa popover" {...props}>
         {trigger}
       </Popover>
     );
   };
 
   const states: { trigger: string; props: PopoverProps }[] = [
-    { trigger: 'bottom end', props: { side: 'bottom', offset: 16, align: 'end', open: true, content: content } },
-    { trigger: 'left start', props: { side: 'left', align: 'start', open: true, content: content } },
-    { trigger: 'left center', props: { side: 'left', align: 'center', content: content } },
-    { trigger: 'bottom center', props: { side: 'bottom', offset: 16, align: 'center', content: content } },
+    { trigger: 'bottom end', props: { side: 'bottom', offset: 16, align: 'end', open: true, content } },
+    { trigger: 'left start', props: { side: 'left', align: 'start', open: true, content } },
+    { trigger: 'left center', props: { side: 'left', align: 'center', content } },
+    { trigger: 'bottom center', props: { side: 'bottom', offset: 16, align: 'center', content } },
   ];
   return (
     <div className="popover">

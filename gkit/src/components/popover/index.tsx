@@ -4,31 +4,42 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { CloseIcon } from '../icons/close';
 
-type PopoverPickProps = Pick<PopoverPrimitive.PopoverProps, 'defaultOpen' | 'open' | 'onOpenChange' | 'modal'> &
-  Pick<PopoverPrimitive.PopoverTriggerProps, 'asChild'> &
-  Pick<
-    PopoverPrimitive.PopoverContentProps,
-    | 'allowPinchZoom'
-    | 'onOpenAutoFocus'
-    | 'onCloseAutoFocus'
-    | 'onEscapeKeyDown'
-    | 'onPointerDownOutside'
-    | 'onFocusOutside'
-    | 'onInteractOutside'
-    | 'portalled'
-    | 'forceMount'
-    | 'side'
-    | 'sideOffset'
-    | 'align'
-    | 'alignOffset'
-    | 'avoidCollisions'
-    | 'collisionTolerance'
-  > &
-  Pick<PopoverPrimitive.PopoverArrowProps, 'width' | 'height' | 'offset'>;
+type RootProps = Pick<PopoverPrimitive.PopoverProps, 'defaultOpen' | 'open' | 'onOpenChange' | 'modal'>;
 
-export type PopoverProps = PropsWithChildren<
-  { idQa?: string; className?: string; content: React.ReactNode } & PopoverPickProps
+type TriggerProps = Pick<PopoverPrimitive.PopoverTriggerProps, 'asChild'>;
+
+type ContentProps = Pick<
+  PopoverPrimitive.PopoverContentProps,
+  | 'onOpenAutoFocus'
+  | 'onCloseAutoFocus'
+  | 'onEscapeKeyDown'
+  | 'onPointerDownOutside'
+  | 'onFocusOutside'
+  | 'onInteractOutside'
+  | 'portalled'
+  | 'forceMount'
+  | 'side'
+  | 'sideOffset'
+  | 'align'
+  | 'alignOffset'
+  | 'avoidCollisions'
+  | 'collisionTolerance'
 >;
+
+type ArrowProps = Pick<PopoverPrimitive.PopoverArrowProps, 'width' | 'height' | 'offset'>;
+
+export type PopoverProps = RootProps &
+  TriggerProps &
+  ContentProps &
+  ArrowProps &
+  PropsWithChildren<{
+    idQa?: string;
+    className?: string;
+    content: React.ReactNode;
+    widthArrow?: number;
+    heightArrow?: number;
+    offsetArrow?: number;
+  }>;
 
 export function Popover({
   children,
@@ -40,7 +51,6 @@ export function Popover({
   onOpenChange,
   modal,
   asChild,
-  allowPinchZoom,
   onOpenAutoFocus,
   onCloseAutoFocus,
   onEscapeKeyDown,
@@ -55,18 +65,18 @@ export function Popover({
   alignOffset,
   avoidCollisions,
   collisionTolerance,
-  width = 16,
-  height = 7,
-  offset = 24,
+  widthArrow = 16,
+  heightArrow = 7,
+  offsetArrow = 24,
 }: PopoverProps) {
   return (
-    <PopoverPrimitive.Root id-qa={idQa} {...{ defaultOpen, open, onOpenChange, modal }}>
+    <PopoverPrimitive.Root {...{ defaultOpen, open, onOpenChange, modal }}>
       <PopoverPrimitive.Trigger asChild={asChild}>{children}</PopoverPrimitive.Trigger>
       {content && (
         <PopoverPrimitive.Content
+          id-qa={idQa}
           className={classNames('gkit-popover-content', className)}
           {...{
-            allowPinchZoom,
             onOpenAutoFocus,
             onCloseAutoFocus,
             onEscapeKeyDown,
@@ -84,7 +94,12 @@ export function Popover({
           }}
         >
           {content}
-          <PopoverPrimitive.Arrow className="popover-arrow" {...{ width, height, offset }} />
+          <PopoverPrimitive.Arrow
+            className="popover-arrow"
+            width={widthArrow}
+            height={heightArrow}
+            offset={offsetArrow}
+          />
           <PopoverPrimitive.Close className="popover-close">
             <CloseIcon />
           </PopoverPrimitive.Close>
