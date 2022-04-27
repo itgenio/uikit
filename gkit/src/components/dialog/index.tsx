@@ -5,13 +5,14 @@ import React, { PropsWithChildren } from 'react';
 import { CloseIcon } from '../icons/close';
 
 type DialogProps = PropsWithChildren<{
+  idQa?: string;
   className?: string;
   asBlock?: boolean;
   onClose?: () => void;
   open?: boolean;
 }>;
 
-export function Dialog({ className, asBlock, children, onClose, open }: DialogProps) {
+export function Dialog({ idQa, className, asBlock, children, onClose, open }: DialogProps) {
   const render = () => (
     <div className="dialog-content" onClick={e => e.stopPropagation()}>
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
@@ -23,7 +24,7 @@ export function Dialog({ className, asBlock, children, onClose, open }: DialogPr
   );
 
   return open === false ? null : (
-    <div className="gkit-dialog">
+    <div id-qa={idQa} className="gkit-dialog">
       {asBlock ? (
         render()
       ) : (
