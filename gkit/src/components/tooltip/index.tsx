@@ -26,9 +26,6 @@ export type TooltipProps = RootProps &
     idQa?: string;
     className?: string;
     content: React.ReactNode;
-    arrowWidth?: number;
-    arrowHeight?: number;
-    arrowOffset?: number;
   }>;
 
 export function Tooltip({
