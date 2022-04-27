@@ -47,13 +47,7 @@ export function Switchers() {
       <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
       <div className="switcher-group">
         {sizes.map(size => (
-          <SwitcherContainer
-            key={size}
-            idQa="id-qa switcher"
-            type="single"
-            defaultValue="left"
-            onValueChange={e => console.log(e)}
-          >
+          <SwitcherContainer key={size} type="single" defaultValue="left" onValueChange={e => console.log(e)}>
             <SwitcherItem size={size} value="left">
               Toggle Item
             </SwitcherItem>

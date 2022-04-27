@@ -7,7 +7,7 @@ export function Accordions() {
   const renderState = (titleProps: AccordionTitleProps, index: number) => {
     return (
       <Fragment key={index}>
-        <AccordionDetails idQa="id-qa accordion">
+        <AccordionDetails>
           <AccordionSummary>
             <CheckIcon />
             <AccordionTitle icon {...titleProps}>

@@ -12,7 +12,11 @@ type ContentProps = Pick<
   'side' | 'align' | 'sideOffset' | 'alignOffset' | 'avoidCollisions' | 'collisionTolerance'
 >;
 
-type ArrowProps = Pick<TooltipPrimitive.TooltipArrowProps, 'width' | 'height' | 'offset'>;
+type ArrowProps = {
+  arrowWidth?: TooltipPrimitive.TooltipArrowProps['width'];
+  arrowHeight?: TooltipPrimitive.TooltipArrowProps['height'];
+  arrowOffset?: TooltipPrimitive.TooltipArrowProps['offset'];
+};
 
 export type TooltipProps = RootProps &
   TriggerProps &
@@ -22,9 +26,9 @@ export type TooltipProps = RootProps &
     idQa?: string;
     className?: string;
     content: React.ReactNode;
-    widthArrow?: number;
-    heightArrow?: number;
-    offsetArrow?: number;
+    arrowWidth?: number;
+    arrowHeight?: number;
+    arrowOffset?: number;
   }>;
 
 export function Tooltip({
@@ -43,9 +47,9 @@ export function Tooltip({
   alignOffset,
   avoidCollisions,
   collisionTolerance,
-  widthArrow = 16,
-  heightArrow = 7,
-  offsetArrow = 6,
+  arrowWidth = 16,
+  arrowHeight = 7,
+  arrowOffset = 6,
 }: TooltipProps) {
   return (
     <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
@@ -58,9 +62,9 @@ export function Tooltip({
         {content}
         <TooltipPrimitive.Arrow
           className="tooltip-arrow"
-          width={widthArrow}
-          height={heightArrow}
-          offset={offsetArrow}
+          width={arrowWidth}
+          height={arrowHeight}
+          offset={arrowOffset}
         />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Root>
