@@ -26,7 +26,11 @@ type ContentProps = Pick<
   | 'collisionTolerance'
 >;
 
-type ArrowProps = Pick<PopoverPrimitive.PopoverArrowProps, 'width' | 'height' | 'offset'>;
+type ArrowProps = {
+  arrowWidth?: PopoverPrimitive.PopoverArrowProps['width'];
+  arrowHeight?: PopoverPrimitive.PopoverArrowProps['height'];
+  arrowOffset?: PopoverPrimitive.PopoverArrowProps['offset'];
+};
 
 export type PopoverProps = RootProps &
   TriggerProps &
@@ -36,9 +40,6 @@ export type PopoverProps = RootProps &
     idQa?: string;
     className?: string;
     content: React.ReactNode;
-    widthArrow?: number;
-    heightArrow?: number;
-    offsetArrow?: number;
   }>;
 
 export function Popover({
@@ -65,46 +66,44 @@ export function Popover({
   alignOffset,
   avoidCollisions,
   collisionTolerance,
-  widthArrow = 16,
-  heightArrow = 7,
-  offsetArrow = 24,
+  arrowWidth = 16,
+  arrowHeight = 7,
+  arrowOffset = 24,
 }: PopoverProps) {
   return (
     <PopoverPrimitive.Root {...{ defaultOpen, open, onOpenChange, modal }}>
       <PopoverPrimitive.Trigger asChild={asChild}>{children}</PopoverPrimitive.Trigger>
-      {content && (
-        <PopoverPrimitive.Content
-          id-qa={idQa}
-          className={classNames('gkit-popover-content', className)}
-          {...{
-            onOpenAutoFocus,
-            onCloseAutoFocus,
-            onEscapeKeyDown,
-            onPointerDownOutside,
-            onFocusOutside,
-            onInteractOutside,
-            portalled,
-            forceMount,
-            side,
-            sideOffset,
-            align,
-            alignOffset,
-            avoidCollisions,
-            collisionTolerance,
-          }}
-        >
-          {content}
-          <PopoverPrimitive.Arrow
-            className="popover-arrow"
-            width={widthArrow}
-            height={heightArrow}
-            offset={offsetArrow}
-          />
-          <PopoverPrimitive.Close className="popover-close">
-            <CloseIcon />
-          </PopoverPrimitive.Close>
-        </PopoverPrimitive.Content>
-      )}
+      <PopoverPrimitive.Content
+        id-qa={idQa}
+        className={classNames('gkit-popover-content', className)}
+        {...{
+          onOpenAutoFocus,
+          onCloseAutoFocus,
+          onEscapeKeyDown,
+          onPointerDownOutside,
+          onFocusOutside,
+          onInteractOutside,
+          portalled,
+          forceMount,
+          side,
+          sideOffset,
+          align,
+          alignOffset,
+          avoidCollisions,
+          collisionTolerance,
+        }}
+      >
+        {content}
+        <PopoverPrimitive.Arrow
+          className="popover-arrow"
+          width={arrowWidth}
+          height={arrowHeight}
+          offset={arrowOffset}
+        />
+        <PopoverPrimitive.Close className="popover-close-btn">
+          <CloseIcon />
+        </PopoverPrimitive.Close>
+      </PopoverPrimitive.Content>
     </PopoverPrimitive.Root>
   );
 }

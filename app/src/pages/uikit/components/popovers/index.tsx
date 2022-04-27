@@ -25,10 +25,10 @@ export function Popovers() {
   };
 
   const states: { trigger: string; props: PopoverProps }[] = [
-    { trigger: 'bottom end', props: { side: 'bottom', offset: 16, align: 'end', open: true, content } },
+    { trigger: 'bottom end', props: { side: 'bottom', arrowOffset: 16, align: 'end', open: true, content } },
     { trigger: 'left start', props: { side: 'left', align: 'start', open: true, content } },
     { trigger: 'left center', props: { side: 'left', align: 'center', content } },
-    { trigger: 'bottom center', props: { side: 'bottom', offset: 16, align: 'center', content } },
+    { trigger: 'bottom center', props: { side: 'bottom', arrowOffset: 16, align: 'center', content } },
   ];
   return (
     <div className="popover">
