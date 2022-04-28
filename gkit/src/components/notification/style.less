@@ -1,0 +1,94 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-notification-container {
+  padding: 1rem 0;
+  width: 27.5rem;
+  cursor: pointer;
+
+  .circle-notification-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &.error {
+    .circle-notification-icon {
+      color: var(--gkit-color-danger-500);
+    }
+  }
+
+  &.warning {
+    .circle-notification-icon {
+      color: var(--gkit-color-orange-500);
+    }
+  }
+
+  &.success {
+    .circle-notification-icon {
+      color: var(--gkit-color-light-green-500);
+    }
+  }
+
+  &.info {
+    .circle-notification-icon {
+      color: var(--gkit-color-light-blue-500);
+    }
+  }
+
+  &.inline {
+    border-radius: 8px;
+    border: 0;
+
+    &.error {
+      background-color: var(--gkit-color-danger-50);
+    }
+
+    &.warning {
+      background-color: var(--gkit-color-orange-50);
+    }
+
+    &.success {
+      background-color: var(--gkit-color-green-50);
+    }
+
+    &.info {
+      background-color: var(--gkit-color-blue-50);
+    }
+  }
+
+  &.toast {
+    background: var(--gkit-color-neutral-0);
+    border: 1px solid var(--gkit-color-neutral-200);
+    border-radius: 5px 8px 8px 5px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+
+    &.error {
+      border-left: 4px solid var(--gkit-color-danger-500);
+    }
+
+    &.warning {
+      border-left: 4px solid var(--gkit-color-orange-500);
+    }
+
+    &.success {
+      border-left: 4px solid var(--gkit-color-light-green-500);
+    }
+
+    &.info {
+      border-left: 4px solid var(--gkit-color-light-blue-500);
+    }
+  }
+
+  .notification-title {
+    display: flex;
+    align-items: center;
+    margin: 0 1.25rem 0 1.375rem;
+
+    .close-icon {
+      width: 0.78rem;
+      height: 0.78rem;
+      cursor: pointer;
+      color: var(--gkit-color-neutral-500);
+    }
+  }
+}

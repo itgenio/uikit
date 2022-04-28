@@ -12,6 +12,7 @@ import { Dialogs } from './components/dialogs';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
+import { Notifications } from './components/notifications';
 import { Panels } from './components/panels';
 import { RadioButtons } from './components/radioButtons';
 import { Switchers } from './components/switchers';
@@ -30,6 +31,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Notifications,
   Switchers,
   Checkboxes,
   Accordions,
