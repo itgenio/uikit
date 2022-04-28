@@ -37,7 +37,7 @@ export function Switchers() {
   };
 
   const states: { state: string; props?: SwitcherItemProps }[] = [
-    { state: 'Normal' },
+    { state: 'Normal', props: { idQaForItem: 'id-qa item' } },
     { state: 'Hover', props: { hover: true } },
     { state: 'Active', props: { active: true } },
   ];
@@ -47,7 +47,13 @@ export function Switchers() {
       <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
       <div className="switcher-group">
         {sizes.map(size => (
-          <SwitcherContainer key={size} type="single" defaultValue="left" onValueChange={e => console.log(e)}>
+          <SwitcherContainer
+            key={size}
+            type="single"
+            defaultValue="left"
+            idQa="id-qa switcher"
+            onValueChange={e => console.log(e)}
+          >
             <SwitcherItem size={size} value="left">
               Toggle Item
             </SwitcherItem>
