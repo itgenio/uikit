@@ -20,6 +20,7 @@ import { TabsExample } from './components/tabs';
 import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
+import { Tooltips } from './components/tooltips';
 
 const components = [
   Colors,
@@ -38,6 +39,7 @@ const components = [
   RadioButtons,
   Toggles,
   Selects,
+  Tooltips,
   Badges,
   Icons,
 ];

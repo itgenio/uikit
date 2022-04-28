@@ -9,11 +9,12 @@ type DialogProps = PropsWithChildren<{
   asBlock?: boolean;
   onClose?: () => void;
   open?: boolean;
+  idQa?: string;
 }>;
 
-export function Dialog({ className, asBlock, children, onClose, open }: DialogProps) {
+export function Dialog({ className, asBlock, children, onClose, open, idQa }: DialogProps) {
   const render = () => (
-    <div className="dialog-content" onClick={e => e.stopPropagation()}>
+    <div className="dialog-content" onClick={e => e.stopPropagation()} id-qa={idQa}>
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
         <CloseIcon />
       </button>
@@ -43,24 +44,52 @@ export function Dialog({ className, asBlock, children, onClose, open }: DialogPr
   );
 }
 
-type DialogTitleProps = PropsWithChildren<{ title?: string }>;
+type DialogTitleProps = PropsWithChildren<{ className?: string; title?: string; idQa?: string }>;
 
-export function DialogTitle({ title, children }: DialogTitleProps) {
-  return <h3 className="dialog-title">{title ?? children}</h3>;
+export function DialogTitle({ className, title, idQa, children }: DialogTitleProps) {
+  return (
+    <h3 className={classNames('dialog-title', className)} id-qa={idQa}>
+      {title ?? children}
+    </h3>
+  );
 }
 
-export function DialogText(props: PropsWithChildren<{}>) {
-  return <p className="dialog-text">{props.children}</p>;
+type DialogTextProps = PropsWithChildren<{ className?: string; idQa?: string }>;
+
+export function DialogText({ className, idQa, children }: DialogTextProps) {
+  return (
+    <p className={classNames('dialog-text', className)} id-qa={idQa}>
+      {children}
+    </p>
+  );
 }
 
-export function DialogHeader(props: PropsWithChildren<{}>) {
-  return <div className="dialog-header">{props.children}</div>;
+type DialogHeaderProps = PropsWithChildren<{ className?: string; idQa?: string }>;
+
+export function DialogHeader({ className, idQa, children }: DialogHeaderProps) {
+  return (
+    <div className={classNames('dialog-header', className)} id-qa={idQa}>
+      {children}
+    </div>
+  );
 }
 
-export function DialogBody(props: PropsWithChildren<{}>) {
-  return <div className="dialog-body">{props.children}</div>;
+type DialogBodyProps = PropsWithChildren<{ className?: string; idQa?: string }>;
+
+export function DialogBody({ className, idQa, children }: DialogBodyProps) {
+  return (
+    <div className={classNames('dialog-body', className)} id-qa={idQa}>
+      {children}
+    </div>
+  );
 }
 
-export function DialogFooter(props: PropsWithChildren<{}>) {
-  return <div className="dialog-footer">{props.children}</div>;
+type DialogFooterProps = PropsWithChildren<{ className?: string; idQa?: string }>;
+
+export function DialogFooter({ className, idQa, children }: DialogFooterProps) {
+  return (
+    <div className={classNames('dialog-footer', className)} id-qa={idQa}>
+      {children}
+    </div>
+  );
 }
