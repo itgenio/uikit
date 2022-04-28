@@ -31,24 +31,12 @@ export type SwitcherItemProps = PropsWithChildren<{
   hover?: boolean;
   active?: boolean;
   className?: string;
-  idQaForItem?: string;
+  idQa?: string;
 }>;
 
-export function SwitcherItem({
-  children,
-  idQaForItem,
-  value,
-  size = 'medium',
-  hover,
-  active,
-  className,
-}: SwitcherItemProps) {
+export function SwitcherItem({ children, idQa, value, size = 'medium', hover, active, className }: SwitcherItemProps) {
   return (
-    <ToggleItem
-      id-qa={idQaForItem}
-      className={classNames('switcher-item', className, size, { hover, active })}
-      value={value}
-    >
+    <ToggleItem id-qa={idQa} className={classNames('switcher-item', className, size, { hover, active })} value={value}>
       {children && <span className="switcher-span">{children}</span>}
     </ToggleItem>
   );
