@@ -7,14 +7,14 @@ export function Accordions() {
   const renderState = (titleProps: AccordionTitleProps, index: number) => {
     return (
       <Fragment key={index}>
-        <AccordionDetails>
-          <AccordionSummary>
+        <AccordionDetails idQa="id-qa accordion">
+          <AccordionSummary idQa="id-qa summary">
             <CheckIcon />
-            <AccordionTitle icon {...titleProps}>
+            <AccordionTitle idQa="id-qa title" icon {...titleProps}>
               1. Знакомство с HTML
             </AccordionTitle>
           </AccordionSummary>
-          <AccordionText>
+          <AccordionText idQa="id-qa text">
             Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени
             обусловливает важность переосмысления внешнеэкономических политик.
           </AccordionText>
