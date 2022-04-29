@@ -26,6 +26,7 @@ export function TextFields() {
     ['Disabled', { disabled: true, placeholder: 'Placeholder', label: 'Label' }],
     ['Disabled with text', { disabled: true, placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
     ['Datalist', { placeholder: 'Placeholder', label: 'Label', dataList: ['Hello', 'World', 'Gavana'] }],
+    ['ShowPassword', { placeholder: 'Введите пароль', label: 'Пароль', inputType: 'password' }],
   ] as const;
 
   return (

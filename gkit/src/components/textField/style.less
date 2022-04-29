@@ -6,6 +6,10 @@
   flex-direction: column;
   gap: 0.5rem;
 
+  &.full-width {
+    display: flex;
+  }
+
   label {
     .text-base();
     .font-bold();
@@ -15,7 +19,43 @@
     .text-sm();
   }
 
-  input {
+  .textField-password-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--gkit-color-neutral-200);
+
+    .textField-password {
+      all: unset;
+      width: 100%;
+      padding: 0.75rem 0 0.75rem 1rem;
+      cursor: text;
+      border-radius: 0.75rem;
+      .text-base();
+      .font-bold();
+
+      &::placeholder {
+        .text-base();
+        font-weight: @font-weight-normal;
+      }
+    }
+
+    .icon-wrapper {
+      display: flex;
+      gap: 0.5rem;
+
+      .eye-icon,
+      .dismissCircle-icon {
+        color: var(--gkit-color-neutral-500);
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .textField-text {
     cursor: text;
     display: inline-flex;
     justify-content: center;
@@ -24,10 +64,6 @@
     .text-base();
     border-radius: 0.75rem;
     padding: 0.75rem 1rem;
-
-    &.full-width {
-      display: flex;
-    }
 
     &.focus,
     &:focus {
@@ -56,7 +92,7 @@
     color: var(--gkit-color-neutral-500);
   }
 
-  input {
+  .textField-text {
     border-color: var(--gkit-color-neutral-200);
     background-color: var(--gkit-color-neutral-50);
     color: var(--gkit-color-neutral-900);
@@ -76,7 +112,34 @@
       color: var(--gkit-color-neutral-300);
 
       &::placeholder {
-        color: var(--gkit-color-neutral-200); //TODO
+        color: var(--gkit-color-neutral-200);
+      }
+    }
+  }
+
+  .textField-password-wrapper {
+    &.focus,
+    &:focus {
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-primary-700();
+    }
+
+    &.hover,
+    &:hover {
+      border-color: var(--gkit-color-primary-500);
+    }
+
+    &.disabled {
+      border-color: var(--gkit-color-neutral-100);
+      background-color: var(--gkit-color-neutral-100);
+      color: var(--gkit-color-neutral-300);
+
+      .textField-password {
+        &::placeholder {
+          color: var(--gkit-color-neutral-300);
+        }
       }
     }
   }
