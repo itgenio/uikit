@@ -13,6 +13,7 @@ import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
+import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
 import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
@@ -30,6 +31,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Popovers,
   Switchers,
   Checkboxes,
   Accordions,

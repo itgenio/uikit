@@ -27,6 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       'classnames',
       'focus-trap-react',
       '@radix-ui/react-toggle-group',
+      '@radix-ui/react-popover',
       '@radix-ui/react-tooltip',
     ],
     outdir: path.resolve(__dirname, 'dist'),
