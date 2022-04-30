@@ -4,29 +4,14 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { CheckMarkIcon } from '../icons';
 
-type DropdownContainerPickProps = Pick<
+type ContainerProps = Pick<
   DropdownMenuPrimitive.DropdownMenuProps,
   'dir' | 'open' | 'onOpenChange' | 'defaultOpen' | 'modal'
 >;
 
-type DropdownContainerProps = PropsWithChildren<{ idQa?: string } & DropdownContainerPickProps>;
+type TriggerProps = Pick<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'asChild'>;
 
-export const DropdownContainer = ({ children, idQa, ...props }: DropdownContainerProps) => {
-  return (
-    <DropdownMenuPrimitive.Root id-qa={idQa} {...props}>
-      {children}
-    </DropdownMenuPrimitive.Root>
-  );
-};
-
-type DropdownTriggerPickProps = Pick<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'asChild'>;
-type DropdownTriggerProps = PropsWithChildren<{ className?: string; asChild?: boolean } & DropdownTriggerPickProps>;
-
-export const DropdownTrigger = ({ children, className, asChild }: DropdownTriggerProps) => {
-  return <DropdownMenuPrimitive.Trigger {...{ className, asChild }}>{children}</DropdownMenuPrimitive.Trigger>;
-};
-
-type DropdownContentPickProps = Pick<
+type ContentProps = Pick<
   DropdownMenuPrimitive.DropdownMenuContentProps,
   | 'asChild'
   | 'allowPinchZoom'
@@ -46,28 +31,79 @@ type DropdownContentPickProps = Pick<
   | 'avoidCollisions'
 >;
 
-type DropdownContentProps = PropsWithChildren<{ className?: string } & DropdownContentPickProps>;
+type DropdownProps = ContainerProps &
+  TriggerProps &
+  ContentProps &
+  PropsWithChildren<{ idQa?: string; className?: string; content: React.ReactNode }>;
 
-export const DropdownContent = ({ children, className, ...props }: DropdownContentProps) => {
+export const Dropdown = ({
+  children,
+  className,
+  idQa,
+  asChild,
+  content,
+  dir,
+  open,
+  onOpenChange,
+  defaultOpen,
+  modal,
+  allowPinchZoom,
+  loop,
+  onCloseAutoFocus,
+  onEscapeKeyDown,
+  onPointerDownOutside,
+  onFocusOutside,
+  onInteractOutside,
+  portalled,
+  forceMount,
+  collisionTolerance,
+  side,
+  sideOffset,
+  align,
+  alignOffset,
+  avoidCollisions,
+}: DropdownProps) => {
   return (
-    <DropdownMenuPrimitive.Content className={classNames('gkit-dropdown-content', className)} {...props}>
-      {children}
-    </DropdownMenuPrimitive.Content>
+    <DropdownMenuPrimitive.Root id-qa={idQa} {...{ dir, open, onOpenChange, defaultOpen, modal }}>
+      <DropdownMenuPrimitive.Trigger {...{ className, asChild }}>{children}</DropdownMenuPrimitive.Trigger>
+      <DropdownMenuPrimitive.Content
+        className={classNames('gkit-dropdown-content', className)}
+        {...{
+          allowPinchZoom,
+          loop,
+          onCloseAutoFocus,
+          onEscapeKeyDown,
+          onPointerDownOutside,
+          onFocusOutside,
+          onInteractOutside,
+          portalled,
+          forceMount,
+          collisionTolerance,
+          side,
+          sideOffset,
+          align,
+          alignOffset,
+          avoidCollisions,
+        }}
+      >
+        {content}
+      </DropdownMenuPrimitive.Content>
+    </DropdownMenuPrimitive.Root>
   );
 };
 
-type DropdownItemPickProps = Pick<
+type ItemPickProps = Pick<
   DropdownMenuPrimitive.DropdownMenuCheckboxItemProps,
   'asChild' | 'checked' | 'onCheckedChange' | 'disabled' | 'onSelect' | 'textValue'
 >;
 
-type DropdownCheckboxItemProps = PropsWithChildren<{ className?: string } & DropdownItemPickProps>;
+type ItemProps = ItemPickProps & PropsWithChildren<{ className?: string }>;
 
-export const DropdownCheckboxItem = ({ children, className, ...props }: DropdownCheckboxItemProps) => {
+export const DropdownItem = ({ children, className, ...props }: ItemProps) => {
   return (
     <div className="dropdown-container-checkbox-item">
       <DropdownMenuPrimitive.CheckboxItem className={classNames('dropdown-checkbox-item', className)} {...props}>
-        {children && <span className="dropdown-text">{children}</span>}
+        {children}
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckMarkIcon />
         </DropdownMenuPrimitive.ItemIndicator>

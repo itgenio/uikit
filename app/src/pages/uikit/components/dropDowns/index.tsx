@@ -1,33 +1,37 @@
 import './style.less';
 import React from 'react';
-import { DropdownContainer, DropdownTrigger, DropdownContent, DropdownCheckboxItem, Button } from '@itgenio/gkit';
+import { Dropdown, DropdownItem, Button } from '@itgenio/gkit';
 
 export function Dropdowns() {
-  const [checked, setChecked] = React.useState(false);
+  const [checked1, setChecked1] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(false);
+  const [checked3, setChecked3] = React.useState(false);
+  const [checked4, setChecked4] = React.useState(false);
+
+  const content = (
+    <div>
+      <label className="dropdown-chapter">Раздел 1</label>
+      <DropdownItem checked={checked1} onCheckedChange={setChecked1}>
+        Option1
+      </DropdownItem>
+      <DropdownItem checked={checked2} onCheckedChange={setChecked2}>
+        Option2
+      </DropdownItem>
+      <DropdownItem checked={checked3} onCheckedChange={setChecked3}>
+        Option3
+      </DropdownItem>
+      <DropdownItem checked={checked4} onCheckedChange={setChecked4}>
+        Option4
+      </DropdownItem>
+    </div>
+  );
 
   return (
     <div className="dropdown">
       <div className="grid">
-        <DropdownContainer defaultOpen>
-          <DropdownTrigger>
-            <Button type="neutral">Dropdown Menu</Button>
-          </DropdownTrigger>
-          <DropdownContent>
-            <label className="dropdown-chapter">Раздел 1</label>
-            <DropdownCheckboxItem checked={checked} onCheckedChange={setChecked}>
-              Dropdown Option1
-            </DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option1</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option2</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option3</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option4</DropdownCheckboxItem>
-            <label className="dropdown-chapter">Раздел 2</label>
-            <DropdownCheckboxItem>Dropdown Option5</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option6</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option7</DropdownCheckboxItem>
-            <DropdownCheckboxItem>Dropdown Option8</DropdownCheckboxItem>
-          </DropdownContent>
-        </DropdownContainer>
+        <Dropdown defaultOpen content={content}>
+          <Button type="neutral">Dropdown Menu</Button>
+        </Dropdown>
       </div>
     </div>
   );
