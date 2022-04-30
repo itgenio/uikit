@@ -13,8 +13,8 @@ import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
 import { Panels } from './components/panels';
+import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
-import { Selects } from './components/selects';
 import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextAreas } from './components/textAreas';
@@ -33,12 +33,12 @@ const components = [
   Dialogs,
   ModalPages,
   TextAreas,
+  Popovers,
   Switchers,
   Checkboxes,
   Accordions,
   RadioButtons,
   Toggles,
-  Selects,
   Tooltips,
   Badges,
   Icons,

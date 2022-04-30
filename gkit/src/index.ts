@@ -6,6 +6,7 @@ export * from './components/dialog';
 export * from './components/link';
 export * from './components/modalPage';
 export * from './components/inputs';
+export * from './components/popover';
 export * from './components/switcher';
 export * from './components/checkbox';
 export * from './components/accordion';
