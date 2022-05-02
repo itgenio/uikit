@@ -19,7 +19,7 @@ type Props = React.PropsWithChildren<{
   size?: Sizes;
   fullWidth?: boolean;
   label?: string;
-  helperText?: string;
+  helperText?: React.ReactNode;
   inputType?: HTMLInputTypeAttribute;
   required?: boolean;
   idQa?: string;

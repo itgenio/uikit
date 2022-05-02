@@ -14,7 +14,7 @@ export type TextAreaProps = {
   cols?: number;
   name?: string;
   label?: string;
-  helperText?: string;
+  helperText?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
   required?: boolean;
