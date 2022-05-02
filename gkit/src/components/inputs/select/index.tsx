@@ -13,7 +13,7 @@ export type SelectOption = { label: string; value: Values };
 
 export type SelectProps = {
   label?: string;
-  helperText?: string;
+  helperText?: React.ReactNode;
   idQa?: string;
   onChange?: (value: Values) => void;
   placeholder?: string;

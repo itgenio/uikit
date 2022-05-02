@@ -9,7 +9,7 @@ type InputsContainerProps = PropsWithChildren<{
   id?: string;
   label?: string;
   size?: Sizes;
-  helperText?: string;
+  helperText?: React.ReactNode;
   className?: string;
 }>;
 
