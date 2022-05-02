@@ -17,6 +17,7 @@ import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
 import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
+import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
 import { Tooltips } from './components/tooltips';
@@ -31,6 +32,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  TextAreas,
   Popovers,
   Switchers,
   Checkboxes,

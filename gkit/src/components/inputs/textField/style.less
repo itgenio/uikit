@@ -1,0 +1,75 @@
+@import (reference) "../../../variables";
+@import (reference) "../../../ui";
+
+.gkit-text-field {
+  cursor: text;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+
+  &.full-width {
+    display: flex;
+  }
+
+  &.small {
+    .text-sm();
+    border-radius: 0.625rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  &.large {
+    .text-base();
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  &.focus,
+  &:focus {
+    .outline();
+    .outline-2();
+    .outline-offset-2();
+    .outline-primary-600();
+  }
+
+  &.error {
+    border: 1px solid var(--gkit-color-danger-500);
+
+    &:hover {
+      border: 1px solid var(--gkit-color-danger-500);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &::placeholder {
+    .text-base();
+  }
+}
+
+.gkit-text-field {
+  border-color: var(--gkit-color-neutral-200);
+  background-color: var(--gkit-color-neutral-0);
+  color: var(--gkit-color-neutral-900);
+
+  &::placeholder {
+    color: var(--gkit-color-neutral-500);
+  }
+
+  &.hover,
+  &:hover {
+    border-color: var(--gkit-color-primary-500);
+  }
+
+  &[disabled] {
+    border-color: var(--gkit-color-neutral-100);
+    background-color: var(--gkit-color-neutral-100);
+    color: var(--gkit-color-neutral-300);
+
+    &::placeholder {
+      color: var(--gkit-color-neutral-300);
+    }
+  }
+}

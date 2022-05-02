@@ -1,6 +1,10 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { HTMLInputTypeAttribute, useMemo } from 'react';
+import { generateId } from '../../utils/generateId';
+import { InputsContainer } from '../components/inputsContainer';
+
+type Sizes = 'small' | 'large';
 
 type Props = React.PropsWithChildren<{
   disabled?: boolean;
@@ -12,6 +16,7 @@ type Props = React.PropsWithChildren<{
   value?: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  size?: Sizes;
   fullWidth?: boolean;
   label?: string;
   helperText?: React.ReactNode;
@@ -28,10 +33,9 @@ type Props = React.PropsWithChildren<{
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }>;
 
-const generateId = () => String(Date.now() * Math.random());
-
 export function TextField({
   value,
+  size = 'large',
   fullWidth,
   placeholder,
   hover,
@@ -58,22 +62,11 @@ export function TextField({
   const id = useMemo(() => generateId(), []);
 
   return (
-    <div
-      id-qa={idQa}
-      className={classNames('gkit-text-field', className, {
-        hover,
-        active,
-        focus,
-        'full-width': fullWidth,
-        disabled,
-        error,
-      })}
-    >
-      {label && <label htmlFor={id}>{label}</label>}
+    <InputsContainer {...{ id, size, label, idQa, helperText, className }}>
       <input
         id-qa={idQaForInput}
         type={inputType}
-        className={classNames({ hover, active, focus })}
+        className={classNames('gkit-text-field', size, { 'full-width': fullWidth, hover, active, focus, error })}
         list={id + 'list'}
         {...{
           value,
@@ -90,11 +83,7 @@ export function TextField({
           autoComplete,
         }}
       />
-      {helperText && (
-        <span id-qa={idQaForInput ? `helper-text-${idQaForInput}` : 'helper-text'} className="helper-text">
-          {helperText}
-        </span>
-      )}
+
       {dataList && (
         <datalist id={id + 'list'}>
           {dataList.map(value => (
@@ -102,6 +91,6 @@ export function TextField({
           ))}
         </datalist>
       )}
-    </div>
+    </InputsContainer>
   );
 }
