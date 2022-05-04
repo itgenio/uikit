@@ -14,18 +14,30 @@ export function Badges() {
           <div key={`${color}${index}`} className="column">
             {sizes.map(size => {
               const p = { ...props, color, size };
-              return <Badge key={`${color}${size}`} {...p} />;
-            })}
-
-            {sizes.map(size => {
-              const p = { ...props, color, size };
-              return <Badge key={`${color}${size}`} {...p} iconStart={<StarIcon className="star-icon" />} />;
+              return (
+                <Badge key={`${color}${size}`} {...p}>
+                  Badge
+                </Badge>
+              );
             })}
 
             {sizes.map(size => {
               const p = { ...props, color, size };
               return (
-                <Badge key={`${color}${size}`} {...p} onClick={() => console.log('click')} iconEnd={<CloseIcon />} />
+                <Badge key={`${color}${size}`} {...p}>
+                  <StarIcon className="star-icon" />
+                  Badge
+                </Badge>
+              );
+            })}
+
+            {sizes.map(size => {
+              const p = { ...props, color, size };
+              return (
+                <Badge key={`${color}${size}`} {...p} onClick={() => console.log('click')}>
+                  Badge
+                  <CloseIcon />
+                </Badge>
               );
             })}
           </div>
@@ -35,8 +47,8 @@ export function Badges() {
   };
 
   const states: { state: string; props?: BadgeProps }[] = [
-    { state: 'Secondary', props: { type: 'secondary', label: 'Badge' } },
-    { state: 'Primary', props: { type: 'primary', label: 'Badge' } },
+    { state: 'Secondary', props: { type: 'secondary' } },
+    { state: 'Primary', props: { type: 'primary' } },
   ];
 
   return (
