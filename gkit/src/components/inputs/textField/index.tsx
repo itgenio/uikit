@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { HTMLInputTypeAttribute, useMemo } from 'react';
+import React, { HTMLInputTypeAttribute, useMemo, useState } from 'react';
 import { DismissCircleIcon } from '../../icons';
 import { EyeIcon, EyeOffIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
@@ -34,9 +34,7 @@ export type TextFieldProps = React.PropsWithChildren<{
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onClear?: () => void;
-  isPasswordHidden?: boolean;
-  isFocused?: boolean;
-  onShowPassword?: () => void;
+  defaultPasswordHidden?: boolean;
 }>;
 
 export function TextField({
@@ -65,27 +63,30 @@ export function TextField({
   onFocus,
   onBlur,
   onClear,
-  isPasswordHidden = true,
-  isFocused,
-  onShowPassword,
+  defaultPasswordHidden = true,
 }: TextFieldProps) {
+  const [isPasswordHidden, setPasswordHidden] = useState(defaultPasswordHidden);
+  const [isFocused, setFocused] = useState(false);
+
   const id = useMemo(() => generateId(), []);
 
   return (
-    <InputsContainer {...{ id, size, label, idQa, helperText, className }}>
+    <InputsContainer className={classNames('gkit-text-field', className)} {...{ id, size, label, idQa, helperText }}>
       <div
         id-qa={idQaForInput}
         className={classNames('text-field-wrapper', size, {
           hover,
-          focus: focus || isFocused || autoFocus,
+          focus: focus || isFocused,
           'full-width': fullWidth,
           active,
           error,
           disabled,
         })}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       >
         <input
-          type={inputType === 'password' && isPasswordHidden ? 'password' : 'text'}
+          type={inputType && inputType === 'password' && isPasswordHidden ? 'password' : 'text'}
           className={classNames('text-field', size)}
           list={id + 'list'}
           {...{
@@ -105,12 +106,19 @@ export function TextField({
         />
         <div className="icons-wrapper">
           {onClear && value && (
-            <button onClick={onClear}>
+            <button
+              onClick={() => {
+                onClear();
+                setPasswordHidden(!isPasswordHidden);
+              }}
+            >
               <DismissCircleIcon />
             </button>
           )}
           {inputType === 'password' && (
-            <button onClick={onShowPassword}>{isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}</button>
+            <button onClick={() => setPasswordHidden(!isPasswordHidden)}>
+              {isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}
+            </button>
           )}
         </div>
       </div>
