@@ -1,15 +1,14 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { HTMLInputTypeAttribute, useMemo, useRef, useState } from 'react';
-import useOnClickOutside from 'use-onclickoutside';
-import { DismissCircleIcon } from '../../icons/dismissCircle';
-import { EyeIcon, EyeOffIcon } from '../../icons/eye';
+import React, { HTMLInputTypeAttribute, useMemo } from 'react';
+import { DismissCircleIcon } from '../../icons';
+import { EyeIcon, EyeOffIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-type Props = React.PropsWithChildren<{
+export type TextFieldProps = React.PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   active?: boolean;
@@ -35,6 +34,9 @@ type Props = React.PropsWithChildren<{
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onClear?: () => void;
+  isPasswordHidden?: boolean;
+  isFocused?: boolean;
+  onShowPassword?: () => void;
 }>;
 
 export function TextField({
@@ -63,24 +65,19 @@ export function TextField({
   onFocus,
   onBlur,
   onClear,
-}: Props) {
-  const [showPassword, setShowPassword] = useState(false);
-  const [focusWrapper, setFocusWrapper] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(ref, () => setFocusWrapper(false));
-
+  isPasswordHidden = true,
+  isFocused,
+  onShowPassword,
+}: TextFieldProps) {
   const id = useMemo(() => generateId(), []);
 
   return (
     <InputsContainer {...{ id, size, label, idQa, helperText, className }}>
       <div
-        ref={ref}
-        onClick={() => setFocusWrapper(!focusWrapper)}
-        className={classNames('gkit-text-field-wrapper', size, {
+        id-qa={idQaForInput}
+        className={classNames('text-field-wrapper', size, {
           hover,
-          focus,
-          'focus-wrapper': focusWrapper,
+          focus: focus || isFocused || autoFocus,
           'full-width': fullWidth,
           active,
           error,
@@ -88,8 +85,7 @@ export function TextField({
         })}
       >
         <input
-          id-qa={idQaForInput}
-          type={inputType && showPassword ? 'password' : 'text'}
+          type={inputType === 'password' && isPasswordHidden ? 'password' : 'text'}
           className={classNames('text-field', size)}
           list={id + 'list'}
           {...{
@@ -98,25 +94,23 @@ export function TextField({
             id,
             onChange,
             placeholder,
+            autoFocus,
             onFocus,
             onBlur,
             maxLength,
             disabled,
-            autoFocus,
             name,
             autoComplete,
           }}
         />
         <div className="icons-wrapper">
-          {value && (
+          {onClear && value && (
             <button onClick={onClear}>
               <DismissCircleIcon />
             </button>
           )}
           {inputType === 'password' && (
-            <button onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeIcon /> : <EyeOffIcon />}
-            </button>
+            <button onClick={onShowPassword}>{isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}</button>
           )}
         </div>
       </div>

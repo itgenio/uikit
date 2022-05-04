@@ -1,39 +1,54 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { TextField } from '@itgenio/gkit';
+import { TextField, TextFieldProps } from '@itgenio/gkit';
 
 export function TextFields() {
   const [value, setValue] = useState('');
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const renderState = (state: string, props: any = {}) => {
+  const handleClearField = () => {
+    setValue('');
+    setIsPasswordHidden(!isPasswordHidden);
+  };
+
+  const renderState = (state: string, props: TextFieldProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-
-        <TextField {...props} onChange={e => setValue(e.target.value)} onClear={() => setValue('')} value={value} />
+        <TextField
+          {...props}
+          onShowPassword={() => setIsPasswordHidden(!isPasswordHidden)}
+          onChange={e => setValue(e.target.value)}
+          onClear={handleClearField}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Placeholder"
+          label="Label"
+        />
       </Fragment>
     );
   };
 
-  const states = [
-    [
-      'Normal',
-      { placeholder: 'Placeholder', label: 'Label', helperText: 'Helper text', idQaForInput: 'id-qa for input' },
-    ],
-    ['Normal with text', { placeholder: 'Placeholder', label: 'Label' }],
-    ['Hover', { hover: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Focused', { focus: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Active', { active: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Active with text', { active: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Disabled', { disabled: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Disabled with text', { disabled: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Datalist', { placeholder: 'Placeholder', label: 'Label', dataList: ['Hello', 'World', 'Gavana'] }],
-    ['ShowPassword', { placeholder: 'Введите пароль', label: 'Пароль', inputType: 'password' }],
-  ] as const;
+  const states: { state: string; props: TextFieldProps }[] = [
+    { state: 'Normal', props: { helperText: 'Helper text', idQaForInput: 'id-qa for input' } },
+    { state: 'Normal with text', props: { value: 'Some text' } },
+    { state: 'Hover', props: { hover: true, isFocused } },
+    { state: 'Focused', props: { focus: true } },
+    { state: 'Active', props: { active: true } },
+    { state: 'Active with text', props: { active: true, value: 'Some text' } },
+    { state: 'Disabled', props: { disabled: true } },
+    { state: 'Disabled with text', props: { disabled: true, value: 'Some text' } },
+    { state: 'Datalist', props: { dataList: ['Hello', 'World', 'Gavana'] } },
+    {
+      state: 'Show password',
+      props: { placeholder: 'Введите пароль', label: 'Пароль', inputType: 'password', isPasswordHidden, value },
+    },
+  ];
 
   return (
     <div className="textFields">
-      <div className="grid">{states.map(([name, props]) => renderState(name, props))}</div>
+      <div className="grid">{states.map(({ state, props }) => renderState(state, props))}</div>
     </div>
   );
 }

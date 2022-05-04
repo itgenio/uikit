@@ -23,14 +23,14 @@ export function InputsContainer({
   className,
 }: InputsContainerProps) {
   return (
-    <div id-qa={idQa} className={classNames('gkit-inputs-container', className)}>
+    <div id-qa={idQa} className={classNames('gkit-text-field', className)}>
       {label && (
-        <label htmlFor={id} className={classNames('inputs-container-label', size)}>
+        <label htmlFor={id} className={classNames('text-field-label', size)}>
           {label}
         </label>
       )}
       {children}
-      {helperText && <span className="inputs-container-helper-text">{helperText}</span>}
+      {helperText && <span className="text-field-helper-text">{helperText}</span>}
     </div>
   );
 }
