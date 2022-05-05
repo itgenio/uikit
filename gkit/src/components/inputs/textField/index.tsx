@@ -86,7 +86,13 @@ export function TextField({
         onBlur={() => setFocused(false)}
       >
         <input
-          type={inputType && inputType === 'password' && isPasswordHidden ? 'password' : 'text'}
+          type={
+            inputType === 'password' && isPasswordHidden
+              ? 'password'
+              : inputType === 'password' && !isPasswordHidden
+              ? 'text'
+              : inputType
+          }
           className={classNames('text-field', size)}
           list={id + 'list'}
           {...{
