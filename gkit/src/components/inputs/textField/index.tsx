@@ -1,8 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { HTMLInputTypeAttribute, useMemo, useState } from 'react';
-import { DismissCircleIcon } from '../../icons';
-import { EyeIcon, EyeOffIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
