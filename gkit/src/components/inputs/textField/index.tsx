@@ -33,8 +33,7 @@ export type TextFieldProps = React.PropsWithChildren<{
   maxLength?: number;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  onClear?: () => void;
-  defaultPasswordHidden?: boolean;
+  endAdornment?: React.ReactNode;
 }>;
 
 export function TextField({
@@ -62,10 +61,8 @@ export function TextField({
   maxLength,
   onFocus,
   onBlur,
-  onClear,
-  defaultPasswordHidden = true,
+  endAdornment,
 }: TextFieldProps) {
-  const [isPasswordHidden, setPasswordHidden] = useState(defaultPasswordHidden);
   const [isFocused, setFocused] = useState(false);
 
   const id = useMemo(() => generateId(), []);
@@ -86,13 +83,7 @@ export function TextField({
         onBlur={() => setFocused(false)}
       >
         <input
-          type={
-            inputType === 'password' && isPasswordHidden
-              ? 'password'
-              : inputType === 'password' && !isPasswordHidden
-              ? 'text'
-              : inputType
-          }
+          type={inputType}
           className={classNames('text-field', size)}
           list={id + 'list'}
           {...{
@@ -110,23 +101,7 @@ export function TextField({
             autoComplete,
           }}
         />
-        <div className="icons-wrapper">
-          {onClear && value && (
-            <button
-              onClick={() => {
-                onClear();
-                setPasswordHidden(!isPasswordHidden);
-              }}
-            >
-              <DismissCircleIcon />
-            </button>
-          )}
-          {inputType === 'password' && (
-            <button onClick={() => setPasswordHidden(!isPasswordHidden)}>
-              {isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}
-            </button>
-          )}
-        </div>
+        {endAdornment}
       </div>
 
       {dataList && (
