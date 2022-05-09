@@ -5,7 +5,6 @@
   .text-field-wrapper {
     display: inline-flex;
     align-items: center;
-    padding-right: 1rem;
     border: 1px solid var(--gkit-color-neutral-200);
 
     &.full-width {
@@ -13,10 +12,12 @@
     }
 
     &.small {
+      padding: 0 0.75rem;
       border-radius: 0.625rem;
     }
 
     &.large {
+      padding: 0 1rem;
       border-radius: 0.75rem;
     }
 
@@ -27,12 +28,12 @@
 
       &.small {
         .text-sm();
-        padding: 0.625rem 0 0.625rem 0.75rem;
+        padding: 0.625rem 0;
       }
 
       &.large {
         .text-base();
-        padding: 0.75rem 0 0.75rem 1rem;
+        padding: 0.75rem 0;
       }
 
       &::placeholder {

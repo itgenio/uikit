@@ -31,6 +31,7 @@ export type TextFieldProps = React.PropsWithChildren<{
   maxLength?: number;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 }>;
 
@@ -59,6 +60,7 @@ export function TextField({
   maxLength,
   onFocus,
   onBlur,
+  startAdornment,
   endAdornment,
 }: TextFieldProps) {
   const [isFocused, setFocused] = useState(false);
@@ -80,6 +82,8 @@ export function TextField({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       >
+        {startAdornment}
+
         <input
           type={inputType}
           className={classNames('text-field', size)}
@@ -99,6 +103,7 @@ export function TextField({
             autoComplete,
           }}
         />
+
         {endAdornment}
       </div>
 
