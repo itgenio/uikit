@@ -1,12 +1,12 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { HTMLInputTypeAttribute, useMemo } from 'react';
+import React, { HTMLInputTypeAttribute, useMemo, useState } from 'react';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-type Props = React.PropsWithChildren<{
+export type TextFieldProps = React.PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   active?: boolean;
@@ -31,6 +31,8 @@ type Props = React.PropsWithChildren<{
   maxLength?: number;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
 }>;
 
 export function TextField({
@@ -58,31 +60,52 @@ export function TextField({
   maxLength,
   onFocus,
   onBlur,
-}: Props) {
+  startAdornment,
+  endAdornment,
+}: TextFieldProps) {
+  const [isFocused, setFocused] = useState(false);
+
   const id = useMemo(() => generateId(), []);
 
   return (
-    <InputsContainer {...{ id, size, label, idQa, helperText, className }}>
-      <input
+    <InputsContainer className={classNames('gkit-text-field', className)} {...{ id, size, label, idQa, helperText }}>
+      <div
         id-qa={idQaForInput}
-        type={inputType}
-        className={classNames('gkit-text-field', size, { 'full-width': fullWidth, hover, active, focus, error })}
-        list={id + 'list'}
-        {...{
-          value,
-          required,
-          id,
-          placeholder,
-          onFocus,
-          onBlur,
-          maxLength,
+        className={classNames('text-field-wrapper', size, {
+          hover,
+          focus: focus || isFocused,
+          'full-width': fullWidth,
+          active,
+          error,
           disabled,
-          onChange,
-          autoFocus,
-          name,
-          autoComplete,
-        }}
-      />
+        })}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      >
+        {startAdornment}
+
+        <input
+          type={inputType}
+          className={classNames('text-field', size)}
+          list={id + 'list'}
+          {...{
+            required,
+            value,
+            id,
+            onChange,
+            placeholder,
+            autoFocus,
+            onFocus,
+            onBlur,
+            maxLength,
+            disabled,
+            name,
+            autoComplete,
+          }}
+        />
+
+        {endAdornment}
+      </div>
 
       {dataList && (
         <datalist id={id + 'list'}>

@@ -1,36 +1,59 @@
 import './style.less';
-import React, { Fragment } from 'react';
-import { TextField } from '@itgenio/gkit';
+import React, { Fragment, useState } from 'react';
+import { TextField, DismissCircleIcon, EyeIcon, EyeOffIcon, TextFieldProps } from '@itgenio/gkit';
 
 export function TextFields() {
-  const renderState = (state: string, props: any = {}, value?: string | number) => {
+  const [value, setValue] = useState('');
+  const [isPasswordHidden, setPasswordHidden] = useState(true);
+
+  const handleClearField = () => {
+    setValue('');
+    setPasswordHidden(!isPasswordHidden);
+  };
+
+  const renderState = (state: string, props: TextFieldProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-
-        <TextField {...props} onChange={e => console.log(`onChange: ${e.target.value}`)} value={value} />
+        <TextField {...props} onChange={e => console.log(e.target.value)} placeholder="Placeholder" label="Label" />
       </Fragment>
     );
   };
 
-  const states = [
-    [
-      'Normal',
-      { placeholder: 'Placeholder', label: 'Label', helperText: 'Helper text', idQaForInput: 'id-qa for input' },
-    ],
-    ['Normal with text', { placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
-    ['Hover', { hover: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Focused', { focus: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Active', { active: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Active with text', { active: true, placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
-    ['Disabled', { disabled: true, placeholder: 'Placeholder', label: 'Label' }],
-    ['Disabled with text', { disabled: true, placeholder: 'Placeholder', label: 'Label' }, 'Some text'],
-    ['Datalist', { placeholder: 'Placeholder', label: 'Label', dataList: ['Hello', 'World', 'Gavana'] }],
-  ] as const;
+  const states: { state: string; props: TextFieldProps }[] = [
+    { state: 'Normal', props: { helperText: 'Helper text', idQaForInput: 'id-qa for input' } },
+    { state: 'Normal with text', props: { value: 'Some text' } },
+    { state: 'Hover', props: { hover: true, autoFocus: true } },
+    { state: 'Focused', props: { focus: true } },
+    { state: 'Active', props: { active: true } },
+    { state: 'Active with text', props: { active: true, value: 'Some text' } },
+    { state: 'Disabled', props: { disabled: true } },
+    { state: 'Disabled with text', props: { disabled: true, value: 'Some text' } },
+    { state: 'Datalist', props: { dataList: ['Hello', 'World', 'Gavana'] } },
+  ];
 
   return (
     <div className="textFields">
-      <div className="grid">{states.map(([name, props, content]) => renderState(name, props, content))}</div>
+      <div className="grid">{states.map(({ state, props }) => renderState(state, props))}</div>
+      <TextField
+        placeholder="Введите пароль"
+        label="Пароль"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        inputType={isPasswordHidden ? 'password' : 'text'}
+        endAdornment={
+          <div className="icons-wrapper">
+            {value && (
+              <button onClick={handleClearField}>
+                <DismissCircleIcon />
+              </button>
+            )}
+            <button onClick={() => setPasswordHidden(!isPasswordHidden)}>
+              {isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}
+            </button>
+          </div>
+        }
+      />
     </div>
   );
 }
