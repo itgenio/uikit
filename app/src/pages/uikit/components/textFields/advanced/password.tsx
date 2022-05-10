@@ -5,11 +5,6 @@ export const TextFieldPassword = () => {
   const [value, setValue] = useState('');
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
-  const handleClearField = () => {
-    setValue('');
-    setPasswordHidden(!isPasswordHidden);
-  };
-
   return (
     <TextField
       placeholder="Введите пароль"
@@ -20,10 +15,11 @@ export const TextFieldPassword = () => {
       endAdornment={
         <div className="icons-wrapper">
           {value && (
-            <button onClick={handleClearField}>
+            <button onClick={() => setValue('')}>
               <DismissCircleIcon />
             </button>
           )}
+
           <button onClick={() => setPasswordHidden(!isPasswordHidden)}>
             {isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}
           </button>
