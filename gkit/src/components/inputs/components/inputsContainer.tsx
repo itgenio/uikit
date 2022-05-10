@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { PropsWithChildren } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 
 type Sizes = 'small' | 'large';
 
@@ -13,17 +13,12 @@ type InputsContainerProps = PropsWithChildren<{
   className?: string;
 }>;
 
-export function InputsContainer({
-  children,
-  id,
-  size = 'large',
-  label,
-  helperText,
-  idQa,
-  className,
-}: InputsContainerProps) {
+export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(function InputsContainer(
+  { children, id, size = 'large', label, helperText, idQa, className },
+  ref
+) {
   return (
-    <div id-qa={idQa} className={classNames('gkit-inputs-container', className)}>
+    <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className)}>
       {label && (
         <label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
@@ -33,4 +28,4 @@ export function InputsContainer({
       {helperText && <span className="inputs-container-helper-text">{helperText}</span>}
     </div>
   );
-}
+});

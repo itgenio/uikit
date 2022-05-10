@@ -1,12 +1,12 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { HTMLInputTypeAttribute, useMemo, useState } from 'react';
+import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo, useState } from 'react';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 
-export type TextFieldProps = React.PropsWithChildren<{
+export type TextFieldProps = PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   active?: boolean;
@@ -33,42 +33,51 @@ export type TextFieldProps = React.PropsWithChildren<{
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  inputRef?: ForwardedRef<HTMLInputElement>;
 }>;
 
-export function TextField({
-  value,
-  size = 'large',
-  fullWidth,
-  placeholder,
-  hover,
-  disabled,
-  active,
-  focus,
-  error,
-  className,
-  onChange,
-  label,
-  helperText,
-  inputType = 'text',
-  required,
-  idQa,
-  idQaForInput,
-  name,
-  autoComplete,
-  autoFocus,
-  dataList,
-  maxLength,
-  onFocus,
-  onBlur,
-  startAdornment,
-  endAdornment,
-}: TextFieldProps) {
+export const TextField = forwardRef(function TextField(
+  {
+    value,
+    size = 'large',
+    fullWidth,
+    placeholder,
+    hover,
+    disabled,
+    active,
+    focus,
+    error,
+    className,
+    onChange,
+    label,
+    helperText,
+    inputType = 'text',
+    required,
+    idQa,
+    idQaForInput,
+    name,
+    autoComplete,
+    autoFocus,
+    dataList,
+    maxLength,
+    onFocus,
+    onBlur,
+    startAdornment,
+    endAdornment,
+    inputRef,
+  }: TextFieldProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   const [isFocused, setFocused] = useState(false);
 
   const id = useMemo(() => generateId(), []);
 
   return (
-    <InputsContainer className={classNames('gkit-text-field', className)} {...{ id, size, label, idQa, helperText }}>
+    <InputsContainer
+      ref={ref}
+      className={classNames('gkit-text-field', className)}
+      {...{ id, size, label, idQa, helperText }}
+    >
       <div
         id-qa={idQaForInput}
         className={classNames('text-field-wrapper', size, {
@@ -85,6 +94,7 @@ export function TextField({
         {startAdornment}
 
         <input
+          ref={inputRef}
           type={inputType}
           className={classNames('text-field', size)}
           list={id + 'list'}
@@ -116,4 +126,4 @@ export function TextField({
       )}
     </InputsContainer>
   );
-}
+});
