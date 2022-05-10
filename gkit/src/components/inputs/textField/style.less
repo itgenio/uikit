@@ -26,6 +26,11 @@
       cursor: text;
       width: 100%;
 
+      &:-webkit-autofill,
+      &:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+      }
+
       &.small {
         .text-sm();
         padding: 0.625rem 0;
