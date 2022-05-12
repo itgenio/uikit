@@ -42,7 +42,8 @@ const components = [
   Tooltips,
   Badges,
   Icons,
-];
+].sort((a, b) => a.name.localeCompare(b.name));
+
 const DEFAULT = 0;
 
 export function UikitDemo() {
