@@ -79,7 +79,6 @@ export const TextField = forwardRef(function TextField(
       {...{ id, size, label, idQa, helperText }}
     >
       <div
-        id-qa={idQaForInput}
         className={classNames('text-field-wrapper', size, {
           hover,
           focus: focus || isFocused,
@@ -94,6 +93,7 @@ export const TextField = forwardRef(function TextField(
         {startAdornment}
 
         <input
+          id-qa={idQaForInput}
           ref={inputRef}
           type={inputType}
           className={classNames('text-field', size)}
