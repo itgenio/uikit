@@ -5,7 +5,7 @@ import { TextFieldControlledFocus } from './advanced/controlledFocus';
 import { TextFieldPassword } from './advanced/password';
 
 const SIMPLE_STATES: { state: string; props: TextFieldProps }[] = [
-  { state: 'Normal', props: { helperText: 'Helper text', idQaForInput: 'id-qa for input', autoComplete: 'name' } },
+  { state: 'Normal', props: { helperText: 'Helper text', idQaForInput: 'id-qa for input' } },
   { state: 'Normal with text', props: { value: 'Some text' } },
   { state: 'Hover', props: { hover: true, autoFocus: true } },
   { state: 'Focused', props: { focus: true } },
