@@ -6,3 +6,4 @@ export * from './dismissCircle';
 export * from './close';
 export * from './moreHorizontal';
 export * from './moreVertical';
+export * from './calendar';
