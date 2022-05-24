@@ -8,3 +8,4 @@ export * from './moreHorizontal';
 export * from './moreVertical';
 export * from './calendar';
 export * from './money';
+export * from './documentCopy';
