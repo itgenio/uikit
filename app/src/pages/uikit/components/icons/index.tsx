@@ -12,6 +12,7 @@ import {
   EyeOffIcon,
   DismissCircleIcon,
   CalendarIcon,
+  DocumentCopyIcon,
 } from '@itgenio/gkit';
 
 export function Icons() {
@@ -27,6 +28,7 @@ export function Icons() {
       <EyeOffIcon />
       <StarIcon />
       <CalendarIcon />
+      <DocumentCopyIcon />
     </div>
   );
 }

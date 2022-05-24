@@ -7,3 +7,4 @@ export * from './close';
 export * from './moreHorizontal';
 export * from './moreVertical';
 export * from './calendar';
+export * from './documentCopy';
