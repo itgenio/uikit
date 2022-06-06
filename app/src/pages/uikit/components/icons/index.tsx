@@ -14,6 +14,7 @@ import {
   CalendarIcon,
   MoneyIcon,
   DocumentCopyIcon,
+  CalendarWithArrowRightIcon,
 } from '@itgenio/gkit';
 
 export function Icons() {
@@ -29,6 +30,7 @@ export function Icons() {
       <EyeOffIcon />
       <StarIcon />
       <CalendarIcon />
+      <CalendarWithArrowRightIcon />
       <MoneyIcon />
       <DocumentCopyIcon />
     </div>

@@ -9,3 +9,4 @@ export * from './moreVertical';
 export * from './calendar';
 export * from './money';
 export * from './documentCopy';
+export * from './calendarWithArrowRightIcon';
