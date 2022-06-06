@@ -17,22 +17,28 @@ import {
   CalendarWithArrowRightIcon,
 } from '@itgenio/gkit';
 
+const ICONS = [
+  CheckMarkIcon,
+  MobilePhoneIcon,
+  MoreHorizontalIcon,
+  MoreVerticalIcon,
+  StarIcon,
+  EyeIcon,
+  CloseIcon,
+  EyeOffIcon,
+  DismissCircleIcon,
+  CalendarIcon,
+  MoneyIcon,
+  DocumentCopyIcon,
+  CalendarWithArrowRightIcon,
+].sort((a, b) => a.name.localeCompare(b.name));
+
 export function Icons() {
   return (
     <div className="icons">
-      <MobilePhoneIcon />
-      <CheckMarkIcon />
-      <MoreHorizontalIcon />
-      <MoreVerticalIcon />
-      <CloseIcon />
-      <DismissCircleIcon />
-      <EyeIcon />
-      <EyeOffIcon />
-      <StarIcon />
-      <CalendarIcon />
-      <CalendarWithArrowRightIcon />
-      <MoneyIcon />
-      <DocumentCopyIcon />
+      {ICONS.map(Icon => (
+        <Icon key={Icon.name} />
+      ))}
     </div>
   );
 }
