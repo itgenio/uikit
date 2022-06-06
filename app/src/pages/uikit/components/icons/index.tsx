@@ -30,9 +30,9 @@ export function Icons() {
       <EyeOffIcon />
       <StarIcon />
       <CalendarIcon />
+      <CalendarWithArrowRightIcon />
       <MoneyIcon />
       <DocumentCopyIcon />
-      <CalendarWithArrowRightIcon />
     </div>
   );
 }
