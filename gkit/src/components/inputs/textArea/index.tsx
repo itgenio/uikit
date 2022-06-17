@@ -8,6 +8,7 @@ type Sizes = 'small' | 'large';
 
 export type TextAreaProps = {
   idQa?: string;
+  idQaForTextArea?: string;
   resize?: string;
   maxLength?: number;
   rows?: number;
@@ -31,6 +32,7 @@ export type TextAreaProps = {
 
 export function TextArea({
   idQa,
+  idQaForTextArea,
   size = 'large',
   label,
   helperText,
@@ -54,6 +56,7 @@ export function TextArea({
   return (
     <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
       <textarea
+        id-qa={idQaForTextArea}
         id={id}
         onChange={onChange}
         {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
