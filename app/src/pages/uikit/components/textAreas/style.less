@@ -1,0 +1,12 @@
+.uikit-page .textAreas {
+  @styles-count: 2;
+
+  .grid {
+    display: grid;
+    grid-template-columns: min-content repeat(@styles-count, min-content);
+    grid-template-rows: auto repeat(auto-fit, min-content);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    align-items: center;
+  }
+}

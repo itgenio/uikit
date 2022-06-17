@@ -1,31 +1,25 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
-import { CloseIcon } from '../icons/close';
+import React, { PropsWithChildren } from 'react';
 
 type Sizes = 'small' | 'large';
 type Colors = 'neutral' | 'green' | 'blue' | 'purple' | 'orange' | 'danger';
 type Type = 'secondary' | 'primary';
 
-export type BadgeProps = {
-  icon?: React.ReactNode;
+export type BadgeProps = PropsWithChildren<{
   size?: Sizes;
   color?: Colors;
   type?: Type;
-  label?: string;
-  onDelete?: () => void;
   onClick?: () => void;
   className?: string;
   idQa?: string;
-};
+}>;
 
 export function Badge({
-  icon,
+  children,
   size = 'large',
   color = 'neutral',
   type = 'secondary',
-  label,
-  onDelete,
   className,
   idQa,
   onClick,
@@ -36,18 +30,7 @@ export function Badge({
       onClick={onClick}
       className={classNames('gkit-badge', className, size, color, type, { clickable: !!onClick })}
     >
-      {icon}
-      {label}
-      {onDelete && (
-        <button
-          onClick={e => {
-            e.stopPropagation();
-            onDelete();
-          }}
-        >
-          <CloseIcon />
-        </button>
-      )}
+      {children}
     </span>
   );
 }

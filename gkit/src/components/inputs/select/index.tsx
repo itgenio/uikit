@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import { CheckMarkIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
@@ -46,6 +47,7 @@ export function Select({
   value,
 }: SelectProps) {
   const [open, setOpen] = useState(false);
+  const [currentValue, setCurrentValue] = useState<Values>();
   const id = useMemo(() => generateId(), []);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -65,9 +67,8 @@ export function Select({
       >
         <input
           readOnly
-          id={id}
           className={classNames('select-input', size, { filled, error, disabled })}
-          {...{ placeholder, disabled, value }}
+          {...{ id, placeholder, disabled, value }}
           onClick={() => setOpen(!open)}
         />
         {open && !disabled && (
@@ -80,9 +81,12 @@ export function Select({
                   e.stopPropagation();
                   setOpen(!open);
                   onChange(option.label);
+                  setCurrentValue(option.value);
                 }}
               >
                 {option.label}
+
+                {currentValue === option.value && <CheckMarkIcon />}
               </div>
             ))}
           </div>

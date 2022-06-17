@@ -1,9 +1,10 @@
 .uikit-page .icons {
-  .grid {
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    grid-template-rows: auto repeat(auto-fit, min-content);
-    align-items: center;
-    overflow-x: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .gkit-svg-icon {
+    width: 48px;
+    height: 48px;
   }
 }

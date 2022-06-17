@@ -1,14 +1,44 @@
 import './style.less';
+
 import React from 'react';
-import { CheckMarkIcon, MobilePhoneIcon } from '@itgenio/gkit';
+import {
+  CheckMarkIcon,
+  MobilePhoneIcon,
+  MoreHorizontalIcon,
+  MoreVerticalIcon,
+  StarIcon,
+  EyeIcon,
+  CloseIcon,
+  EyeOffIcon,
+  DismissCircleIcon,
+  CalendarIcon,
+  MoneyIcon,
+  DocumentCopyIcon,
+  CalendarWithArrowRightIcon,
+} from '@itgenio/gkit';
+
+const ICONS = [
+  CheckMarkIcon,
+  MobilePhoneIcon,
+  MoreHorizontalIcon,
+  MoreVerticalIcon,
+  StarIcon,
+  EyeIcon,
+  CloseIcon,
+  EyeOffIcon,
+  DismissCircleIcon,
+  CalendarIcon,
+  MoneyIcon,
+  DocumentCopyIcon,
+  CalendarWithArrowRightIcon,
+].sort((a, b) => a.name.localeCompare(b.name));
 
 export function Icons() {
   return (
     <div className="icons">
-      <div className="grid">
-        <MobilePhoneIcon />
-        <CheckMarkIcon />
-      </div>
+      {ICONS.map(Icon => (
+        <Icon key={Icon.name} />
+      ))}
     </div>
   );
 }
