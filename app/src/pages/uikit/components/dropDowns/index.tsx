@@ -10,7 +10,6 @@ export function Dropdowns() {
 
   const content = (
     <div>
-      <label className="dropdown-chapter">Раздел 1</label>
       <DropdownItem checked={checked1} onCheckedChange={setChecked1}>
         Option1
       </DropdownItem>
@@ -29,7 +28,7 @@ export function Dropdowns() {
   return (
     <div className="dropdown">
       <div className="grid">
-        <Dropdown defaultOpen content={content}>
+        <Dropdown content={content}>
           <Button type="neutral">Dropdown Menu</Button>
         </Dropdown>
       </div>

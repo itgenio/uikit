@@ -18,6 +18,7 @@ import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
 import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
+import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
 import { Tooltips } from './components/tooltips';
@@ -33,6 +34,7 @@ const components = [
   Dialogs,
   ModalPages,
   Dropdowns,
+  TextAreas,
   Popovers,
   Switchers,
   Checkboxes,
@@ -42,7 +44,8 @@ const components = [
   Tooltips,
   Badges,
   Icons,
-];
+].sort((a, b) => a.name.localeCompare(b.name));
+
 const DEFAULT = 0;
 
 export function UikitDemo() {
