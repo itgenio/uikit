@@ -38,7 +38,7 @@ export function Tabs({ children, onChange, value, className, idQa }: TabsProps) 
 
 export function Tab({ children, value, onClick, label, selected, idQa, size = 'normal', ...props }: TabProps & any) {
   return (
-    <div className="tab-container">
+    <div>
       <div
         className={classNames('gkit-tab', size, { selected })}
         data-value={value}

@@ -6,95 +6,64 @@
   gap: 1.5rem;
   font-weight: @font-weight-bold;
   .text-sm();
-}
 
-.gkit-tab {
-  display: flex;
-  gap: 0.5rem;
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    height: 0.25rem;
-    width: 100%;
-    top: 30px;
-    background-color: transparent;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-  }
-
-  &.selected {
-    color: var(--gkit-color-neutral-900);
+  .gkit-tab {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+    color: var(--gkit-color-neutral-500);
 
     &:after {
       content: '';
       position: absolute;
       height: 0.25rem;
       width: 100%;
-      top: 30px;
-      background-color: var(--gkit-color-primary-500);
+      background-color: transparent;
       border-top-right-radius: 0.5rem;
       border-top-left-radius: 0.5rem;
     }
-  }
 
-  &:hover,
-  &.hover {
-    cursor: pointer;
+    &.selected {
+      color: var(--gkit-color-neutral-900);
+    }
 
-    //&.gkit-tab:after, &.selected:after {
-    //  background-color: var(--gkit-color-primary-500);
-    //  //opacity: 0.3;
-    //}
+    &:hover,
+    &.hover {
+      cursor: pointer;
+      color: var(--gkit-color-neutral-900);
 
-    &.gkit-tab:after {
-      &.selected:after{
+      &.gkit-tab:after {
         background-color: var(--gkit-color-primary-500);
         opacity: 0.3;
       }
     }
+
+    &.small {
+      padding-bottom: 0.5rem;
+
+      &:after {
+        top: 28px;
+      }
+    }
+
+    &.normal {
+      padding-bottom: 0.75rem;
+
+      &:after {
+        top: 32px;
+      }
+    }
   }
 
-  &.small {
-    //padding-bottom: 0.5rem;
-    //top: 24px;
-  }
+  .indicator {
+    display: block;
+    height: 0.25rem;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
 
-  &.normal {
-    //padding-bottom: 0.75rem;
-    //top: 30px;
-  }
-}
-
-.gkit-tab:not(&.selected:after):hover {
-  background-color: var(--gkit-color-primary-500);
-  opacity: 0.3;
-}
-
-.indicator {
-  //display: block;
-  //height: 0.25rem;
-  //border-top-right-radius: 0.5rem;
-  //border-top-left-radius: 0.5rem;
-
-  &.selected {
-    //color: var(--gkit-color-neutral-900);
-    //background-color: var(--gkit-color-primary-500);
-  }
-
-  //&:hover,
-  //&.hover {
-  //  background-color: var(--gkit-color-primary-500);
-  //  opacity: 0.3;
-  //}
-}
-
-.gkit-tab {
-  color: var(--gkit-color-neutral-500);
-
-  &:hover,
-  &.hover {
-    color: var(--gkit-color-neutral-900);
+    &.selected {
+      color: var(--gkit-color-neutral-900);
+      background-color: var(--gkit-color-primary-500);
+    }
   }
 }
