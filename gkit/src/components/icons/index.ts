@@ -10,4 +10,7 @@ export * from './money';
 export * from './moreHorizontal';
 export * from './moreVertical';
 export * from './star';
+export * from './comment';
+export * from './heart';
+export * from './options';
 export * from './search';
