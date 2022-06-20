@@ -14,7 +14,7 @@
     color: var(--gkit-color-neutral-500);
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       height: 0.25rem;
       width: 100%;
@@ -25,6 +25,16 @@
 
     &.selected {
       color: var(--gkit-color-neutral-900);
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 0.25rem;
+        width: 100%;
+        background-color: var(--gkit-color-primary-500);
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+      }
     }
 
     &:hover,
@@ -36,13 +46,18 @@
         background-color: var(--gkit-color-primary-500);
         opacity: 0.3;
       }
+
+      &.selected:after {
+        background-color: var(--gkit-color-primary-500);
+        opacity: 1;
+      }
     }
 
     &.small {
       padding-bottom: 0.5rem;
 
       &:after {
-        top: 28px;
+        bottom: 0;
       }
     }
 
@@ -50,20 +65,8 @@
       padding-bottom: 0.75rem;
 
       &:after {
-        top: 32px;
+        bottom: 0;
       }
-    }
-  }
-
-  .indicator {
-    display: block;
-    height: 0.25rem;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-
-    &.selected {
-      color: var(--gkit-color-neutral-900);
-      background-color: var(--gkit-color-primary-500);
     }
   }
 }

@@ -38,17 +38,14 @@ export function Tabs({ children, onChange, value, className, idQa }: TabsProps) 
 
 export function Tab({ children, value, onClick, label, selected, idQa, size = 'normal', ...props }: TabProps & any) {
   return (
-    <div>
-      <div
-        className={classNames('gkit-tab', size, { selected })}
-        data-value={value}
-        onClick={() => onClick?.(value)}
-        id-qa={idQa}
-        {...props}
-      >
-        {label ?? children}
-      </div>
-      <span className={classNames('indicator', { selected })} />
+    <div
+      className={classNames('gkit-tab', size, { selected })}
+      data-value={value}
+      onClick={() => onClick?.(value)}
+      id-qa={idQa}
+      {...props}
+    >
+      {label ?? children}
     </div>
   );
 }
