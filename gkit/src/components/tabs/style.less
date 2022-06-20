@@ -13,9 +13,10 @@
     position: relative;
     color: var(--gkit-color-neutral-500);
 
-    &:after {
+    &::after {
       content: "";
       position: absolute;
+      bottom: 0;
       height: 0.25rem;
       width: 100%;
       background-color: transparent;
@@ -26,14 +27,8 @@
     &.selected {
       color: var(--gkit-color-neutral-900);
 
-      &:after {
-        content: "";
-        position: absolute;
-        height: 0.25rem;
-        width: 100%;
+      &::after {
         background-color: var(--gkit-color-primary-500);
-        border-top-right-radius: 0.5rem;
-        border-top-left-radius: 0.5rem;
       }
     }
 
@@ -42,31 +37,18 @@
       cursor: pointer;
       color: var(--gkit-color-neutral-900);
 
-      &.gkit-tab:after {
+      &:not(.selected)::after {
         background-color: var(--gkit-color-primary-500);
         opacity: 0.3;
-      }
-
-      &.selected:after {
-        background-color: var(--gkit-color-primary-500);
-        opacity: 1;
       }
     }
 
     &.small {
       padding-bottom: 0.5rem;
-
-      &:after {
-        bottom: 0;
-      }
     }
 
     &.normal {
       padding-bottom: 0.75rem;
-
-      &:after {
-        bottom: 0;
-      }
     }
   }
 }
