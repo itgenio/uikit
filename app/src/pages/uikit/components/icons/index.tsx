@@ -15,6 +15,10 @@ import {
   MoneyIcon,
   DocumentCopyIcon,
   CalendarWithArrowRightIcon,
+  CommentIcon,
+  HeartIcon,
+  HeartFillIcon,
+  OptionsIcon,
 } from '@itgenio/gkit';
 
 const ICONS = [
@@ -31,6 +35,10 @@ const ICONS = [
   MoneyIcon,
   DocumentCopyIcon,
   CalendarWithArrowRightIcon,
+  CommentIcon,
+  HeartIcon,
+  HeartFillIcon,
+  OptionsIcon,
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export function Icons() {
