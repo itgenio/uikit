@@ -8,6 +8,7 @@ type Sizes = 'small' | 'large';
 
 export type TextAreaProps = {
   idQa?: string;
+  idQaForTextArea?: string;
   resize?: string;
   maxLength?: number;
   rows?: number;
@@ -27,10 +28,12 @@ export type TextAreaProps = {
   filled?: boolean;
   error?: boolean;
   disabled?: boolean;
+  onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>;
 };
 
 export function TextArea({
   idQa,
+  idQaForTextArea,
   size = 'large',
   label,
   helperText,
@@ -49,14 +52,15 @@ export function TextArea({
   disabled,
   placeholder,
   className,
+  onKeyPress,
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
+
   return (
     <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
       <textarea
-        id={id}
-        onChange={onChange}
-        {...{ value, maxLength, placeholder, disabled, name, rows, cols, required }}
+        id-qa={idQaForTextArea}
+        {...{ id, onChange, onKeyPress, value, maxLength, placeholder, disabled, name, rows, cols, required }}
         className={classNames('gkit-text-area', size, resize, {
           hover,
           focus,

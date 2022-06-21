@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { CheckMarkIcon } from '../../icons';
+import { CheckMarkIcon, ChevronUp20FilledIcon, ChevronDown20FilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
@@ -72,6 +72,9 @@ export const Select = React.memo(
             className={classNames('select-input', size, { filled, error, disabled })}
             {...{ id, placeholder, disabled, value }}
           />
+
+          <div className="select-chevron">{open ? <ChevronUp20FilledIcon /> : <ChevronDown20FilledIcon />}</div>
+
           {open && !disabled && (
             <div className="select-dropdown">
               {options.map((option, index) => (

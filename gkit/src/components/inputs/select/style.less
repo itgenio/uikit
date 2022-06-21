@@ -15,25 +15,6 @@
     border-radius: 0.75rem;
   }
 
-  &.active {
-    &::after {
-      transform: rotate(-135deg);
-    }
-  }
-
-  &::after {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-right: 1.25rem;
-    border-bottom: 1px solid var(--gkit-color-neutral-700);
-    border-right: 1px solid var(--gkit-color-neutral-700);
-    position: absolute;
-    right: 0;
-    top: 1rem;
-    transform: rotate(45deg);
-  }
-
   .select-input {
     all: inherit;
     width: 100%;
@@ -71,6 +52,16 @@
     }
   }
 
+  .select-chevron {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0.75rem;
+    color: var(--gkit-color-neutral-700);
+  }
+
   .select-dropdown {
     padding: 0.25rem;
     position: absolute;
@@ -84,6 +75,8 @@
     .select-option {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
       padding: 0.5rem 1rem;
 
       .icon-checkmark {
