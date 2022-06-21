@@ -7,7 +7,7 @@ type Sizes = 'small' | 'normal' | 'large';
 //                                    ( without bg )            ( with border )
 type Types = 'primary' | 'secondary' | 'linkSecondary' | 'danger' | 'neutral' | 'linkNeutral';
 
-type Props = React.PropsWithChildren<{
+export type ButtonProps = React.PropsWithChildren<{
   size?: Sizes;
   type?: Types;
   disabled?: boolean;
@@ -19,7 +19,8 @@ type Props = React.PropsWithChildren<{
   onClick?: () => void;
   idQa?: string;
   disablePrevent?: boolean;
-}>;
+}> &
+  React.DOMAttributes<HTMLButtonElement>;
 
 export function Button({
   children,
@@ -34,7 +35,8 @@ export function Button({
   onClick,
   idQa,
   disablePrevent,
-}: Props) {
+  ...props
+}: ButtonProps) {
   return (
     <button
       id-qa={idQa}
@@ -46,6 +48,7 @@ export function Button({
           onClick();
         }
       }}
+      {...props}
     >
       {children}
     </button>
@@ -53,10 +56,12 @@ export function Button({
 }
 
 type ButtonGroupProps<C extends typeof Button = typeof Button> = {
-  children?: (React.ReactElement<Props, C> | null | false) | (React.ReactElement<Props, C> | null | false)[];
+  children?:
+    | (React.ReactElement<ButtonProps, C> | null | false)
+    | (React.ReactElement<ButtonProps, C> | null | false)[];
   className?: string;
   idQa?: string;
-} & Pick<Props, 'size' | 'type' | 'asIcon'>;
+} & Pick<ButtonProps, 'size' | 'type' | 'asIcon'>;
 
 export function ButtonGroup({ idQa, className, size, type, asIcon, children }: ButtonGroupProps) {
   return (
