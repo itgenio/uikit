@@ -30,68 +30,72 @@ export type SelectProps = {
   value?: Values;
 };
 
-export function Select({
-  size = 'large',
-  className,
-  label,
-  helperText,
-  idQa,
-  onChange,
-  hover,
-  focus,
-  filled,
-  error,
-  disabled,
-  placeholder,
-  options,
-  value,
-}: SelectProps) {
-  const [open, setOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState<Values>();
-  const id = useMemo(() => generateId(), []);
-  const ref = useRef<HTMLDivElement>(null);
+export const Select = React.memo(
+  ({
+    size = 'large',
+    className,
+    label,
+    helperText,
+    idQa,
+    onChange,
+    hover,
+    focus,
+    filled,
+    error,
+    disabled,
+    placeholder,
+    options,
+    value,
+  }: SelectProps) => {
+    const [open, setOpen] = useState(false);
+    const [currentValue, setCurrentValue] = useState<Values>();
+    const id = useMemo(() => generateId(), []);
+    const ref = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(ref, () => setOpen(false));
+    useOnClickOutside(ref, () => setOpen(false));
 
-  return (
-    <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
-      <div
-        ref={ref}
-        className={classNames('gkit-select', size, {
-          active: open,
-          hover,
-          focus,
-          error,
-          disabled,
-        })}
-      >
-        <input
-          readOnly
-          className={classNames('select-input', size, { filled, error, disabled })}
-          {...{ id, placeholder, disabled, value }}
+    return (
+      <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
+        <div
+          ref={ref}
+          className={classNames('gkit-select', size, {
+            active: open,
+            hover,
+            focus,
+            error,
+            disabled,
+          })}
           onClick={() => setOpen(!open)}
-        />
-        {open && !disabled && (
-          <div className="select-dropdown">
-            {options.map((option, index) => (
-              <div
-                className={classNames('select-option', size)}
-                key={index}
-                onClick={e => {
-                  e.stopPropagation();
-                  setOpen(!open);
-                  onChange(option.label);
-                  setCurrentValue(option.value);
-                }}
-              >
-                {option.label}
+        >
+          <input
+            readOnly
+            className={classNames('select-input', size, { filled, error, disabled })}
+            {...{ id, placeholder, disabled, value }}
+          />
+          {open && !disabled && (
+            <div className="select-dropdown">
+              {options.map((option, index) => (
+                <div
+                  className={classNames('select-option', size)}
+                  key={index}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setOpen(!open);
+                    onChange(option.label);
+                    setCurrentValue(option.value);
+                  }}
+                >
+                  {option.label}
 
-                {currentValue === option.value && <CheckMarkIcon />}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </InputsContainer>
-  );
-}
+                  {currentValue === option.value && <CheckMarkIcon />}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </InputsContainer>
+    );
+  }
+);
+
+Select.displayName = 'Select';
