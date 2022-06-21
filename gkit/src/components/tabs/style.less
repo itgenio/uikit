@@ -9,26 +9,45 @@
 }
 
 .gkit-tab {
-  padding-bottom: 1rem;
-  border-bottom: 2px solid transparent;
+  position: relative;
+  color: var(--gkit-color-neutral-500);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0.25rem;
+    width: 100%;
+    background-color: transparent;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+  }
+
+  &.selected {
+    color: var(--gkit-color-neutral-900);
+
+    &::after {
+      background-color: var(--gkit-color-primary-500);
+    }
+  }
 
   &:hover,
   &.hover {
     cursor: pointer;
-  }
-}
+    color: var(--gkit-color-neutral-900);
 
-.gkit-tab {
-  color: var(--gkit-color-neutral-500);
-
-  &:hover,
-  &.hover {
-    color: var(--gkit-color-neutral-700);
-    border-bottom-color: var(--gkit-color-neutral-300);
+    &:not(.selected)::after {
+      background-color: var(--gkit-color-primary-500);
+      opacity: 0.3;
+    }
   }
 
-  &.selected {
-    color: var(--gkit-color-neutral-800);
-    border-bottom-color: var(--gkit-color-primary-500);
+  &.small {
+    padding-bottom: 0.5rem;
+  }
+
+  &.normal {
+    padding-bottom: 0.75rem;
   }
 }
