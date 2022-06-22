@@ -69,7 +69,8 @@ export const Select = React.memo(
           <input
             readOnly
             className={classNames('select-input', size, { filled, error, disabled })}
-            {...{ id, placeholder, disabled, value }}
+            {...{ id, placeholder, disabled }}
+            value={options.find(({ value: valueOptions }) => valueOptions === value).label ?? options[0].label}
           />
 
           <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
@@ -83,7 +84,7 @@ export const Select = React.memo(
                   onClick={e => {
                     e.stopPropagation();
                     setOpen(!open);
-                    onChange(option.label);
+                    onChange(option.value);
                     setCurrentValue(option.value);
                   }}
                 >
