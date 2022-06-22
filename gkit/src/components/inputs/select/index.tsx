@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { CheckMarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
@@ -51,8 +51,27 @@ export const Select = React.memo(
     const [currentValue, setCurrentValue] = useState<Values>();
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useOnClickOutside(ref, () => setOpen(false));
+
+    useLayoutEffect(() => {
+      if (!open) return;
+
+      const dropdownElement = dropdownRef.current;
+
+      if (!dropdownElement) return;
+
+      const rect = dropdownElement.getBoundingClientRect();
+
+      if (rect.right > window.innerWidth) {
+        dropdownElement.style.left = `-${rect.right - window.innerWidth}px`;
+      }
+
+      if (rect.bottom > window.innerHeight) {
+        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight}px)`;
+      }
+    }, [open]);
 
     return (
       <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
@@ -76,7 +95,7 @@ export const Select = React.memo(
           <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
 
           {open && !disabled && (
-            <div className="select-dropdown">
+            <div className="select-dropdown" ref={dropdownRef}>
               {options.map((option, index) => (
                 <div
                   className={classNames('select-option', size)}
