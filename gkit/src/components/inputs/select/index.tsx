@@ -59,7 +59,6 @@ export const Select = React.memo(
         <div
           ref={ref}
           className={classNames('gkit-select', size, {
-            active: open,
             hover,
             focus,
             error,
