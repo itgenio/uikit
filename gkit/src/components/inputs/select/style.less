@@ -1,0 +1,122 @@
+@import (reference) "../../../variables";
+@import (reference) "../../../ui";
+
+.gkit-select {
+  border: 1px solid var(--gkit-color-neutral-200);
+  position: relative;
+  cursor: pointer;
+  background: var(--gkit-color-neutral-0);
+
+  &.small {
+    border-radius: 0.625rem;
+  }
+
+  &.large {
+    border-radius: 0.75rem;
+  }
+
+  .select-input {
+    all: inherit;
+    width: 100%;
+    border: none;
+
+    &.small {
+      padding: 0.625rem 0.75rem;
+      .text-sm();
+    }
+
+    &.large {
+      padding: 0.75rem 1rem;
+      .text-base();
+    }
+
+    &.filled,
+    &.error {
+      &::placeholder {
+        color: var(--gkit-color-neutral-900);
+      }
+    }
+
+    &.error {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &.disabled {
+      background: var(--gkit-color-neutral-100);
+
+      &::placeholder {
+        color: var(--gkit-color-neutral-300);
+      }
+    }
+  }
+
+  .select-chevron {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0.75rem;
+    color: var(--gkit-color-neutral-700);
+  }
+
+  .select-dropdown {
+    padding: 0.25rem;
+    position: absolute;
+    z-index: 1;
+    background: var(--gkit-color-neutral-0);
+    border: 1px solid var(--gkit-color-neutral-200);
+    border-radius: 0.75rem;
+    margin-top: 5px;
+    width: 100%;
+
+    .select-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      padding: 0.5rem 1rem;
+
+      .icon-checkmark {
+        color: var(--gkit-color-light-primary-600);
+      }
+
+      &.small {
+        .text-sm();
+        border-radius: 0.625rem;
+      }
+
+      &.large {
+        .text-base();
+        border-radius: 0.75rem;
+      }
+
+      &:hover {
+        background: var(--gkit-color-neutral-100);
+      }
+    }
+  }
+
+  &.hover,
+  &:hover {
+    border: 1px solid var(--gkit-color-light-primary-500);
+  }
+
+  &.focus,
+  :focus {
+    .outline();
+    .outline-2();
+    .outline-offset-2();
+    .outline-primary-600();
+  }
+
+  &.error {
+    border: 1px solid var(--gkit-color-danger-500);
+  }
+
+  &.disabled {
+    border: 1px solid var(--gkit-color-neutral-200);
+  }
+}
