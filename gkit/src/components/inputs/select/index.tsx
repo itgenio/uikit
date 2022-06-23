@@ -85,14 +85,16 @@ export const Select = React.memo(
           })}
           onClick={() => setOpen(!open)}
         >
-          <input
-            readOnly
-            className={classNames('select-input', size, { filled, error, disabled })}
-            {...{ id, placeholder, disabled }}
-            value={options.find(({ value: valueOptions }) => valueOptions === value).label ?? options[0].label}
-          />
+          <div className="input-wrapper">
+            <input
+              readOnly
+              className={classNames('select-input', size, { filled, error, disabled })}
+              {...{ id, placeholder, disabled }}
+              value={options.find(({ value: valueOptions }) => valueOptions === value).label ?? options[0].label}
+            />
 
-          <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
+            <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
+          </div>
 
           {open && !disabled && (
             <div className="select-dropdown" ref={dropdownRef}>

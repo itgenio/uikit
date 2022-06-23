@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 import { Select, SelectProps, SelectOption } from '@itgenio/gkit';
 
 const options: SelectOption[] = [
-  { label: 'Option1', value: '1' },
+  { label: 'Option1123123123 12312312312323434234', value: '1' },
   { label: 'Option2', value: '2' },
   { label: 'Option3', value: '3' },
 ];
