@@ -13,3 +13,4 @@ export * from './star';
 export * from './comment';
 export * from './heart';
 export * from './options';
+export * from './image';
