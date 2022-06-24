@@ -61,7 +61,7 @@ export function Icons() {
   return (
     <div className="icons">
       {ICONS.map(Icon => (
-        <Icon key={Icon.name} />
+        <Icon key={Icon.name} alt={Icon.name} />
       ))}
     </div>
   );
