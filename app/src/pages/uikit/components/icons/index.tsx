@@ -22,6 +22,11 @@ import {
   SearchIcon,
   ChevronUpFilledIcon,
   ChevronDownFilledIcon,
+  Image16RegularIcon,
+  Image20RegularIcon,
+  Image24RegularIcon,
+  Image28RegularIcon,
+  Image48RegularIcon,
 } from '@itgenio/gkit';
 
 const ICONS = [
@@ -45,6 +50,11 @@ const ICONS = [
   SearchIcon,
   ChevronUpFilledIcon,
   ChevronDownFilledIcon,
+  Image16RegularIcon,
+  Image20RegularIcon,
+  Image24RegularIcon,
+  Image28RegularIcon,
+  Image48RegularIcon,
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export function Icons() {

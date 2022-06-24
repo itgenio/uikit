@@ -15,3 +15,4 @@ export * from './heart';
 export * from './options';
 export * from './search';
 export * from './chevron';
+export * from './image';
