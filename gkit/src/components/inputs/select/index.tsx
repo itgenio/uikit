@@ -63,13 +63,14 @@ export const Select = React.memo(
       if (!dropdownElement) return;
 
       const rect = dropdownElement.getBoundingClientRect();
+      const maxWidthScroll = 20;
 
       if (rect.right > window.innerWidth) {
-        dropdownElement.style.left = `-${rect.right - window.innerWidth}px`;
+        dropdownElement.style.left = `-${rect.right - window.innerWidth + maxWidthScroll}px`;
       }
 
       if (rect.bottom > window.innerHeight) {
-        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight}px)`;
+        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + maxWidthScroll}px)`;
       }
     }, [open]);
 
