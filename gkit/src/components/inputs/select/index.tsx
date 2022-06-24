@@ -12,6 +12,8 @@ type Values = string | number;
 
 export type SelectOption = { label: string; value: Values };
 
+const DROPDOWN_PADDING = 20;
+
 export type SelectProps = {
   label?: string;
   helperText?: React.ReactNode;
@@ -48,7 +50,6 @@ export const Select = React.memo(
     value,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
-    const [currentValue, setCurrentValue] = useState<Values>();
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -63,14 +64,13 @@ export const Select = React.memo(
       if (!dropdownElement) return;
 
       const rect = dropdownElement.getBoundingClientRect();
-      const maxWidthScroll = 20;
 
       if (rect.right > window.innerWidth) {
-        dropdownElement.style.left = `-${rect.right - window.innerWidth + maxWidthScroll}px`;
+        dropdownElement.style.left = `-${rect.right - window.innerWidth + DROPDOWN_PADDING}px`;
       }
 
       if (rect.bottom > window.innerHeight) {
-        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + maxWidthScroll}px)`;
+        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + DROPDOWN_PADDING}px)`;
       }
     }, [open]);
 
@@ -91,7 +91,7 @@ export const Select = React.memo(
               readOnly
               className={classNames('select-input', size, { filled, error, disabled })}
               {...{ id, placeholder, disabled }}
-              value={options.find(({ value: valueOptions }) => valueOptions === value).label ?? options[0].label}
+              value={options.find(option => option.value === value)?.label}
             />
 
             <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
@@ -107,12 +107,11 @@ export const Select = React.memo(
                     e.stopPropagation();
                     setOpen(!open);
                     onChange(option.value);
-                    setCurrentValue(option.value);
                   }}
                 >
                   {option.label}
 
-                  {currentValue === option.value && <CheckMarkIcon />}
+                  {option.value === value && <CheckMarkIcon />}
                 </div>
               ))}
             </div>

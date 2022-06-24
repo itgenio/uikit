@@ -10,7 +10,7 @@ const options: SelectOption[] = [
 
 export function Selects() {
   const sizes = ['small', 'large'] as const;
-  const [value, setValue] = useState<string | number>(options[0].value);
+  const [value, setValue] = useState<string | number>('');
 
   const renderState = (state: string, props: SelectProps, index: number) => {
     return (
