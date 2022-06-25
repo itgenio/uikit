@@ -7,14 +7,16 @@
   "scripts": {
     "format": "pretty-quick",
     "check-format": "pretty-quick --check",
-    "lint": "eslint './app/src/**/*.tsx' './gkit/src/**/*.tsx' './gkit/src/**/*.ts'",
+    "lint": "eslint './app/src/**/*.tsx' 'gkit/src/**/*.tsx' 'gkit/src/**/*.ts'",
     "build": "turbo run build",
     "dev": "turbo run dev"
   },
-  "workspaces": [
-    "app",
-    "@itgenio/gkit"
-  ],
+  "workspaces": {
+    "packages": [
+      "./gkit",
+      "./app"
+    ]
+  },
   "author": "Alex So",
   "license": "ISC",
   "devDependencies": {
