@@ -5,7 +5,7 @@ import * as gkit from '@itgenio/gkit';
 import { Button, Tooltip } from '@itgenio/gkit';
 
 const STEP = 2;
-const DEFAULT_SIZE = 20;
+const DEFAULT_SIZE = 24;
 
 const ICONS = Object.entries(gkit)
   .filter(([key]) => key.endsWith('Icon'))
