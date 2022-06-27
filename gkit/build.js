@@ -21,7 +21,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     bundle: true,
     format: 'esm',
     splitting: true,
-    minifyIdentifiers: false,
+    minify: false,
     external: [
       'react',
       'react-dom',
