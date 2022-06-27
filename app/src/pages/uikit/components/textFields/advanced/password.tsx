@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, DismissCircleIcon, EyeIcon, EyeOffIcon } from '@itgenio/gkit';
+import { TextField, DismissCircle24Icon, Eye24Icon, EyeOff24Icon } from '@itgenio/gkit';
 
 export const TextFieldPassword = () => {
   const [value, setValue] = useState('');
@@ -16,12 +16,12 @@ export const TextFieldPassword = () => {
         <div className="icons-wrapper">
           {value && (
             <button onClick={() => setValue('')}>
-              <DismissCircleIcon />
+              <DismissCircle24Icon />
             </button>
           )}
 
           <button onClick={() => setPasswordHidden(!isPasswordHidden)}>
-            {isPasswordHidden ? <EyeIcon /> : <EyeOffIcon />}
+            {isPasswordHidden ? <Eye24Icon /> : <EyeOff24Icon />}
           </button>
         </div>
       }

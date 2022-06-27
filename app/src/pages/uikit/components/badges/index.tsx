@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Badge, StarIcon, CloseIcon, BadgeProps } from '@itgenio/gkit';
+import { Badge, Star16Icon, Dismiss16Icon, BadgeProps } from '@itgenio/gkit';
 
 export function Badges() {
   const sizes = ['small', 'large'] as const;
@@ -25,7 +25,7 @@ export function Badges() {
               const p = { ...props, color, size };
               return (
                 <Badge key={`${color}${size}`} {...p}>
-                  <StarIcon className="star-icon" />
+                  <Star16Icon className="star-icon" />
                   Badge
                 </Badge>
               );
@@ -36,7 +36,7 @@ export function Badges() {
               return (
                 <Badge key={`${color}${size}`} {...p} onClick={() => console.log('click')}>
                   Badge
-                  <CloseIcon />
+                  <Dismiss16Icon />
                 </Badge>
               );
             })}

@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import React, { PropsWithChildren } from 'react';
-import { CloseIcon } from '../icons/close';
+import { Dismiss24Icon } from '../icons/dismiss';
 
 type Props = PropsWithChildren<{
   title?: string;
@@ -24,7 +24,7 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
       }}
     >
       <button className="close-btn" id-qa="close-icon-btn" onClick={() => onClose?.()}>
-        <CloseIcon />
+        <Dismiss24Icon />
       </button>
       {children}
     </div>
