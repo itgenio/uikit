@@ -2,7 +2,7 @@ import './style.less';
 
 import React, { CSSProperties, useState } from 'react';
 import * as gkit from '@itgenio/gkit';
-import { Button, ButtonGroup, Tooltip } from '@itgenio/gkit';
+import { Button, Tooltip } from '@itgenio/gkit';
 
 const STEP = 2;
 const DEFAULT_SIZE = 20;
@@ -20,23 +20,23 @@ export function Icons() {
       <div className="sizes">
         <span>Current size: {currentSize}</span>
 
-        <ButtonGroup>
-          <Button onClick={() => setCurrentSize(s => s + STEP)} size="small">
-            +
-          </Button>
-
-          <Button onClick={() => setCurrentSize(s => s - STEP)} size="small">
+        <div className="slider">
+          <Button onClick={() => setCurrentSize(s => s - STEP)} size="small" asIcon>
             -
           </Button>
-        </ButtonGroup>
 
-        <ButtonGroup>
-          {[16, 24, 36, 48, 64, 72, 100, 132].map(size => (
-            <Button key={size} onClick={() => setCurrentSize(size)} size="small">
-              {size}
-            </Button>
-          ))}
-        </ButtonGroup>
+          <input
+            value={currentSize}
+            type="range"
+            min="1"
+            max="200"
+            onChange={e => setCurrentSize(e.target.valueAsNumber)}
+          />
+
+          <Button onClick={() => setCurrentSize(s => s + STEP)} size="small" asIcon>
+            +
+          </Button>
+        </div>
       </div>
 
       <div className="board" style={{ '--icon-size': `${currentSize}px` } as CSSProperties}>

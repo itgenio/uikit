@@ -1,25 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
-import { SvgIcon, SvgIconProps } from './svgIcon';
+import DocumentCopy from './assets/document_copy_24_regular.svg';
+import { SvgIconProps } from './svgIcon';
 
-export function DocumentCopy16Icon({ className, ...props }: Partial<SvgIconProps> = {}) {
-  return (
-    <SvgIcon className={classNames('document-copy-icon', className)} viewBox="0 0 16 16" {...props}>
-      <path
-        d="M6.99854 1C5.89397 1 4.99854 1.89543 4.99854 3V11C4.99854 12.1046 5.89397 13 6.99854 13L12 13C13.1046 13 14 12.1046 14 11V5.5H13.9985V4.41421C13.9985 4.01639 13.8405 3.63486 13.5592 3.35355L11.645 1.43934C11.3637 1.15804 10.9821 1 10.5843 1H6.99854ZM12 12L6.99854 12C6.44625 12 5.99854 11.5523 5.99854 11V3C5.99854 2.44772 6.44625 2 6.99854 2H9.99854V3.5C9.99854 4.32843 10.6701 5 11.4985 5H12.9985V6.06135L13 6.06102V11C13 11.5523 12.5523 12 12 12ZM12.7914 4H11.4985C11.2224 4 10.9985 3.77614 10.9985 3.5V2.20711L12.7914 4ZM3 4C3 3.44772 3.44772 3 4 3V11C4 12.6569 5.34315 14 7 14L12 14C12 14.5523 11.5523 15 11 15H6.78947C4.6966 15 3 13.3034 3 11.2105V4Z"
-        fill="currentColor"
-      />
-    </SvgIcon>
-  );
-}
-
-export function DocumentCopy24Icon({ className, ...props }: Partial<SvgIconProps> = {}) {
-  return (
-    <SvgIcon className={classNames('document-copy-icon', className)} viewBox="0 0 24 24" {...props}>
-      <path
-        d="M5.5028 4.62704L5.5 6.75V17.2542C5.5 19.0491 6.95507 20.5042 8.75 20.5042L17.3663 20.5045C17.0573 21.3782 16.224 22.0042 15.2444 22.0042H8.75C6.12665 22.0042 4 19.8776 4 17.2542V6.75C4 5.76929 4.62745 4.93512 5.5028 4.62704ZM13.1284 2C13.7254 2 14.2979 2.23723 14.7199 2.65947L19.3383 7.28054C19.7599 7.70246 19.9968 8.27456 19.9968 8.87107V17.2542C19.9968 18.4969 18.9895 19.5042 17.7468 19.5042H8.75241C7.50977 19.5042 6.50241 18.4969 6.50241 17.2542V4.25C6.50241 3.00736 7.50977 2 8.75241 2H13.1284ZM12.9994 3.5H8.75241C8.33819 3.5 8.00241 3.83579 8.00241 4.25V17.2542C8.00241 17.6684 8.33819 18.0042 8.75241 18.0042H17.7468C18.161 18.0042 18.4968 17.6684 18.4968 17.2542L18.4964 9.003L15.25 9.00389C14.0591 9.00389 13.0844 8.07873 13.0052 6.90794L13 6.75389L12.9994 3.5ZM14.4994 4.561L14.5 6.75389C14.5 7.13359 14.7822 7.44738 15.1482 7.49704L15.25 7.50389L17.4404 7.503L14.4994 4.561Z"
-        fill="currentColor"
-      />
-    </SvgIcon>
-  );
+export function DocumentCopyIcon({ className, ...props }: Partial<SvgIconProps> = {}) {
+  return <DocumentCopy className={classNames('document-copy-icon', className)} {...props} />;
 }

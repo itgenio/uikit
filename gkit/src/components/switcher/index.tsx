@@ -7,7 +7,7 @@ import {
 } from '@radix-ui/react-toggle-group';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { Circle24Icon } from '../icons/circle';
+import { CircleIcon } from '../icons/circle';
 
 type TogglePropsKeys = 'type' | 'defaultValue' | 'onValueChange';
 
@@ -43,5 +43,5 @@ export function SwitcherItem({ children, idQa, value, size = 'medium', hover, ac
 }
 
 export function SwitcherCircle() {
-  return <Circle24Icon />;
+  return <CircleIcon />;
 }

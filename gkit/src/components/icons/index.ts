@@ -1,3 +1,5 @@
+import './icons.less';
+
 export * from './calendar';
 export * from './calendarArrowRight';
 export * from './checkMark';
