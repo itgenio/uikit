@@ -2,7 +2,7 @@ import './style.less';
 
 import React, { CSSProperties, useState } from 'react';
 import * as gkit from '@itgenio/gkit';
-import { Button, ButtonGroup } from '@itgenio/gkit';
+import { Button, ButtonGroup, Tooltip } from '@itgenio/gkit';
 
 const STEP = 2;
 const DEFAULT_SIZE = 20;
@@ -41,7 +41,9 @@ export function Icons() {
 
       <div className="board" style={{ '--icon-size': `${currentSize}px` } as CSSProperties}>
         {ICONS.map(Icon => (
-          <Icon key={Icon.name} alt={Icon.name} />
+          <Tooltip key={Icon.name} content={Icon.name}>
+            <Icon />
+          </Tooltip>
         ))}
       </div>
     </div>
