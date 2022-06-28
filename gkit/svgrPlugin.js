@@ -12,6 +12,13 @@ module.exports = () => ({
           expandProps: 'start',
           titleProp: true,
           dimensions: false,
+          svgoConfig: {
+            plugins: [
+              { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+              'removeXMLNS',
+              { name: 'removeAttrs', params: { attrs: 'svg:fill' } },
+            ],
+          },
           svgProps: {
             focusable: false,
             color: 'inherit',
@@ -19,9 +26,8 @@ module.exports = () => ({
             'aria-hidden': '{props.alt ? undefined : true}',
             role: '{props.alt ? "img" : undefined}',
             title: '{props.alt}',
-            xmlns: undefined,
-            fill: undefined,
           },
+          plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
         },
         { filePath: args.path }
       );
