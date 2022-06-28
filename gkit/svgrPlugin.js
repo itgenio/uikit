@@ -1,12 +1,12 @@
+const fs = require('fs');
+const svgrTransform = require('@svgr/core').transform;
+
 module.exports = () => ({
   name: 'svgr',
   setup(build) {
-    const svgr = require('@svgr/core').transform;
-    const fs = require('fs');
-
     build.onLoad({ filter: /\.svg$/ }, async args => {
       const svg = await fs.promises.readFile(args.path, 'utf8');
-      const contents = await svgr(
+      const contents = await svgrTransform(
         svg,
         {
           expandProps: 'start',
