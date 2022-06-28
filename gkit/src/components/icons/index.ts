@@ -2,7 +2,7 @@ import './icons.less';
 
 export * from './calendar';
 export * from './calendarArrowRight';
-export * from './checkMark';
+export * from './checkmark';
 export * from './chevron';
 export * from './circle';
 export * from './comment';
