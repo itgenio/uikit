@@ -4,7 +4,7 @@ import ChevronDownFilled from './assets/chevron_down_24_filled.svg';
 import ChevronDown from './assets/chevron_down_24_regular.svg';
 import ChevronUpFilled from './assets/chevron_up_24_filled.svg';
 import ChevronUp from './assets/chevron_up_24_regular.svg';
-import { SvgIconProps } from './svgIcon';
+import { SvgIconProps } from './types';
 
 export function ChevronDownIcon({ className, ...props }: Partial<SvgIconProps> = {}) {
   return <ChevronDown className={classNames('chevron-down-icon', className)} {...props} />;
