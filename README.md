@@ -1,6 +1,6 @@
 # Монорепозиторий
 
-Живой пример: https://gkit.eu.meteorapp.com
+Живой пример: https://gena-kit.netlify.app/
 
 ## Разработка
 
