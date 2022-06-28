@@ -25,6 +25,7 @@ module.exports = () => ({
             className: '{"gkit-svg-icon" + (props.className ? " " + props.className : "")}',
             'aria-hidden': '{props.title ? undefined : true}',
           },
+          replaceAttrValues: { '#212121': 'currentColor' },
           plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
         },
         { filePath: args.path }
