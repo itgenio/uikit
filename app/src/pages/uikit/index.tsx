@@ -44,7 +44,7 @@ const components = [
   Badges,
   Icons,
   Selects,
-].sort((a, b) => a.name.localeCompare(b.name));
+].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
 

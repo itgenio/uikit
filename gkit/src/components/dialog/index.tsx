@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import React, { PropsWithChildren } from 'react';
-import { CloseIcon } from '../icons/close';
+import { DismissIcon } from '../icons/dismiss';
 
 type DialogProps = PropsWithChildren<{
   className?: string;
@@ -16,7 +16,7 @@ export function Dialog({ className, asBlock, children, onClose, open, idQa }: Di
   const render = () => (
     <div className="dialog-content" onClick={e => e.stopPropagation()} id-qa={idQa}>
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
-        <CloseIcon />
+        <DismissIcon />
       </button>
 
       {children}

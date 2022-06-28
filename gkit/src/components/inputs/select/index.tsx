@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { CheckMarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
+import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
 
@@ -111,7 +111,7 @@ export const Select = React.memo(
                 >
                   {option.label}
 
-                  {option.value === value && <CheckMarkIcon />}
+                  {option.value === value && <CheckmarkIcon />}
                 </div>
               ))}
             </div>

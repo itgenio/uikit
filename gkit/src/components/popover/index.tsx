@@ -2,7 +2,7 @@ import './style.less';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { CloseIcon } from '../icons/close';
+import { DismissIcon } from '../icons/dismiss';
 
 type RootProps = Pick<PopoverPrimitive.PopoverProps, 'defaultOpen' | 'open' | 'onOpenChange' | 'modal'>;
 
@@ -101,7 +101,7 @@ export function Popover({
           offset={arrowOffset}
         />
         <PopoverPrimitive.Close className="popover-close-btn">
-          <CloseIcon />
+          <DismissIcon />
         </PopoverPrimitive.Close>
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Root>

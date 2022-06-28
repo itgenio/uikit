@@ -1,21 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
-import { SvgIcon, SvgIconProps } from './svgIcon';
+import Money from './assets/money_24_regular.svg';
+import { SvgIconProps } from './types';
 
 export function MoneyIcon({ className, ...props }: Partial<SvgIconProps> = {}) {
-  return (
-    <SvgIcon className={classNames('money-icon', className)} viewBox="0 0 16 16" {...props}>
-      <g clipPath="url(#clip0_39578_2906)">
-        <path
-          d="M5 7C5 5.89543 5.89543 5 7 5C8.10457 5 9 5.89543 9 7C9 8.10457 8.10457 9 7 9C5.89543 9 5 8.10457 5 7ZM7 6C6.44772 6 6 6.44772 6 7C6 7.55228 6.44772 8 7 8C7.55228 8 8 7.55228 8 7C8 6.44772 7.55228 6 7 6ZM1.5 2C0.671573 2 0 2.67157 0 3.5V10.5C0 11.3284 0.671573 12 1.5 12H12.5C13.3284 12 14 11.3284 14 10.5V3.5C14 2.67157 13.3284 2 12.5 2H1.5ZM1 3.5C1 3.22386 1.22386 3 1.5 3H3V4C3 4.55228 2.55228 5 2 5L1 5V3.5ZM1 6L2 6C3.10457 6 4 5.10457 4 4V3H10V4C10 5.10457 10.8954 6 12 6L13 6V8H12C10.8954 8 10 8.89543 10 10V11H4V10C4 8.89543 3.10457 8 2 8H1V6ZM11 3H12.5C12.7761 3 13 3.22386 13 3.5V5L12 5C11.4477 5 11 4.55228 11 4V3ZM13 9V10.5C13 10.7761 12.7761 11 12.5 11H11V10C11 9.44772 11.4477 9 12 9H13ZM3 11H1.5C1.22386 11 1 10.7761 1 10.5V9H2C2.55228 9 3 9.44772 3 10V11ZM15.0001 10.5C15.0001 11.8807 13.8808 13 12.5001 13H2.08545C2.29137 13.5826 2.84699 14 3.5001 14H12.5001C14.4331 14 16.0001 12.433 16.0001 10.5V5.49997C16.0001 4.84686 15.5827 4.29125 15.0001 4.08533V10.5Z"
-          fill="currentColor"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_39578_2906">
-          <rect width="16" height="16" fill="white" />
-        </clipPath>
-      </defs>
-    </SvgIcon>
-  );
+  return <Money className={classNames('money-icon', className)} {...props} />;
 }

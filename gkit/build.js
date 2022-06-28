@@ -1,6 +1,7 @@
 const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
+const svgrPlugin = require('./svgrPlugin');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
@@ -21,6 +22,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     bundle: true,
     format: 'esm',
     splitting: true,
+    keepNames: true,
     external: [
       'react',
       'react-dom',
@@ -32,7 +34,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       'use-onclickoutside',
     ],
     outdir: path.resolve(__dirname, 'dist'),
-    plugins: [lessLoader({})],
+    plugins: [lessLoader({}), svgrPlugin()],
     loader: {
       '.ts': 'ts',
     },
