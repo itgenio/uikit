@@ -2,6 +2,12 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { Select, SelectProps, SelectOption } from '@itgenio/gkit';
 
+const options: SelectOption[] = [
+  { label: 'Option1 Option1 Option1 Option1 Option1', value: '1' },
+  { label: 'Option2', value: '2' },
+  { label: 'Option3', value: '3' },
+];
+
 export function Selects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<string | number>('');
@@ -36,12 +42,6 @@ export function Selects() {
     { state: 'Filled', props: { filled: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
-  ];
-
-  const options: SelectOption[] = [
-    { label: 'Option1', value: '1' },
-    { label: 'Option2', value: '2' },
-    { label: 'Option3', value: '3' },
   ];
 
   return (
