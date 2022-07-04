@@ -1,10 +1,9 @@
 import './style.less';
-
 import classNames from 'classnames';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { ChevronDownFilledIcon, ChevronUpFilledIcon } from 'components/icons';
-import { Checkbox } from 'components/checkbox';
+import { Checkbox } from '../checkbox';
+import { ChevronDownFilledIcon, ChevronUpFilledIcon } from '../icons';
 
 type Sizes = 'small' | 'large';
 
