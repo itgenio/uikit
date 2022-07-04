@@ -22,6 +22,7 @@ import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
 import { Tooltips } from './components/tooltips';
+import { Dropdowns } from './components/dropdowns';
 
 const components = [
   Colors,
@@ -44,6 +45,7 @@ const components = [
   Badges,
   Icons,
   Selects,
+  Dropdowns,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;

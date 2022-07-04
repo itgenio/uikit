@@ -1,0 +1,11 @@
+.uikit-page .dropdowns {
+  @styles-count: 2;
+
+  .grid {
+    display: grid;
+    grid-template-columns: min-content repeat(@styles-count, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    align-items: center;
+  }
+}
