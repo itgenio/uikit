@@ -64,7 +64,7 @@ export const Dropdown = React.memo(
       } else {
         setSelectedAll(false);
       }
-    }, [selectedValues, options.length]);
+    }, [selectedValues, options.length, onChange]);
 
     useLayoutEffect(() => {
       if (!open) return;
