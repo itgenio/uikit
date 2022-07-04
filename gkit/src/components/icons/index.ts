@@ -19,3 +19,5 @@ export * from './options';
 export * from './phone';
 export * from './search';
 export * from './star';
+export * from './addCircle';
+export * from './add';
