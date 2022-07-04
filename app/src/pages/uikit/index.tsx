@@ -9,6 +9,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
+import { Dropdowns } from './components/dropdowns';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
@@ -22,7 +23,6 @@ import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
 import { Toggles } from './components/toggles';
 import { Tooltips } from './components/tooltips';
-import { Dropdowns } from './components/dropdowns';
 
 const components = [
   Colors,
