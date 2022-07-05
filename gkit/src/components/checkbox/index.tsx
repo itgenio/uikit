@@ -11,7 +11,7 @@ export type CheckboxProps = PropsWithChildren<{
   idQa?: string;
 }>;
 
-export function Checkbox({ children, hover, disabled, checked, idQa, onChange, className }: CheckboxProps) {
+export function Checkbox({ children, hover, disabled, checked, idQa, onChange = () => {}, className }: CheckboxProps) {
   return (
     <label className={classNames('gkit-checkbox', className)} id-qa={idQa}>
       <input

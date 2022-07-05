@@ -10,60 +10,54 @@ type Sizes = 'small' | 'large';
 export type DropdownProps = {
   size?: Sizes;
   label?: string;
-  helperText?: string;
   idQa?: string;
   className?: string;
-  placeholder?: string;
   filled?: boolean;
   error?: boolean;
   focus?: boolean;
   hover?: boolean;
   disabled?: boolean;
-  values?: string[];
+  values?: (string | number)[];
   options?: { label: string; value: string }[];
-  onChange?: (selectedValues: string[]) => void;
-  textBtnSelectAll?: string;
-  isShowBtnSelectAll?: boolean;
+  onChange?: (selectedValues: (string | number)[]) => void;
+  selectAllOptionLabel?: string;
+  hasSelectAllOption?: boolean;
 };
 
 export const Dropdown = React.memo(
   ({
-    hover,
     options,
     onChange,
+    size,
     filled,
     error,
     disabled,
-    size,
+    hover,
     focus,
     label,
     idQa,
     values,
     className,
-    textBtnSelectAll,
-    isShowBtnSelectAll,
+    selectAllOptionLabel,
+    hasSelectAllOption,
   }: DropdownProps) => {
-    const [selectedValues, setSelectedValues] = useState(values ?? []);
     const [open, setOpen] = useState(false);
+    const [isAllSelected, setAllSelected] = useState<boolean | undefined>(undefined);
 
     const ref = useRef(null);
-    useOnClickOutside(ref, () => setOpen(false));
-
     const popupRef = useRef<HTMLUListElement>(null);
 
-    const [selectedAll, setSelectedAll] = useState<boolean | undefined>(undefined);
+    useOnClickOutside(ref, () => setOpen(false));
 
     useEffect(() => {
-      onChange(selectedValues);
-
-      if (selectedValues.length === options.length) {
-        setSelectedAll(true);
-      } else if (selectedValues.length === 0) {
-        setSelectedAll(undefined);
+      if (values.length === options.length) {
+        setAllSelected(true);
+      } else if (values.length === 0) {
+        setAllSelected(undefined);
       } else {
-        setSelectedAll(false);
+        setAllSelected(false);
       }
-    }, [selectedValues, options.length, onChange]);
+    }, [values.length, options.length]);
 
     useLayoutEffect(() => {
       if (!open) return;
@@ -97,35 +91,31 @@ export const Dropdown = React.memo(
         <div className={classNames('content-wrapper', size)} onClick={() => setOpen(!open)}>
           <div className={classNames('dropdown-label', size, { filled, error, disabled })}>{label}</div>
 
-          {!!selectedValues.length && <div className="dropdown-select-count">{selectedValues.length}</div>}
+          {values.length !== 0 && <div className="dropdown-select-count">{values.length}</div>}
 
           <div className="dropdown-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
         </div>
 
         {open && !disabled && (
           <ul ref={popupRef} className="dropdown-popup">
-            {isShowBtnSelectAll && (
+            {hasSelectAllOption && (
               <li
                 className="dropdown-option selected-all"
-                onClick={() =>
-                  setSelectedAll(prevState => {
-                    const newStateAll = prevState === undefined ? true : undefined;
+                onClick={() => {
+                  setAllSelected(prevState => {
+                    return prevState === undefined ? true : undefined;
+                  });
 
-                    setSelectedValues(
-                      selectedValues.length === options.length ? [] : options.map(({ value }) => value)
-                    );
-
-                    return newStateAll;
-                  })
-                }
+                  onChange(values.length === options.length ? [] : options.map(({ value }) => value));
+                }}
               >
                 <span
                   className={classNames(
                     'box-selected-all',
-                    selectedAll !== undefined ? (selectedAll ? 'plus' : 'minus') : null
+                    isAllSelected !== undefined ? (isAllSelected ? 'plus' : 'minus') : null
                   )}
                 ></span>
-                {textBtnSelectAll ?? 'Выбрать все'}
+                {selectAllOptionLabel}
               </li>
             )}
 
@@ -133,17 +123,11 @@ export const Dropdown = React.memo(
               <li
                 className="dropdown-option"
                 key={value}
-                onChange={e => {
-                  e.stopPropagation();
-
-                  setSelectedValues(prevState =>
-                    prevState.includes(value) ? prevState.filter(state => state !== value) : [...prevState, value]
-                  );
-                }}
+                onChange={() =>
+                  onChange(values.includes(value) ? values.filter(state => state !== value) : [...values, value])
+                }
               >
-                <Checkbox checked={selectedValues.includes(value)} onChange={() => {}}>
-                  {label}
-                </Checkbox>
+                <Checkbox checked={values.includes(value)}>{label}</Checkbox>
               </li>
             ))}
           </ul>

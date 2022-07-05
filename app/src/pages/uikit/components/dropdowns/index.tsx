@@ -11,7 +11,7 @@ const options = [
 
 export function Dropdowns() {
   const sizes = ['small', 'large'] as const;
-  const [value, setValue] = useState<string[]>(['1']);
+  const [value, setValue] = useState<(string | number)[]>(['1']);
 
   const renderState = (state: string, props: any, index: number) => {
     return (
@@ -24,11 +24,12 @@ export function Dropdowns() {
               key={size}
               {...p}
               label="Label"
-              isShowBtnSelectAll
+              hasSelectAllOption
               options={options}
               values={value}
-              onChange={value => {
-                setValue(value);
+              selectAllOptionLabel="All Selected"
+              onChange={(values: (string | number)[]) => {
+                setValue(values);
               }}
             />
           );
