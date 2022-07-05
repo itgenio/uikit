@@ -109,13 +109,15 @@ export const Dropdown = React.memo(
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
                 }}
               >
-                <span
+                {/* <span
                   className={classNames(
                     'box-selected-all',
                     isAllSelected !== undefined ? (isAllSelected ? 'plus' : 'minus') : null
                   )}
-                ></span>
-                {selectAllOptionLabel}
+                ></span> */}
+                <Checkbox checked={values.length !== 0} type={isAllSelected ? 'check' : 'minus'}>
+                  {selectAllOptionLabel}
+                </Checkbox>
               </li>
             )}
 
