@@ -1,8 +1,16 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { RadioButton, RadioButtonProps } from '@itgenio/gkit';
 
+enum Fruit {
+  apple = 'apple',
+  banana = 'banana',
+  kiwi = 'kiwi',
+}
+
 export function RadioButtons() {
+  const [currentFruit, setFruit] = useState<string>(Fruit.apple);
+
   const renderState = (state: string, props: RadioButtonProps, index: number) => {
     return (
       <Fragment key={index}>
@@ -24,7 +32,33 @@ export function RadioButtons() {
 
   return (
     <div className="radioButtons">
-      <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
+      <div className="grid">
+        <Fragment>
+          <div>Example</div>
+
+          <div className="fruit">
+            {Object.values(Fruit).map(fruit => (
+              <RadioButton
+                key={fruit}
+                name="fruit"
+                checked={currentFruit === fruit}
+                value={fruit}
+                onChange={e => {
+                  const value = e.target.value;
+
+                  console.log(`${value} new fruit`);
+
+                  setFruit(value);
+                }}
+              >
+                {fruit}
+              </RadioButton>
+            ))}
+          </div>
+        </Fragment>
+
+        {states.map(({ state, props = {} }, index) => renderState(state, props, index))}
+      </div>
     </div>
   );
 }
