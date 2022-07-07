@@ -5,7 +5,6 @@ import { CheckmarkFilledIcon } from 'components/icons';
 
 export type CheckboxProps = PropsWithChildren<{
   disabled?: boolean;
-  type?: 'check' | 'minus';
   hover?: boolean;
   checked?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
