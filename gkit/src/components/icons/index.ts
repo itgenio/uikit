@@ -20,3 +20,5 @@ export * from './phone';
 export * from './search';
 export * from './star';
 export * from './subtract';
+export * from './addCircle';
+export * from './add';
