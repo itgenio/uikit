@@ -1,7 +1,7 @@
 @import (reference) "../../variables";
 @import (reference) "../../ui";
 
-.gkit-dropdown {
+.gkit-multi-select {
   border: 1px solid var(--gkit-color-neutral-200);
   position: relative;
   cursor: pointer;
@@ -30,7 +30,7 @@
       .text-base();
     }
 
-    .dropdown-label {
+    .multi-select-label {
       width: 100%;
       text-overflow: ellipsis;
       border: none;
@@ -57,7 +57,7 @@
     }
   }
 
-  .dropdown-select-count {
+  .multi-select-count {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +68,7 @@
     text-align: center;
   }
 
-  .dropdown-chevron {
+  .multi-select-chevron {
     display: flex;
     color: var(--gkit-color-neutral-700);
     justify-content: flex-end;
@@ -82,7 +82,7 @@
     }
   }
 
-  .dropdown-popup {
+  .multi-select-dropdown {
     padding: 0.25rem;
     position: absolute;
     z-index: 1;
@@ -92,7 +92,7 @@
     margin: 5px 0;
     list-style-type: none;
 
-    .dropdown-option {
+    .multi-select-option {
       display: flex;
       justify-content: space-between;
       align-items: center;

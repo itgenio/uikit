@@ -7,7 +7,9 @@ import { CheckmarkFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, Subtra
 
 type Sizes = 'small' | 'large';
 
-export type DropdownProps = {
+type Value = string | number;
+
+export type MultiSelectProps = {
   size?: Sizes;
   label?: string;
   idQa?: string;
@@ -17,14 +19,14 @@ export type DropdownProps = {
   focus?: boolean;
   hover?: boolean;
   disabled?: boolean;
-  values?: (string | number)[];
-  options?: { label: string; value: string }[];
-  onChange?: (selectedValues: (string | number)[]) => void;
+  values?: Value[];
+  options?: { label: string; value: Value }[];
+  onChange?: (selectedValues: Value[]) => void;
   selectAllOptionLabel?: string;
   hasSelectAllOption?: boolean;
 };
 
-export const Dropdown = React.memo(
+export const MultiSelect = React.memo(
   ({
     options,
     onChange,
@@ -40,7 +42,7 @@ export const Dropdown = React.memo(
     className,
     selectAllOptionLabel,
     hasSelectAllOption,
-  }: DropdownProps) => {
+  }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
     const [isAllSelected, setAllSelected] = useState<boolean>(false);
 
@@ -79,7 +81,7 @@ export const Dropdown = React.memo(
       <div
         id-qa={idQa}
         ref={ref}
-        className={classNames('gkit-dropdown', className, size, {
+        className={classNames('gkit-multi-select', className, size, {
           hover,
           focus,
           error,
@@ -87,18 +89,18 @@ export const Dropdown = React.memo(
         })}
       >
         <div className={classNames('content-wrapper', size)} onClick={() => setOpen(!open)}>
-          <div className={classNames('dropdown-label', size, { filled, error, disabled })}>{label}</div>
+          <div className={classNames('multi-select-label', size, { filled, error, disabled })}>{label}</div>
 
-          {values.length !== 0 && <div className="dropdown-select-count">{values.length}</div>}
+          {values.length !== 0 && <div className="multi-select-count">{values.length}</div>}
 
-          <div className="dropdown-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
+          <div className="multi-select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
         </div>
 
         {open && !disabled && (
-          <ul ref={popupRef} className="dropdown-popup">
+          <ul ref={popupRef} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li
-                className="dropdown-option selected-all"
+                className="multi-select-option selected-all"
                 onClick={() => {
                   setAllSelected(prevState => !prevState);
 
@@ -121,7 +123,7 @@ export const Dropdown = React.memo(
 
             {options.map(({ label, value }) => (
               <li
-                className="dropdown-option"
+                className="multi-select-option"
                 key={value}
                 onChange={() =>
                   onChange(values.includes(value) ? values.filter(state => state !== value) : [...values, value])
@@ -137,4 +139,4 @@ export const Dropdown = React.memo(
   }
 );
 
-Dropdown.displayName = 'Dropdown';
+MultiSelect.displayName = 'MultiSelect';

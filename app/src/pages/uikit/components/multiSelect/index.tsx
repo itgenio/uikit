@@ -1,7 +1,7 @@
 import './style.less';
 
 import React, { Fragment, useState } from 'react';
-import { Dropdown } from '@itgenio/gkit';
+import { MultiSelect } from '@itgenio/gkit';
 
 const options = [
   { label: 'Option1', value: '1' },
@@ -9,7 +9,7 @@ const options = [
   { label: 'Option3', value: '3' },
 ];
 
-export function Dropdowns() {
+export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<(string | number)[]>(['1']);
 
@@ -20,7 +20,7 @@ export function Dropdowns() {
         {sizes.map(size => {
           const p = { ...props, size };
           return (
-            <Dropdown
+            <MultiSelect
               key={size}
               {...p}
               label="Label"
@@ -48,10 +48,10 @@ export function Dropdowns() {
   ];
 
   return (
-    <div className="dropdowns">
+    <div className="multi-selects">
       <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
     </div>
   );
 }
 
-Dropdowns.displayName = 'Dropdowns';
+MultiSelects.displayName = 'MultiSelects';

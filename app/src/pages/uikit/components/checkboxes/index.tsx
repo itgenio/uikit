@@ -13,8 +13,8 @@ export function Checkboxes() {
   };
 
   const states: [string, CheckboxProps][] = [
-    ['Normal', {}],
-    ['Hover', { hover: true }],
+    ['Normal', { checked: false }],
+    ['Hover', { hover: true, checked: false }],
     ['Checked', { checked: true }],
     ['Disabled', { disabled: true, checked: false }],
     ['Disabled+Checked', { disabled: true, checked: true }],

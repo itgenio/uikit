@@ -9,7 +9,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
-import { Dropdowns } from './components/dropdowns';
+import { MultiSelects } from './components/multiSelect';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
@@ -45,7 +45,7 @@ const components = [
   Badges,
   Icons,
   Selects,
-  Dropdowns,
+  MultiSelects,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
