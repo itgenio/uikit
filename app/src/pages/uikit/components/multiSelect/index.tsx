@@ -1,7 +1,7 @@
 import './style.less';
 
 import React, { Fragment, useState } from 'react';
-import { MultiSelect } from '@itgenio/gkit';
+import { MultiSelect, MultiSelectProps } from '@itgenio/gkit';
 
 const options = [
   { label: 'Option1', value: '1' },
@@ -28,7 +28,7 @@ export function MultiSelects() {
               options={options}
               values={value}
               selectAllOptionLabel="All Selected"
-              onChange={(values: (string | number)[]) => {
+              onChange={values => {
                 setValue(values);
               }}
             />
@@ -38,7 +38,7 @@ export function MultiSelects() {
     );
   };
 
-  const states: { state: string; props?: any }[] = [
+  const states: { state: string; props?: MultiSelectProps }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
     { state: 'Focused', props: { focus: true } },

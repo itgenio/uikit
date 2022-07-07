@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { Checkbox } from '../checkbox';
-import { CheckmarkFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SubtractIcon } from '../icons';
+import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
 
 type Sizes = 'small' | 'large';
 
@@ -114,7 +114,8 @@ export const MultiSelect = React.memo(
 
                     onChange(!checked ? options.map(({ value }) => value) : []);
                   }}
-                  icon={isAllSelected ? <CheckmarkFilledIcon /> : <SubtractIcon />}
+                  icon={<SubtractFilledIcon />}
+                  checkedIcon={isAllSelected ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
                 >
                   {selectAllOptionLabel}
                 </Checkbox>
