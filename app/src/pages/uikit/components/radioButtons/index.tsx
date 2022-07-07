@@ -1,11 +1,19 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { RadioButton, RadioButtonProps } from '@itgenio/gkit';
 
+enum Fruit {
+  apple = 'apple',
+  banana = 'banana',
+  kiwi = 'kiwi',
+}
+
 export function RadioButtons() {
-  const renderState = (state: string, props: RadioButtonProps) => {
+  const [currentFruit, setFruit] = useState<string>(Fruit.apple);
+
+  const renderState = (state: string, props: RadioButtonProps, index: number) => {
     return (
-      <Fragment key={state}>
+      <Fragment key={index}>
         <div>{state}</div>
         <RadioButton {...props} onChange={() => console.log('click on radio button')}>
           label
@@ -14,17 +22,43 @@ export function RadioButtons() {
     );
   };
 
-  const states: [string, RadioButtonProps][] = [
-    ['Normal', {}],
-    ['Hover', { hover: true }],
-    ['Checked', { checked: true }],
-    ['Disabled', { disabled: true, checked: false }],
-    ['Disabled+Checked', { disabled: true, checked: true }],
+  const states: { state: string; props?: RadioButtonProps }[] = [
+    { state: 'Normal' },
+    { state: 'Hover', props: { hover: true } },
+    { state: 'Checked', props: { checked: true } },
+    { state: 'Disabled', props: { disabled: true, checked: false } },
+    { state: 'Disabled+Checked', props: { disabled: true, checked: true } },
   ];
 
   return (
     <div className="radioButtons">
-      <div className="grid">{states.map(([name, props]) => renderState(name, props))}</div>
+      <div className="grid">
+        <Fragment>
+          <div>Example</div>
+
+          <div className="fruit">
+            {Object.values(Fruit).map(fruit => (
+              <RadioButton
+                key={fruit}
+                name="fruit"
+                checked={currentFruit === fruit}
+                value={fruit}
+                onChange={e => {
+                  const value = e.target.value;
+
+                  console.log(`${value} new fruit`);
+
+                  setFruit(value);
+                }}
+              >
+                {fruit}
+              </RadioButton>
+            ))}
+          </div>
+        </Fragment>
+
+        {states.map(({ state, props = {} }, index) => renderState(state, props, index))}
+      </div>
     </div>
   );
 }
