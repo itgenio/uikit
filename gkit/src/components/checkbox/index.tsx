@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { PropsWithChildren } from 'react';
 import { CheckmarkFilledIcon } from 'components/icons';
+import React, { PropsWithChildren } from 'react';
 
 export type CheckboxProps = PropsWithChildren<{
   disabled?: boolean;
