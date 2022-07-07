@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { Checkbox } from '../checkbox';
-import { ChevronDownFilledIcon, ChevronUpFilledIcon } from '../icons';
+import { CheckmarkFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SubtractIcon } from '../icons';
 
 type Sizes = 'small' | 'large';
 
@@ -42,7 +42,7 @@ export const Dropdown = React.memo(
     hasSelectAllOption,
   }: DropdownProps) => {
     const [open, setOpen] = useState(false);
-    const [isAllSelected, setAllSelected] = useState<boolean | undefined>(undefined);
+    const [isAllSelected, setAllSelected] = useState<boolean>(false);
 
     const ref = useRef(null);
     const popupRef = useRef<HTMLUListElement>(null);
@@ -52,8 +52,6 @@ export const Dropdown = React.memo(
     useEffect(() => {
       if (values.length === options.length) {
         setAllSelected(true);
-      } else if (values.length === 0) {
-        setAllSelected(undefined);
       } else {
         setAllSelected(false);
       }
@@ -102,20 +100,20 @@ export const Dropdown = React.memo(
               <li
                 className="dropdown-option selected-all"
                 onClick={() => {
-                  setAllSelected(prevState => {
-                    return prevState === undefined ? true : undefined;
-                  });
+                  setAllSelected(prevState => !prevState);
 
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
                 }}
               >
-                {/* <span
-                  className={classNames(
-                    'box-selected-all',
-                    isAllSelected !== undefined ? (isAllSelected ? 'plus' : 'minus') : null
-                  )}
-                ></span> */}
-                <Checkbox checked={values.length !== 0} type={isAllSelected ? 'check' : 'minus'}>
+                <Checkbox
+                  checked={values.length !== 0}
+                  onChange={({ target: { checked } }) => {
+                    setAllSelected(!checked);
+
+                    onChange(!checked ? options.map(({ value }) => value) : []);
+                  }}
+                  icon={isAllSelected ? <CheckmarkFilledIcon /> : <SubtractIcon />}
+                >
                   {selectAllOptionLabel}
                 </Checkbox>
               </li>

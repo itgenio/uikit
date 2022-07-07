@@ -1,15 +1,13 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Checkbox, CheckboxProps } from '@itgenio/gkit';
+import { Checkbox, CheckboxProps, SubtractIcon } from '@itgenio/gkit';
 
 export function Checkboxes() {
   const renderState = (state: string, props: CheckboxProps) => {
     return (
       <Fragment key={state}>
         <div>{state}</div>
-        <Checkbox {...props} onChange={() => console.log('click on checkbox')}>
-          label
-        </Checkbox>
+        <Checkbox {...props}>label</Checkbox>
       </Fragment>
     );
   };
@@ -20,6 +18,7 @@ export function Checkboxes() {
     ['Checked', { checked: true }],
     ['Disabled', { disabled: true, checked: false }],
     ['Disabled+Checked', { disabled: true, checked: true }],
+    ['Minus', { checked: true, icon: <SubtractIcon /> }],
   ];
 
   return (
