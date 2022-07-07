@@ -19,7 +19,6 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
       className="modal-page-content"
       id-qa={idQa || 'modal-page-content'}
       onClick={e => {
-        e.preventDefault();
         e.stopPropagation();
       }}
     >
@@ -34,7 +33,6 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
     <div
       className={classNames('gkit-modal-page', { 'as-block': asBlock })}
       onClick={e => {
-        e.preventDefault();
         e.stopPropagation();
       }}
     >
@@ -46,7 +44,6 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
             className={classNames('gkit-modal-page-wrapper', className)}
             onClick={e => {
               e.stopPropagation();
-              e.preventDefault();
             }}
           >
             {render()}
