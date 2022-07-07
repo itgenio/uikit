@@ -3,9 +3,9 @@ import React, { Fragment } from 'react';
 import { RadioButton, RadioButtonProps } from '@itgenio/gkit';
 
 export function RadioButtons() {
-  const renderState = (state: string, props: RadioButtonProps) => {
+  const renderState = (state: string, props: RadioButtonProps, index: number) => {
     return (
-      <Fragment key={state}>
+      <Fragment key={index}>
         <div>{state}</div>
         <RadioButton {...props} onChange={() => console.log('click on radio button')}>
           label
@@ -14,17 +14,17 @@ export function RadioButtons() {
     );
   };
 
-  const states: [string, RadioButtonProps][] = [
-    ['Normal', {}],
-    ['Hover', { hover: true }],
-    ['Checked', { checked: true }],
-    ['Disabled', { disabled: true, checked: false }],
-    ['Disabled+Checked', { disabled: true, checked: true }],
+  const states: { state: string; props?: RadioButtonProps }[] = [
+    { state: 'Normal' },
+    { state: 'Hover', props: { hover: true } },
+    { state: 'Checked', props: { checked: true } },
+    { state: 'Disabled', props: { disabled: true, checked: false } },
+    { state: 'Disabled+Checked', props: { disabled: true, checked: true } },
   ];
 
   return (
     <div className="radioButtons">
-      <div className="grid">{states.map(([name, props]) => renderState(name, props))}</div>
+      <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
     </div>
   );
 }

@@ -9,8 +9,8 @@ export type RadioButtonProps = PropsWithChildren<{
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
   idQa?: string;
-  value: string | number | readonly string[];
-  name: string;
+  value?: string | number;
+  name?: string;
 }>;
 
 export function RadioButton({
