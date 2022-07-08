@@ -25,6 +25,7 @@ export function MultiSelects() {
               {...p}
               label="Label"
               hasSelectAllOption
+              helperText="Desc"
               options={options}
               values={value}
               selectAllOptionLabel="All Selected"

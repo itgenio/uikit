@@ -21,6 +21,7 @@ export type MultiSelectProps = {
   hover?: boolean;
   disabled?: boolean;
   values?: Value[];
+  helperText?: React.ReactNode;
   options?: { label: string; value: Value }[];
   onChange?: (selectedValues: Value[]) => void;
   selectAllOptionLabel?: string;
@@ -39,6 +40,7 @@ export const MultiSelect = React.memo(
     error,
     values,
     options,
+    helperText,
     onChange,
     selectAllOptionLabel,
     hasSelectAllOption,
@@ -69,61 +71,69 @@ export const MultiSelect = React.memo(
     }, [open]);
 
     return (
-      <div
-        id-qa={idQa}
-        ref={ref}
-        className={classNames('gkit-multi-select', className, size, {
-          hover,
-          focus,
-          error,
-          disabled,
-        })}
-      >
-        <div className={classNames('content-wrapper', size)} onClick={() => setOpen(!open)}>
-          <div className={classNames('multi-select-label', { disabled })}>{label}</div>
+      <div id-qa={idQa} className={classNames('gkit-multi-select-wrapper', size)}>
+        <div
+          ref={ref}
+          className={classNames('gkit-multi-select', className, size, {
+            hover,
+            focus,
+            error,
+            disabled,
+          })}
+        >
+          <div
+            className="multi-select-content-wrapper"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            <div className={classNames('multi-select-label', { disabled })}>{label}</div>
 
-          {values.length !== 0 && !disabled && <div className="multi-select-count">{values.length}</div>}
+            {values.length !== 0 && !disabled && <div className="multi-select-count">{values.length}</div>}
 
-          <div className="multi-select-chevron">
-            {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+            <div className="multi-select-chevron">
+              {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+            </div>
           </div>
+
+          {open && !disabled && (
+            <ul ref={dropdownRef} className="multi-select-dropdown">
+              {hasSelectAllOption && (
+                <li
+                  className={classNames('multi-select-option', size)}
+                  onClick={() => {
+                    onChange(values.length === options.length ? [] : options.map(({ value }) => value));
+                  }}
+                >
+                  <Checkbox
+                    checked={values.length !== 0}
+                    onChange={({ target: { checked } }) => {
+                      onChange(!checked ? options.map(({ value }) => value) : []);
+                    }}
+                    icon={<SubtractFilledIcon />}
+                    checkedIcon={values.length === options.length ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
+                  >
+                    {selectAllOptionLabel}
+                  </Checkbox>
+                </li>
+              )}
+
+              {options.map(({ label, value }) => (
+                <li
+                  className={classNames('multi-select-option', size)}
+                  key={value}
+                  onChange={() => {
+                    onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
+                  }}
+                >
+                  <Checkbox checked={values.includes(value)}>{label}</Checkbox>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {open && !disabled && (
-          <ul ref={dropdownRef} className="multi-select-dropdown">
-            {hasSelectAllOption && (
-              <li
-                className={classNames('multi-select-option', size)}
-                onClick={() => {
-                  onChange(values.length === options.length ? [] : options.map(({ value }) => value));
-                }}
-              >
-                <Checkbox
-                  checked={values.length !== 0}
-                  onChange={({ target: { checked } }) => {
-                    onChange(!checked ? options.map(({ value }) => value) : []);
-                  }}
-                  icon={<SubtractFilledIcon />}
-                  checkedIcon={values.length === options.length ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
-                >
-                  {selectAllOptionLabel}
-                </Checkbox>
-              </li>
-            )}
-
-            {options.map(({ label, value }) => (
-              <li
-                className={classNames('multi-select-option', size)}
-                key={value}
-                onChange={() => {
-                  onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
-                }}
-              >
-                <Checkbox checked={values.includes(value)}>{label}</Checkbox>
-              </li>
-            ))}
-          </ul>
-        )}
+        {helperText && <div className="multi-select-helper-text">{helperText}</div>}
       </div>
     );
   }
