@@ -16,7 +16,6 @@ export type MultiSelectProps = {
   label?: string;
   idQa?: string;
   className?: string;
-  filled?: boolean;
   error?: boolean;
   focus?: boolean;
   hover?: boolean;
@@ -30,18 +29,17 @@ export type MultiSelectProps = {
 
 export const MultiSelect = React.memo(
   ({
-    options,
-    onChange,
     size,
-    filled,
-    error,
-    disabled,
-    hover,
-    focus,
     label,
     idQa,
-    values,
     className,
+    focus,
+    hover,
+    disabled,
+    error,
+    values,
+    options,
+    onChange,
     selectAllOptionLabel,
     hasSelectAllOption,
   }: MultiSelectProps) => {
@@ -82,11 +80,13 @@ export const MultiSelect = React.memo(
         })}
       >
         <div className={classNames('content-wrapper', size)} onClick={() => setOpen(!open)}>
-          <div className={classNames('multi-select-label', { filled, error, disabled })}>{label}</div>
+          <div className={classNames('multi-select-label', { disabled })}>{label}</div>
 
-          {values.length !== 0 && <div className="multi-select-count">{values.length}</div>}
+          {values.length !== 0 && !disabled && <div className="multi-select-count">{values.length}</div>}
 
-          <div className="multi-select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
+          <div className="multi-select-chevron">
+            {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+          </div>
         </div>
 
         {open && !disabled && (

@@ -42,7 +42,6 @@ export function MultiSelects() {
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
     { state: 'Focused', props: { focus: true } },
-    { state: 'Filled', props: { filled: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
   ];
