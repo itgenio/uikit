@@ -12,6 +12,7 @@ import { Dialogs } from './components/dialogs';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
+import { MultiSelects } from './components/multiSelects';
 import { Panels } from './components/panels';
 import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
@@ -44,6 +45,7 @@ const components = [
   Badges,
   Icons,
   Selects,
+  MultiSelects,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;

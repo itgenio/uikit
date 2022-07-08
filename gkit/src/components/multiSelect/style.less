@@ -1,0 +1,136 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-multi-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &.small {
+    .text-sm();
+  }
+
+  &.large {
+    .text-base();
+  }
+
+  .gkit-multi-select {
+    border: 1px solid var(--gkit-color-neutral-200);
+    position: relative;
+    cursor: pointer;
+    background: var(--gkit-color-neutral-0);
+
+    &.small {
+      border-radius: 0.625rem;
+      padding: 0.625rem 0.75rem;
+    }
+
+    &.large {
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .multi-select-content-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .multi-select-label {
+        width: 100%;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        border: none;
+        flex: 0;
+
+        &.disabled {
+          color: var(--gkit-color-neutral-300);
+        }
+      }
+
+      .multi-select-count {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        padding: 0 0.5rem;
+        border-radius: 1rem;
+        background-color: var(--gkit-color-neutral-300);
+        text-align: center;
+      }
+
+      .multi-select-chevron {
+        display: flex;
+        color: var(--gkit-color-neutral-700);
+        justify-content: flex-end;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+
+        .gkit-svg-icon {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+
+    .multi-select-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--gkit-color-neutral-0);
+      margin: 0.3rem 0;
+      padding: 0.25rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--gkit-color-neutral-200);
+      list-style-type: none;
+      z-index: 1;
+
+      .multi-select-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
+        padding: 0.5rem 1rem;
+
+        &.small {
+          border-radius: 0.625rem;
+        }
+
+        &.large {
+          border-radius: 0.75rem;
+        }
+
+        &:hover {
+          background: var(--gkit-color-neutral-100);
+        }
+      }
+    }
+
+    &.hover,
+    &:hover {
+      border: 1px solid var(--gkit-color-light-primary-500);
+    }
+
+    &.focus,
+    :focus {
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-primary-600();
+    }
+
+    &.error {
+      border: 1px solid var(--gkit-color-danger-500);
+    }
+
+    &.disabled {
+      background: var(--gkit-color-neutral-100);
+      border: 1px solid var(--gkit-color-neutral-200);
+    }
+  }
+
+  .multi-select-helper-text {
+    color: var(--gkit-color-neutral-500);
+    .text-sm();
+  }
+}
