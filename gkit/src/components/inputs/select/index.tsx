@@ -94,7 +94,9 @@ export const Select = React.memo(
               value={options.find(option => option.value === value)?.label}
             />
 
-            <div className="select-chevron">{open ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}</div>
+            <div className="select-chevron">
+              {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+            </div>
           </div>
 
           {open && !disabled && (

@@ -50,6 +50,8 @@
       }
 
       &.disabled {
+        color: var(--gkit-color-neutral-300);
+
         &::placeholder {
           color: var(--gkit-color-neutral-300);
         }
@@ -75,6 +77,8 @@
     border: 1px solid var(--gkit-color-neutral-200);
     border-radius: 0.75rem;
     margin-top: 5px;
+    max-height: 280px;
+    overflow: auto;
 
     .select-option {
       display: flex;
