@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { Checkbox } from '../checkbox';
 import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
@@ -82,7 +82,7 @@ export const MultiSelect = React.memo(
         })}
       >
         <div className={classNames('content-wrapper', size)} onClick={() => setOpen(!open)}>
-          <div className={classNames('multi-select-label', size, { filled, error, disabled })}>{label}</div>
+          <div className={classNames('multi-select-label', { filled, error, disabled })}>{label}</div>
 
           {values.length !== 0 && <div className="multi-select-count">{values.length}</div>}
 
@@ -93,7 +93,7 @@ export const MultiSelect = React.memo(
           <ul ref={dropdownRef} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li
-                className="multi-select-option selected-all"
+                className={classNames('multi-select-option', size)}
                 onClick={() => {
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
                 }}
@@ -113,10 +113,10 @@ export const MultiSelect = React.memo(
 
             {options.map(({ label, value }) => (
               <li
-                className="multi-select-option"
+                className={classNames('multi-select-option', size)}
                 key={value}
                 onChange={() => {
-                  onChange(values.includes(value) ? values.filter(state => state !== value) : [...values, value]);
+                  onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
                 }}
               >
                 <Checkbox checked={values.includes(value)}>{label}</Checkbox>

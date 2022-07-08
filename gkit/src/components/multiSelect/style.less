@@ -9,10 +9,12 @@
 
   &.small {
     border-radius: 0.625rem;
+    .text-sm();
   }
 
   &.large {
     border-radius: 0.75rem;
+    .text-base();
   }
 
   .content-wrapper {
@@ -22,12 +24,10 @@
 
     &.small {
       padding: 0.625rem 0.75rem;
-      .text-sm();
     }
 
     &.large {
       padding: 0.75rem 1rem;
-      .text-base();
     }
 
     .multi-select-label {
@@ -36,23 +36,8 @@
       border: none;
       flex: 0;
 
-      &.filled,
-      &.error {
-        &::placeholder {
-          color: var(--gkit-color-neutral-900);
-        }
-      }
-
-      &.error {
-        &:focus {
-          outline: none;
-        }
-      }
-
       &.disabled {
-        &::placeholder {
-          color: var(--gkit-color-neutral-300);
-        }
+        color: var(--gkit-color-neutral-300);
       }
     }
   }
@@ -89,7 +74,7 @@
     background: var(--gkit-color-neutral-0);
     border: 1px solid var(--gkit-color-neutral-200);
     border-radius: 0.75rem;
-    margin: 5px 0;
+    margin: 0.3rem 0;
     list-style-type: none;
 
     .multi-select-option {
@@ -99,20 +84,11 @@
       white-space: nowrap;
       padding: 0.5rem 1rem;
 
-      &.selected-all {
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.75rem;
-        padding: 0.5rem 1rem;
-      }
-
       &.small {
-        .text-sm();
         border-radius: 0.625rem;
       }
 
       &.large {
-        .text-base();
         border-radius: 0.75rem;
       }
 
