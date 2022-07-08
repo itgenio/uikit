@@ -13,7 +13,7 @@ export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<(string | number)[]>(['1']);
 
-  const renderState = (state: string, props: any, index: number) => {
+  const renderState = (state: string, props: MultiSelectProps, index: number) => {
     return (
       <Fragment key={index}>
         <div>{state}</div>
