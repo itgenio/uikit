@@ -9,6 +9,8 @@ type Sizes = 'small' | 'large';
 
 type Value = string | number;
 
+const DROPDOWN_PADDING = 20;
+
 export type MultiSelectProps = {
   size?: Sizes;
   label?: string;
@@ -44,36 +46,27 @@ export const MultiSelect = React.memo(
     hasSelectAllOption,
   }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
-    const [isAllSelected, setAllSelected] = useState<boolean>(false);
 
     const ref = useRef(null);
-    const popupRef = useRef<HTMLUListElement>(null);
+    const dropdownRef = useRef<HTMLUListElement>(null);
 
     useOnClickOutside(ref, () => setOpen(false));
-
-    useEffect(() => {
-      if (values.length === options.length) {
-        setAllSelected(true);
-      } else {
-        setAllSelected(false);
-      }
-    }, [values.length, options.length]);
 
     useLayoutEffect(() => {
       if (!open) return;
 
-      const popup = popupRef.current;
+      const dropdownElement = dropdownRef.current;
 
-      if (!popup) return;
+      if (!dropdownElement) return;
 
-      const popupRect = popup.getBoundingClientRect();
+      const rect = dropdownElement.getBoundingClientRect();
 
-      if (popupRect.right > window.innerWidth) {
-        popup.style.insetInline = 'auto 0%';
+      if (rect.right > window.innerWidth) {
+        dropdownElement.style.left = `-${rect.right - window.innerWidth + DROPDOWN_PADDING}px`;
       }
 
-      if (popupRect.bottom > window.innerHeight) {
-        popup.style.insetBlock = 'auto 100%';
+      if (rect.bottom > window.innerHeight) {
+        dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + DROPDOWN_PADDING}px)`;
       }
     }, [open]);
 
@@ -97,25 +90,21 @@ export const MultiSelect = React.memo(
         </div>
 
         {open && !disabled && (
-          <ul ref={popupRef} className="multi-select-dropdown">
+          <ul ref={dropdownRef} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li
                 className="multi-select-option selected-all"
                 onClick={() => {
-                  setAllSelected(prevState => !prevState);
-
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
                 }}
               >
                 <Checkbox
                   checked={values.length !== 0}
                   onChange={({ target: { checked } }) => {
-                    setAllSelected(!checked);
-
                     onChange(!checked ? options.map(({ value }) => value) : []);
                   }}
                   icon={<SubtractFilledIcon />}
-                  checkedIcon={isAllSelected ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
+                  checkedIcon={values.length === options.length ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
                 >
                   {selectAllOptionLabel}
                 </Checkbox>
@@ -126,9 +115,9 @@ export const MultiSelect = React.memo(
               <li
                 className="multi-select-option"
                 key={value}
-                onChange={() =>
-                  onChange(values.includes(value) ? values.filter(state => state !== value) : [...values, value])
-                }
+                onChange={() => {
+                  onChange(values.includes(value) ? values.filter(state => state !== value) : [...values, value]);
+                }}
               >
                 <Checkbox checked={values.includes(value)}>{label}</Checkbox>
               </li>
