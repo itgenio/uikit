@@ -32,12 +32,14 @@ export function MultiSelects() {
               inputText="inputText"
               options={options}
               values={value}
-              customBadge={value => (
-                <Badge type="secondary" key={value} size={size}>
-                  {options.find(option => option?.value === value)?.label}
-                  <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
-                </Badge>
-              )}
+              customBadge={value =>
+                options.length !== 0 ? (
+                  <Badge type="secondary" key={value} size={size}>
+                    {options.find(option => option?.value === value)?.label}
+                    <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
+                  </Badge>
+                ) : null
+              }
               selectAllOptionLabel="All Selected"
               onChange={values => {
                 setValue(values);
