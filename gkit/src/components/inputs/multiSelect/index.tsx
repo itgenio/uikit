@@ -36,7 +36,7 @@ export type MultiSelectProps = {
   hasSelectAllOption?: boolean;
   inputText?: string;
   isBadge?: boolean;
-  customBadge?: () => React.ReactNode;
+  customBadge?: (value: Value) => React.ReactNode;
 };
 
 export const MultiSelect = React.memo(
