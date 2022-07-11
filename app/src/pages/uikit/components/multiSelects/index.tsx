@@ -3,7 +3,7 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { MultiSelect, MultiSelectProps, Badge, DismissIcon } from '@itgenio/gkit';
 
-const options: MultiSelect['options'] = [];
+const options: MultiSelectProps['options'] = [];
 
 for (let value = 1; value < 100; value++) {
   options.push({
