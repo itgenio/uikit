@@ -45,13 +45,15 @@ export function MultiSelects() {
     );
   };
 
-  const customBadge = size => value =>
-    (
+  const customBadge = size => {
+    const element = value => (
       <Badge type="primary" key={value} size={size}>
         {options.find(option => option.value === value)?.label}
         <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
       </Badge>
     );
+    return value => element(value);
+  };
 
   const states1: { state: string; props?: MultiSelectProps }[] = [
     { state: 'Normal' },
