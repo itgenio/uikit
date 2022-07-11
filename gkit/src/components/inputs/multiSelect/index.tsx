@@ -85,9 +85,15 @@ export const MultiSelect = React.memo(
     }, [open]);
 
     const defaultBadge = value => (
-      <Badge type="secondary" key={value} size={size}>
+      <Badge type="primary" key={value} size={size}>
         {options.find(option => option.value === value)?.label}
-        <DismissIcon onClick={() => onChange(values.filter(v => v !== value))} />
+        <DismissIcon
+          onClick={e => {
+            e.stopPropagation();
+
+            onChange(values.filter(v => v !== value));
+          }}
+        />
       </Badge>
     );
 
@@ -102,7 +108,12 @@ export const MultiSelect = React.memo(
             error,
             disabled,
           })}
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
+
+            // @ts-expect-error не знаю как сделать так чтобы не ругался
+            if (e.target.closest('.gkit-badge')) return;
+
             setOpen(!open);
           }}
         >

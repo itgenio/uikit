@@ -22,7 +22,6 @@ export function MultiSelects() {
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
-          const customBadge = props.customBadge ? props.customBadge(size) : undefined;
           return (
             <MultiSelect
               key={size}
@@ -32,8 +31,13 @@ export function MultiSelects() {
               helperText="Desc"
               inputText="inputText"
               options={options}
-              customBadge={customBadge}
               values={value}
+              customBadge={value => (
+                <Badge type="secondary" key={value} size={size}>
+                  {options.find(option => option.value === value)?.label}
+                  <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
+                </Badge>
+              )}
               selectAllOptionLabel="All Selected"
               onChange={values => {
                 setValue(values);
@@ -43,16 +47,6 @@ export function MultiSelects() {
         })}
       </Fragment>
     );
-  };
-
-  const customBadge = size => {
-    const element = value => (
-      <Badge type="primary" key={value} size={size}>
-        {options.find(option => option.value === value)?.label}
-        <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
-      </Badge>
-    );
-    return value => element(value);
   };
 
   const states1: { state: string; props?: MultiSelectProps }[] = [
@@ -68,14 +62,12 @@ export function MultiSelects() {
       state: 'Normal',
       props: {
         isBadge: true,
-        customBadge,
       },
     },
     {
       state: 'Hover',
       props: {
         isBadge: true,
-        customBadge,
         hover: true,
       },
     },
@@ -83,16 +75,14 @@ export function MultiSelects() {
       state: 'Focused',
       props: {
         isBadge: true,
-        customBadge,
         focus: true,
       },
     },
-    { state: 'Error', props: { isBadge: true, customBadge, error: true } },
+    { state: 'Error', props: { isBadge: true, error: true } },
     {
       state: 'Disabled',
       props: {
         isBadge: true,
-        customBadge,
         disabled: true,
       },
     },
