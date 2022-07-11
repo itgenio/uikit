@@ -3,14 +3,20 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { MultiSelect, MultiSelectProps, Badge, DismissIcon } from '@itgenio/gkit';
 
-const options: MultiSelectProps['options'] = [];
+const getOptions = () => {
+  const options: MultiSelectProps['options'] = [];
 
-for (let value = 1; value < 100; value++) {
-  options.push({
-    label: `Options ${value}`,
-    value,
-  });
-}
+  for (let value = 1; value < 100; value++) {
+    options.push({
+      label: `Options ${value}`,
+      value,
+    });
+  }
+
+  return options;
+};
+
+const options = getOptions();
 
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
