@@ -34,7 +34,7 @@ export function MultiSelects() {
               values={value}
               customBadge={value => (
                 <Badge type="secondary" key={value} size={size}>
-                  {options.find(option => option.value === value)?.label}
+                  {options.find(option => option?.value === value)?.label}
                   <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
                 </Badge>
               )}
