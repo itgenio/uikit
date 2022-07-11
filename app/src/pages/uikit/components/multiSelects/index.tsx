@@ -1,17 +1,20 @@
 import './style.less';
 
 import React, { Fragment, useState } from 'react';
-import { MultiSelect, MultiSelectProps } from '@itgenio/gkit';
+import { MultiSelect, MultiSelectProps, Badge, DismissIcon } from '@itgenio/gkit';
 
-const options = [
-  { label: 'Option1', value: '1' },
-  { label: 'Option2', value: '2' },
-  { label: 'Option3', value: '3' },
-];
+const options: MultiSelect['options'] = [];
+
+for (let value = 1; value < 100; value++) {
+  options.push({
+    label: `Options ${value}`,
+    value,
+  });
+}
 
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
-  const [value, setValue] = useState<(string | number)[]>(['1']);
+  const [value, setValue] = useState<(string | number)[]>([1]);
 
   const renderState = (state: string, props: MultiSelectProps, index: number) => {
     return (
@@ -19,6 +22,7 @@ export function MultiSelects() {
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
+          const customBadge = props.customBadge ? props.customBadge(size) : undefined;
           return (
             <MultiSelect
               key={size}
@@ -26,7 +30,9 @@ export function MultiSelects() {
               label="Label"
               hasSelectAllOption
               helperText="Desc"
+              inputText="inputText"
               options={options}
+              customBadge={customBadge}
               values={value}
               selectAllOptionLabel="All Selected"
               onChange={values => {
@@ -39,7 +45,15 @@ export function MultiSelects() {
     );
   };
 
-  const states: { state: string; props?: MultiSelectProps }[] = [
+  const customBadge = size => value =>
+    (
+      <Badge type="primary" key={value} size={size}>
+        {options.find(option => option.value === value)?.label}
+        <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
+      </Badge>
+    );
+
+  const states1: { state: string; props?: MultiSelectProps }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
     { state: 'Focused', props: { focus: true } },
@@ -47,9 +61,45 @@ export function MultiSelects() {
     { state: 'Disabled', props: { disabled: true } },
   ];
 
+  const states2: { state: string; props?: MultiSelectProps }[] = [
+    {
+      state: 'Normal',
+      props: {
+        isBadge: true,
+        customBadge,
+      },
+    },
+    {
+      state: 'Hover',
+      props: {
+        isBadge: true,
+        customBadge,
+        hover: true,
+      },
+    },
+    {
+      state: 'Focused',
+      props: {
+        isBadge: true,
+        customBadge,
+        focus: true,
+      },
+    },
+    { state: 'Error', props: { isBadge: true, customBadge, error: true } },
+    {
+      state: 'Disabled',
+      props: {
+        isBadge: true,
+        customBadge,
+        disabled: true,
+      },
+    },
+  ];
+
   return (
     <div className="multi-selects">
-      <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
+      <div className="grid">{states1.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
+      <div className="grid">{states2.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
     </div>
   );
 }
