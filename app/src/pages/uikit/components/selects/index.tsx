@@ -2,28 +2,11 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { Select, SelectProps, SelectOption } from '@itgenio/gkit';
 
-const options: SelectOption[] = [
-  { label: 'Option1 Option1 Option1 Option1 Option1', value: '1' },
-  { label: 'Option2', value: '2' },
-  { label: 'Option3', value: '3' },
-  { label: 'Option4', value: '4' },
-  { label: 'Option5', value: '5' },
-  { label: 'Option6', value: '6' },
-  { label: 'Option7', value: '7' },
-  { label: 'Option8', value: '8' },
-  { label: 'Option9', value: '9' },
-  { label: 'Option10', value: '10' },
-  { label: 'Option11', value: '11' },
-  { label: 'Option12', value: '12' },
-  { label: 'Option13', value: '13' },
-  { label: 'Option14', value: '14' },
-  { label: 'Option15', value: '15' },
-  { label: 'Option16', value: '16' },
-  { label: 'Option17', value: '17' },
-  { label: 'Option18', value: '18' },
-  { label: 'Option19', value: '19' },
-  { label: 'Option20', value: '20' },
-];
+const options: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
+  const index = i + 1;
+
+  return { label: `Option${index}`, value: index };
+});
 
 export function Selects() {
   const sizes = ['small', 'large'] as const;
