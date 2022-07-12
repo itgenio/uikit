@@ -23,6 +23,7 @@ export type MultiSelectProps = {
   size?: Sizes;
   label?: string;
   idQa?: string;
+  idQaDropdown?: string;
   className?: string;
   error?: boolean;
   focus?: boolean;
@@ -44,6 +45,7 @@ export const MultiSelect = React.memo(
     size,
     label,
     idQa,
+    idQaDropdown,
     className,
     focus,
     hover,
@@ -137,7 +139,7 @@ export const MultiSelect = React.memo(
         </div>
 
         {open && !disabled && (
-          <ul ref={dropdownRef} className="multi-select-dropdown">
+          <ul ref={dropdownRef} id-qa={idQaDropdown} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li
                 className={classNames('multi-select-option', size)}

@@ -18,6 +18,7 @@ export type SelectProps = {
   label?: string;
   helperText?: React.ReactNode;
   idQa?: string;
+  idQaDropdown?: string;
   onChange?: (value: Values) => void;
   placeholder?: string;
   className?: string;
@@ -48,6 +49,7 @@ export const Select = React.memo(
     placeholder,
     options,
     value,
+    idQaDropdown,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -100,7 +102,7 @@ export const Select = React.memo(
           </div>
 
           {open && !disabled && (
-            <div className="select-dropdown" ref={dropdownRef}>
+            <div className="select-dropdown" id-qa={idQaDropdown} ref={dropdownRef}>
               {options.map((option, index) => (
                 <div
                   className={classNames('select-option', size)}
