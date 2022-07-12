@@ -2,15 +2,8 @@ import './style.less';
 import classNames from 'classnames';
 import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { Badge } from '../../badge';
 import { Checkbox } from '../../checkbox';
-import {
-  SubtractFilledIcon,
-  ChevronDownFilledIcon,
-  ChevronUpFilledIcon,
-  CheckmarkFilledIcon,
-  DismissIcon,
-} from '../../icons';
+import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../../icons';
 import { InputsContainer } from '../components/inputsContainer';
 
 type Sizes = 'small' | 'large';
@@ -19,11 +12,12 @@ type Value = string | number;
 
 const DROPDOWN_PADDING = 20;
 
+type Options = { label: string; value: Value }[];
+
 export type MultiSelectProps = {
   size?: Sizes;
   label?: string;
   idQa?: string;
-  idQaDropdown?: string;
   className?: string;
   error?: boolean;
   focus?: boolean;
@@ -31,13 +25,12 @@ export type MultiSelectProps = {
   disabled?: boolean;
   values?: Value[];
   helperText?: React.ReactNode;
-  options?: { label: string; value: Value }[];
+  options?: Options;
   onChange?: (selectedValues: Value[]) => void;
   selectAllOptionLabel?: string;
   hasSelectAllOption?: boolean;
   inputText?: string;
-  isBadge?: boolean;
-  customBadge?: (value: Value) => React.ReactNode;
+  renderValues?: (values: Options) => React.ReactNode;
 };
 
 export const MultiSelect = React.memo(
@@ -45,7 +38,6 @@ export const MultiSelect = React.memo(
     size,
     label,
     idQa,
-    idQaDropdown,
     className,
     focus,
     hover,
@@ -58,10 +50,10 @@ export const MultiSelect = React.memo(
     selectAllOptionLabel,
     hasSelectAllOption,
     inputText,
-    isBadge = false,
-    customBadge,
+    renderValues: renderValuesProp,
   }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
+    const hasValue = values.length > 0;
 
     const ref = useRef(null);
     const dropdownRef = useRef<HTMLUListElement>(null);
@@ -86,25 +78,26 @@ export const MultiSelect = React.memo(
       }
     }, [open]);
 
-    const defaultBadge = value => (
-      <Badge type="primary" key={value} size={size}>
-        {options.find(option => option.value === value)?.label}
-        <DismissIcon
-          onClick={e => {
-            e.stopPropagation();
+    const renderValues = () => {
+      if (renderValuesProp) {
+        return hasValue ? renderValuesProp(options.filter(({ value }) => values.includes(value))) : inputText;
+      }
 
-            onChange(values.filter(v => v !== value));
-          }}
-        />
-      </Badge>
-    );
+      return (
+        <Fragment>
+          {inputText}
+
+          {hasValue && !disabled && <span className="multi-select-count">{values.length}</span>}
+        </Fragment>
+      );
+    };
 
     return (
       <InputsContainer
         {...{ ref, idQa, size, label, helperText, className: classNames('gkit-multi-select', className) }}
       >
         <div
-          className={classNames('multi-select-content-wrapper', size, {
+          className={classNames('multi-select-content', size, {
             hover,
             focus,
             error,
@@ -113,25 +106,11 @@ export const MultiSelect = React.memo(
           onClick={e => {
             e.stopPropagation();
 
-            // @ts-expect-error не знаю как сделать так чтобы не ругался
-            if (e.target.closest('.gkit-badge')) return;
-
             setOpen(!open);
           }}
         >
-          <div className={classNames('multi-select-label', size, { disabled, selected: values.length !== 0 })}>
-            {isBadge ? (
-              values.length !== 0 && !disabled ? (
-                values.map(customBadge ? customBadge : defaultBadge)
-              ) : (
-                inputText
-              )
-            ) : (
-              <Fragment>
-                {inputText}
-                {values.length !== 0 && !disabled && <span className="multi-select-count">{values.length}</span>}
-              </Fragment>
-            )}
+          <div className={classNames('multi-select-label', size, { disabled, selected: hasValue })}>
+            {renderValues()}
           </div>
           <div className="multi-select-chevron">
             {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
@@ -139,9 +118,10 @@ export const MultiSelect = React.memo(
         </div>
 
         {open && !disabled && (
-          <ul ref={dropdownRef} id-qa={idQaDropdown} className="multi-select-dropdown">
+          <ul ref={dropdownRef} id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li
+                id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
                 className={classNames('multi-select-option', size)}
                 onClick={() => {
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
@@ -149,7 +129,7 @@ export const MultiSelect = React.memo(
               >
                 <Checkbox
                   className="multi-select-checkbox"
-                  checked={values.length !== 0}
+                  checked={hasValue}
                   onChange={({ target: { checked } }) => {
                     onChange(!checked ? options.map(({ value }) => value) : []);
                   }}
@@ -163,6 +143,7 @@ export const MultiSelect = React.memo(
 
             {options.map(({ label, value }) => (
               <li
+                id-qa={classNames({ [`${idQa}-option-${value}`]: idQa })}
                 className={classNames('multi-select-option', size)}
                 key={value}
                 onChange={e => {
