@@ -3,26 +3,19 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { MultiSelect, MultiSelectProps, Badge, DismissIcon } from '@itgenio/gkit';
 
-const getOptions = () => {
-  const options: MultiSelectProps['options'] = [];
+type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => MultiSelectProps['renderValues'] };
 
-  for (let value = 1; value < 100; value++) {
-    options.push({
-      label: `Options ${value}`,
-      value,
-    });
-  }
+const options: NonNullable<MultiSelectProps['options']> = Array.from({ length: 60 }, (_, i) => {
+  const index = i + 1;
 
-  return options;
-};
-
-const options = getOptions();
+  return { label: `Option ${index}`, value: index };
+});
 
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
-  const [value, setValue] = useState<(string | number)[]>([1]);
+  const [value, setValue] = useState<MultiSelectProps['values']>([1]);
 
-  const renderState = (state: string, props: MultiSelectProps, index: number) => {
+  const renderState = (state: string, props: MultiSelectProps, customProps: CustomProps, index: number) => {
     return (
       <Fragment key={index}>
         <div>{state}</div>
@@ -32,20 +25,13 @@ export function MultiSelects() {
             <MultiSelect
               key={size}
               {...p}
+              renderValues={customProps?.closureRenderValue?.(size)}
               label="Label"
               hasSelectAllOption
               helperText="Desc"
               inputText="inputText"
               options={options}
               values={value}
-              customBadge={value =>
-                options.length !== 0 ? (
-                  <Badge type="secondary" key={value} size={size}>
-                    {options.find(option => option?.value === value)?.label}
-                    <DismissIcon onClick={() => setValue(prevState => prevState.filter(v => v !== value))} />
-                  </Badge>
-                ) : null
-              }
               selectAllOptionLabel="All Selected"
               onChange={values => {
                 setValue(values);
@@ -57,49 +43,46 @@ export function MultiSelects() {
     );
   };
 
-  const states1: { state: string; props?: MultiSelectProps }[] = [
+  const states: {
+    state: string;
+    props?: MultiSelectProps;
+    customProps?: CustomProps;
+  }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
     { state: 'Focused', props: { focus: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
-  ];
+    {
+      state: 'Custom Render Values',
+      customProps: {
+        closureRenderValue: size => values => {
+          return values.map(({ label, value }) => {
+            return (
+              <Badge type="secondary" key={value} size={size}>
+                {label}
+                <button
+                  onClick={e => {
+                    e.stopPropagation();
 
-  const states2: { state: string; props?: MultiSelectProps }[] = [
-    {
-      state: 'Normal',
-      props: {
-        isBadge: true,
-      },
-    },
-    {
-      state: 'Hover',
-      props: {
-        isBadge: true,
-        hover: true,
-      },
-    },
-    {
-      state: 'Focused',
-      props: {
-        isBadge: true,
-        focus: true,
-      },
-    },
-    { state: 'Error', props: { isBadge: true, error: true } },
-    {
-      state: 'Disabled',
-      props: {
-        isBadge: true,
-        disabled: true,
+                    setValue(prevState => prevState?.filter(v => v !== value));
+                  }}
+                >
+                  <DismissIcon />
+                </button>
+              </Badge>
+            );
+          });
+        },
       },
     },
   ];
 
   return (
     <div className="multi-selects">
-      <div className="grid">{states1.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
-      <div className="grid">{states2.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
+      <div className="grid">
+        {states.map(({ state, props = {}, customProps = {} }, index) => renderState(state, props, customProps, index))}
+      </div>
     </div>
   );
 }
