@@ -8,8 +8,8 @@ const STEP = 2;
 const DEFAULT_SIZE = 24;
 
 const ICONS = Object.entries(gkit)
-  .filter(([key]) => key.endsWith('Icon'))
-  .map(([, value]) => value)
+  .filter(([key, value]) => typeof value === 'function' && key.endsWith('Icon'))
+  .map(([, value]) => value as Function)
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export function Icons() {
