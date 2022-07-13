@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import React, { PropsWithChildren } from 'react';
-import { DismissIcon } from '../icons/dismiss';
+import { DismissIcon } from '../icons';
 
 type Props = PropsWithChildren<{
   title?: string;
@@ -44,6 +44,7 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
             className={classNames('gkit-modal-page-wrapper', className)}
             onClick={e => {
               e.stopPropagation();
+              onClose?.();
             }}
           >
             {render()}
