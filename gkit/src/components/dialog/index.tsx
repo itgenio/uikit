@@ -27,7 +27,11 @@ export function Dialog({ className, asBlock, children, onClose, open, idQa }: Di
   );
 
   return open === false ? null : (
-    <div className="gkit-dialog" style={{ '--gkitDialogZIndex': DIALOG_Z_INDEX } as CSSProperties}>
+    <div
+      className="gkit-dialog"
+      onClick={e => e.stopPropagation()}
+      style={{ '--gkitDialogZIndex': DIALOG_Z_INDEX } as CSSProperties}
+    >
       {asBlock ? (
         render()
       ) : (

@@ -29,6 +29,7 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
   return open === false ? null : (
     <div
       className={classNames('gkit-modal-page', { 'as-block': asBlock })}
+      onClick={e => e.stopPropagation()}
       style={{ '--gkitModalPageZIndex': MODAL_PAGE_Z_INDEX } as CSSProperties}
     >
       {asBlock ? (
