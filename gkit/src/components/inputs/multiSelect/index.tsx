@@ -12,7 +12,7 @@ type Value = string | number;
 
 const DROPDOWN_PADDING = 20;
 
-type Options = { label: string; value: Value }[];
+type Option = { label: string; value: Value };
 
 export type MultiSelectProps = {
   size?: Sizes;
@@ -25,12 +25,12 @@ export type MultiSelectProps = {
   disabled?: boolean;
   values?: Value[];
   helperText?: React.ReactNode;
-  options?: Options;
+  options?: Option[];
   onChange?: (selectedValues: Value[]) => void;
   selectAllOptionLabel?: string;
   hasSelectAllOption?: boolean;
   inputText?: string;
-  renderValues?: (values: Options) => React.ReactNode;
+  renderValues?: (values: Value[]) => React.ReactNode;
 };
 
 export const MultiSelect = React.memo(
@@ -80,7 +80,7 @@ export const MultiSelect = React.memo(
 
     const renderValues = () => {
       if (renderValuesProp) {
-        return hasValue ? renderValuesProp(options.filter(({ value }) => values.includes(value))) : inputText;
+        return renderValuesProp(values);
       }
 
       return (
