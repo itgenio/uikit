@@ -15,4 +15,3 @@ export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/badge';
 export * from './components/icons';
-export * from './components/multiSelect';

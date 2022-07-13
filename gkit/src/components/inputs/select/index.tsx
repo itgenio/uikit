@@ -100,9 +100,10 @@ export const Select = React.memo(
           </div>
 
           {open && !disabled && (
-            <div className="select-dropdown" ref={dropdownRef}>
+            <div className="select-dropdown" id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} ref={dropdownRef}>
               {options.map((option, index) => (
                 <div
+                  id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
                   className={classNames('select-option', size)}
                   key={index}
                   onClick={e => {
