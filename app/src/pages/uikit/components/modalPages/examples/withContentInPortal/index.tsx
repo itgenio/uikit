@@ -1,6 +1,6 @@
 import './style.less';
 
-import React, { CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   ModalPage,
@@ -8,7 +8,6 @@ import {
   ModalPageTitle,
   Button,
   ModalPageBody,
-  MODAL_PAGE_Z_INDEX,
   ButtonGroup,
   ModalPageText,
 } from '@itgenio/gkit';
@@ -32,10 +31,7 @@ export const ModalExampleWithContentInPortal = () => {
 
         <ModalPageBody>
           {ReactDOM.createPortal(
-            <div
-              className="modal-example-with-content-in-portal"
-              style={{ '--modalPageContentZIndex': MODAL_PAGE_Z_INDEX + 1 } as CSSProperties}
-            >
+            <div className="modal-example-with-content-in-portal">
               <ModalPageText>Count: {count}</ModalPageText>
 
               <ButtonGroup>

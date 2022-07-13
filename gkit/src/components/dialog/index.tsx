@@ -1,10 +1,9 @@
 import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
-import React, { CSSProperties, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { DismissIcon } from '../icons/dismiss';
 
-export const DIALOG_Z_INDEX = 2000;
 export const DIALOG_WRAPPER_CN = 'gkit-dialog-wrapper';
 
 type DialogProps = PropsWithChildren<{
@@ -27,11 +26,7 @@ export function Dialog({ className, asBlock, children, onClose, open, idQa }: Di
   );
 
   return open === false ? null : (
-    <div
-      className="gkit-dialog"
-      onClick={e => e.stopPropagation()}
-      style={{ '--gkitDialogZIndex': DIALOG_Z_INDEX } as CSSProperties}
-    >
+    <div className="gkit-dialog" onClick={e => e.stopPropagation()}>
       {asBlock ? (
         render()
       ) : (

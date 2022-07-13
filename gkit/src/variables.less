@@ -37,6 +37,9 @@
 @mobile-landscape: ~"only screen and (min-width: 481px) and (max-width: 767px)";
 @mobile-portrait: ~"only screen and (max-width: 480px)";
 
+@modal-page-z-index: 2000;
+@dialog-z-index: 2000;
+
 html {
   --gkit-text-size-xs: @text-size-xs;
   --gkit-text-size-sm: @text-size-sm;
@@ -45,6 +48,9 @@ html {
   --gkit-text-size-xl: @text-size-xl;
   --gkit-text-size-2xl: @text-size-2xl;
   --gkit-text-size-3xl: @text-size-3xl;
+
+  --gkit-modal-page-z-index: @modal-page-z-index;
+  --gkit-dialog-z-index: @dialog-z-index;
 
   --gkit-color-neutral-0: @color-light-neutral-0;
   --gkit-color-neutral-50: @color-light-neutral-50;

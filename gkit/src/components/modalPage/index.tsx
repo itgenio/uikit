@@ -1,10 +1,9 @@
 import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
-import React, { CSSProperties, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { DismissIcon } from '../icons/dismiss';
 
-export const MODAL_PAGE_Z_INDEX = 2000;
 export const MODAL_PAGE_WRAPPER_CN = 'gkit-modal-page-wrapper';
 
 type Props = PropsWithChildren<{
@@ -27,11 +26,7 @@ export function ModalPage({ className, asBlock, children, onClose, open, idQa }:
   );
 
   return open === false ? null : (
-    <div
-      className={classNames('gkit-modal-page', { 'as-block': asBlock })}
-      onClick={e => e.stopPropagation()}
-      style={{ '--gkitModalPageZIndex': MODAL_PAGE_Z_INDEX } as CSSProperties}
-    >
+    <div className={classNames('gkit-modal-page', { 'as-block': asBlock })} onClick={e => e.stopPropagation()}>
       {asBlock ? (
         render()
       ) : (
