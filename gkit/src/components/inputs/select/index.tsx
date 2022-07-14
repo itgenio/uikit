@@ -10,7 +10,7 @@ type Sizes = 'small' | 'large';
 
 type Values = string | number;
 
-export type SelectOption = { label: string; value: Values };
+export type SelectOption = { label: string; value: Values; group?: string };
 
 const DROPDOWN_PADDING = 20;
 
@@ -30,6 +30,7 @@ export type SelectProps = {
   disabled?: boolean;
   options?: SelectOption[];
   value?: Values;
+  divideByGroups?: boolean;
 };
 
 export const Select = React.memo(
@@ -48,6 +49,7 @@ export const Select = React.memo(
     placeholder,
     options,
     value,
+    divideByGroups,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -73,6 +75,49 @@ export const Select = React.memo(
         dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + DROPDOWN_PADDING}px)`;
       }
     }, [open]);
+
+    const renderOptionItem = (option, index) => (
+      <div
+        id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
+        className={classNames('select-option', size)}
+        key={index}
+        onClick={e => {
+          e.stopPropagation();
+          setOpen(!open);
+          onChange(option.value);
+        }}
+      >
+        {option.label}
+        {option.value === value && <CheckmarkIcon />}
+      </div>
+    );
+
+    const renderOptionsByGroups = () => {
+      let groupsLength = 0;
+
+      const mapOfGroups = options.reduce((acc, option) => {
+        if (!option.group) return acc;
+
+        if (!acc[option.group]) {
+          acc[option.group] = [option];
+          groupsLength++;
+        } else {
+          acc[option.group].push(option);
+        }
+
+        return acc;
+      }, {} as Record<string, SelectOption[]>);
+
+      return Object.keys(mapOfGroups).map((group, groupIdx) => [
+        options.filter(item => item.group === group).map((option, i) => renderOptionItem(option, i)),
+
+        groupIdx !== groupsLength - 1 && (
+          <div key={`divider-${groupIdx}`} tabIndex={-1}>
+            <hr />
+          </div>
+        ),
+      ]);
+    };
 
     return (
       <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
@@ -101,22 +146,9 @@ export const Select = React.memo(
 
           {open && !disabled && (
             <div className="select-dropdown" id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} ref={dropdownRef}>
-              {options.map((option, index) => (
-                <div
-                  id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
-                  className={classNames('select-option', size)}
-                  key={index}
-                  onClick={e => {
-                    e.stopPropagation();
-                    setOpen(!open);
-                    onChange(option.value);
-                  }}
-                >
-                  {option.label}
-
-                  {option.value === value && <CheckmarkIcon />}
-                </div>
-              ))}
+              {divideByGroups
+                ? renderOptionsByGroups()
+                : options.map((option, index) => renderOptionItem(option, index))}
             </div>
           )}
         </div>

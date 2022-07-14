@@ -8,6 +8,16 @@ const options: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   return { label: `Option${index}`, value: index };
 });
 
+const optionsWithGroups = options.map((option, i) => {
+  if (i % 2) {
+    option.group = `${i}`;
+  } else {
+    option.group = `${i + 1}`;
+  }
+
+  return option;
+});
+
 export function Selects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<string | number>('');
@@ -25,7 +35,7 @@ export function Selects() {
               placeholder="Placeholder"
               label="Label"
               helperText="Desc"
-              options={options}
+              options={state === 'DivideByGroups' ? optionsWithGroups : options}
               value={value}
               onChange={value => setValue(value)}
             />
@@ -40,6 +50,7 @@ export function Selects() {
     { state: 'Hover', props: { hover: true } },
     { state: 'Focused', props: { focus: true } },
     { state: 'Filled', props: { filled: true } },
+    { state: 'DivideByGroups', props: { divideByGroups: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
   ];
