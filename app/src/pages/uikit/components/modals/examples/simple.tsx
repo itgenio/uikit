@@ -17,12 +17,10 @@ export const ModalExampleDefault = () => {
           <Modal.Text>Какой-то длинный текст</Modal.Text>
         </Modal.Body>
 
-        <Modal.Footer idQa="modal-footer">
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-            <Button type="secondary">Ok</Button>
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
 
-            <Button type="danger">Not OK</Button>
-          </div>
+          <Button type="danger">Not OK</Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -50,12 +48,10 @@ export const ModalExampleAsBlockWithFooter = () => {
         <Modal.Title title="Modal with footer" idQa="modal-title" />
       </Modal.Header>
 
-      <Modal.Footer idQa="modal-footer">
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-          <Button type="secondary">Ok</Button>
+      <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+        <Button type="secondary">Ok</Button>
 
-          <Button type="danger">Not OK</Button>
-        </div>
+        <Button type="danger">Not OK</Button>
       </Modal.Footer>
     </Modal>
   );
@@ -73,8 +69,18 @@ export const ModalExampleDefaultFullScreen = () => {
         </Modal.Header>
 
         <Modal.Body>
-          <Modal.Text>Какой-то длинный текст</Modal.Text>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20rem' }}>
+            {['Какой-то', 'длинный', 'текст', 'со', 'скролом'].map((text, index) => (
+              <Modal.Text key={index}>{text}</Modal.Text>
+            ))}
+          </div>
         </Modal.Body>
+
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
+
+          <Button type="danger">Not OK</Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );

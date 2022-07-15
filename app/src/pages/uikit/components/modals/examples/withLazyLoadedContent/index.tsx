@@ -29,12 +29,10 @@ export const ModalExampleWithLazyLoadedContent = () => {
             <LazyContent />
           </Modal.Body>
 
-          <Modal.Footer idQa="modal-footer">
-            <div style={{ display: 'flex' }}>
-              <Button type="secondary">Ok</Button>
+          <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+            <Button type="secondary">Ok</Button>
 
-              <Button type="danger">Not OK</Button>
-            </div>
+            <Button type="danger">Not OK</Button>
           </Modal.Footer>
         </Modal>
       </React.Suspense>

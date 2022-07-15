@@ -1,4 +1,5 @@
 import './style.less';
+
 import React, { Fragment, FunctionComponent } from 'react';
 import {
   ModalExampleAsBlockWithFooter,
@@ -20,7 +21,7 @@ const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
 
 export function Modals() {
   return (
-    <div className="modals bg-neutral-50">
+    <div className="modals">
       <div className="grid">
         {EXAMPLES.map(({ name, Modal }, index) => {
           return (

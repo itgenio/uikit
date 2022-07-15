@@ -16,7 +16,7 @@ export const ModalExampleWithContentInPortal = () => {
     <div>
       <Button onClick={() => setOpen(o => !o)}>Open</Button>
 
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={open} onClose={() => setOpen(false)} fullScreen>
         <Modal.Header>
           <Modal.Title title="Counter" />
         </Modal.Header>
