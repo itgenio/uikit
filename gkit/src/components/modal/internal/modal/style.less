@@ -2,9 +2,13 @@
 
 .gkit-modal {
   position: relative;
-  z-index: var(--gkit-modal-z-index);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &.as-block {
-    z-index: unset;
+  &:not(.as-block) {
+    position: fixed;
+    inset: 0;
+    z-index: var(--gkit-modal-z-index);
   }
 }

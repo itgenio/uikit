@@ -1,7 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 import { Portal } from '../portal';
 import { ModalHeader, ModalTitle, ModalText, ModalBody, ModalFooter } from './components';
-import { ModalInternal, ModalContentInternal, ModalWrapperInternal } from './internal';
+import { usePreventBodyScroll } from './hooks/useBodyScroll';
+import { ModalInternal, ModalContentInternal, ModalWrapperInternal, ModalOverlayInternal } from './internal';
 
 export type { ModalHeaderProps, ModalTitleProps, ModalTextProps, ModalBodyProps, ModalFooterProps } from './components';
 
@@ -11,10 +12,22 @@ export type ModalProps = PropsWithChildren<{
   open?: boolean;
   asBlock?: boolean;
   fullScreen?: boolean;
+  preventBodyScroll?: boolean;
   idQa?: string;
 }>;
 
-export function Modal({ className, asBlock, fullScreen, children, onClose, open, idQa }: ModalProps) {
+export function Modal({
+  className,
+  open,
+  onClose,
+  asBlock,
+  fullScreen,
+  preventBodyScroll = true,
+  idQa,
+  children,
+}: ModalProps) {
+  usePreventBodyScroll(preventBodyScroll && open);
+
   // Для блока не обязательно передавать props.open, поэтому явно проверяем на false
   if (open === false) return null;
 
@@ -31,7 +44,9 @@ export function Modal({ className, asBlock, fullScreen, children, onClose, open,
   return (
     <Portal>
       <ModalInternal className={className} asBlock={false} idQa={idQa}>
-        <ModalWrapperInternal onClose={onClose}>
+        <ModalWrapperInternal>
+          <ModalOverlayInternal onClose={onClose} />
+
           <ModalContentInternal onClose={onClose} fullScreen={fullScreen}>
             {children}
           </ModalContentInternal>

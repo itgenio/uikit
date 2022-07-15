@@ -10,12 +10,12 @@ import {
 } from './examples';
 
 const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
-  { name: 'Default', Modal: ModalExampleDefault },
   { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
   { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
+  { name: 'Default', Modal: ModalExampleDefault },
+  { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
   { name: 'With content in portal', Modal: ModalExampleWithContentInPortal },
   { name: 'With lazy loaded content', Modal: ModalExampleWithLazyLoadedContent },
-  { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
 ];
 
 export function Modals() {

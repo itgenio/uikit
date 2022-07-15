@@ -16,6 +16,14 @@ export const ModalExampleDefault = () => {
         <Modal.Body>
           <Modal.Text>Какой-то длинный текст</Modal.Text>
         </Modal.Body>
+
+        <Modal.Footer idQa="modal-footer">
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <Button type="secondary">Ok</Button>
+
+            <Button type="danger">Not OK</Button>
+          </div>
+        </Modal.Footer>
       </Modal>
     </div>
   );
