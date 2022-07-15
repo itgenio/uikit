@@ -29,10 +29,11 @@ export function Checkbox({
 }: CheckboxProps) {
   return (
     <label className={classNames('gkit-checkbox', className)} id-qa={idQa}>
-      <input type="checkbox" id-qa={idQaCheckbox} disabled={disabled} checked={checked} onChange={onChange} />
-      <span className={classNames('checkbox', { hover })}>{checked ? checkedIcon : icon}</span>
+      <input type="checkbox" disabled={disabled} checked={checked} onChange={onChange} id-qa={idQaCheckbox} />
 
-      {children && <span className="checkbox-span">{children}</span>}
+      <span className={classNames('checkbox-body', { hover })}>{checked ? checkedIcon : icon}</span>
+
+      {children && <span className="checkbox-children">{children}</span>}
     </label>
   );
 }
