@@ -1,0 +1,59 @@
+@import (reference) "../../../../variables";
+@import (reference) "../../../../ui";
+
+.gkit-dialog .dialog-content {
+  .shadow-lg();
+
+  position: relative;
+  max-width: 50ch;
+  min-width: 260px;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin: auto;
+
+  .close-dialog-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    right: -2.25rem;
+    top: -2.25rem;
+    position: absolute;
+    cursor: pointer;
+  }
+}
+
+@media @mobile-portrait {
+  .gkit-dialog .dialog-content {
+    border-radius: 1rem 1rem 0 0;
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    width: 100%;
+
+    .close-dialog-btn {
+      right: 1.2rem;
+      top: 1.5rem;
+
+      .dismiss-icon {
+        width: 1rem;
+        height: 1rem;
+
+        path {
+          fill: var(--gkit-color-neutral-800);
+        }
+      }
+    }
+  }
+}
+
+.gkit-dialog .dialog-content {
+  background-color: var(--gkit-color-neutral-0);
+
+  .close-dialog-btn {
+    color: var(--gkit-color-neutral-200);
+  }
+}

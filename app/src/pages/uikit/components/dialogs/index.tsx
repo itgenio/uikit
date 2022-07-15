@@ -1,60 +1,62 @@
 import './style.less';
-import React, { useState } from 'react';
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, DialogText, DialogTitle } from '@itgenio/gkit';
 
-export function Dialogs() {
+import React, { useState } from 'react';
+import { Button, Dialog } from '@itgenio/gkit';
+
+const DialogExample = () => {
   const [open, setOpen] = useState(false);
 
+  return (
+    <div>
+      <Button onClick={() => setOpen(o => !o)}>Open</Button>
+
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog.Header>
+          <Dialog.Title title="Title" />
+        </Dialog.Header>
+
+        <Dialog.Body>
+          <Dialog.Text>Привет, это диалог! Какой-то длинный текст не помещается на всю ширину строки!</Dialog.Text>
+        </Dialog.Body>
+
+        <Dialog.Footer>
+          <DialogExample />
+        </Dialog.Footer>
+      </Dialog>
+    </div>
+  );
+};
+
+export function Dialogs() {
   return (
     <div className="dialogs bg-neutral-50">
       <div className="grid">
         <Dialog asBlock>
-          <DialogHeader>
-            <DialogTitle title="Dialog with footer" />
-          </DialogHeader>
+          <Dialog.Header>
+            <Dialog.Title title="Dialog with footer" />
+          </Dialog.Header>
 
-          <DialogFooter>
+          <Dialog.Footer>
             <div className="flex gap-4 items-start">
               <Button type="secondary">Ok</Button>
 
               <Button type="danger">Not OK</Button>
             </div>
-          </DialogFooter>
+          </Dialog.Footer>
         </Dialog>
 
         <Dialog asBlock>
-          <DialogHeader>
-            <DialogTitle title="Dialog with body and footer" />
-          </DialogHeader>
+          <Dialog.Header>
+            <Dialog.Title title="Dialog with body and footer" />
+          </Dialog.Header>
 
-          <DialogBody>
-            <DialogText>Привет, это диалог! Какой-то длинный текст не помещается на всю ширину строки!</DialogText>
-          </DialogBody>
+          <Dialog.Body>
+            <Dialog.Text>Привет, это диалог! Какой-то длинный текст не помещается на всю ширину строки!</Dialog.Text>
+          </Dialog.Body>
         </Dialog>
       </div>
 
-      <div>
-        <Button onClick={() => setOpen(o => !o)}>Open</Button>
-
-        <Dialog open={open} onClose={() => setOpen(false)}>
-          <DialogHeader>
-            <DialogTitle title="Title" />
-          </DialogHeader>
-
-          <DialogBody>
-            <DialogText>Привет, это диалог! Какой-то длинный текст не помещается на всю ширину строки!</DialogText>
-          </DialogBody>
-
-          <DialogFooter>
-            <Button type="neutral" size="large">
-              Добавить
-            </Button>
-            <Button type="primary" size="large">
-              Добавить
-            </Button>
-          </DialogFooter>
-        </Dialog>
-      </div>
+      <DialogExample />
     </div>
   );
 }
