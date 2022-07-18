@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { ChevronIcon } from '../icons/chevron';
+import { ChevronDownIcon } from '../icons/chevron';
 
 type AccordionProps = PropsWithChildren<{ idQa?: string }>;
 
@@ -17,7 +17,8 @@ export function AccordionSummary({ children, idQa }: AccordionProps) {
   return (
     <summary id-qa={idQa}>
       {children}
-      <ChevronIcon />
+
+      <ChevronDownIcon />
     </summary>
   );
 }

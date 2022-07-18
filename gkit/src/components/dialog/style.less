@@ -8,6 +8,7 @@
     position: fixed;
     inset: 0;
     display: flex;
+    z-index: var(--gkit-dialog-z-index);
   }
 
   .dialog-content {
@@ -62,24 +63,13 @@
       display: flex;
       gap: 0;
       margin-bottom: 0;
-      animation-name: contentUp;
-      animation-duration: 0.5s;
-
-      @keyframes contentUp {
-        0% {
-          height: 0;
-          padding: 0;
-        }
-        100% {
-          height: 30%;
-        }
-      }
+      width: 100%;
 
       .close-dialog-btn {
         right: 1.2rem;
         top: 1.5rem;
 
-        .close-icon {
+        .dismiss-icon {
           width: 1rem;
           height: 1rem;
 

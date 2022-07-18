@@ -2,31 +2,23 @@
 @import (reference) "../../ui";
 
 .gkit-dropdown-content {
-  min-width: 19.5rem;
   background-color: var(--gkit-color-neutral-0);
   border-radius: 0.5rem;
   padding: 0.25rem;
-  box-shadow: 0 0.25rem 0.75rem 0.12rem var(--gkit-color-neutral-200);
+  max-height: 280px;
+  overflow: auto;
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.1);
 
-  .dropdown-container-checkbox-item {
+  .dropdown-item {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     padding: 0.5rem 1rem;
-
-    .dropdown-checkbox-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .text-base();
-      font-family: 'Nunito Sans', serif;
-      font-weight: @font-weight-normal;
-
-      .icon-checkmark {
-        width: 24px;
-        height: 24px;
-        color: var(--gkit-color-primary-500);
-      }
-    }
+    white-space: nowrap;
+    .text-sm();
+    font-weight: @font-weight-normal;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--gkit-color-neutral-100);

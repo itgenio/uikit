@@ -2,7 +2,9 @@ import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import React, { PropsWithChildren } from 'react';
-import { CloseIcon } from '../icons/close';
+import { DismissIcon } from '../icons/dismiss';
+
+export const DIALOG_WRAPPER_CN = 'gkit-dialog-wrapper';
 
 type DialogProps = PropsWithChildren<{
   className?: string;
@@ -16,7 +18,7 @@ export function Dialog({ className, asBlock, children, onClose, open, idQa }: Di
   const render = () => (
     <div className="dialog-content" onClick={e => e.stopPropagation()} id-qa={idQa}>
       <button className="close-dialog-btn" onClick={() => onClose?.()}>
-        <CloseIcon />
+        <DismissIcon />
       </button>
 
       {children}
@@ -24,13 +26,14 @@ export function Dialog({ className, asBlock, children, onClose, open, idQa }: Di
   );
 
   return open === false ? null : (
-    <div className="gkit-dialog">
+    <div className="gkit-dialog" onClick={e => e.stopPropagation()}>
       {asBlock ? (
         render()
       ) : (
-        <FocusTrap>
+        // При динамической загрузке у FocusTrap'a нет tabbable elements, поэтому нужно передать селектор в fallbackFocus
+        <FocusTrap focusTrapOptions={{ allowOutsideClick: true, fallbackFocus: `.${DIALOG_WRAPPER_CN}` }}>
           <div
-            className={classNames('gkit-dialog-wrapper', className)}
+            className={classNames(DIALOG_WRAPPER_CN, className)}
             onClick={e => {
               e.stopPropagation();
               onClose?.();

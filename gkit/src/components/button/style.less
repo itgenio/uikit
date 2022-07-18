@@ -1,7 +1,7 @@
 @import (reference) "../../variables";
 @import (reference) "../../ui";
 
-.gkit-btn {
+.gkit-btn, .gkit-dropdown-trigger {
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -55,18 +55,21 @@
 .gkit-btn-group {
   display: inline-flex;
 
-  & > .gkit-btn:not(:first-child) {
+  & > .gkit-btn:not(:first-child),
+  .gkit-dropdown-trigger:not(:first-child) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-left: none;
   }
 
-  & > .gkit-btn:not(:last-child) {
+  & > .gkit-btn:not(:last-child),
+  .gkit-dropdown-trigger:not(:last-child) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
   }
 
-  & > .gkit-btn {
+  & > .gkit-btn,
+  .gkit-dropdown-trigger {
     &.primary,
     &.secondary,
     &.danger,
@@ -79,7 +82,7 @@
   }
 }
 
-.gkit-btn {
+.gkit-btn, .gkit-dropdown-trigger {
   &[disabled] {
     opacity: 0.4;
   }
