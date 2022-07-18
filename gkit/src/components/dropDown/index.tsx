@@ -16,7 +16,7 @@ type TriggerPickProps = Pick<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'as
 
 type TriggerProps = TriggerPickProps &
   PropsWithChildren<{
-    classNameTrigger?: string;
+    className?: string;
     size?: Sizes;
     type?: Types;
     asIcon?: boolean;
@@ -48,12 +48,12 @@ type ContentProps = Pick<
 type DropdownProps = ContainerProps &
   TriggerProps &
   ContentProps &
-  PropsWithChildren<{ idQa?: string; className?: string; content: React.ReactNode }>;
+  PropsWithChildren<{ idQa?: string; classNameContent?: string; content: React.ReactNode }>;
 
 export const Dropdown = ({
   children,
-  classNameTrigger,
   className,
+  classNameContent,
   idQa,
   asChild,
   size = 'normal',
@@ -87,7 +87,7 @@ export const Dropdown = ({
   return (
     <DropdownMenuPrimitive.Root id-qa={idQa} {...{ dir, open, onOpenChange, defaultOpen, modal }}>
       <DropdownMenuPrimitive.Trigger
-        className={classNames('gkit-dropdown-trigger', classNameTrigger, size, type, {
+        className={classNames('gkit-dropdown-trigger', className, size, type, {
           hover,
           active,
           focus,
@@ -98,7 +98,7 @@ export const Dropdown = ({
         {children}
       </DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Content
-        className={classNames('gkit-dropdown-content', className)}
+        className={classNames('gkit-dropdown-content', classNameContent)}
         {...{
           allowPinchZoom,
           loop,
@@ -183,7 +183,7 @@ type ItemIndicatorProps = ItemIndicatorPickProps & PropsWithChildren<{ className
 
 export const DropdownItemIndicator = ({ children, className, ...props }: ItemIndicatorProps) => {
   return (
-    <DropdownMenuPrimitive.ItemIndicator className={classNames('dropdown-indicator-item', className)} {...props}>
+    <DropdownMenuPrimitive.ItemIndicator className={classNames(className)} {...props}>
       {children}
     </DropdownMenuPrimitive.ItemIndicator>
   );

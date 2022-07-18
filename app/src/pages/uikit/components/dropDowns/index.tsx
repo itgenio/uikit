@@ -1,5 +1,5 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Dropdown,
   DropdownItem,
@@ -15,10 +15,6 @@ import {
 } from '@itgenio/gkit';
 
 export function Dropdowns() {
-  const [checked1, setChecked1] = React.useState(false);
-  const [checked2, setChecked2] = React.useState(false);
-  const [color, setColor] = React.useState('blue');
-
   const content = (
     <Fragment>
       <DropdownItem onSelect={() => console.log('click')}>Option 1</DropdownItem>
@@ -26,16 +22,31 @@ export function Dropdowns() {
     </Fragment>
   );
 
-  const contentCheckbox = (
+  return (
+    <div className="dropdown">
+      <div className="grid">
+        <ButtonGroup>
+          <Button>Кнопка</Button>
+          <Dropdown asIcon content={content} sideOffset={5} align="end">
+            <ChevronDownFilledIcon />
+          </Dropdown>
+        </ButtonGroup>
+
+        <DropdownCheckbox />
+
+        <DropdownRadio />
+      </div>
+    </div>
+  );
+}
+
+export function DropdownCheckbox() {
+  const [checked, setChecked] = useState(false);
+
+  const content = (
     <Fragment>
-      <DropdownCheckboxItem checked={checked1} onCheckedChange={setChecked1}>
-        Option 1
-        <DropdownItemIndicator>
-          <CheckmarkIcon />
-        </DropdownItemIndicator>
-      </DropdownCheckboxItem>
-      <DropdownCheckboxItem checked={checked2} onCheckedChange={setChecked2}>
-        Option 2
+      <DropdownCheckboxItem checked={checked} onCheckedChange={setChecked}>
+        Option
         <DropdownItemIndicator>
           <CheckmarkIcon />
         </DropdownItemIndicator>
@@ -43,7 +54,13 @@ export function Dropdowns() {
     </Fragment>
   );
 
-  const contentRadioBtn = (
+  return <Dropdown content={content}>Checkbox</Dropdown>;
+}
+
+export function DropdownRadio() {
+  const [color, setColor] = useState('blue');
+
+  const content = (
     <DropdownRadioGroup value={color} onValueChange={setColor}>
       <DropdownRadioItem value="red">
         red
@@ -61,29 +78,14 @@ export function Dropdowns() {
 
       <DropdownRadioItem value="green">
         green
-        <DropdownItemIndicator>
+        <DropdownItemIndicator asChild>
           <CircleIcon />
         </DropdownItemIndicator>
       </DropdownRadioItem>
     </DropdownRadioGroup>
   );
 
-  return (
-    <div className="dropdown">
-      <div className="grid">
-        <ButtonGroup>
-          <Button>Попросить перенос</Button>
-          <Dropdown asIcon content={content} sideOffset={5} align="end">
-            <ChevronDownFilledIcon />
-          </Dropdown>
-        </ButtonGroup>
-
-        <Dropdown content={contentCheckbox}>Checkbox</Dropdown>
-
-        <Dropdown content={contentRadioBtn}>RadioBtn</Dropdown>
-      </div>
-    </div>
-  );
+  return <Dropdown content={content}>RadioBtn</Dropdown>;
 }
 
 Dropdowns.displayName = 'Dropdowns';
