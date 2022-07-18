@@ -40,8 +40,7 @@ export function Switchers() {
 
   const states: { state: string; props?: SwitcherItemProps }[] = [
     { state: 'Normal', props: { idQa: 'id-qa item' } },
-    { state: 'Hover', props: { hover: true } },
-    { state: 'Active', props: { active: true } },
+    { state: 'Disabled', props: { disabled: true } },
   ];
 
   return (

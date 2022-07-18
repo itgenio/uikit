@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
@@ -76,7 +77,7 @@ export const Select = React.memo(
       }
     }, [open]);
 
-    const renderOptionItem = (option, index) => (
+    const renderOptionItem = (option: SelectOption, index: number) => (
       <div
         id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
         className={classNames('select-option', size)}
@@ -93,25 +94,15 @@ export const Select = React.memo(
     );
 
     const renderOptionsByGroups = () => {
-      let groupsLength = 0;
+      const optionsByGroupDict = groupByPropertyToDict(
+        options.filter(o => !!o.group),
+        option => option.group
+      );
 
-      const mapOfGroups = options.reduce((acc, option) => {
-        if (!option.group) return acc;
+      return Object.keys(optionsByGroupDict).map((group, groupIdx, groups) => [
+        optionsByGroupDict[group].map(renderOptionItem),
 
-        if (!acc[option.group]) {
-          acc[option.group] = [option];
-          groupsLength++;
-        } else {
-          acc[option.group].push(option);
-        }
-
-        return acc;
-      }, {} as Record<string, SelectOption[]>);
-
-      return Object.keys(mapOfGroups).map((group, groupIdx) => [
-        options.filter(item => item.group === group).map((option, i) => renderOptionItem(option, i)),
-
-        groupIdx !== groupsLength - 1 && (
+        groupIdx !== groups.length - 1 && (
           <div key={`divider-${groupIdx}`} tabIndex={-1}>
             <hr />
           </div>
@@ -146,9 +137,7 @@ export const Select = React.memo(
 
           {open && !disabled && (
             <div className="select-dropdown" id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} ref={dropdownRef}>
-              {divideByGroups
-                ? renderOptionsByGroups()
-                : options.map((option, index) => renderOptionItem(option, index))}
+              {divideByGroups ? renderOptionsByGroups() : options.map(renderOptionItem)}
             </div>
           )}
         </div>

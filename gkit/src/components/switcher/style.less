@@ -42,8 +42,7 @@
       }
     }
 
-    &:hover,
-    &.hover {
+    &:hover {
       background-color: var(--gkit-color-neutral-200);
 
       .circle-icon {
@@ -51,14 +50,25 @@
       }
     }
 
-    &:active,
-    &.active {
+    &:active {
       background-color: var(--gkit-color-neutral-0);
       color: var(--gkit-color-light-primary-700);
 
       .circle-icon {
         color: var(--gkit-color-light-primary-700);
       }
+    }
+
+    &:disabled {
+      * {
+        color: var(--gkit-color-neutral-400);
+      }
+
+      &:hover, &:active {
+        background-color: transparent;
+      }
+
+      cursor: default;
     }
 
     &[data-state="on"] {
