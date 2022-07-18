@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { CircleIcon } from '../icons/circle';
 
-type TogglePropsKeys = 'type' | 'defaultValue' | 'onValueChange';
+type TogglePropsKeys = 'type' | 'value' | 'onValueChange';
 
 type ToggleProps = Pick<ToggleGroupSingleProps, TogglePropsKeys> | Pick<ToggleGroupMultipleProps, TogglePropsKeys>;
 
