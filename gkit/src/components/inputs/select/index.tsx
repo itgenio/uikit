@@ -99,10 +99,10 @@ export const Select = React.memo(
         option => option.group
       );
 
-      return Object.keys(optionsByGroupDict).map((group, groupIdx, groups) => [
-        optionsByGroupDict[group].map(renderOptionItem),
+      return Object.values(optionsByGroupDict).map((groups, groupIdx, groupsOptions) => [
+        groups.map(renderOptionItem),
 
-        groupIdx !== groups.length - 1 && (
+        groupIdx !== groupsOptions.length - 1 && (
           <div key={`divider-${groupIdx}`} tabIndex={-1}>
             <hr />
           </div>
