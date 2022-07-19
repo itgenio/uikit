@@ -8,22 +8,9 @@ type ContainerProps = Pick<
   'dir' | 'open' | 'onOpenChange' | 'defaultOpen' | 'modal'
 >;
 
-type Sizes = 'small' | 'normal' | 'large';
-
-type Types = 'primary' | 'secondary' | 'linkSecondary' | 'danger' | 'neutral' | 'linkNeutral';
-
 type TriggerPickProps = Pick<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'asChild'>;
 
-type TriggerProps = TriggerPickProps &
-  PropsWithChildren<{
-    className?: string;
-    size?: Sizes;
-    type?: Types;
-    asIcon?: boolean;
-    hover?: boolean;
-    active?: boolean;
-    focus?: boolean;
-  }>;
+type TriggerProps = TriggerPickProps & PropsWithChildren<{ className?: string }>;
 
 type ContentProps = Pick<
   DropdownMenuPrimitive.DropdownMenuContentProps,
@@ -56,12 +43,6 @@ export const Dropdown = ({
   classNameContent,
   idQa,
   asChild,
-  size = 'normal',
-  type = 'primary',
-  asIcon,
-  hover,
-  active,
-  focus,
   content,
   dir,
   open,
@@ -86,15 +67,7 @@ export const Dropdown = ({
 }: DropdownProps) => {
   return (
     <DropdownMenuPrimitive.Root id-qa={idQa} {...{ dir, open, onOpenChange, defaultOpen, modal }}>
-      <DropdownMenuPrimitive.Trigger
-        className={classNames('gkit-dropdown-trigger', className, size, type, {
-          hover,
-          active,
-          focus,
-          icon: asIcon,
-        })}
-        asChild={asChild}
-      >
+      <DropdownMenuPrimitive.Trigger className={classNames(className)} asChild={asChild}>
         {children}
       </DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Content

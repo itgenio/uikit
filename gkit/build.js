@@ -33,6 +33,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       '@radix-ui/react-popover',
       '@radix-ui/react-tooltip',
       'use-onclickoutside',
+      '@itgenio/utils',
     ],
     outdir: path.resolve(__dirname, 'dist'),
     plugins: [lessLoader({}), svgrPlugin()],

@@ -1,10 +1,12 @@
 import './style.less';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherItemProps } from '@itgenio/gkit';
 
 const sizes = ['medium', 'large'] as const;
 
 export function Switchers() {
+  const [value, setValue] = useState('left');
+
   const renderState = (state: string, props: SwitcherItemProps, index: number) => {
     return (
       <Fragment key={index}>
@@ -38,8 +40,7 @@ export function Switchers() {
 
   const states: { state: string; props?: SwitcherItemProps }[] = [
     { state: 'Normal', props: { idQa: 'id-qa item' } },
-    { state: 'Hover', props: { hover: true } },
-    { state: 'Active', props: { active: true } },
+    { state: 'Disabled', props: { disabled: true } },
   ];
 
   return (
@@ -50,16 +51,24 @@ export function Switchers() {
           <SwitcherContainer
             key={size}
             type="single"
-            defaultValue="left"
+            value={value}
             idQa="id-qa switcher"
-            onValueChange={e => console.log(e)}
+            onValueChange={newValue => {
+              console.log({ newValue });
+
+              if (!newValue) return;
+
+              setValue(newValue);
+            }}
           >
             <SwitcherItem size={size} value="left">
               Toggle Item
             </SwitcherItem>
+
             <SwitcherItem size={size} value="center">
               Toggle Item
             </SwitcherItem>
+
             <SwitcherItem size={size} value="right">
               Toggle Item
             </SwitcherItem>

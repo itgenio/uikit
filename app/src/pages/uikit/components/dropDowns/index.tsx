@@ -27,8 +27,10 @@ export function Dropdowns() {
       <div className="grid">
         <ButtonGroup>
           <Button>Кнопка</Button>
-          <Dropdown asIcon content={content} sideOffset={5} align="end">
-            <ChevronDownFilledIcon />
+          <Dropdown asChild content={content} sideOffset={5} align="end">
+            <Button asIcon type="primary">
+              <ChevronDownFilledIcon />
+            </Button>
           </Dropdown>
         </ButtonGroup>
 
@@ -78,7 +80,7 @@ export function DropdownRadio() {
 
       <DropdownRadioItem value="green">
         green
-        <DropdownItemIndicator asChild>
+        <DropdownItemIndicator>
           <CircleIcon />
         </DropdownItemIndicator>
       </DropdownRadioItem>
