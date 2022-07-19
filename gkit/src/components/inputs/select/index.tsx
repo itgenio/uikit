@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
 import { InputsContainer } from '../components/inputsContainer';
@@ -10,7 +11,7 @@ type Sizes = 'small' | 'large';
 
 type Values = string | number;
 
-export type SelectOption = { label: string; value: Values };
+export type SelectOption = { label: string; value: Values; group?: string };
 
 const DROPDOWN_PADDING = 20;
 
@@ -30,6 +31,7 @@ export type SelectProps = {
   disabled?: boolean;
   options?: SelectOption[];
   value?: Values;
+  divideByGroups?: boolean;
 };
 
 export const Select = React.memo(
@@ -48,6 +50,7 @@ export const Select = React.memo(
     placeholder,
     options,
     value,
+    divideByGroups,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -73,6 +76,39 @@ export const Select = React.memo(
         dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + DROPDOWN_PADDING}px)`;
       }
     }, [open]);
+
+    const renderOptionItem = (option: SelectOption, index: number) => (
+      <div
+        id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
+        className={classNames('select-option', size)}
+        key={index}
+        onClick={e => {
+          e.stopPropagation();
+          setOpen(!open);
+          onChange(option.value);
+        }}
+      >
+        {option.label}
+        {option.value === value && <CheckmarkIcon />}
+      </div>
+    );
+
+    const renderOptionsByGroups = () => {
+      const optionsByGroupDict = groupByPropertyToDict(
+        options.filter(o => !!o.group),
+        option => option.group
+      );
+
+      return Object.values(optionsByGroupDict).map((groups, groupIdx, groupsOptions) => [
+        groups.map(renderOptionItem),
+
+        groupIdx !== groupsOptions.length - 1 && (
+          <div key={`divider-${groupIdx}`} tabIndex={-1}>
+            <hr />
+          </div>
+        ),
+      ]);
+    };
 
     return (
       <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
@@ -101,22 +137,7 @@ export const Select = React.memo(
 
           {open && !disabled && (
             <div className="select-dropdown" id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} ref={dropdownRef}>
-              {options.map((option, index) => (
-                <div
-                  id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
-                  className={classNames('select-option', size)}
-                  key={index}
-                  onClick={e => {
-                    e.stopPropagation();
-                    setOpen(!open);
-                    onChange(option.value);
-                  }}
-                >
-                  {option.label}
-
-                  {option.value === value && <CheckmarkIcon />}
-                </div>
-              ))}
+              {divideByGroups ? renderOptionsByGroups() : options.map(renderOptionItem)}
             </div>
           )}
         </div>
