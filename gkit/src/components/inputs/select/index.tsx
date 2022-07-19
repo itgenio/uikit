@@ -99,11 +99,11 @@ export const Select = React.memo(
         option => option.group
       );
 
-      return Object.values(optionsByGroupDict).map((groups, groupIdx, groupsOptions) => [
-        groups.map(renderOptionItem),
+      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
+        options.map(renderOptionItem),
 
-        groupIdx !== groupsOptions.length - 1 && (
-          <div key={`divider-${groupIdx}`} tabIndex={-1}>
+        index !== groupedOptions.length - 1 && (
+          <div key={`divider-${index}`} tabIndex={-1}>
             <hr />
           </div>
         ),
