@@ -8,10 +8,9 @@ import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
-import { Dialogs } from './components/dialogs';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
-import { ModalPages } from './components/modalPages';
+import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
 import { Panels } from './components/panels';
 import { Popovers } from './components/popovers';
@@ -32,8 +31,7 @@ const components = [
   Panels,
   TabsExample,
   TextFields,
-  Dialogs,
-  ModalPages,
+  Modals,
   TextAreas,
   Popovers,
   Switchers,

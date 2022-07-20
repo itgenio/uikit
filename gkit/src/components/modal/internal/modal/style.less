@@ -1,0 +1,14 @@
+@import (reference) "../../../../variables";
+
+.gkit-modal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:not(.as-block) {
+    position: fixed;
+    inset: 0;
+    z-index: var(--gkit-modal-z-index);
+  }
+}

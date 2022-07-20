@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ModalPage, ModalPageHeader, ModalPageTitle, Button, ModalPageBody, ModalPageFooter } from '@itgenio/gkit';
+import { Button, Modal } from '@itgenio/gkit';
 
 const LazyContent = React.lazy(async () => {
   return await import('./content').then(components => {
@@ -20,23 +20,21 @@ export const ModalExampleWithLazyLoadedContent = () => {
       <React.Suspense fallback={<div>Loading...</div>}>
         <Button onClick={() => setOpen(o => !o)}>Open</Button>
 
-        <ModalPage open={open} onClose={() => setOpen(false)}>
-          <ModalPageHeader>
-            <ModalPageTitle title="Lazy loaded content" />
-          </ModalPageHeader>
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <Modal.Header>
+            <Modal.Title title="Lazy loaded content" />
+          </Modal.Header>
 
-          <ModalPageBody>
+          <Modal.Body>
             <LazyContent />
-          </ModalPageBody>
+          </Modal.Body>
 
-          <ModalPageFooter idQa="modal-footer">
-            <div style={{ display: 'flex' }}>
-              <Button type="secondary">Ok</Button>
+          <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+            <Button type="secondary">Ok</Button>
 
-              <Button type="danger">Not OK</Button>
-            </div>
-          </ModalPageFooter>
-        </ModalPage>
+            <Button type="danger">Not OK</Button>
+          </Modal.Footer>
+        </Modal>
       </React.Suspense>
     </div>
   );
