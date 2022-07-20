@@ -1,4 +1,4 @@
-const path = require('node:path/win32');
+const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgrPlugin = require('./svgrPlugin');
