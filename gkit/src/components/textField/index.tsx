@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo, useState } from 'react';
 import { generateId } from '../../utils/generateId';
-import { InputsContainer } from '../components/inputsContainer';
+import { InputsContainer } from '../internal/inputsContainer';
 
 type Sizes = 'small' | 'large';
 

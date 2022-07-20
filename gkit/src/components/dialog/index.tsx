@@ -2,7 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import React, { PropsWithChildren } from 'react';
-import { DismissIcon } from '../icons/dismiss';
+import { DismissIcon } from '../../icons/dismiss';
 
 export const DIALOG_WRAPPER_CN = 'gkit-dialog-wrapper';
 

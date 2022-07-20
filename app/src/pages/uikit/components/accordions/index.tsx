@@ -1,6 +1,12 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { AccordionDetails, AccordionTitle, AccordionText, AccordionSummary, AccordionTitleProps } from '@itgenio/gkit';
+import {
+  AccordionDetails,
+  AccordionTitle,
+  AccordionText,
+  AccordionSummary,
+  AccordionTitleProps,
+} from '@itgenio/gkit/accordion';
 import { CheckIcon } from './checkIcon';
 
 export function Accordions() {

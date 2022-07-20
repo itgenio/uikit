@@ -5,7 +5,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
 import { generateId } from '../../utils/generateId';
-import { InputsContainer } from '../components/inputsContainer';
+import { InputsContainer } from '../internal/inputsContainer';
 
 type Sizes = 'small' | 'large';
 

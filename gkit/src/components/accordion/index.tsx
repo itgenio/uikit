@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { ChevronDownIcon } from '../icons/chevron';
+import { ChevronDownIcon } from '../../icons/chevron';
 
 type AccordionProps = PropsWithChildren<{ idQa?: string }>;
 

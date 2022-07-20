@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Button } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
 
 export function Buttons() {
   const sizes = ['small', 'normal', 'large'];

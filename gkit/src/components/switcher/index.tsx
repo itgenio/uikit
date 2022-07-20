@@ -7,7 +7,7 @@ import {
 } from '@radix-ui/react-toggle-group';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { CircleIcon } from '../icons/circle';
+import { CircleIcon } from '../../icons/circle';
 
 type TogglePropsKeys = 'type' | 'value' | 'onValueChange';
 

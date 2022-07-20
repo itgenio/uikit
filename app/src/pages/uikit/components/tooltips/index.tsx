@@ -1,6 +1,6 @@
 import './style.less';
 import React from 'react';
-import { Tooltip, TooltipProps } from '@itgenio/gkit';
+import { Tooltip, TooltipProps } from '@itgenio/gkit/tooltip';
 
 export function Tooltips() {
   const content = (

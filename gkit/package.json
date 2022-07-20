@@ -2,15 +2,13 @@
   "name": "@itgenio/gkit",
   "version": "0.0.60",
   "description": "GKIT",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "./index.js",
   "scripts": {
-    "build": "rimraf dist && cross-env NODE_ENV=production ts-node ./build.js",
-    "watch": "rimraf dist && ts-node ./build.js",
-    "tsc": "tsc",
-    "prepack": "npm run build && npm run tsc"
+    "build": "npm run rimraf && cross-env NODE_ENV=production ts-node ./scripts/build.js",
+    "watch": "npm run rimraf && ts-node ./scripts/build.js",
+    "tsc": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build && npm run tsc",
+    "rimraf": "ts-node ./scripts/rimraf.js"
   },
   "author": "Alex So",
   "license": "MIT",
@@ -31,8 +29,11 @@
     "cross-env": "^7.0.3",
     "esbuild": "^0.14.16",
     "esbuild-plugin-less": "^1.1.6",
+    "globby": "^13.1.2",
+    "less": "^4.1.3",
     "react": "^17.0.2",
     "rimraf": "^3.0.2",
+    "tiny-glob": "^0.2.9",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },

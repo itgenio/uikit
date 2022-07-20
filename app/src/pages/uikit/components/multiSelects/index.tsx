@@ -1,7 +1,9 @@
 import './style.less';
 
 import React, { Fragment, useState } from 'react';
-import { MultiSelect, MultiSelectProps, Badge, DismissIcon } from '@itgenio/gkit';
+import { Badge } from '@itgenio/gkit/badge';
+import { DismissIcon } from '@itgenio/gkit/icons';
+import { MultiSelect, MultiSelectProps } from '@itgenio/gkit/multiSelect';
 
 type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => MultiSelectProps['renderValues'] };
 

@@ -2,7 +2,7 @@ import './style.less';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { DismissIcon } from '../icons/dismiss';
+import { DismissIcon } from '../../icons/dismiss';
 
 type RootProps = Pick<PopoverPrimitive.PopoverProps, 'defaultOpen' | 'open' | 'onOpenChange' | 'modal'>;
 

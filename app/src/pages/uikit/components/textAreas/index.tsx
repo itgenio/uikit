@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { TextArea, TextAreaProps } from '@itgenio/gkit';
+import { TextArea, TextAreaProps } from '@itgenio/gkit/textArea';
 
 export function TextAreas() {
   const sizes = ['small', 'large'] as const;

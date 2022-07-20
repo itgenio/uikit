@@ -1,12 +1,22 @@
-const path = require('path');
+const path = require('node:path/win32');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgrPlugin = require('./svgrPlugin');
+const writePlugin = require('./writePlugin');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
 
 (async () => {
+  const { globby } = await import('globby');
+
+  const entryPoints = await globby([
+    'src/index.ts', // global styles
+    'src/icons/index.ts', // icons
+    'src/components/*/index.tsx', // components
+    '!src/components/internal', // exclude internal components
+  ]);
+
   build({
     watch: isProduction
       ? false
@@ -17,12 +27,11 @@ const isProduction = process.env.NODE_ENV === 'production';
             }
           },
         },
-    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
-    outbase: 'src',
+    entryPoints,
     bundle: true,
     format: 'esm',
-    splitting: true,
     keepNames: true,
+    write: false, // check writePlugin
     external: [
       'react',
       'react-dom',
@@ -34,10 +43,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       'use-onclickoutside',
       '@itgenio/utils',
     ],
-    outdir: path.resolve(__dirname, 'dist'),
-    plugins: [lessLoader({}), svgrPlugin()],
-    loader: {
-      '.ts': 'ts',
-    },
+    outdir: path.resolve(__dirname, '..'),
+    plugins: [lessLoader(), svgrPlugin(), writePlugin()],
   }).catch(e => console.error(e.message));
 })();

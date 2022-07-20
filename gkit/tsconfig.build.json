@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "rootDirs": ["src/components"],
+    "outDir": "."
+  },
+  "include": ["index.d.ts", "src/components"],
+  "exclude": ["src/components/internal", "src/utils"]
+}
