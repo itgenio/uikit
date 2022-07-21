@@ -24,15 +24,15 @@ module.exports = () => ({
           const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
           // Если это JS сборка, то нужно импортировать в него CSS сборку
-          if (filePath.endsWith(JS_EXT)) {
-            const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
+          // if (filePath.endsWith(JS_EXT)) {
+          //   const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
 
-            const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
+          //   const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
 
-            if (cssFile) {
-              fileText = `import '${cssFileRelativePath}';\n${fileText}`;
-            }
-          }
+          //   if (cssFile) {
+          //     fileText = `import '${cssFileRelativePath}';\n${fileText}`;
+          //   }
+          // }
 
           const outFolder = fileDir.replace(cwd, '').split('\\').at(-1);
           const outDir = path.resolve(cwd, outFolder);
