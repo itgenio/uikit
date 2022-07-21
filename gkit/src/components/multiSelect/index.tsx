@@ -2,9 +2,9 @@ import './style.less';
 import classNames from 'classnames';
 import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../../icons';
 import { Checkbox } from '../checkbox';
-import { InputsContainer } from '../internal/inputsContainer';
+import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
+import { InputsContainer } from '../internal/components/inputsContainer';
 
 type Sizes = 'small' | 'large';
 

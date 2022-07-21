@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
-import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../../icons';
-import { generateId } from '../../utils/generateId';
-import { InputsContainer } from '../internal/inputsContainer';
+import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../icons';
+import { InputsContainer } from '../internal/components/inputsContainer';
+import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
 

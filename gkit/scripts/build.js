@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
   const entryPoints = await globby([
     'src/index.ts', // global styles
-    'src/icons/index.ts', // icons
+    'src/components/icons/index.ts', // icons
     'src/components/*/index.tsx', // components
     '!src/components/internal', // exclude internal components
   ]);

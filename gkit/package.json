@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run rimraf && cross-env NODE_ENV=production ts-node ./scripts/build.js",
     "watch": "npm run rimraf && ts-node ./scripts/build.js",
-    "tsc": "tsc -p tsconfig.build.json",
+    "tsc": "ts-node ./scripts/buildTypes.js",
     "prepack": "npm run build && npm run tsc",
     "rimraf": "ts-node ./scripts/rimraf.js"
   },
