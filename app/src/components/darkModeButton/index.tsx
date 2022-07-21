@@ -1,6 +1,6 @@
 import './style.css';
 import React, { useEffect, useState } from 'react';
-import { Button } from '@itgenio/gkit/button';
+// import { Button } from '@itgenio/gkit/button';
 import imageMoonUrl from '../../img/icon_moon.svg';
 import imageSunUrl from '../../img/icon_sun.svg';
 
@@ -30,23 +30,5 @@ export const DarkModeButton = () => {
     saveDefaultTheme(isDarkTheme);
   }, [isDarkTheme]);
 
-  return (
-    <Button
-      className="dark-mode-button"
-      asIcon
-      size="small"
-      type="secondary"
-      onClick={() => {
-        const el = document.documentElement;
-
-        if (el.hasAttribute('dark')) {
-          setDarkTheme(false);
-        } else {
-          setDarkTheme(true);
-        }
-      }}
-    >
-      {isDarkTheme ? <img src={imageSunUrl} alt="" /> : <img src={imageMoonUrl} alt="" />}
-    </Button>
-  );
+  return null;
 };

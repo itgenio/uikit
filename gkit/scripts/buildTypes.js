@@ -6,9 +6,5 @@ const cwd = process.cwd();
 
 exec('tsc -p tsconfig.build.json', () => {
   // Remove internal components types
-  rimraf(path.resolve(cwd, './internal'), error => {
-    if (!error) {
-      console.log('Types build succeeded');
-    }
-  });
+  rimraf(path.resolve(cwd, './internal'), () => {});
 });
