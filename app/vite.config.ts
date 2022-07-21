@@ -8,7 +8,17 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     preserveSymlinks: true,
-    // @ts-expect-error
-    alias: [{ find: '@itgenio/gkit', replacement: path.resolve(__dirname, './node_modules/@itgenio/gkit') }],
+    alias: [
+      {
+        find: '@itgenio/gkit',
+        // @ts-expect-error
+        replacement: path.resolve(__dirname, './node_modules/@itgenio/gkit'),
+        customResolver: (...args) => {
+          console.log({ args });
+
+          return args[0];
+        },
+      },
+    ],
   },
 });
