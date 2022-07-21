@@ -1,5 +1,6 @@
 import './style.css';
-import React, { useEffect, useState } from 'react';
+import Badge from '@material-ui/core/Badge';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Button } from '@itgenio/gkit/button';
 import imageMoonUrl from '../../img/icon_moon.svg';
 import imageSunUrl from '../../img/icon_sun.svg';
@@ -31,22 +32,26 @@ export const DarkModeButton = () => {
   }, [isDarkTheme]);
 
   return (
-    <Button
-      className="dark-mode-button"
-      asIcon
-      size="small"
-      type="secondary"
-      onClick={() => {
-        const el = document.documentElement;
+    <Fragment>
+      <Badge overlap="circle" color="primary" variant="dot" />
 
-        if (el.hasAttribute('dark')) {
-          setDarkTheme(false);
-        } else {
-          setDarkTheme(true);
-        }
-      }}
-    >
-      {isDarkTheme ? <img src={imageSunUrl} alt="" /> : <img src={imageMoonUrl} alt="" />}
-    </Button>
+      <Button
+        className="dark-mode-button"
+        asIcon
+        size="small"
+        type="secondary"
+        onClick={() => {
+          const el = document.documentElement;
+
+          if (el.hasAttribute('dark')) {
+            setDarkTheme(false);
+          } else {
+            setDarkTheme(true);
+          }
+        }}
+      >
+        {isDarkTheme ? <img src={imageSunUrl} alt="" /> : <img src={imageMoonUrl} alt="" />}
+      </Button>
+    </Fragment>
   );
 };

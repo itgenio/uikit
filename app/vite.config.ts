@@ -14,4 +14,9 @@ export default defineConfig({
     }),
   ],
   preview: { port: 3005 },
+  // build: {
+  //   rollupOptions: {
+  //     external: [/^@itgenio\/gkit\/\w+$/],
+  //   },
+  // },
 });
