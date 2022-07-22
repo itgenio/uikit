@@ -1,18 +1,15 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
+import { Button, ButtonGroup } from '@itgenio/gkit/button';
 import {
   Dropdown,
   DropdownItem,
-  Button,
-  ChevronDownFilledIcon,
-  ButtonGroup,
   DropdownCheckboxItem,
   DropdownItemIndicator,
-  CheckmarkIcon,
   DropdownRadioGroup,
   DropdownRadioItem,
-  CircleIcon,
-} from '@itgenio/gkit';
+} from '@itgenio/gkit/dropdown';
+import { ChevronDownFilledIcon, CheckmarkIcon, CircleIcon } from '@itgenio/gkit/icons';
 
 export function Dropdowns() {
   const content = (
