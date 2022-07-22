@@ -23,14 +23,6 @@ module.exports = () => ({
           const fileName = path.basename(filePath);
           const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
-          const outFolder = fileDir
-            .replace(cwd, '')
-            .split(/(\\)|(\/)/g)
-            .at(-1);
-          const outDir = path.resolve(cwd, outFolder);
-
-          await fs.promises.mkdir(outDir, { recursive: true });
-
           // Если это JS сборка, то нужно импортировать в него CSS сборку
           if (filePath.endsWith(JS_EXT)) {
             const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
@@ -40,16 +32,15 @@ module.exports = () => ({
             if (cssFile) {
               fileText = `import '${cssFileRelativePath}';\n${fileText}`;
             }
-
-            const packageJsonPath = path.resolve(outDir, './package.json');
-
-            if (!fs.existsSync(packageJsonPath)) {
-              const packageJsonContent = `{\n  "typings": "./index.d.ts"\n}`;
-
-              await fs.promises.writeFile(packageJsonPath, packageJsonContent);
-            }
           }
 
+          const outFolder = fileDir
+            .replace(cwd, '')
+            .split(/(\\)|(\/)/g)
+            .at(-1);
+          const outDir = path.resolve(cwd, outFolder);
+
+          await fs.promises.mkdir(outDir, { recursive: true });
           await fs.promises.writeFile(path.resolve(outDir, fileName), fileText);
         })
       );
