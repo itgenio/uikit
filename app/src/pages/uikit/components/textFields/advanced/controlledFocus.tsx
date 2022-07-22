@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Button, TextField } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { TextField } from '@itgenio/gkit/textField';
 
 export const TextFieldControlledFocus = () => {
   const rootRef = useRef<HTMLDivElement>(null);

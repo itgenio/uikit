@@ -1,6 +1,7 @@
 import './style.less';
 import React, { useState } from 'react';
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, DialogText, DialogTitle } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogText, DialogTitle } from '@itgenio/gkit/dialog';
 
 export function Dialogs() {
   const [open, setOpen] = useState(false);

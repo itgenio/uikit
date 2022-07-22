@@ -1,6 +1,6 @@
 import './style.less';
 import React, { useState } from 'react';
-import { Tab, Tabs } from '@itgenio/gkit';
+import { Tab, Tabs } from '@itgenio/gkit/tabs';
 
 const tabs = ['menu', 'item 2'];
 

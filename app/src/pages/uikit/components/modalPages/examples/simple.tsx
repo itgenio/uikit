@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { Button } from '@itgenio/gkit/button';
 import {
-  Button,
   ModalPage,
   ModalPageHeader,
   ModalPageTitle,
   ModalPageBody,
   ModalPageText,
   ModalPageFooter,
-} from '@itgenio/gkit';
+} from '@itgenio/gkit/modalPage';
 
 export const ModalExampleDefault = () => {
   const [open, setOpen] = useState(false);

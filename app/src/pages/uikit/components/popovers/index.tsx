@@ -1,6 +1,7 @@
 import './style.less';
 import React from 'react';
-import { Popover, PopoverProps, Button } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { Popover, PopoverProps } from '@itgenio/gkit/popover';
 
 export function Popovers() {
   const content = (

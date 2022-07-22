@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { Select, SelectProps, SelectOption } from '@itgenio/gkit';
+import { Select, SelectProps, SelectOption } from '@itgenio/gkit/select';
 
 const sizes = ['small', 'large'] as const;
 

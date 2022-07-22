@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ModalPage, ModalPageHeader, ModalPageTitle, Button, ModalPageBody, ModalPageFooter } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { ModalPage, ModalPageHeader, ModalPageTitle, ModalPageBody, ModalPageFooter } from '@itgenio/gkit/modalPage';
 
 const LazyContent = React.lazy(async () => {
   return await import('./content').then(components => {

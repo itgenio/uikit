@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Toggle, ToggleProps } from '@itgenio/gkit';
+import { Toggle, ToggleProps } from '@itgenio/gkit/toggle';
 
 export function Toggles() {
   const renderState = (state: string, props: ToggleProps) => {

@@ -2,15 +2,8 @@ import './style.less';
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import {
-  ModalPage,
-  ModalPageHeader,
-  ModalPageTitle,
-  Button,
-  ModalPageBody,
-  ButtonGroup,
-  ModalPageText,
-} from '@itgenio/gkit';
+import { Button, ButtonGroup } from '@itgenio/gkit/button';
+import { ModalPage, ModalPageHeader, ModalPageTitle, ModalPageBody, ModalPageText } from '@itgenio/gkit/modalPage';
 
 /**
  * Пример показывает, что есть возможность кликнуть на контент, который находится вне дерева модалки

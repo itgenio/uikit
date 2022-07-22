@@ -1,8 +1,8 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import { generateId } from '../../utils/generateId';
-import { InputsContainer } from '../components/inputsContainer';
+import { InputsContainer } from '../internal/components/inputsContainer';
+import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
 
