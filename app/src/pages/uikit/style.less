@@ -14,12 +14,18 @@
     font-weight: @font-weight-bold;
   }
 
-  header {
+  header,
+  .tools {
     padding: 0.5rem 1rem;
     display: flex;
-    align-items: center;
+    justify-content: center;
     border-bottom: 1px solid var(--gkit-color-neutral-200);
     margin-bottom: 0.125rem;
+  }
+
+  .tools {
+    align-items: center;
+    gap: 1rem;
 
     .dark-mode-button {
       margin-left: auto;
