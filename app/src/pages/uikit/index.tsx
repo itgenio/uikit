@@ -9,6 +9,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dialogs } from './components/dialogs';
+import { Dropdowns } from './components/dropdowns';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { ModalPages } from './components/modalPages';
@@ -34,6 +35,7 @@ const components = [
   TextFields,
   Dialogs,
   ModalPages,
+  Dropdowns,
   TextAreas,
   Popovers,
   Switchers,
