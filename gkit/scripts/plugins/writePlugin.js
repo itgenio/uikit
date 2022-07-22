@@ -25,7 +25,7 @@ module.exports = () => ({
 
           const outFolder = fileDir
             .replace(cwd, '')
-            .split(/(\\\\)|(\/)/)
+            .split(/(\\)|(\/)/g)
             .at(-1);
           const outDir = path.resolve(cwd, outFolder);
 
