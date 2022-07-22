@@ -1,6 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { Button, ButtonGroup } from '@itgenio/gkit';
 import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
 import { Badges } from './components/badges';
@@ -64,27 +65,29 @@ export function UikitDemo() {
       <section>
         <header>
           <span className="text-xl logo">UI_KIT</span>
-          <DarkModeButton />
         </header>
-        <div>
-          <button
-            className="gkit-btn small secondary icon"
-            onClick={() => {
-              document.body.classList.toggle('schema-green');
-            }}
-          >
-            Green
-          </button>
-        </div>
+
+        <section className="tools">
+          <ButtonGroup>
+            <Button onClick={() => document.body.classList.toggle('schema-green')} type="primary" size="small">
+              Schema
+            </Button>
+
+            <DarkModeButton />
+          </ButtonGroup>
+        </section>
+
         <nav>
           {names.map(name => (
-            <button
+            <Button
               key={name}
-              className={classNames('gkit-btn small', { selected: name === c })}
+              className={classNames({ selected: name === c })}
               onClick={() => setC(name)}
+              size="small"
+              type="tertiaryNeutral"
             >
               {name}
-            </button>
+            </Button>
           ))}
         </nav>
       </section>

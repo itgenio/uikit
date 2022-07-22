@@ -2,10 +2,10 @@ import './style.less';
 import classNames from 'classnames';
 import React, { ForwardedRef, forwardRef } from 'react';
 
-type Sizes = 'small' | 'normal' | 'large';
+export const BUTTON_CN = 'gkit-btn';
 
-//                                    ( without bg )            ( with border )
-type Types = 'primary' | 'secondary' | 'linkSecondary' | 'danger' | 'neutral' | 'linkNeutral';
+type Sizes = 'small' | 'normal' | 'large';
+type Types = 'primary' | 'secondary' | 'tertiaryPrimary' | 'tertiaryNeutral' | 'danger';
 
 export type ButtonProps = React.PropsWithChildren<{
   size?: Sizes;
@@ -16,9 +16,7 @@ export type ButtonProps = React.PropsWithChildren<{
   focus?: boolean;
   asIcon?: boolean;
   className?: string;
-  onClick?: () => void;
   idQa?: string;
-  disablePrevent?: boolean;
 }> &
   React.DOMAttributes<HTMLButtonElement>;
 
@@ -34,8 +32,8 @@ export const Button = forwardRef(function Button(
     asIcon,
     className,
     onClick,
+    onMouseDown,
     idQa,
-    disablePrevent,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
@@ -45,12 +43,21 @@ export const Button = forwardRef(function Button(
       ref={ref}
       id-qa={idQa}
       disabled={disabled}
-      className={classNames('gkit-btn', className, size, type, { hover, active, focus, icon: asIcon })}
+      className={classNames(BUTTON_CN, className, size, type, { hover, active, focus, icon: asIcon })}
       onClick={e => {
-        if (onClick) {
-          !disablePrevent && e.preventDefault();
-          onClick();
+        const activeElement = document.activeElement as HTMLElement | null;
+
+        if (activeElement?.classList.contains(BUTTON_CN)) {
+          activeElement.blur();
         }
+
+        onClick?.(e);
+      }}
+      onMouseDown={e => {
+        // Предотвращаем фокус при нажатии кнопки мыши, т.к сейчас фокус может быть только через клавиатуру
+        e.preventDefault();
+
+        onMouseDown?.(e);
       }}
       {...props}
     >
