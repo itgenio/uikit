@@ -19,7 +19,7 @@ const asyncRimraf = path => {
 
   const rawGitignorePatterns = await fs.promises.readFile(path.resolve(__dirname, '../.gitignore'), 'utf8');
 
-  const patterns = rawGitignorePatterns.split('\r\n');
+  const patterns = rawGitignorePatterns.trim().split(/\s+/g);
   patterns.push('!node_modules');
 
   const paths = await globby(patterns, { onlyFiles: false });

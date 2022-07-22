@@ -23,7 +23,10 @@ module.exports = () => ({
           const fileName = path.basename(filePath);
           const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
-          const outFolder = fileDir.replace(cwd, '').split('\\').at(-1);
+          const outFolder = fileDir
+            .replace(cwd, '')
+            .split(/(\\\\)|(\/)/)
+            .at(-1);
           const outDir = path.resolve(cwd, outFolder);
 
           await fs.promises.mkdir(outDir, { recursive: true });
