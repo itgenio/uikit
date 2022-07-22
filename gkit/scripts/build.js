@@ -27,7 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
             }
           },
         },
-    format: 'esm',
+    format: 'cjs',
     keepNames: true,
     outdir: path.resolve(__dirname, '..'),
     entryPoints,
