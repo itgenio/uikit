@@ -4,11 +4,11 @@
   "description": "GKIT",
   "main": "./index.js",
   "scripts": {
-    "build": "npm run rimraf && cross-env NODE_ENV=production ts-node ./scripts/build.js",
-    "watch": "npm run rimraf && ts-node ./scripts/build.js",
+    "build": "npm run clean && cross-env NODE_ENV=production ts-node ./scripts/build.js",
+    "watch": "npm run clean && ts-node ./scripts/build.js",
     "tsc": "ts-node ./scripts/buildTypes.js",
     "prepack": "npm run build && npm run tsc",
-    "rimraf": "ts-node ./scripts/rimraf.js"
+    "clean": "ts-node ./scripts/clean.js"
   },
   "author": "Alex So",
   "license": "MIT",
