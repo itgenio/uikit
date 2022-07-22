@@ -3,20 +3,8 @@ const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgrPlugin = require('./svgrPlugin');
 
-// isProduction flag for watch mode
-const isProduction = process.env.NODE_ENV === 'production';
-
 (async () => {
   build({
-    watch: isProduction
-      ? false
-      : {
-          onRebuild(error) {
-            if (!error) {
-              console.log('Build succeeded');
-            }
-          },
-        },
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     outbase: 'src',
     bundle: true,
