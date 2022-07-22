@@ -3,7 +3,6 @@
   "version": "0.0.61-beta.3",
   "description": "GKIT",
   "main": "./index.js",
-  "files": ["./button"],
   "scripts": {
     "build": "npm run rimraf && cross-env NODE_ENV=production ts-node ./scripts/build.js",
     "watch": "npm run rimraf && ts-node ./scripts/build.js",

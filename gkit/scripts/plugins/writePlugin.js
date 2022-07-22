@@ -41,11 +41,7 @@ module.exports = () => ({
             const packageJsonPath = path.resolve(outDir, './package.json');
 
             if (!fs.existsSync(packageJsonPath)) {
-              const packageJsonContent = JSON.stringify({
-                sideEffects: false,
-                module: './index.js',
-                typings: './index.d.ts',
-              });
+              const packageJsonContent = `{\n  "sideEffects": false,\n  "module": "./index.js",\n  "typings": "./index.d.ts"\n}`;
 
               await fs.promises.writeFile(packageJsonPath, packageJsonContent);
             }
