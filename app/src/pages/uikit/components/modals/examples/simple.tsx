@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Modal } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { Modal } from '@itgenio/gkit/modal';
 
 export const ModalExampleDefault = () => {
   const [open, setOpen] = useState(false);
