@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.63-beta.1",
+  "version": "0.0.63-beta.2",
   "description": "GKIT",
   "main": "./index.js",
   "scripts": {
