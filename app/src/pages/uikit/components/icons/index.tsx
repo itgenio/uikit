@@ -1,13 +1,14 @@
 import './style.less';
 
 import React, { CSSProperties, useState } from 'react';
-import * as gkit from '@itgenio/gkit';
-import { Button, Tooltip } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import * as gkitIcons from '@itgenio/gkit/icons';
+import { Tooltip } from '@itgenio/gkit/tooltip';
 
 const STEP = 2;
 const DEFAULT_SIZE = 24;
 
-const ICONS = Object.entries(gkit)
+const ICONS = Object.entries(gkitIcons)
   .filter(([key, value]) => typeof value === 'function' && key.endsWith('Icon'))
   .map(([, value]) => value as Function)
   .sort((a, b) => a.name.localeCompare(b.name));

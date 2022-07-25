@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { RadioButton, RadioButtonProps } from '@itgenio/gkit';
+import { RadioButton, RadioButtonProps } from '@itgenio/gkit/radioButton';
 
 enum Fruit {
   apple = 'apple',

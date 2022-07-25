@@ -1,8 +1,8 @@
 import './style.less';
 import classNames from 'classnames';
 import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo, useState } from 'react';
-import { generateId } from '../../utils/generateId';
-import { InputsContainer } from '../components/inputsContainer';
+import { InputsContainer } from '../internal/components/inputsContainer';
+import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
 
@@ -21,6 +21,7 @@ export type TextFieldProps = PropsWithChildren<{
   label?: string;
   helperText?: React.ReactNode;
   inputType?: HTMLInputTypeAttribute;
+  inputPattern?: string;
   required?: boolean;
   idQa?: string;
   idQaForInput?: string;
@@ -52,6 +53,7 @@ export const TextField = forwardRef(function TextField(
     label,
     helperText,
     inputType = 'text',
+    inputPattern,
     required,
     idQa,
     idQaForInput,
@@ -98,6 +100,7 @@ export const TextField = forwardRef(function TextField(
           type={inputType}
           className={classNames('text-field', size)}
           list={id + 'list'}
+          pattern={inputPattern}
           {...{
             required,
             value,

@@ -1,6 +1,7 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { Checkbox, CheckboxProps, SubtractFilledIcon } from '@itgenio/gkit';
+import { Checkbox, CheckboxProps } from '@itgenio/gkit/checkbox';
+import { SubtractFilledIcon } from '@itgenio/gkit/icons';
 
 export function Checkboxes() {
   const [checked, setChecked] = useState(false);

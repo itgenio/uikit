@@ -1,6 +1,6 @@
 import './style.css';
 import React, { useEffect, useState } from 'react';
-import { Button } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
 import imageMoonUrl from '../../img/icon_moon.svg';
 import imageSunUrl from '../../img/icon_sun.svg';
 

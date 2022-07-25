@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 
 type Sizes = 'small' | 'normal' | 'large';
 
@@ -22,23 +22,27 @@ export type ButtonProps = React.PropsWithChildren<{
 }> &
   React.DOMAttributes<HTMLButtonElement>;
 
-export function Button({
-  children,
-  size = 'normal',
-  hover,
-  type = 'primary',
-  disabled,
-  active,
-  focus,
-  asIcon,
-  className,
-  onClick,
-  idQa,
-  disablePrevent,
-  ...props
-}: ButtonProps) {
+export const Button = forwardRef(function Button(
+  {
+    children,
+    size = 'normal',
+    hover,
+    type = 'primary',
+    disabled,
+    active,
+    focus,
+    asIcon,
+    className,
+    onClick,
+    idQa,
+    disablePrevent,
+    ...props
+  }: ButtonProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   return (
     <button
+      ref={ref}
       id-qa={idQa}
       disabled={disabled}
       className={classNames('gkit-btn', className, size, type, { hover, active, focus, icon: asIcon })}
@@ -53,7 +57,7 @@ export function Button({
       {children}
     </button>
   );
-}
+});
 
 type ButtonGroupProps<C extends typeof Button = typeof Button> = {
   children?:

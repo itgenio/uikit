@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment } from 'react';
-import { Link } from '@itgenio/gkit';
+import { Link } from '@itgenio/gkit/link';
 
 export function Links() {
   const sizes = ['small', 'normal', 'large'];

@@ -1,52 +1,61 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { Select, SelectProps, SelectOption } from '@itgenio/gkit';
+import { Select, SelectProps, SelectOption } from '@itgenio/gkit/select';
 
-const options: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
+const sizes = ['small', 'large'] as const;
+
+const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
   return { label: `Option${index}`, value: index };
 });
 
+const optionsWithGroups = defaultOptions.map((option, i) => {
+  option.group = i % 2 ? 'Odd' : 'Even';
+
+  return option;
+});
+
+type State = { title: string; props?: SelectProps; options?: SelectProps['options'] };
+
 export function Selects() {
-  const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<string | number>('');
 
-  const renderState = (state: string, props: SelectProps, index: number) => {
+  const renderState = ({ title, props, options = defaultOptions }: State, index: number) => {
     return (
       <Fragment key={index}>
-        <div>{state}</div>
-        {sizes.map(size => {
-          const p = { ...props, size };
-          return (
-            <Select
-              key={size}
-              {...p}
-              placeholder="Placeholder"
-              label="Label"
-              helperText="Desc"
-              options={options}
-              value={value}
-              onChange={value => setValue(value)}
-            />
-          );
-        })}
+        <div>{title}</div>
+
+        {sizes.map(size => (
+          <Select
+            key={size}
+            size={size}
+            placeholder="Placeholder"
+            label="Label"
+            helperText="Desc"
+            options={options}
+            value={value}
+            onChange={value => setValue(value)}
+            {...props}
+          />
+        ))}
       </Fragment>
     );
   };
 
-  const states: { state: string; props?: SelectProps }[] = [
-    { state: 'Normal' },
-    { state: 'Hover', props: { hover: true } },
-    { state: 'Focused', props: { focus: true } },
-    { state: 'Filled', props: { filled: true } },
-    { state: 'Error', props: { error: true } },
-    { state: 'Disabled', props: { disabled: true } },
+  const states: State[] = [
+    { title: 'Normal' },
+    { title: 'Hover', props: { hover: true } },
+    { title: 'Focused', props: { focus: true } },
+    { title: 'Filled', props: { filled: true } },
+    { title: 'DivideByGroups', props: { divideByGroups: true }, options: optionsWithGroups },
+    { title: 'Error', props: { error: true } },
+    { title: 'Disabled', props: { disabled: true } },
   ];
 
   return (
     <div className="selects">
-      <div className="grid">{states.map(({ state, props = {} }, index) => renderState(state, props, index))}</div>
+      <div className="grid">{states.map(renderState)}</div>
     </div>
   );
 }

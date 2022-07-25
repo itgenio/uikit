@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '@itgenio/gkit/dist/index.css';
+import '@itgenio/gkit/index.css';
 import './stylesheets/index.less';
 import { UikitDemo } from './pages/uikit';
 

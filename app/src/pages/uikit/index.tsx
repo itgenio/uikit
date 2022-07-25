@@ -8,6 +8,7 @@ import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
+import { Dropdowns } from './components/dropdowns';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { Modals } from './components/modals';
@@ -32,6 +33,7 @@ const components = [
   TabsExample,
   TextFields,
   Modals,
+  Dropdowns,
   TextAreas,
   Popovers,
   Switchers,

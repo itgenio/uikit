@@ -1,0 +1,14 @@
+*
+
+!.gitignore
+!.npmignore
+!src
+!src/**
+!scripts
+!scripts/**
+!index.d.ts
+!package-lock.json
+!package.json
+!README.md
+!tsconfig.build.json
+!tsconfig.json

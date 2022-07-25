@@ -2,7 +2,8 @@ import './style.less';
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Button, ButtonGroup } from '@itgenio/gkit';
+import { Button, ButtonGroup } from '@itgenio/gkit/button';
+import { Modal } from '@itgenio/gkit/modal';
 
 /**
  * Пример показывает, что есть возможность кликнуть на контент, который находится вне дерева модалки
