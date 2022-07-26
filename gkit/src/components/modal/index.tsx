@@ -14,6 +14,7 @@ export type ModalProps = PropsWithChildren<{
   fullScreen?: boolean;
   preventBodyScroll?: boolean;
   idQa?: string;
+  idQaContent?: string;
 }>;
 
 export function Modal({
@@ -24,6 +25,7 @@ export function Modal({
   fullScreen,
   preventBodyScroll = true,
   idQa,
+  idQaContent,
   children,
 }: ModalProps) {
   usePreventBodyScroll(preventBodyScroll && open);
@@ -34,7 +36,7 @@ export function Modal({
   if (asBlock) {
     return (
       <ModalInternal className={className} asBlock idQa={idQa}>
-        <ModalContentInternal onClose={onClose} fullScreen={fullScreen}>
+        <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
           {children}
         </ModalContentInternal>
       </ModalInternal>
@@ -47,7 +49,7 @@ export function Modal({
         <ModalWrapperInternal>
           <ModalOverlayInternal onClose={onClose} />
 
-          <ModalContentInternal onClose={onClose} fullScreen={fullScreen}>
+          <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
             {children}
           </ModalContentInternal>
         </ModalWrapperInternal>
