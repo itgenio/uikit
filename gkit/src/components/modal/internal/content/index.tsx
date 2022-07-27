@@ -15,7 +15,7 @@ export const ModalContentInternal = ({ fullScreen, onClose, idQa, children }: Pr
       id-qa={idQa}
     >
       {onClose && (
-        <button className="close-modal-btn" onClick={onClose}>
+        <button className="close-modal-btn" id-qa="close-icon-btn" onClick={onClose}>
           <DismissIcon />
         </button>
       )}
