@@ -64,7 +64,7 @@ export const ModalExampleDefaultFullScreen = () => {
   return (
     <div>
       <Button onClick={() => setOpen(o => !o)}>Open</Button>
-      <Modal open={open} onClose={() => setOpen(false)} fullScreen>
+      <Modal className="modal-with-long-body-example" open={open} onClose={() => setOpen(false)} fullScreen>
         <Modal.Header>
           <Modal.Title title="Complex" />
         </Modal.Header>
