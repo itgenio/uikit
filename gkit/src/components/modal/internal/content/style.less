@@ -8,6 +8,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    max-width: 760px;
+    min-width: 360px;
+    max-height: 100%;
     padding: 2rem;
     gap: 1rem;
     position: relative;
@@ -17,15 +20,10 @@
     &.full-screen {
       @margin: 0.5rem;
 
+      max-width: unset;
       width: 100%;
       height: calc(100% - @margin * 2);
       margin: @margin;
-
-      @media @mobile-portrait {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
     }
 
     .close-modal-btn {
@@ -50,29 +48,38 @@
         top: 0;
       }
     }
-  }
 
-  &:not(.as-block) {
-    .modal-content {
-      max-width: 760px;
-      min-width: 360px;
-      max-height: 100%;
+    @media @mobile-portrait {
+      padding: 1.5rem 1rem 1rem;
+      width: 100%;
+      max-width: unset;
+      min-width: unset;
+      min-height: 180px;
+      align-self: flex-end;
+      border-radius: 1rem 1rem 0 0;
 
       &.full-screen {
-        max-width: unset;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
       }
+    }
+  }
+
+  &.as-block {
+    .modal-content {
+      max-width: unset;
+      min-width: unset;
+      max-height: unset;
+      min-height: unset;
 
       @media @mobile-portrait {
-        padding: 1.5rem 1rem 1rem;
-        width: 100%;
-        max-width: unset;
-        min-width: unset;
-        min-height: 180px;
-        align-self: flex-end;
-        border-radius: 1rem 1rem 0 0;
+        align-self: unset;
+        border-radius: 1rem;
 
         &.full-screen {
-          border-radius: 0;
+          border-radius: 1rem;
         }
       }
     }
