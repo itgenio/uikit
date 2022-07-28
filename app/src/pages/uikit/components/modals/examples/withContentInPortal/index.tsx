@@ -3,7 +3,7 @@ import './style.less';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, ButtonGroup } from '@itgenio/gkit/button';
-import { ModalPage, ModalPageHeader, ModalPageTitle, ModalPageBody, ModalPageText } from '@itgenio/gkit/modalPage';
+import { Modal } from '@itgenio/gkit/modal';
 
 /**
  * Пример показывает, что есть возможность кликнуть на контент, который находится вне дерева модалки
@@ -17,15 +17,15 @@ export const ModalExampleWithContentInPortal = () => {
     <div>
       <Button onClick={() => setOpen(o => !o)}>Open</Button>
 
-      <ModalPage open={open} onClose={() => setOpen(false)}>
-        <ModalPageHeader>
-          <ModalPageTitle title="Counter" />
-        </ModalPageHeader>
+      <Modal open={open} onClose={() => setOpen(false)} fullScreen>
+        <Modal.Header>
+          <Modal.Title title="Counter" />
+        </Modal.Header>
 
-        <ModalPageBody>
+        <Modal.Body>
           {ReactDOM.createPortal(
             <div className="modal-example-with-content-in-portal">
-              <ModalPageText>Count: {count}</ModalPageText>
+              <Modal.Text>Count: {count}</Modal.Text>
 
               <ButtonGroup>
                 <Button type="primary" onClick={() => setCount(c => c + 1)}>
@@ -39,8 +39,8 @@ export const ModalExampleWithContentInPortal = () => {
             </div>,
             document.body
           )}
-        </ModalPageBody>
-      </ModalPage>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

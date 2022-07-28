@@ -1,24 +1,29 @@
 import './style.less';
+
 import React, { Fragment, FunctionComponent } from 'react';
 import {
+  ModalExampleAsBlockFullScreen,
   ModalExampleAsBlockWithFooter,
   ModalExampleDefault,
   ModalExampleDefaultAsBlock,
+  ModalExampleDefaultFullScreen,
   ModalExampleWithContentInPortal,
   ModalExampleWithLazyLoadedContent,
 } from './examples';
 
 const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
   { name: 'Default', Modal: ModalExampleDefault },
-  { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
-  { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
+  { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
   { name: 'With content in portal', Modal: ModalExampleWithContentInPortal },
   { name: 'With lazy loaded content', Modal: ModalExampleWithLazyLoadedContent },
+  { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
+  { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
+  { name: 'As block full screen', Modal: ModalExampleAsBlockFullScreen },
 ];
 
-export function ModalPages() {
+export function Modals() {
   return (
-    <div className="modalPages bg-neutral-50">
+    <div className="modals">
       <div className="grid">
         {EXAMPLES.map(({ name, Modal }, index) => {
           return (
@@ -34,4 +39,4 @@ export function ModalPages() {
   );
 }
 
-ModalPages.displayName = 'ModalPages';
+Modals.displayName = 'Modals';
