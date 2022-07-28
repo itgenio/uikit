@@ -2,6 +2,7 @@ import './style.less';
 
 import React, { Fragment, FunctionComponent } from 'react';
 import {
+  ModalExampleAsBlockFullScreen,
   ModalExampleAsBlockWithFooter,
   ModalExampleDefault,
   ModalExampleDefaultAsBlock,
@@ -11,12 +12,13 @@ import {
 } from './examples';
 
 const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
-  { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
-  { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
   { name: 'Default', Modal: ModalExampleDefault },
   { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
   { name: 'With content in portal', Modal: ModalExampleWithContentInPortal },
   { name: 'With lazy loaded content', Modal: ModalExampleWithLazyLoadedContent },
+  { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
+  { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
+  { name: 'As block full screen', Modal: ModalExampleAsBlockFullScreen },
 ];
 
 export function Modals() {

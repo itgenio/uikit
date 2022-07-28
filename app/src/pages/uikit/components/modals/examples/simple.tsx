@@ -58,6 +58,22 @@ export const ModalExampleAsBlockWithFooter = () => {
   );
 };
 
+export const ModalExampleAsBlockFullScreen = () => {
+  return (
+    <Modal asBlock fullScreen>
+      <Modal.Header>
+        <Modal.Title title="Modal as block fullscreen" idQa="modal-title" />
+      </Modal.Header>
+
+      <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+        <Button type="secondary">Ok</Button>
+
+        <Button type="danger">Not OK</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
 export const ModalExampleDefaultFullScreen = () => {
   const [open, setOpen] = useState(false);
 
