@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment, useState } from 'react';
-import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherItemProps } from '@itgenio/gkit';
+import { SwitcherContainer, SwitcherItem, SwitcherCircle, SwitcherItemProps } from '@itgenio/gkit/switcher';
 
 const sizes = ['medium', 'large'] as const;
 

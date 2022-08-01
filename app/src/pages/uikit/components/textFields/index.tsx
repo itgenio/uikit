@@ -1,6 +1,6 @@
 import './style.less';
 import React, { Fragment, PropsWithChildren } from 'react';
-import { TextField, TextFieldProps } from '@itgenio/gkit';
+import { TextField, TextFieldProps } from '@itgenio/gkit/textField';
 import { TextFieldControlledFocus } from './advanced/controlledFocus';
 import { TextFieldPassword } from './advanced/password';
 

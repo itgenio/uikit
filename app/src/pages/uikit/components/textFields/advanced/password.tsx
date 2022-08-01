@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, DismissCircleIcon, EyeIcon, EyeOffIcon } from '@itgenio/gkit';
+import { DismissCircleIcon, EyeIcon, EyeOffIcon } from '@itgenio/gkit/icons';
+import { TextField } from '@itgenio/gkit/textField';
 
 export const TextFieldPassword = () => {
   const [value, setValue] = useState('');
