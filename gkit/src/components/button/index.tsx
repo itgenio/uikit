@@ -16,7 +16,6 @@ export type ButtonProps = React.PropsWithChildren<{
   focus?: boolean;
   asIcon?: boolean;
   className?: string;
-  onClick?: () => void;
   idQa?: string;
   disablePrevent?: boolean;
 }> &
@@ -49,7 +48,7 @@ export const Button = forwardRef(function Button(
       onClick={e => {
         if (onClick) {
           !disablePrevent && e.preventDefault();
-          onClick();
+          onClick(e);
         }
       }}
       {...props}
