@@ -18,6 +18,7 @@ export type ButtonProps = React.PropsWithChildren<{
   className?: string;
   idQa?: string;
   disablePrevent?: boolean;
+  tabIndex?: number;
 }> &
   React.DOMAttributes<HTMLButtonElement>;
 
