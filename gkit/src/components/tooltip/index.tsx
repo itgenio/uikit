@@ -1,11 +1,15 @@
 import './style.less';
+
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
 type RootProps = Pick<TooltipPrimitive.TooltipProps, 'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange'>;
 
-type TriggerProps = Pick<TooltipPrimitive.TooltipTriggerProps, 'asChild'>;
+type TriggerProps = { triggerClassName?: string; triggerIdQa?: string } & Pick<
+  TooltipPrimitive.TooltipTriggerProps,
+  'asChild'
+>;
 
 type ContentProps = Pick<
   TooltipPrimitive.TooltipContentProps,
@@ -30,8 +34,10 @@ export type TooltipProps = RootProps &
 
 export function Tooltip({
   children,
-  idQa,
   className,
+  idQa,
+  triggerClassName,
+  triggerIdQa,
   content,
   defaultOpen,
   open,
@@ -50,15 +56,23 @@ export function Tooltip({
 }: TooltipProps) {
   return (
     <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
-      <TooltipPrimitive.Trigger asChild={asChild}>{children}</TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Trigger
+        className={classNames('gkit-tooltip-trigger', triggerClassName)}
+        asChild={asChild}
+        id-qa={triggerIdQa}
+      >
+        {children}
+      </TooltipPrimitive.Trigger>
+
       <TooltipPrimitive.Content
         id-qa={idQa}
         className={classNames('gkit-tooltip', className)}
         {...{ side, align, sideOffset, alignOffset, avoidCollisions, collisionTolerance }}
       >
         {content}
+
         <TooltipPrimitive.Arrow
-          className="tooltip-arrow"
+          className="gkit-tooltip-arrow"
           width={arrowWidth}
           height={arrowHeight}
           offset={arrowOffset}
