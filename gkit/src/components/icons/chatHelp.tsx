@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-
 import React from 'react';
 import ChatHelpFilled from './assets/chat_help_24_filled.svg';
 import ChatHelp from './assets/chat_help_24_regular.svg';
