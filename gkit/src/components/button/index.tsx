@@ -17,6 +17,7 @@ export type ButtonProps = React.PropsWithChildren<{
   asIcon?: boolean;
   className?: string;
   idQa?: string;
+  tabIndex?: number;
 }> &
   React.DOMAttributes<HTMLButtonElement>;
 
