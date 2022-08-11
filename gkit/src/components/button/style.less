@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  position: relative; // for after pseudo element
   transition: transform 100ms ease-out, background-color 200ms ease-out, -webkit-transform 100ms ease-out;
 
   //normal
@@ -22,10 +23,18 @@
 
   &.focus,
   &:focus {
-    .outline();
-    .outline-2();
-    .outline-offset-2();
-    .outline-primary-300();
+    &::after {
+      content: "";
+      position: absolute;
+      opacity: 0.3;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-primary-600();
+    }
   }
 
   &.large {
