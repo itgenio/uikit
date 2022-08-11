@@ -1,7 +1,7 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useState } from 'react';
-import { Button, ButtonGroup } from '@itgenio/gkit';
+import React, { useLayoutEffect, useState } from 'react';
+import { Button, ButtonGroup } from '@itgenio/gkit/button';
 import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
 import { Badges } from './components/badges';
@@ -51,12 +51,26 @@ const components = [
 
 const DEFAULT = 0;
 
+const SCHEMAS = ['blue', 'green', 'purple', 'orange'] as const;
+
 export function UikitDemo() {
   const names = components.map(c => c.displayName);
 
   const [c, setC] = useState(names[DEFAULT]);
+  const [schemaIndex, setSchemaIndex] = useState(0);
 
   const Component = components.find(component => component.displayName === c);
+
+  useLayoutEffect(() => {
+    const schema = SCHEMAS[schemaIndex];
+    const schemaClass = `schema-${schema}`;
+
+    document.body.classList.add(schemaClass);
+
+    return () => {
+      document.body.classList.remove(schemaClass);
+    };
+  }, [schemaIndex]);
 
   return (
     <div className="uikit-page">
@@ -67,7 +81,11 @@ export function UikitDemo() {
 
         <section className="tools">
           <ButtonGroup>
-            <Button onClick={() => document.body.classList.toggle('schema-green')} type="primary" size="small">
+            <Button
+              onClick={() => setSchemaIndex(currentIndex => (currentIndex < SCHEMAS.length - 1 ? currentIndex + 1 : 0))}
+              type="primary"
+              size="small"
+            >
               Schema
             </Button>
 

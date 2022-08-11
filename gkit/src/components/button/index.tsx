@@ -5,7 +5,16 @@ import React, { ForwardedRef, forwardRef } from 'react';
 export const BUTTON_CN = 'gkit-btn';
 
 type Sizes = 'small' | 'normal' | 'large';
-type Types = 'primary' | 'secondary' | 'tertiaryPrimary' | 'tertiaryNeutral' | 'danger';
+type Types =
+  | 'primary'
+  | 'secondary'
+  | 'tertiaryPrimary'
+  | 'tertiaryNeutral'
+  | 'danger'
+  | 'blue'
+  | 'green'
+  | 'purple'
+  | 'orange';
 
 export type ButtonProps = React.PropsWithChildren<{
   size?: Sizes;

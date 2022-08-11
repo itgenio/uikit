@@ -92,13 +92,13 @@
     }
   }
 
+  &.icon svg path {
+    fill: currentColor;
+  }
+
   &.primary {
     background-color: var(--gkit-color-light-primary-500);
     color: var(--gkit-color-light-neutral-0);
-
-    &.icon svg path {
-      fill: currentColor;
-    }
 
     &:not([disabled]) {
       &.hover,
@@ -113,10 +113,6 @@
     color: var(--gkit-color-neutral-800);
     border: 1px solid var(--gkit-color-neutral-200);
 
-    &.icon svg path {
-      fill: currentColor;
-    }
-
     &:not([disabled]) {
       &.hover,
       &:hover {
@@ -128,10 +124,6 @@
   &.tertiaryPrimary {
     background-color: transparent;
     color: var(--gkit-color-primary-700);
-
-    &.icon svg path {
-      fill: currentColor;
-    }
 
     &:not([disabled]) {
       &.hover,
@@ -145,10 +137,6 @@
     background-color: transparent;
     color: var(--gkit-color-neutral-800);
 
-    &.icon svg path {
-      fill: currentColor;
-    }
-
     &:not([disabled]) {
       &.hover,
       &:hover {
@@ -157,13 +145,57 @@
     }
   }
 
+  &.blue {
+    background-color: var(--gkit-color-blue-50);
+    color: var(--gkit-color-blue-700);
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        background-color: var(--gkit-color-blue-100);
+      }
+    }
+  }
+
+  &.green {
+    background-color: var(--gkit-color-green-50);
+    color: var(--gkit-color-green-700);
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        background-color: var(--gkit-color-green-100);
+      }
+    }
+  }
+
+  &.purple {
+    background-color: var(--gkit-color-purple-50);
+    color: var(--gkit-color-purple-700);
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        background-color: var(--gkit-color-purple-100);
+      }
+    }
+  }
+
+  &.orange {
+    background-color: var(--gkit-color-orange-50);
+    color: var(--gkit-color-orange-700);
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        background-color: var(--gkit-color-orange-100);
+      }
+    }
+  }
+
   &.danger {
     background-color: var(--gkit-color-light-danger-500);
     color: var(--gkit-color-light-neutral-0);
-
-    &.icon svg path {
-      fill: currentColor;
-    }
 
     &:not([disabled]) {
       &.hover,
