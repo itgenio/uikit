@@ -5,7 +5,7 @@
   .text-field-wrapper {
     display: inline-flex;
     align-items: center;
-    .input-outline(var(--gkit-color-neutral-200));
+    border: 1px solid var(--gkit-color-neutral-200);
 
     &.full-width {
       display: flex;
@@ -51,19 +51,19 @@
   .text-field-wrapper {
     &.hover,
     &:hover {
-      outline-color: var(--gkit-color-primary-500);
+      border-color: var(--gkit-color-primary-500);
     }
 
     &.focus {
-      .pseudo-element-with-outline();
+      .pseudo-element-with-border();
     }
 
     &.error {
-      outline-color: var(--gkit-color-danger-500);
+      border-color: var(--gkit-color-danger-500);
     }
 
     &.disabled {
-      outline-color: var(--gkit-color-neutral-100);
+      border-color: var(--gkit-color-neutral-100);
       background-color: var(--gkit-color-neutral-100);
       color: var(--gkit-color-neutral-300);
     }
