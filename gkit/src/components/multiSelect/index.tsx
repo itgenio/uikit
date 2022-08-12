@@ -58,6 +58,8 @@ export const MultiSelect = React.memo(
     const ref = useRef(null);
     const dropdownRef = useRef<HTMLUListElement>(null);
 
+    const canShowDropdown = open && !disabled;
+
     useOnClickOutside(ref, () => setOpen(false));
 
     useLayoutEffect(() => {
@@ -99,7 +101,7 @@ export const MultiSelect = React.memo(
         <div
           className={classNames('multi-select-content', size, {
             hover,
-            focus,
+            focus: focus || canShowDropdown,
             error,
             disabled,
           })}
@@ -112,12 +114,13 @@ export const MultiSelect = React.memo(
           <div className={classNames('multi-select-label', size, { disabled, selected: hasValue })}>
             {renderValues()}
           </div>
+
           <div className="multi-select-chevron">
-            {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+            {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
           </div>
         </div>
 
-        {open && !disabled && (
+        {canShowDropdown && (
           <ul ref={dropdownRef} id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} className="multi-select-dropdown">
             {hasSelectAllOption && (
               <li

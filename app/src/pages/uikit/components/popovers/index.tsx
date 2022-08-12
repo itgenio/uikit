@@ -12,7 +12,7 @@ export function Popovers() {
       </div>
       <div className="popover-button-container">
         <Button className="popover-button">Сохранить</Button>
-        <Button type="neutral">Пропустить</Button>
+        <Button type="secondary">Пропустить</Button>
       </div>
     </div>
   );

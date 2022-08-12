@@ -1,23 +1,23 @@
 .uikit-page .buttons {
-  @styles-count: 6;
-
   .grid {
     display: grid;
-    grid-template-columns: min-content repeat(@styles-count, min-content);
+    grid-template-columns: min-content repeat(var(--app-buttons-styles-count), min-content);
     grid-template-rows: auto repeat(auto-fit, min-content);
     row-gap: 0.5rem;
     column-gap: 2rem;
+    padding: 1rem;
     align-items: center;
     overflow-x: auto;
 
     .title {
       font-size: 1.25rem;
+      text-transform: capitalize;
     }
   }
 
   .row {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
   }
 }
