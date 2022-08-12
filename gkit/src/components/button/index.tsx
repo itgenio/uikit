@@ -26,7 +26,6 @@ export type ButtonProps = React.PropsWithChildren<{
   asIcon?: boolean;
   className?: string;
   idQa?: string;
-  disablePrevent?: boolean;
   tabIndex?: number;
 }> &
   React.DOMAttributes<HTMLButtonElement>;
@@ -45,7 +44,6 @@ export const Button = forwardRef(function Button(
     onClick,
     onMouseDown,
     idQa,
-    disablePrevent,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
@@ -57,8 +55,6 @@ export const Button = forwardRef(function Button(
       disabled={disabled}
       className={classNames(BUTTON_CN, className, size, type, { hover, active, focus, icon: asIcon })}
       onClick={e => {
-        !disablePrevent && e.preventDefault();
-
         const activeElement = document.activeElement as HTMLElement | null;
 
         if (activeElement?.classList.contains(BUTTON_CN)) {
