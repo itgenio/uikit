@@ -22,7 +22,10 @@
 
   &.focus,
   &:focus {
-    .pseudo-element-with-outline();
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+    outline-color: var(--gkit-color-primary-300);
   }
 
   &.large {
@@ -108,8 +111,7 @@
   &.secondary {
     background-color: transparent;
     color: var(--gkit-color-neutral-800);
-    outline: 1px solid var(--gkit-color-neutral-200);
-    outline-offset: -1px;
+    border: 1px solid var(--gkit-color-neutral-200);
 
     &:not([disabled]) {
       &.hover,
