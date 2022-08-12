@@ -5,7 +5,7 @@
   display: flex;
   width: fit-content;
   height: fit-content;
-  .input-outline(var(--gkit-color-neutral-200));
+  border: 1px solid var(--gkit-color-neutral-200);
 
   &.small {
     .gkit-text-area {
@@ -25,11 +25,14 @@
 
   &.hover,
   &:hover {
-    outline-color: var(--gkit-color-light-primary-500);
+    border-color: var(--gkit-color-light-primary-500);
   }
 
   &.focus {
-    .pseudo-element-with-outline();
+    .outline();
+    .outline-2();
+    .outline-offset-2();
+    .outline-primary-300();
   }
 
   &.filled,
@@ -40,18 +43,14 @@
   }
 
   &.error {
-    outline-color: var(--gkit-color-danger-500);
-
-    &:focus {
-      outline: none;
-    }
+    border-color: var(--gkit-color-danger-500);
   }
 
   &.disabled {
     background: var(--gkit-color-neutral-100);
 
     &:hover {
-      outline-color: var(--gkit-color-neutral-200);
+      border-color: var(--gkit-color-neutral-200);
     }
 
     .gkit-text-area::placeholder {

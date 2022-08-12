@@ -10,7 +10,7 @@
     gap: 1rem;
     background: var(--gkit-color-neutral-0);
     cursor: pointer;
-    .input-outline(var(--gkit-color-neutral-200));
+    border: 1px solid var(--gkit-color-neutral-200);
 
     &.small {
       border-radius: 0.625rem;
@@ -93,20 +93,23 @@
 
     &.hover,
     &:hover {
-      outline-color: var(--gkit-color-light-primary-500);
+      border-color: var(--gkit-color-light-primary-500);
     }
 
     &.focus {
-      .pseudo-element-with-outline();
+      .outline();
+      .outline-2();
+      .outline-offset-2();
+      .outline-primary-300();
     }
 
     &.error {
-      outline-color: var(--gkit-color-danger-500);
+      border-color: var(--gkit-color-danger-500);
     }
 
     &.disabled {
       background: var(--gkit-color-neutral-100);
-      outline-color: var(--gkit-color-neutral-200);
+      border-color: var(--gkit-color-neutral-200);
     }
   }
 
@@ -123,7 +126,7 @@
     max-height: 280px;
     overflow: auto;
     min-width: 100%;
-    .input-outline(var(--gkit-color-neutral-200));
+    border: 1px solid var(--gkit-color-neutral-200);
 
     .multi-select-option {
       display: flex;
