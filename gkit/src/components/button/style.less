@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  position: relative; // for after pseudo element
   transition: transform 100ms ease-out, background-color 200ms ease-out, -webkit-transform 100ms ease-out;
 
   //normal
@@ -23,18 +22,7 @@
 
   &.focus,
   &:focus {
-    &::after {
-      content: "";
-      position: absolute;
-      opacity: 0.3;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      .outline();
-      .outline-2();
-      .outline-offset-2();
-      .outline-primary-600();
-    }
+    .pseudo-element-with-outline();
   }
 
   &.large {
@@ -120,7 +108,8 @@
   &.secondary {
     background-color: transparent;
     color: var(--gkit-color-neutral-800);
-    border: 1px solid var(--gkit-color-neutral-200);
+    outline: 1px solid var(--gkit-color-neutral-200);
+    outline-offset: -1px;
 
     &:not([disabled]) {
       &.hover,

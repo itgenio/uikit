@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -54,22 +54,29 @@ export function TextArea({
   className,
   onKeyPress,
 }: TextAreaProps) {
+  const [hasFocus, setHasFocus] = useState(false);
+
   const id = useMemo(() => generateId(), []);
 
   return (
     <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
-      <textarea
-        id-qa={idQaForTextArea}
-        {...{ id, onChange, onKeyPress, value, maxLength, placeholder, disabled, name, rows, cols, required }}
-        className={classNames('gkit-text-area', size, resize, {
+      <div
+        className={classNames('gkit-text-area-wrapper', size, {
           hover,
-          focus,
-          filled,
+          focus: focus || hasFocus,
           error,
-          placeholder,
           disabled,
+          filled,
         })}
-      />
+      >
+        <textarea
+          id-qa={idQaForTextArea}
+          {...{ id, onChange, onKeyPress, value, maxLength, placeholder, disabled, name, rows, cols, required }}
+          className={classNames('gkit-text-area', resize)}
+          onFocus={() => setHasFocus(true)}
+          onBlur={() => setHasFocus(false)}
+        />
+      </div>
     </InputsContainer>
   );
 }

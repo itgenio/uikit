@@ -185,3 +185,26 @@
 .outline-primary-900 {
   outline-color: var(--gkit-color-primary-900);
 }
+
+.pseudo-element-with-outline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    opacity: 0.3;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    .outline();
+    .outline-2();
+    .outline-offset-2();
+    .outline-primary-600();
+  }
+}
+
+.input-outline(@color) {
+  outline: 1px solid @color;
+  outline-offset: -1px;
+  border: none;
+}

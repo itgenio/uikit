@@ -57,6 +57,8 @@ export const Select = React.memo(
     const ref = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    const canShowDropdown = open && !disabled;
+
     useOnClickOutside(ref, () => setOpen(false));
 
     useLayoutEffect(() => {
@@ -116,7 +118,7 @@ export const Select = React.memo(
           ref={ref}
           className={classNames('gkit-select', size, {
             hover,
-            focus,
+            focus: focus || canShowDropdown,
             error,
             disabled,
           })}
@@ -131,11 +133,11 @@ export const Select = React.memo(
             />
 
             <div className="select-chevron">
-              {open && !disabled ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
+              {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
             </div>
           </div>
 
-          {open && !disabled && (
+          {canShowDropdown && (
             <div className="select-dropdown" id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} ref={dropdownRef}>
               {divideByGroups ? renderOptionsByGroups() : options.map(renderOptionItem)}
             </div>

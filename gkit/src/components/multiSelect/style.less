@@ -9,8 +9,8 @@
     align-items: center;
     gap: 1rem;
     background: var(--gkit-color-neutral-0);
-    border: 1px solid var(--gkit-color-neutral-200);
     cursor: pointer;
+    .input-outline(var(--gkit-color-neutral-200));
 
     &.small {
       border-radius: 0.625rem;
@@ -29,7 +29,7 @@
       flex-wrap: wrap;
       color: var(--gkit-color-neutral-500);
       font-weight: 400;
-      border: none;
+      outline: none;
 
       svg {
         cursor: pointer;
@@ -93,24 +93,20 @@
 
     &.hover,
     &:hover {
-      border: 1px solid var(--gkit-color-light-primary-500);
+      outline-color: var(--gkit-color-light-primary-500);
     }
 
-    &.focus,
-    :focus {
-      .outline();
-      .outline-2();
-      .outline-offset-2();
-      .outline-primary-300();
+    &.focus {
+      .pseudo-element-with-outline();
     }
 
     &.error {
-      border: 1px solid var(--gkit-color-danger-500);
+      outline-color: var(--gkit-color-danger-500);
     }
 
     &.disabled {
       background: var(--gkit-color-neutral-100);
-      border: 1px solid var(--gkit-color-neutral-200);
+      outline-color: var(--gkit-color-neutral-200);
     }
   }
 
@@ -122,12 +118,12 @@
     margin: 0.3rem 0;
     padding: 0.25rem;
     border-radius: 0.75rem;
-    border: 1px solid var(--gkit-color-neutral-200);
     list-style-type: none;
     z-index: 1;
     max-height: 280px;
     overflow: auto;
     min-width: 100%;
+    .input-outline(var(--gkit-color-neutral-200));
 
     .multi-select-option {
       display: flex;
