@@ -9,22 +9,21 @@ export type ToggleProps = PropsWithChildren<{
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
   idQa?: string;
+  name?: string;
 }>;
 
-export function Toggle({ children, hover, disabled, checked, idQa, onChange, className }: ToggleProps) {
+export function Toggle({ children, hover, disabled, checked, idQa, onChange, className, name }: ToggleProps) {
   return (
     <label className={classNames('gkit-toggle', className)} id-qa={idQa}>
       <input
         className={classNames('toggle-input', { hover, disabled, checked })}
         type="checkbox"
-        onChange={onChange}
-        checked={checked}
-        disabled={disabled}
+        {...{ name, disabled, checked, onChange }}
       />
 
       <span className="slider round" />
 
-      {children && <span className={classNames('toggle-text', { disabled, checked })}>{children}</span>}
+      {children && <span className={classNames('toggle-text', { disabled })}>{children}</span>}
     </label>
   );
 }
