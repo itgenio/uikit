@@ -30,3 +30,5 @@ export * from './textBulletListTree';
 export * from './micSparkle';
 export * from './peopleCommunity';
 export * from './chatHelp';
+export * from './thumbLike';
+export * from './thumbDislike';
