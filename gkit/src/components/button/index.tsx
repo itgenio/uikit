@@ -41,8 +41,6 @@ export const Button = forwardRef(function Button(
     focus,
     asIcon,
     className,
-    onClick,
-    onMouseDown,
     idQa,
     ...props
   }: ButtonProps,
@@ -54,21 +52,6 @@ export const Button = forwardRef(function Button(
       id-qa={idQa}
       disabled={disabled}
       className={classNames(BUTTON_CN, className, size, type, { hover, active, focus, icon: asIcon })}
-      onClick={e => {
-        const activeElement = document.activeElement as HTMLElement | null;
-
-        if (activeElement?.classList.contains(BUTTON_CN)) {
-          activeElement.blur();
-        }
-
-        onClick?.(e);
-      }}
-      onMouseDown={e => {
-        // Предотвращаем фокус при нажатии кнопки мыши, т.к сейчас фокус может быть только через клавиатуру
-        e.preventDefault();
-
-        onMouseDown?.(e);
-      }}
       {...props}
     >
       {children}
