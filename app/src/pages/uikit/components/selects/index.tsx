@@ -7,7 +7,7 @@ const sizes = ['small', 'large'] as const;
 const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
-  return { label: `Option${index}`, value: index };
+  return { label: `Option${index}`, value: String(index) };
 });
 
 const optionsWithGroups = defaultOptions.map((option, i) => {
@@ -19,7 +19,7 @@ const optionsWithGroups = defaultOptions.map((option, i) => {
 type State = { title: string; props?: SelectProps; options?: SelectProps['options'] };
 
 export function Selects() {
-  const [value, setValue] = useState<string | number>('');
+  const [value, setValue] = useState<string | undefined>(undefined);
 
   const renderState = ({ title, props, options = defaultOptions }: State, index: number) => {
     return (
