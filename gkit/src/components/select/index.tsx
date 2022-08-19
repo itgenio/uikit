@@ -54,7 +54,6 @@ export const Select = React.memo(
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
-
     const canShowDropdown = open && !disabled;
 
     useOnClickOutside(ref, () => setOpen(false));
@@ -111,12 +110,13 @@ export const Select = React.memo(
           <SelectPrimitive.Trigger
             className={classNames('gkit-select', 'input-wrapper', size, {
               hover,
-              focus: focus || canShowDropdown,
+              focus,
               error,
               disabled,
               filled,
             })}
             id-qa={classNames({ [`${idQa}-trigger`]: idQa })}
+            id={id}
           >
             <SelectPrimitive.Value placeholder={placeholder} aria-label={value != null ? String(value) : undefined} />
             <SelectPrimitive.Icon className="select-chevron">

@@ -50,8 +50,11 @@
     border-color: var(--gkit-color-light-primary-500);
   }
 
-  &.focus {
-    .pseudo-element-with-border();
+  &:not(.disabled) {
+    &.focus,
+    &:focus {
+      .pseudo-element-with-border();
+    }
   }
 
   &.error {

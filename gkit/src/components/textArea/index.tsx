@@ -29,6 +29,8 @@ export type TextAreaProps = {
   error?: boolean;
   disabled?: boolean;
   onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>;
+  onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
 };
 
 export function TextArea({
@@ -53,9 +55,9 @@ export function TextArea({
   placeholder,
   className,
   onKeyPress,
+  onFocus,
+  onBlur,
 }: TextAreaProps) {
-  const [hasFocus, setHasFocus] = useState(false);
-
   const id = useMemo(() => generateId(), []);
 
   return (
@@ -63,7 +65,7 @@ export function TextArea({
       <div
         className={classNames('gkit-text-area-wrapper', size, {
           hover,
-          focus: focus || hasFocus,
+          focus,
           error,
           disabled,
           filled,
@@ -71,10 +73,22 @@ export function TextArea({
       >
         <textarea
           id-qa={idQaForTextArea}
-          {...{ id, onChange, onKeyPress, value, maxLength, placeholder, disabled, name, rows, cols, required }}
+          {...{
+            id,
+            onChange,
+            onKeyPress,
+            value,
+            maxLength,
+            placeholder,
+            disabled,
+            name,
+            rows,
+            cols,
+            required,
+            onFocus,
+            onBlur,
+          }}
           className={classNames('gkit-text-area', resize)}
-          onFocus={() => setHasFocus(true)}
-          onBlur={() => setHasFocus(false)}
         />
       </div>
     </InputsContainer>

@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo, useState } from 'react';
+import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -70,8 +70,6 @@ export const TextField = forwardRef(function TextField(
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  const [isFocused, setFocused] = useState(false);
-
   const id = useMemo(() => generateId(), []);
 
   return (
@@ -83,14 +81,12 @@ export const TextField = forwardRef(function TextField(
       <div
         className={classNames('text-field-wrapper', size, {
           hover,
-          focus: focus || isFocused,
+          focus,
           'full-width': fullWidth,
           active,
           error,
           disabled,
         })}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
       >
         {startAdornment}
 

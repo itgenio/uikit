@@ -1,10 +1,11 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
+import React, { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { Checkbox } from '../checkbox';
 import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
+import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
 
@@ -57,6 +58,7 @@ export const MultiSelect = React.memo(
 
     const ref = useRef(null);
     const dropdownRef = useRef<HTMLUListElement>(null);
+    const id = useMemo(() => generateId(), []);
 
     const canShowDropdown = open && !disabled;
 
@@ -96,7 +98,7 @@ export const MultiSelect = React.memo(
 
     return (
       <InputsContainer
-        {...{ ref, idQa, size, label, helperText, className: classNames('gkit-multi-select', className) }}
+        {...{ ref, id, idQa, size, label, helperText, className: classNames('gkit-multi-select', className) }}
       >
         <div
           className={classNames('multi-select-content', size, {
@@ -110,6 +112,7 @@ export const MultiSelect = React.memo(
 
             setOpen(!open);
           }}
+          id={id}
         >
           <div className={classNames('multi-select-label', size, { disabled, selected: hasValue })}>
             {renderValues()}

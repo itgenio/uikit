@@ -1,4 +1,5 @@
 import './style.less';
+import { Label } from '@radix-ui/react-label';
 import classNames from 'classnames';
 import React, { forwardRef, PropsWithChildren } from 'react';
 
@@ -20,9 +21,9 @@ export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(
   return (
     <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className)}>
       {label && (
-        <label htmlFor={id} className={classNames('inputs-container-label', size)}>
+        <Label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
-        </label>
+        </Label>
       )}
       {children}
       {helperText && <span className="inputs-container-helper-text">{helperText}</span>}
