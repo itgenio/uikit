@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -31,6 +31,7 @@ export type TextAreaProps = {
   onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
+  autoFocus?: boolean;
 };
 
 export function TextArea({
@@ -57,8 +58,21 @@ export function TextArea({
   onKeyPress,
   onFocus,
   onBlur,
+  autoFocus,
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
+
+  const ref = useRef<HTMLTextAreaElement>();
+
+  useLayoutEffect(() => {
+    if (!autoFocus) return;
+
+    const textAreaElement = ref.current;
+
+    if (!textAreaElement) return;
+
+    textAreaElement.selectionStart = ref.current.value.length;
+  }, [autoFocus]);
 
   return (
     <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
@@ -73,6 +87,7 @@ export function TextArea({
       >
         <textarea
           id-qa={idQaForTextArea}
+          ref={ref}
           {...{
             id,
             onChange,
@@ -87,6 +102,7 @@ export function TextArea({
             required,
             onFocus,
             onBlur,
+            autoFocus,
           }}
           className={classNames('gkit-text-area', resize)}
         />
