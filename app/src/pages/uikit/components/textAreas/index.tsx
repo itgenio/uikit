@@ -24,6 +24,7 @@ export function TextAreas() {
     { state: 'Filled', props: { filled: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
+    { state: 'AutoFocus', props: { autoFocus: true, value: 'text', onChange: () => {} } },
   ];
 
   return (
