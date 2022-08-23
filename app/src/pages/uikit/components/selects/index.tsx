@@ -19,7 +19,7 @@ const optionsWithGroups = defaultOptions.map((option, i) => {
 type State = { title: string; props?: SelectProps; options?: SelectProps['options'] };
 
 export function Selects() {
-  const [value, setValue] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState<string | number | undefined>(undefined);
 
   const renderState = ({ title, props, options = defaultOptions }: State, index: number) => {
     return (
