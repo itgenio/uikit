@@ -71,7 +71,9 @@ export function TextArea({
 
     if (!textAreaElement) return;
 
-    textAreaElement.selectionStart = ref.current.value.length;
+    const pos = ref.current.value.length;
+
+    textAreaElement.setSelectionRange(pos, pos);
   }, [autoFocus]);
 
   return (
