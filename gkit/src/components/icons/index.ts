@@ -32,3 +32,4 @@ export * from './peopleCommunity';
 export * from './chatHelp';
 export * from './thumbLike';
 export * from './thumbDislike';
+export * from './handRight';
