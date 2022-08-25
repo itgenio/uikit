@@ -31,6 +31,7 @@ export type SelectProps = {
   options?: SelectOption[];
   value?: Values;
   divideByGroups?: boolean;
+  portalProps?: SelectPrimitive.SelectPortalProps;
 };
 
 export const Select = React.memo(
@@ -50,6 +51,7 @@ export const Select = React.memo(
     options,
     value,
     divideByGroups,
+    portalProps = {},
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -123,7 +125,7 @@ export const Select = React.memo(
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
-          <SelectPrimitive.Portal>
+          <SelectPrimitive.Portal {...portalProps} className={classNames('gkit-select-portal', portalProps.className)}>
             <SelectPrimitive.Content
               className="gkit-select-dropdown"
               id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
