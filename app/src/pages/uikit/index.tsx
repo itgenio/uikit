@@ -10,6 +10,7 @@ import { Buttons } from './components/buttons';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dropdowns } from './components/dropdowns';
+import { Emojis } from './components/emojis';
 import { Icons } from './components/icons';
 import { Links } from './components/links';
 import { Modals } from './components/modals';
@@ -47,6 +48,7 @@ const components = [
   Icons,
   Selects,
   MultiSelects,
+  Emojis,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
