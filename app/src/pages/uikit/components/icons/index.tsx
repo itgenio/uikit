@@ -1,11 +1,10 @@
 import './style.less';
 
-import React, { CSSProperties, useState } from 'react';
-import { Button } from '@itgenio/gkit/button';
+import React, { CSSProperties, useCallback, useState } from 'react';
 import * as gkitIcons from '@itgenio/gkit/icons';
 import { Tooltip } from '@itgenio/gkit/tooltip';
+import { STEP, Slider } from '../slider';
 
-const STEP = 2;
 const DEFAULT_SIZE = 24;
 
 const ICONS = Object.entries(gkitIcons)
@@ -16,28 +15,21 @@ const ICONS = Object.entries(gkitIcons)
 export function Icons() {
   const [currentSize, setCurrentSize] = useState(DEFAULT_SIZE);
 
+  const onClickMinus = useCallback(() => setCurrentSize(s => s - STEP), []);
+  const onClickPlus = useCallback(() => setCurrentSize(s => s + STEP), []);
+  const onChangeInput = useCallback(e => setCurrentSize(e.target.valueAsNumber), []);
+
   return (
     <div className="icons">
       <div className="sizes">
         <span>Current size: {currentSize}</span>
 
-        <div className="slider">
-          <Button onClick={() => setCurrentSize(s => s - STEP)} size="small" asIcon>
-            -
-          </Button>
-
-          <input
-            value={currentSize}
-            type="range"
-            min="1"
-            max="200"
-            onChange={e => setCurrentSize(e.target.valueAsNumber)}
-          />
-
-          <Button onClick={() => setCurrentSize(s => s + STEP)} size="small" asIcon>
-            +
-          </Button>
-        </div>
+        <Slider
+          onClickMinus={onClickMinus}
+          onClickPlus={onClickPlus}
+          value={currentSize}
+          onChangeInput={onChangeInput}
+        />
       </div>
 
       <div className="board" style={{ '--icon-size': `${currentSize}px` } as CSSProperties}>
