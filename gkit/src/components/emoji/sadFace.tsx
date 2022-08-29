@@ -4,7 +4,7 @@ import { Emoji, EmojiProps } from './internal';
 
 export function SadFaceEmoji({ className, ...props }: Partial<EmojiProps> = {}) {
   return (
-    <Emoji className={classNames('sad-face-emoji', className)} viewBox="0 0 24 24" {...props}>
+    <Emoji id="sad-face-emoji" className={className} viewBox="0 0 24 24" {...props}>
       <path
         d="M11.925 22.275C6.69374 22.275 1.04999 18.9938 1.04999 11.7938C1.04999 4.59375 6.69374 1.3125 11.925 1.3125C14.8312 1.3125 17.5125 2.26875 19.5 4.0125C21.6562 5.925 22.8 8.625 22.8 11.7938C22.8 14.9625 21.6562 17.6438 19.5 19.5563C17.5125 21.3 14.8125 22.275 11.925 22.275Z"
         fill="url(#paint0_radial_224_8612)"

@@ -4,7 +4,7 @@ import { Emoji, EmojiProps } from './internal';
 
 export const RaisedHandEmoji = ({ className, ...props }: Partial<EmojiProps> = {}) => {
   return (
-    <Emoji className={classNames('raise-hand-emoji', className)} viewBox="0 0 24 24" {...props}>
+    <Emoji id="raised-hand-emoji" className={className} viewBox="0 0 24 24" {...props}>
       <radialGradient id="svgIDa" cx="57.16" cy="33.264" r="89.842" gradientUnits="userSpaceOnUse">
         <stop offset=".359" stopColor="#F9DDBD" />
         <stop offset=".882" stopColor="#EDC391" />
