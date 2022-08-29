@@ -1,18 +1,18 @@
 import './style.less';
 
 import React, { CSSProperties, useCallback, useState } from 'react';
-import * as gkitIcons from '@itgenio/gkit/icons';
+import * as gkitEmojis from '@itgenio/gkit/emoji';
 import { Tooltip } from '@itgenio/gkit/tooltip';
 import { STEP, Slider } from '../slider';
 
 const DEFAULT_SIZE = 24;
 
-const ICONS = Object.entries(gkitIcons)
-  .filter(([key, value]) => typeof value === 'function' && key.endsWith('Icon'))
+const EMOJIS = Object.entries(gkitEmojis)
+  .filter(([key, value]) => typeof value === 'function' && key.endsWith('Emoji'))
   .map(([, value]) => value as Function)
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export function Icons() {
+export function Emojis() {
   const [currentSize, setCurrentSize] = useState(DEFAULT_SIZE);
 
   const onClickMinus = useCallback(() => setCurrentSize(s => s - STEP), []);
@@ -20,7 +20,7 @@ export function Icons() {
   const onChangeInput = useCallback(e => setCurrentSize(e.target.valueAsNumber), []);
 
   return (
-    <div className="icons">
+    <div className="emojis">
       <div className="sizes">
         <span>Current size: {currentSize}</span>
 
@@ -33,9 +33,9 @@ export function Icons() {
       </div>
 
       <div className="board" style={{ '--icon-size': `${currentSize}px` } as CSSProperties}>
-        {ICONS.map(Icon => (
-          <Tooltip key={Icon.name} content={Icon.name}>
-            <Icon />
+        {EMOJIS.map(Emoji => (
+          <Tooltip key={Emoji.name} content={Emoji.name}>
+            <Emoji />
           </Tooltip>
         ))}
       </div>
@@ -43,4 +43,4 @@ export function Icons() {
   );
 }
 
-Icons.displayName = 'Icons';
+Emojis.displayName = 'Emojis';
