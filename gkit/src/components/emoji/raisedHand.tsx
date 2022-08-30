@@ -4,13 +4,19 @@ import { Emoji, EmojiProps } from './internal';
 
 export const RaisedHandEmoji = ({ className, ...props }: Partial<EmojiProps> = {}) => {
   return (
-    <Emoji id="raised-hand-emoji" className={className} viewBox="0 0 24 24" {...props}>
-      <radialGradient id="svgIDa" cx="57.16" cy="33.264" r="89.842" gradientUnits="userSpaceOnUse">
+    <Emoji className={classNames('raised-hand-emoji', className)} viewBox="0 0 24 24" {...props}>
+      <radialGradient
+        id="raised-hand-emoji-gradient-id"
+        cx="57.16"
+        cy="33.264"
+        r="89.842"
+        gradientUnits="userSpaceOnUse"
+      >
         <stop offset=".359" stopColor="#F9DDBD" />
         <stop offset=".882" stopColor="#EDC391" />
       </radialGradient>
       <path
-        fill="url(#svgIDa)"
+        fill="url(#raised-hand-emoji-gradient-id)"
         d="M50.9 122.3c-23.88 0-30.28-12.73-31.45-23.41c-.55-5.04-1.27-61.23-1.27-61.8c0-2.78.71-7.48 5.46-7.48c4.46 0 6.46 3.77 6.46 7.5l.46 23.24c.02.82.68 1.65 1.5 1.65s1.48-.84 1.5-1.66l.59-38.24c0-3.76 2-7.57 6.46-7.57s6.46 3.74 6.46 7.48l.48 37.92c.01.82.68 1.47 1.5 1.47s1.49-.66 1.5-1.48l.57-46.71c0-3.75 2-7.52 6.46-7.52s6.46 3.77 6.46 7.5l.59 46.46a1.5 1.5 0 0 0 3 0L68.1 25c0-3.75 2-7.52 6.46-7.52s6.46 3.77 6.46 7.5c.11 12.42.38 44.85.34 46.01c-.08.92.26 1.52.56 1.85c.4.44.98.69 1.63.69c1.44 0 2.87-1.14 3.27-1.49c1.78-1.54 3.31-3.95 4.93-6.5c2.02-3.18 4.12-6.48 6.36-7.39c1.76-.71 3.89-1.11 6.01-1.11c3.4 0 5.53 1 5.89 1.98c1.56 4.3-.32 5.95-5.09 9.6l-.92.71c-4.73 3.65-7.8 11.08-10.52 17.63c-1.11 2.67-2.15 5.2-3.23 7.32c-.65 1.28-1.21 2.79-1.86 4.53c-3.46 9.36-8.72 23.49-37.49 23.49z"
       />
       <path
@@ -19,14 +25,14 @@ export const RaisedHandEmoji = ({ className, ...props }: Partial<EmojiProps> = {
       />
       <defs>
         <path
-          id="svgIDb"
+          id="raised-hand-emoji-use-id"
           d="M107.92 57.8c-2.27-2.53-8.01-3.72-13.54-1.54c-4.65 1.83-9.96 19.19-9.96 19.19l-3.87-6.4s-65.53 21.5-64.6 30s7.74 24.75 34.94 24.75c35.1 0 36.64-20.86 40.71-28.84c3.79-7.43 8.56-24.71 14.42-26.55c3.8-1.18 3.82-8.48 1.9-10.61z"
         />
       </defs>
-      <clipPath id="svgIDc">
-        <use href="#svgIDb" />
+      <clipPath id="raised-hand-emoji-clip-path-id">
+        <use href="#raised-hand-emoji-use-id" />
       </clipPath>
-      <g clipPath="url(#svgIDc)">
+      <g clipPath="url(#raised-hand-emoji-clip-path-id)">
         <path
           fill="#E6B77E"
           d="M83.91 69.48C73 73.64 66.57 83.91 62.62 97.38c-.54 1.86 1.17 2.4 1.83.58c6.86-18.88 23.87-25.11 23.87-25.11l-4.41-3.37z"
