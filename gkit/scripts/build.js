@@ -1,7 +1,7 @@
 const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
-const svgrPlugin = require('./plugins/svgrPlugin');
+const svgPlugin = require('./plugins/svgPlugin');
 const writePlugin = require('./plugins/writePlugin');
 
 // isProduction flag for watch mode
@@ -47,6 +47,6 @@ const isProduction = process.env.NODE_ENV === 'production';
       'use-onclickoutside',
       '@itgenio/utils',
     ],
-    plugins: [lessLoader(), svgrPlugin(), writePlugin()],
+    plugins: [lessLoader(), svgPlugin(), writePlugin()],
   }).catch(e => console.error(e.message));
 })();
