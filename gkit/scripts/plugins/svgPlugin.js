@@ -36,7 +36,7 @@ module.exports = () => ({
   name: 'svg',
   setup(build) {
     // Icons
-    build.onLoad({ filter: /\\icons\\assets\\\w+\.svg$/ }, async args => {
+    build.onLoad({ filter: /\/icons\/assets\/\w+\.svg$/ }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,
         svgProps: { className: '{"gkit-svg-icon" + (props.className ? " " + props.className : "")}' },
@@ -50,7 +50,7 @@ module.exports = () => ({
     });
 
     // Emoji
-    build.onLoad({ filter: /\\emoji\\assets\\\w+\.svg$/ }, async args => {
+    build.onLoad({ filter: /\/emoji\/assets\/\w+\.svg$/ }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,
         svgProps: { className: '{"gkit-emoji" + (props.className ? " " + props.className : "")}' },
