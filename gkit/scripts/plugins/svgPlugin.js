@@ -10,11 +10,13 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig = {}, svgP
       expandProps: 'start',
       titleProp: true,
       dimensions: false,
+      plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
       svgoConfig: {
         plugins: [
           { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
-          'removeXMLNS',
           { name: 'removeAttrs', params: { attrs: 'svg:fill' } },
+          'removeXMLNS',
+          'prefixIds',
         ],
         ...svgoConfig,
       },
@@ -24,7 +26,6 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig = {}, svgP
         'aria-hidden': '{props.title ? undefined : true}',
         ...svgProps,
       },
-      plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
       ...svgrConfig,
     },
     { filePath: svgFilePath }
