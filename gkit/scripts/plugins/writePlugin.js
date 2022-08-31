@@ -34,7 +34,10 @@ module.exports = () => ({
             }
           }
 
-          const outFolder = fileDir.replace(cwd, '').split(path.sep).at(-1);
+          const outFolder = fileDir
+            .replace(cwd, '')
+            .split(/(\\)|(\/)/g)
+            .at(-1);
           const outDir = path.resolve(cwd, outFolder);
 
           await fs.promises.mkdir(outDir, { recursive: true });
