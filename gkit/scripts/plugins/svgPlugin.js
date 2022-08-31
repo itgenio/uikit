@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const svgrTransform = require('@svgr/core').transform;
 
-const escapedPathSep = path.sep.split('').map(sym => `\\${sym}`);
+const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 
 const ICONS_PATH_FILTER = new RegExp([`icons`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 const EMOJI_PATH_FILTER = new RegExp([`emoji`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
