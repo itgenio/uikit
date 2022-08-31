@@ -1,5 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 const svgrTransform = require('@svgr/core').transform;
+
+const escapedPathSep = path.sep.split('').map(sym => `\\${sym}`);
+
+const ICONS_PATH_FILTER = new RegExp([`icons`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
+const EMOJI_PATH_FILTER = new RegExp([`emoji`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 
 const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig = {}, svgProps = {} }) => {
   const svgContent = await fs.promises.readFile(svgFilePath, 'utf8');
@@ -36,7 +42,7 @@ module.exports = () => ({
   name: 'svg',
   setup(build) {
     // Icons
-    build.onLoad({ filter: /\/icons\/assets\/\w+\.svg$/ }, async args => {
+    build.onLoad({ filter: ICONS_PATH_FILTER }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,
         svgProps: { className: '{"gkit-svg-icon" + (props.className ? " " + props.className : "")}' },
@@ -50,7 +56,7 @@ module.exports = () => ({
     });
 
     // Emoji
-    build.onLoad({ filter: /\/emoji\/assets\/\w+\.svg$/ }, async args => {
+    build.onLoad({ filter: EMOJI_PATH_FILTER }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,
         svgProps: { className: '{"gkit-emoji" + (props.className ? " " + props.className : "")}' },
