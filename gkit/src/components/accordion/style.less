@@ -21,19 +21,21 @@
 
     .accordion-title {
       .text-xl();
+
       &.icon {
         .text-base();
       }
     }
 
-    .icon-chevron {
+    .chevron-down-icon {
       transition: transform 0.5s;
       width: 1rem;
-      height: 0.56rem;
+      height: 1rem;
     }
 
     div {
       width: 100%;
+
       p {
         .text-sm();
         font-weight: @font-weight-normal;
@@ -49,7 +51,7 @@
     color: var(--gkit-color-neutral-600);
   }
 
-  &[open] summary .icon-chevron {
+  &[open] summary .chevron-down-icon {
     transform: scale(1, -1);
   }
 

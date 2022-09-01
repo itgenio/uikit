@@ -35,3 +35,4 @@ export * from './thumbDislike';
 export * from './handRight';
 export * from './warning';
 export * from './delete';
+export * from './edit';
