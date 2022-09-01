@@ -27,14 +27,10 @@
       }
     }
 
-    .icon-chevron {
+    .chevron-down-icon {
       transition: transform 0.5s;
       width: 1rem;
-      height: 0.56rem;
-    }
-
-    .chevron-down-icon {
-      transition: all 0.2s ease;
+      height: 1rem;
     }
 
     div {
@@ -55,13 +51,8 @@
     color: var(--gkit-color-neutral-600);
   }
 
-  &[open] summary .icon-chevron {
-    transform: scale(1, -1);
-  }
-
   &[open] summary .chevron-down-icon {
-    transform: rotate(180deg);
-    transition: all 0.2s ease;
+    transform: scale(1, -1);
   }
 
   .accordion-text {
