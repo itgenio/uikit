@@ -21,6 +21,7 @@
 
     .accordion-title {
       .text-xl();
+
       &.icon {
         .text-base();
       }
@@ -32,8 +33,13 @@
       height: 0.56rem;
     }
 
+    .chevron-down-icon {
+      transition: all 0.2s ease;
+    }
+
     div {
       width: 100%;
+
       p {
         .text-sm();
         font-weight: @font-weight-normal;
@@ -51,6 +57,11 @@
 
   &[open] summary .icon-chevron {
     transform: scale(1, -1);
+  }
+
+  &[open] summary .chevron-down-icon {
+    transform: rotate(180deg);
+    transition: all 0.2s ease;
   }
 
   .accordion-text {
