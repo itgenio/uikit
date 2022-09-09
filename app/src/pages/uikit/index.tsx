@@ -12,10 +12,10 @@ import { Colors } from './components/colors';
 import { Dropdowns } from './components/dropdowns';
 import { Emojis } from './components/emojis';
 import { Icons } from './components/icons';
+import { InlineNotifications } from './components/inlineNotifications';
 import { Links } from './components/links';
 import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
-import { Notifications } from './components/notifications';
 import { Panels } from './components/panels';
 import { Popovers } from './components/popovers';
 import { RadioButtons } from './components/radioButtons';
@@ -50,7 +50,7 @@ const components = [
   Selects,
   MultiSelects,
   Emojis,
-  Notifications,
+  InlineNotifications,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;

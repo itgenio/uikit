@@ -2,9 +2,9 @@ import './style.less';
 
 import React, { Fragment } from 'react';
 import { Button } from '@itgenio/gkit/button';
-import { InlineNotification, InlineNotificationProps } from '@itgenio/gkit/notification';
+import { InlineNotification, InlineNotificationProps } from '@itgenio/gkit/inlineNotification';
 
-export function Notifications() {
+export function InlineNotifications() {
   const renderState = (state: string, props: InlineNotificationProps, index: number) => {
     return (
       <Fragment>
@@ -46,4 +46,4 @@ export function Notifications() {
   );
 }
 
-Notifications.displayName = 'Notifications';
+InlineNotifications.displayName = 'InlineNotifications';
