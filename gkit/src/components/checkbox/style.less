@@ -1,102 +1,61 @@
 @import (reference) "../../variables";
 @import (reference) "../../ui";
-@checkbox-size: 24px;
+@checkbox-size: 1.5rem;
 
 .gkit-checkbox {
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 
   input[type="checkbox"] {
-    position: relative;
-    appearance: none;
-    -webkit-appearance: none;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
     overflow: hidden;
-    border-radius: 4px;
-    background-color: var(--gkit-color-neutral-0);
-    cursor: pointer;
+    position: absolute;
+    white-space: nowrap;
 
-    &:before {
-      content: "";
-      display: block;
-      width: @checkbox-size;
-      height: @checkbox-size;
-      border: 1px solid var(--gkit-color-neutral-300);
-      transition: 0.2s border-color ease;
-      border-radius: 4px;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: 50% 55%;
-      width: @checkbox-size * 0.5;
-      height: @checkbox-size;
-      border-radius: 0;
-      transform: translate(-50%, -85%) scale(0) rotate(45deg);
-      background-color: transparent;
-      box-shadow: 4px 4px 0px 0px #ffffff;
-    }
-
-    &.hover,
-    &:hover {
-      background-color: var(--gkit-color-light-primary-50);
-    }
-
-    &.hover:before,
-    &:hover:before {
-      border: 1px solid var(--gkit-color-light-primary-400);
-    }
-
-    &:checked:before {
-      border-color: var(--gkit-color-light-primary-400);
-      transition: 0.5s border-color ease;
-    }
-
-    &:checked:after {
-      animation: toggleOnCheckbox 0.2s ease forwards;
-    }
-
-    &:checked:not(:disabled):before {
+    &:checked + .checkbox-body {
       background-color: var(--gkit-color-light-primary-500);
     }
 
-    &:disabled:before {
+    &:disabled + .checkbox-body {
       border-color: var(--gkit-color-neutral-300);
       background-color: var(--gkit-color-neutral-100);
     }
 
-    &:disabled + span {
+    &:disabled ~ .checkbox-children {
       color: var(--gkit-color-neutral-400);
     }
 
-    &:checked:disabled:before {
+    &:checked:disabled + .checkbox-body {
       background-color: var(--gkit-color-neutral-300);
     }
+  }
 
-    &:not(:disabled):after {
-      box-shadow: 4px 4px 0 0 var(--gkit-color-neutral-0);
+  .checkbox-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @checkbox-size;
+    width: @checkbox-size;
+    background: var(--gkit-color-neutral-0);
+    border: 1px solid var(--gkit-color-neutral-300);
+    border-radius: 0.25rem;
+    margin-right: 0.75rem;
+    color: var(--gkit-color-neutral-0);
+
+    &.hover,
+    &:hover {
+      background: var(--gkit-color-light-primary-50);
+      border: 1px solid var(--gkit-color-light-primary-400);
     }
-  }
-  .checkbox-span {
-    margin-left: 0.75rem;
-  }
-}
 
-@keyframes toggleOnCheckbox {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -85%) scale(0) rotate(45deg);
-  }
-
-  70% {
-    opacity: 1;
-    transform: translate(-50%, -85%) scale(0.8) rotate(45deg);
-  }
-
-  100% {
-    transform: translate(-50%, -85%) scale(0.7) rotate(45deg);
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
   }
 }

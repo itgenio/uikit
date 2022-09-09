@@ -5,6 +5,7 @@
   position: relative;
   width: 44px;
   height: 24px;
+  cursor: pointer;
 
   .toggle-input {
     opacity: 0;
@@ -40,7 +41,6 @@
 
   .slider {
     position: absolute;
-    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
@@ -69,9 +69,13 @@
   }
 
   .toggle-text {
+    display: flex;
+    align-items: center;
     position: relative;
     left: 2.8rem;
     margin-left: 0.875rem;
+    white-space: nowrap;
+    color: var(--gkit-color-neutral-800);
 
     &.disabled {
       color: var(--gkit-color-neutral-400);

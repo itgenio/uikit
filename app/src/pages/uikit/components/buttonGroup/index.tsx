@@ -1,6 +1,6 @@
 import './style.less';
 import React from 'react';
-import { Button, ButtonGroup } from '@itgenio/gkit';
+import { Button, ButtonGroup } from '@itgenio/gkit/button';
 
 const Svg = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -34,11 +34,13 @@ export function ButtonGroups() {
           <Button>2</Button>
           <Button>3</Button>
         </ButtonGroup>
+
         <ButtonGroup>
-          <Button type="secondary">1</Button>
-          <Button type="secondary">2</Button>
-          <Button type="secondary">3</Button>
+          <Button type="tertiaryNeutral">1</Button>
+          <Button type="tertiaryNeutral">2</Button>
+          <Button type="tertiaryNeutral">3</Button>
         </ButtonGroup>
+
         <ButtonGroup size="large">
           <Button type="danger">1</Button>
           <Button type="danger">2</Button>
@@ -48,27 +50,27 @@ export function ButtonGroups() {
       <div>
         <label>Buttons different(denied!)</label>
         <ButtonGroup>
-          <Button type="neutral">0</Button>
-          <Button type="secondary">1</Button>
+          <Button type="secondary">0</Button>
+          <Button type="tertiaryNeutral">1</Button>
           <Button>2</Button>
           <Button type="danger">3</Button>
-          <Button type="neutral">4</Button>
+          <Button type="secondary">4</Button>
         </ButtonGroup>
       </div>
       <div>
         <label>3 buttons with borders</label>
         <ButtonGroup>
-          <Button type="neutral">1</Button>
-          <Button type="neutral" asIcon disabled>
+          <Button type="secondary">1</Button>
+          <Button type="secondary" asIcon disabled>
             <Svg />
           </Button>
-          <Button type="neutral">3</Button>
+          <Button type="secondary">3</Button>
         </ButtonGroup>
       </div>
       <div>
         <label>Set type and size for group</label>
-        <ButtonGroup size="large" type="neutral">
-          <Button size="small" type="neutral">
+        <ButtonGroup size="large" type="secondary">
+          <Button size="small" type="secondary">
             0
           </Button>
           <Button size="large" type="secondary">
@@ -76,7 +78,7 @@ export function ButtonGroups() {
           </Button>
           <Button>2</Button>
           <Button type="danger">3</Button>
-          <Button type="neutral">4</Button>
+          <Button type="secondary">4</Button>
         </ButtonGroup>
       </div>
     </div>

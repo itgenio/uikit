@@ -3,43 +3,25 @@
 
   .grid {
     display: grid;
-    grid-template-columns: min-content repeat(@styles-count, min-content);
-    grid-template-rows: auto repeat(auto-fit, min-content);
+    grid-template-columns: max-content repeat(@styles-count, max-content);
     row-gap: 1rem;
     column-gap: 2rem;
     align-items: center;
-    overflow-x: auto;
-
-    .notification-title-h3 {
-      font-size: 1rem;
-      color: var(--gkit-color-neutral-800);
-      margin-left: 1rem;
-      width: 100%;
-    }
 
     .notification-content {
-      padding: 0 1rem 0 3.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
 
       .notification-text {
         font-size: 0.875rem;
         color: var(--gkit-color-neutral-600);
-        margin: 0.5rem 0 1rem;
       }
 
       .notification-button-container {
         display: flex;
         flex-direction: row;
-
-        button {
-          font-weight: 600;
-          font-size: 0.875rem;
-          color: var(--gkit-color-neutral-800);
-        }
       }
-    }
-
-    .title {
-      font-size: 1.25rem;
     }
   }
 }

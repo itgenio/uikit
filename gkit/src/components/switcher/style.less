@@ -19,7 +19,7 @@
     &.medium {
       .text-sm();
 
-      .switcher-icon {
+      .circle-icon {
         width: 1rem;
         height: 1rem;
       }
@@ -32,7 +32,7 @@
     &.large {
       .text-base();
 
-      .switcher-icon {
+      .circle-icon {
         width: 1.25rem;
         height: 1.25rem;
       }
@@ -42,26 +42,29 @@
       }
     }
 
-    &:hover,
-    &.hover {
+    &:hover:not(:disabled) {
       background-color: var(--gkit-color-neutral-200);
 
-      .switcher-icon {
+      .circle-icon {
         color: var(--gkit-color-neutral-800);
       }
     }
 
-    &:active,
-    &.active {
+    &:active:not(:disabled) {
       background-color: var(--gkit-color-neutral-0);
       color: var(--gkit-color-light-primary-700);
 
-      .switcher-icon {
+      .circle-icon {
         color: var(--gkit-color-light-primary-700);
       }
     }
 
-    &[data-state="on"] {
+    &:disabled {
+      color: var(--gkit-color-neutral-400);
+      cursor: default;
+    }
+
+    &[data-state="on"]:not(:disabled) {
       background-color: var(--gkit-color-neutral-0);
       color: var(--gkit-color-light-primary-700);
     }

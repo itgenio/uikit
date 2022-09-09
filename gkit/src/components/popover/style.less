@@ -1,0 +1,27 @@
+@import (reference) "../../variables";
+
+.gkit-popover-content {
+  border-radius: 8px;
+  padding: 1rem;
+  width: 20rem;
+  box-shadow: 0 4px 12px 2px var(--gkit-color-neutral-300);
+  background-color: var(--gkit-color-neutral-0);
+
+  .popover-close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    .dismiss-icon {
+      width: 1rem;
+      height: 1rem;
+      margin: 0.5rem;
+      color: var(--gkit-color-neutral-800);
+    }
+  }
+
+  .popover-arrow {
+    fill: var(--gkit-color-neutral-0);
+  }
+}

@@ -1,0 +1,45 @@
+.uikit-page .badges {
+  @styles-count: 6;
+
+  .grid {
+    display: grid;
+    grid-template-columns: min-content repeat(@styles-count, max-content);
+    grid-template-rows: auto repeat(auto-fit, min-content);
+    row-gap: 2rem;
+    column-gap: 2rem;
+    align-items: center;
+    overflow-x: auto;
+
+    .title {
+      font-size: 1.25rem;
+    }
+
+    .small {
+      .star-icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        cursor: pointer;
+      }
+    }
+    .large {
+      .star-icon {
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+      }
+    }
+
+    .dismiss-icon {
+      width: 0.75rem;
+      height: 0.75rem;
+      cursor: pointer;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}

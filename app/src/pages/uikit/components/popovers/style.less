@@ -1,0 +1,35 @@
+.uikit-page .popover {
+  height: 100%;
+  @styles-count: 1;
+
+  .grid {
+    display: grid;
+    grid-template-columns: min-content repeat(@styles-count, min-content);
+    height: 100%;
+    justify-content: space-around;
+    align-items: start;
+  }
+}
+
+.popover-button:first-child {
+  margin-right: 0.5rem;
+}
+
+.popover-header {
+  color: var(--gkit-color-neutral-900);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.popover-text {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--gkit-color-neutral-600);
+  margin-top: 0.5rem;
+}
+
+.popover-button-container {
+  display: flex;
+  margin: 1rem 0 0.5rem;
+  justify-content: center;
+}

@@ -1,4 +1,5 @@
 import './style.less';
+
 import classNames from 'classnames';
 import React from 'react';
 
@@ -10,16 +11,29 @@ type Props = React.PropsWithChildren<{
   hover?: boolean;
   className?: string;
   href: string;
+  rel?: string;
   idQa?: string;
-}>;
+}> &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export function Link({ children, size = 'normal', hover, disabled, className, href, idQa }: Props) {
+export function Link({
+  children,
+  size = 'normal',
+  hover,
+  disabled,
+  className,
+  href,
+  idQa,
+  rel = 'noopener',
+  ...props
+}: Props) {
   return (
     <a
-      href={href}
-      rel="noopener"
-      id-qa={idQa}
       className={classNames('gkit-link', className, size, { hover, disabled })}
+      href={href}
+      rel={rel}
+      id-qa={idQa}
+      {...props}
     >
       {children}
     </a>

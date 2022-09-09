@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "baseUrl": "./src",
     "types": ["node"],
     "module": "ESNext",
-    "outDir": "dist",
     "rootDir": "./src",
     "moduleResolution": "Node",
     "emitDeclarationOnly": true,
@@ -12,6 +10,5 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react"
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["src"]
+  "include": ["src", "index.d.ts"]
 }

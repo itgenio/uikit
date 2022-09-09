@@ -1,39 +1,36 @@
 import './style.less';
+
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { CircleNotificationIcon } from '../icons/circleNotification';
-import { CloseIcon } from '../icons/close';
+import { ErrorCircleFilledIcon, DismissIcon } from '../icons';
 
-type Statuses = 'success' | 'warning' | 'error' | 'info';
-type Types = 'toast' | 'inline';
+type Variants = 'success' | 'warning' | 'error' | 'info';
 
-export type NotificationContainerProps = PropsWithChildren<{
-  status?: Statuses;
-  type?: Types;
+export type NotificationProps = PropsWithChildren<{
+  variant?: Variants;
   className?: string;
   idQa?: string;
+  title: string;
+  onClose?: () => void;
 }>;
 
-export function NotificationContainer({ children, type, status, className, idQa }: NotificationContainerProps) {
+export function Notification({ children, variant, className, idQa, title, onClose }: NotificationProps) {
   return (
-    <div id-qa={idQa} className={classNames('gkit-notification-container', className, status, type)}>
-      {children}
-    </div>
-  );
-}
+    <div id-qa={idQa} className={classNames('gkit-notification-container', className, variant)}>
+      <ErrorCircleFilledIcon className="notification-error-circle-icon" />
 
-type NotificationHeaderProps = PropsWithChildren<{ onClose?: () => void; className?: string }>;
+      <div className="notification-content-wrapper">
+        <div className={classNames('notification-title', className)}>
+          {title}
+          {onClose && (
+            <button onClick={onClose}>
+              <DismissIcon className="notification-dismiss-icon" />
+            </button>
+          )}
+        </div>
 
-export function NotificationHeader({ children, onClose, className }: NotificationHeaderProps) {
-  return (
-    <div className={classNames('notification-title', className)}>
-      <CircleNotificationIcon />
-      {children}
-      {onClose && (
-        <button onClick={onClose}>
-          <CloseIcon />
-        </button>
-      )}
+        {children}
+      </div>
     </div>
   );
 }

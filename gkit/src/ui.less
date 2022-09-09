@@ -185,3 +185,18 @@
 .outline-primary-900 {
   outline-color: var(--gkit-color-primary-900);
 }
+
+.pseudo-element-with-border() {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    opacity: 0.6;
+    inset: -3px;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 0 2px var(--gkit-color-primary-300);
+    box-sizing: unset;
+  }
+}

@@ -1,0 +1,27 @@
+@import (reference) "../../../../variables";
+@import (reference) "../../../../ui";
+
+.gkit-inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .inputs-container-label {
+    color: var(--gkit-color-neutral-800);
+    .font-bold();
+    cursor: pointer;
+
+    &.small {
+      .text-sm();
+    }
+
+    &.large {
+      .text-base();
+    }
+  }
+
+  .inputs-container-helper-text {
+    color: var(--gkit-color-neutral-500);
+    .text-sm();
+  }
+}

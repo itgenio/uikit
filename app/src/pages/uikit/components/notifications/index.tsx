@@ -1,61 +1,47 @@
 import './style.less';
+
 import React, { Fragment } from 'react';
-import { NotificationContainer, NotificationHeader, NotificationContainerProps, Button } from '@itgenio/gkit';
+import { Button } from '@itgenio/gkit/button';
+import { Notification, NotificationProps } from '@itgenio/gkit/notification';
 
 export function Notifications() {
-  const types = ['inline', 'toast'] as const;
-
-  const renderState = (state: string, props: NotificationContainerProps, index: number) => {
+  const renderState = (state: string, props: NotificationProps, index: number) => {
     return (
-      <Fragment key={index}>
-        {types.map(type => {
-          const p = { ...props, type };
-          return (
-            <NotificationContainer key={`${state}${type}`} {...p}>
-              <NotificationHeader onClose={() => console.log('click')}>
-                <h3 className="notification-title-h3">Notification message title</h3>
-              </NotificationHeader>
-              <div className="notification-content">
-                <p className="notification-text">
-                  Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
-                </p>
-                <div className="notification-button-container">
-                  <Button size="small" type="linkNeutral">
-                    Кнопка
-                  </Button>
-                  <Button size="small" type="linkNeutral">
-                    Кнопка
-                  </Button>
-                  <Button size="small" type="linkNeutral">
-                    Кнопка
-                  </Button>
-                </div>
-              </div>
-            </NotificationContainer>
-          );
-        })}
+      <Fragment>
+        <div>{state}</div>
+
+        <Notification key={`${state}${index}`} {...props} onClose={() => console.log('close')}>
+          <div className="notification-content">
+            <p className="notification-text">
+              Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
+            </p>
+            <div className="notification-button-container">
+              <Button size="small" type="danger">
+                Кнопка
+              </Button>
+              <Button size="small" type="tertiaryNeutral">
+                Кнопка
+              </Button>
+              <Button size="small" type="tertiaryNeutral">
+                Кнопка
+              </Button>
+            </div>
+          </div>
+        </Notification>
       </Fragment>
     );
   };
 
-  const states: { state: string; props?: NotificationContainerProps }[] = [
-    { state: 'Error', props: { status: 'error' } },
-    { state: 'Warning', props: { status: 'warning' } },
-    { state: 'Success', props: { status: 'success' } },
-    { state: 'Info', props: { status: 'info' } },
+  const states: { state: string; props?: NotificationProps }[] = [
+    { state: 'Error', props: { variant: 'error', title: 'Notification message title' } },
+    { state: 'Warning', props: { variant: 'warning', title: 'Notification message title' } },
+    { state: 'Success', props: { variant: 'success', title: 'Notification message title' } },
+    { state: 'Info', props: { variant: 'info', title: 'Notification message title' } },
   ];
 
   return (
     <div className="notification">
-      <div className="grid">
-        <div>
-          <span className="title">Inline</span>
-        </div>
-        <div>
-          <span className="title">Toast</span>
-        </div>
-        {states.map(({ state, props = {} }, index) => renderState(state, props, index))}
-      </div>
+      <div className="grid">{states.map(({ state, props }, index) => renderState(state, props, index))}</div>
     </div>
   );
 }

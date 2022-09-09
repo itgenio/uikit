@@ -1,0 +1,17 @@
+@import (reference) "../../../../variables";
+@import (reference) "../../../../ui";
+
+.gkit-modal .modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 1; // under modal-content
+}
+
+.gkit-modal .modal-overlay {
+  background-color: rgba(107, 114, 128, 0.75);
+}
+
+.dark-mode .gkit-modal .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+}

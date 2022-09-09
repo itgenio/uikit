@@ -1,0 +1,80 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-text-area-wrapper {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid var(--gkit-color-neutral-200);
+
+  &.small {
+    .gkit-text-area {
+      .text-sm();
+    }
+
+    border-radius: 0.625rem;
+  }
+
+  &.large {
+    .gkit-text-area {
+      .text-base();
+    }
+
+    border-radius: 0.75rem;
+  }
+
+  &.hover,
+  &:hover {
+    border-color: var(--gkit-color-light-primary-500);
+  }
+
+  &.focus,
+  &:focus-within {
+    .pseudo-element-with-border();
+  }
+
+  &.filled,
+  &.error {
+    .gkit-text-area::placeholder {
+      color: var(--gkit-color-neutral-900);
+    }
+  }
+
+  &.error {
+    border-color: var(--gkit-color-danger-500);
+  }
+
+  &.disabled {
+    background: var(--gkit-color-neutral-100);
+
+    &:hover {
+      border-color: var(--gkit-color-neutral-200);
+    }
+
+    .gkit-text-area::placeholder {
+      color: var(--gkit-color-neutral-300);
+    }
+  }
+
+  .gkit-text-area {
+    border: none;
+    outline: none;
+    background: var(--gkit-color-neutral-0);
+    color: var(--gkit-color-neutral-900);
+    padding: 0.75rem 1rem;
+    cursor: text;
+    border-radius: inherit;
+
+    &.both {
+      resize: both;
+    }
+
+    &.horizontal {
+      resize: horizontal;
+    }
+
+    &.vertical {
+      resize: vertical;
+    }
+  }
+}
