@@ -32,7 +32,7 @@ export function Notifications() {
     );
   };
 
-  const states: { state: string; props?: NotificationProps }[] = [
+  const states: { state: string; props: NotificationProps }[] = [
     { state: 'Error', props: { variant: 'error', title: 'Notification message title' } },
     { state: 'Warning', props: { variant: 'warning', title: 'Notification message title' } },
     { state: 'Success', props: { variant: 'success', title: 'Notification message title' } },

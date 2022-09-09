@@ -16,7 +16,7 @@ export type NotificationProps = PropsWithChildren<{
 
 export function Notification({ children, variant = 'error', className, idQa, title, onClose }: NotificationProps) {
   return (
-    <div id-qa={idQa} className={classNames('gkit-notification-container', className, variant)}>
+    <div id-qa={idQa} className={classNames('gkit-notification', className, variant)}>
       <ErrorCircleFilledIcon className="notification-error-circle-icon" />
 
       <div className="notification-content-wrapper">
