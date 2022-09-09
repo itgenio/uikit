@@ -2,15 +2,15 @@ import './style.less';
 
 import React, { Fragment } from 'react';
 import { Button } from '@itgenio/gkit/button';
-import { Notification, NotificationProps } from '@itgenio/gkit/notification';
+import { InlineNotification, InlineNotificationProps } from '@itgenio/gkit/notification';
 
 export function Notifications() {
-  const renderState = (state: string, props: NotificationProps, index: number) => {
+  const renderState = (state: string, props: InlineNotificationProps, index: number) => {
     return (
       <Fragment>
         <div>{state}</div>
 
-        <Notification key={`${state}${index}`} {...props} onClose={() => console.log('close')}>
+        <InlineNotification key={`${state}${index}`} {...props} onClose={() => console.log('close')}>
           <div className="notification-content">
             <p className="notification-text">
               Повторите попытку через 20 минут или обратитесь в банк, выпустивший карту.
@@ -27,12 +27,12 @@ export function Notifications() {
               </Button>
             </div>
           </div>
-        </Notification>
+        </InlineNotification>
       </Fragment>
     );
   };
 
-  const states: { state: string; props: NotificationProps }[] = [
+  const states: { state: string; props: InlineNotificationProps }[] = [
     { state: 'Error', props: { variant: 'error', title: 'Notification message title' } },
     { state: 'Warning', props: { variant: 'warning', title: 'Notification message title' } },
     { state: 'Success', props: { variant: 'success', title: 'Notification message title' } },
