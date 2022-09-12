@@ -1,0 +1,11 @@
+.uikit-page .toast-notification {
+  @styles-count: 1;
+
+  .grid {
+    display: grid;
+    grid-template-columns: max-content repeat(@styles-count, 440px);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    align-items: center;
+  }
+}

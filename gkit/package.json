@@ -18,6 +18,7 @@
     "@radix-ui/react-label": "^1.0.0",
     "@radix-ui/react-popover": "^0.1.6",
     "@radix-ui/react-select": "^1.0.0",
+    "@radix-ui/react-toast": "^1.0.0",
     "@radix-ui/react-toggle-group": "^0.1.5",
     "@radix-ui/react-tooltip": "^0.1.7",
     "focus-trap-react": "^8.9.1",

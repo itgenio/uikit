@@ -44,6 +44,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       '@radix-ui/react-toggle-group',
       '@radix-ui/react-popover',
       '@radix-ui/react-tooltip',
+      '@radix-ui/react-toast',
       'use-onclickoutside',
       '@itgenio/utils',
     ],

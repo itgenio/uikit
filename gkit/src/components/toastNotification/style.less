@@ -1,0 +1,147 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-toast-notification {
+  --stack-gap: 1rem;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 1rem;
+  min-width: 440px;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--gkit-color-neutral-0);
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.1);
+  transform: translate3d(0, 0, 0);
+
+  &:not(:last-child) {
+    --i: calc(~"var(--index) -" 1);
+    --height-stack: calc(~"var(--stack-gap) *" var(--i));
+    --width-stack: calc(0.05 ~"* var(--i)");
+    transform: translate3d(0, calc(1px ~"- var(--height-stack)"), 0) scale(calc(1 ~"+ var(--width-stack)"));
+    opacity: 1;
+  }
+
+  .toast-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+
+    .toast-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gkit-color-neutral-800);
+      font-weight: @font-weight-bold;
+      font-size: @text-size-base;
+      white-space: nowrap;
+    }
+  }
+
+  .toast-close {
+    .toast-dismiss-icon {
+      cursor: pointer;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--gkit-color-neutral-500);
+    }
+  }
+
+  &.error {
+    border-left: 4px solid var(--gkit-color-danger-500);
+
+    .toast-error-circle-icon {
+      color: var(--gkit-color-danger-500);
+    }
+  }
+
+  &.warning {
+    border-left: 4px solid var(--gkit-color-orange-500);
+
+    .toast-error-circle-icon {
+      color: var(--gkit-color-orange-500);
+    }
+  }
+
+  &.success {
+    border-left: 4px solid var(--gkit-color-light-green-500);
+
+    .toast-error-circle-icon {
+      color: var(--gkit-color-light-green-500);
+    }
+  }
+
+  &.info {
+    border-left: 4px solid var(--gkit-color-light-blue-500);
+
+    .toast-error-circle-icon {
+      color: var(--gkit-color-light-blue-500);
+    }
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+@keyframes slideIn{
+  from {
+    transform: translateY(calc(100% + 25px));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes swipeOut {
+  from {
+    transform: translateY(var(--radix-toast-swipe-end-x));
+  }
+
+  to {
+    transform: translateY(calc(100% + 25px));
+  }
+}
+
+.toast-viewport {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  transition: all 0.4s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  &[data-state="open"] {
+    animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &[data-state="closed"] {
+    animation: hide 100ms ease-in;
+  }
+
+  &[data-swipe="move"] {
+    transform: translateY(var(--radix-toast-swipe-move-x));
+  }
+
+  &[data-swipe="cancel"] {
+    transform: translateY(0);
+    transition: transform 200ms ease-out;
+  }
+
+  &[data-swipe="end"] {
+    animation: swipeOut 100ms ease-out;
+  }
+}
