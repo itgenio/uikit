@@ -36,3 +36,4 @@ export * from './handRight';
 export * from './warning';
 export * from './delete';
 export * from './edit';
+export * from './wallet';
