@@ -1,0 +1,65 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-inline-notification {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+
+  .inline-notification-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+
+    .inline-notification-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gkit-color-neutral-800);
+      font-weight: @font-weight-bold;
+      font-size: @text-size-base;
+      white-space: nowrap;
+
+      .inline-notification-dismiss-icon {
+        cursor: pointer;
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--gkit-color-neutral-500);
+      }
+    }
+  }
+
+  &.error {
+    background-color: var(--gkit-color-danger-50);
+
+    .inline-notification-error-circle-icon {
+      color: var(--gkit-color-danger-500);
+    }
+  }
+
+  &.warning {
+    background-color: var(--gkit-color-orange-50);
+
+    .inline-notification-error-circle-icon {
+      color: var(--gkit-color-orange-500);
+    }
+  }
+
+  &.success {
+    background-color: var(--gkit-color-green-50);
+
+    .inline-notification-error-circle-icon {
+      color: var(--gkit-color-light-green-500);
+    }
+  }
+
+  &.info {
+    background-color: var(--gkit-color-blue-50);
+
+    .inline-notification-error-circle-icon {
+      color: var(--gkit-color-light-blue-500);
+    }
+  }
+}

@@ -12,6 +12,7 @@ import { Colors } from './components/colors';
 import { Dropdowns } from './components/dropdowns';
 import { Emojis } from './components/emojis';
 import { Icons } from './components/icons';
+import { InlineNotifications } from './components/inlineNotifications';
 import { Links } from './components/links';
 import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
@@ -49,6 +50,7 @@ const components = [
   Selects,
   MultiSelects,
   Emojis,
+  InlineNotifications,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;

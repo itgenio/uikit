@@ -36,4 +36,5 @@ export * from './handRight';
 export * from './warning';
 export * from './delete';
 export * from './edit';
+export * from './errorCircle';
 export * from './wallet';
