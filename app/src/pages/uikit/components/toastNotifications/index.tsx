@@ -19,12 +19,7 @@ export function ToastNotifications() {
   return (
     <div className="toast-notification">
       <div className="grid">
-        <ToastNotification
-          open={open}
-          onOpenChange={setOpen}
-          content={content}
-          title="Lorem ipsum dolor sit amet"
-        >
+        <ToastNotification open={open} onOpenChange={setOpen} content={content} title="Lorem ipsum dolor sit amet">
           <Button
             type="danger"
             onClick={() => {

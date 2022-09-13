@@ -52,7 +52,7 @@ export const ToastNotification = ({
   asChild,
   title,
   variant = 'error',
-  duration = 10000000,
+  duration,
   content,
   label,
   swipeDirection,
@@ -75,44 +75,49 @@ export const ToastNotification = ({
     <ToastPrimitive.Provider {...{ duration, label, swipeDirection, swipeThreshold }}>
       <div onClick={() => setSavedCount(count => count + 1)}>{children}</div>
 
-      {Array.from({ length: savedCount }).map((_, index) => {
-        const style: CSSProperties = { ['--index' as string]: index };
+      {Array.from({ length: savedCount })
+        .map((_, index) => {
+          const style: CSSProperties = { ['--index' as string]: index };
 
-        return (
-          <ToastPrimitive.Root
-            key={index}
-            style={style}
-            id-qa={idQa}
-            className={classNames('gkit-toast-notification', className, variant)}
-            {...{
-              asChild,
-              type,
-              defaultOpen,
-              open,
-              onOpenChange,
-              onEscapeKeyDown,
-              onSwipeStart,
-              onSwipeMove,
-              onSwipeEnd,
-              forceMount,
-            }}
-            duration={durationRoot}
-          >
-            <ErrorCircleFilledIcon className="toast-error-circle-icon" />
+          return (
+            <ToastPrimitive.Root
+              key={index}
+              style={style}
+              id-qa={idQa}
+              className={classNames(`gkit-toast-notification gkit-toast-notification-${index}`)}
+              {...{
+                asChild,
+                type,
+                defaultOpen,
+                open,
+                onOpenChange,
+                onEscapeKeyDown,
+                onSwipeStart,
+                onSwipeMove,
+                onSwipeEnd,
+                forceMount,
+              }}
+              duration={durationRoot}
+            >
+              <div className={classNames('toast-inner', className, variant)}>
+                <ErrorCircleFilledIcon className="toast-error-circle-icon" />
 
-            <div className="toast-content-wrapper">
-              <ToastPrimitive.Title className="toast-title">
-                {title}
-                <ToastPrimitive.Close onClick={() => setSavedCount(count => count - 1)} className="toast-close">
-                  <DismissIcon className="toast-dismiss-icon" />
-                </ToastPrimitive.Close>
-              </ToastPrimitive.Title>
+                <div className="toast-content-wrapper">
+                  <ToastPrimitive.Title className="toast-title">
+                    {title}
+                    <ToastPrimitive.Close onClick={() => setSavedCount(count => count - 1)} className="toast-close">
+                      <DismissIcon className="toast-dismiss-icon" />
+                    </ToastPrimitive.Close>
+                  </ToastPrimitive.Title>
 
-              {content}
-            </div>
-          </ToastPrimitive.Root>
-        );
-      })}
+                  {content}
+                </div>
+              </div>
+            </ToastPrimitive.Root>
+          );
+        })
+        .slice(0, 3)}
+
       <ToastPrimitive.Viewport className="toast-viewport" hotkey={hotkey} />
     </ToastPrimitive.Provider>
   );
