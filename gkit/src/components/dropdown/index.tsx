@@ -66,8 +66,8 @@ export const Dropdown = ({
   avoidCollisions,
 }: DropdownProps) => {
   return (
-    <DropdownMenuPrimitive.Root id-qa={idQa} {...{ dir, open, onOpenChange, defaultOpen, modal }}>
-      <DropdownMenuPrimitive.Trigger className={classNames(className)} asChild={asChild}>
+    <DropdownMenuPrimitive.Root {...{ dir, open, onOpenChange, defaultOpen, modal }}>
+      <DropdownMenuPrimitive.Trigger id-qa={idQa} className={classNames(className)} asChild={asChild}>
         {children}
       </DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Content
@@ -98,11 +98,11 @@ export const Dropdown = ({
 
 type ItemPickProps = Pick<DropdownMenuPrimitive.MenuItemProps, 'asChild' | 'disabled' | 'onSelect' | 'textValue'>;
 
-type ItemProps = ItemPickProps & PropsWithChildren<{ className?: string }>;
+type ItemProps = ItemPickProps & PropsWithChildren<{ className?: string; idQa?: string }>;
 
-export const DropdownItem = ({ children, className, ...props }: ItemProps) => {
+export const DropdownItem = ({ children, className, idQa, ...props }: ItemProps) => {
   return (
-    <DropdownMenuPrimitive.Item className={classNames('dropdown-item', className)} {...props}>
+    <DropdownMenuPrimitive.Item id-qa={idQa} className={classNames('dropdown-item', className)} {...props}>
       {children}
     </DropdownMenuPrimitive.Item>
   );
@@ -113,11 +113,11 @@ type CheckboxItemPickProps = Pick<
   'asChild' | 'checked' | 'onCheckedChange' | 'disabled' | 'onSelect' | 'textValue'
 >;
 
-type CheckboxItemProps = CheckboxItemPickProps & PropsWithChildren<{ className?: string }>;
+type CheckboxItemProps = CheckboxItemPickProps & PropsWithChildren<{ className?: string; idQa?: string }>;
 
-export const DropdownCheckboxItem = ({ children, className, ...props }: CheckboxItemProps) => {
+export const DropdownCheckboxItem = ({ children, className, idQa, ...props }: CheckboxItemProps) => {
   return (
-    <DropdownMenuPrimitive.CheckboxItem className={classNames('dropdown-item', className)} {...props}>
+    <DropdownMenuPrimitive.CheckboxItem id-qa={idQa} className={classNames('dropdown-item', className)} {...props}>
       {children}
     </DropdownMenuPrimitive.CheckboxItem>
   );
@@ -140,11 +140,11 @@ type RadioItemPickProps = Pick<
   'asChild' | 'value' | 'disabled' | 'onSelect' | 'textValue'
 >;
 
-type RadioItemProps = RadioItemPickProps & PropsWithChildren<{ className?: string }>;
+type RadioItemProps = RadioItemPickProps & PropsWithChildren<{ className?: string; idQa?: string }>;
 
-export const DropdownRadioItem = ({ children, className, ...props }: RadioItemProps) => {
+export const DropdownRadioItem = ({ children, className, idQa, ...props }: RadioItemProps) => {
   return (
-    <DropdownMenuPrimitive.RadioItem className={classNames('dropdown-item', className)} {...props}>
+    <DropdownMenuPrimitive.RadioItem id-qa={idQa} className={classNames('dropdown-item', className)} {...props}>
       {children}
     </DropdownMenuPrimitive.RadioItem>
   );
