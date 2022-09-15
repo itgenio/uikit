@@ -98,7 +98,7 @@ export const MultiSelect = React.memo(
 
     return (
       <InputsContainer
-        {...{ ref, id, idQa, size, label, helperText, className: classNames('gkit-multi-select', className) }}
+        {...{ ref, id, idQa, size, label, helperText, error, className: classNames('gkit-multi-select', className) }}
       >
         <div
           className={classNames('multi-select-content', size, {
