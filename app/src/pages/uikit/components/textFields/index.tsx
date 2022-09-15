@@ -11,7 +11,7 @@ const SIMPLE_STATES: { state: string; props: TextFieldProps }[] = [
   { state: 'Focused', props: { focus: true } },
   { state: 'Active', props: { active: true } },
   { state: 'Active with text', props: { active: true, value: 'Some text' } },
-  { state: 'Error', props: { error: true } },
+  { state: 'Error', props: { error: true, helperText: 'Helper text' } },
   { state: 'Disabled', props: { disabled: true } },
   { state: 'Disabled with text', props: { disabled: true, value: 'Some text' } },
   { state: 'Datalist', props: { dataList: ['Hello', 'World', 'Gavana'] } },

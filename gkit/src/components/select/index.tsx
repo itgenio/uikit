@@ -103,7 +103,7 @@ export const Select = React.memo(
     };
 
     return (
-      <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
+      <InputsContainer {...{ id, size, label, helperText, idQa, className, error }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}

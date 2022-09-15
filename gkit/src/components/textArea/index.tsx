@@ -77,7 +77,7 @@ export function TextArea({
   }, [autoFocus]);
 
   return (
-    <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa, className, error }}>
       <div
         className={classNames('gkit-text-area-wrapper', size, {
           hover,
