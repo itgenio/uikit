@@ -44,18 +44,6 @@
     border-color: var(--gkit-color-danger-500);
   }
 
-  &.disabled {
-    background: var(--gkit-color-neutral-100);
-
-    &:hover {
-      border-color: var(--gkit-color-neutral-200);
-    }
-
-    .gkit-text-area::placeholder {
-      color: var(--gkit-color-neutral-300);
-    }
-  }
-
   .gkit-text-area {
     border: none;
     outline: none;
@@ -75,6 +63,16 @@
 
     &.vertical {
       resize: vertical;
+    }
+
+    &.disabled,
+    &[disabled] {
+      color: var(--gkit-color-neutral-400);
+      background: var(--gkit-color-neutral-100);
+
+      &::placeholder {
+        color: var(--gkit-color-neutral-300);
+      }
     }
   }
 }
