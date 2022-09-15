@@ -94,7 +94,7 @@ export const TextField = forwardRef(function TextField(
           id-qa={idQaForInput}
           ref={inputRef}
           type={inputType}
-          className={classNames('text-field', size)}
+          className={classNames('text-field', size, { value })}
           list={id + 'list'}
           pattern={inputPattern}
           {...{

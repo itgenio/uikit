@@ -70,12 +70,18 @@
     }
 
     .text-field {
+      color: var(--gkit-color-neutral-900);
+
       &::placeholder {
         color: var(--gkit-color-neutral-500);
       }
 
       &.disabled,
       &[disabled] {
+        &.value {
+          color: var(--gkit-color-neutral-400);
+        }
+
         &::placeholder {
           color: var(--gkit-color-neutral-300);
         }
