@@ -40,3 +40,4 @@ export * from './errorCircle';
 export * from './wallet';
 export * from './calendarCancel';
 export * from './questionCircle';
+export * from './checkmarkStarbust';
