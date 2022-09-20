@@ -2,22 +2,25 @@
 @import (reference) "../../ui";
 
 .gkit-accordion {
-  width: 43.5rem;
-  padding: 2rem 1.75rem;
+  cursor: pointer;
   border-radius: 8px;
-  border: 1px solid var(--gkit-color-neutral-200);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 6px 6px -6px rgba(0, 0, 0, 0.15);
   background-color: var(--gkit-color-neutral-0);
+  box-shadow: 1px 6px 6px -6px rgb(0 0 0 / 15%), 0 0 1px 0 rgb(0 0 0 / 30%);
+  transition: box-shadow 360ms cubic-bezier(.165, .84, .44, 1);
+
+  &:hover {
+    box-shadow: 0 4px 12px 2px rgb(0 0 0 / 10%);
+  }
 
   summary {
     list-style-type: none;
     .text-base();
     font-weight: @font-weight-bold;
-    cursor: pointer;
     position: relative;
     color: var(--gkit-color-neutral-900);
     display: flex;
     align-items: center;
+    padding: 1.5rem;
 
     .accordion-title {
       .text-xl();
@@ -28,9 +31,8 @@
     }
 
     .chevron-down-icon {
-      transition: transform 0.5s;
-      width: 1rem;
-      height: 1rem;
+      transform: rotateX(0deg);
+      transition: 0.3s ease-out;
     }
 
     div {
@@ -52,10 +54,11 @@
   }
 
   &[open] summary .chevron-down-icon {
-    transform: scale(1, -1);
+    transform: rotateX(-180deg);
+    transition: 0.3s ease-out;
   }
 
   .accordion-text {
-    margin-top: 1rem;
+    padding: 0 1.5rem 1rem;
   }
 }
