@@ -9,5 +9,5 @@ export function ArrowDownloadIcon({ className, ...props }: Partial<SvgIconProps>
 }
 
 export function ArrowDownloadFilledIcon({ className, ...props }: Partial<SvgIconProps> = {}) {
-  return <ArrowDownloadFilled className={classNames('arrow-download-icon', className)} {...props} />;
+  return <ArrowDownloadFilled className={classNames('arrow-download-filled-icon', className)} {...props} />;
 }
