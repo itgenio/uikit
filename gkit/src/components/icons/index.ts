@@ -61,4 +61,4 @@ export * from './taskListSquare';
 export * from './textbox';
 export * from './videoClip';
 export * from './arrowDownload';
-export * from './videoCamera';
+export * from './video';
