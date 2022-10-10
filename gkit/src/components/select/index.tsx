@@ -14,6 +14,8 @@ type Values = string | number;
 
 export type SelectOption = { label: string; value: Values; group?: string };
 
+export type GroupConfig = { hideText?: boolean; hideSeparator?: boolean };
+
 export type SelectProps = {
   label?: string;
   helperText?: React.ReactNode;
@@ -31,6 +33,7 @@ export type SelectProps = {
   options?: SelectOption[];
   value?: Values;
   divideByGroups?: boolean;
+  groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
 };
 
@@ -52,6 +55,7 @@ export const Select = React.memo(
     value,
     divideByGroups,
     portalProps = {},
+    groupConfig,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -82,13 +86,17 @@ export const Select = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
-
-      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
+      console.log(optionsByGroupDict, Object.values(optionsByGroupDict));
+      return Object.values(optionsByGroupDict).map((options, index) => [
+        <SelectPrimitive.Group className="gkit-select-group" key={options[index].group}>
+          {!groupConfig?.hideText && (
+            <SelectPrimitive.Label className="text-xs gkit-select-group-text">
+              {options[index].group}
+            </SelectPrimitive.Label>
+          )}
+          {!groupConfig?.hideSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />}
+        </SelectPrimitive.Group>,
         options.map(renderOptionItem),
-
-        index !== groupedOptions.length - 1 && (
-          <SelectPrimitive.Separator key={`divider-${index}`} className="gkit-select-separator" />
-        ),
       ]);
     };
 

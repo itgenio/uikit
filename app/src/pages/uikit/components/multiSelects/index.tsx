@@ -10,7 +10,7 @@ type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => Mu
 const options: NonNullable<MultiSelectProps['options']> = Array.from({ length: 60 }, (_, i) => {
   const index = i + 1;
 
-  return { label: `Option ${index}`, value: index };
+  return { label: `Option ${index}`, value: index, group: index % 2 === 0 ? 'Even' : 'Odd' };
 });
 
 export function MultiSelects() {
@@ -76,6 +76,12 @@ export function MultiSelects() {
             );
           });
         },
+      },
+    },
+    {
+      state: 'With group',
+      props: {
+        divideByGroups: true,
       },
     },
   ];
