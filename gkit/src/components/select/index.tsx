@@ -86,17 +86,19 @@ export const Select = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
-      console.log(optionsByGroupDict, Object.values(optionsByGroupDict));
-      return Object.values(optionsByGroupDict).map((options, index) => [
+
+      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
         <SelectPrimitive.Group className="gkit-select-group" key={options[index].group}>
           {!groupConfig?.hideText && (
             <SelectPrimitive.Label className="text-xs gkit-select-group-text">
               {options[index].group}
             </SelectPrimitive.Label>
           )}
-          {!groupConfig?.hideSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />}
         </SelectPrimitive.Group>,
         options.map(renderOptionItem),
+        index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
+          <SelectPrimitive.Separator className="gkit-select-separator" />
+        ),
       ]);
     };
 

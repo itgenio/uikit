@@ -126,14 +126,18 @@ export const MultiSelect = React.memo(
         option => option.group
       );
 
-      return Object.values(optionsByGroupDict).map((options, index) => [
+      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
         <li className="gkit-multiselect-group" key={options[index].group}>
           {!groupConfig?.hideText && (
             <span className="text-xs gkit-multiselect-group-text">{options[index].group}</span>
           )}
-          {!groupConfig?.hideSeparator && <div className="gkit-multiselect-separator" />}
         </li>,
         options.map(renderOptionItem),
+        index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
+          <li key={`${options[index].group}-separator`}>
+            <div className="gkit-multiselect-separator" />
+          </li>
+        ),
       ]);
     };
 
