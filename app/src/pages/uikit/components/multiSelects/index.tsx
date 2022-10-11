@@ -78,12 +78,6 @@ export function MultiSelects() {
         },
       },
     },
-    {
-      state: 'With group',
-      props: {
-        divideByGroups: true,
-      },
-    },
   ];
 
   return (

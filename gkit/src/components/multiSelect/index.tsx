@@ -14,7 +14,7 @@ type Value = string | number;
 
 const DROPDOWN_PADDING = 20;
 
-type Option = { label: string; value: Value; group: string };
+type Option = { label: string; value: Value; group?: string };
 
 type GroupConfig = { hideText?: boolean; hideSeparator?: boolean };
 
@@ -35,7 +35,6 @@ export type MultiSelectProps = {
   hasSelectAllOption?: boolean;
   inputText?: string;
   renderValues?: (values: Value[]) => React.ReactNode;
-  divideByGroups?: boolean;
   groupConfig?: GroupConfig;
 };
 
@@ -57,7 +56,6 @@ export const MultiSelect = React.memo(
     hasSelectAllOption,
     inputText,
     renderValues: renderValuesProp,
-    divideByGroups,
     groupConfig,
   }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
@@ -125,20 +123,24 @@ export const MultiSelect = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
+      const optionsWithoutGroup = options.filter(o => !o.group);
 
-      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
-        <li className="gkit-multiselect-group" key={options[index].group}>
-          {!groupConfig?.hideText && (
-            <span className="text-xs gkit-multiselect-group-text">{options[index].group}</span>
-          )}
-        </li>,
-        options.map(renderOptionItem),
-        index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
-          <li key={`${options[index].group}-separator`}>
-            <div className="gkit-multiselect-separator" />
-          </li>
-        ),
-      ]);
+      return [
+        ...optionsWithoutGroup.map(renderOptionItem),
+        ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
+          <li className="gkit-multiselect-group" key={options[index].group}>
+            {!groupConfig?.hideText && (
+              <span className="text-xs gkit-multiselect-group-text">{options[index].group}</span>
+            )}
+          </li>,
+          options.map(renderOptionItem),
+          index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
+            <li key={`${options[index].group}-separator`}>
+              <div className="gkit-multiselect-separator" />
+            </li>
+          ),
+        ]),
+      ];
     };
 
     return (
@@ -192,7 +194,7 @@ export const MultiSelect = React.memo(
               </li>
             )}
 
-            {divideByGroups ? renderOptionsByGroups() : options.map(renderOptionItem)}
+            {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
           </ul>
         )}
       </InputsContainer>

@@ -32,7 +32,6 @@ export type SelectProps = {
   disabled?: boolean;
   options?: SelectOption[];
   value?: Values;
-  divideByGroups?: boolean;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
 };
@@ -53,7 +52,6 @@ export const Select = React.memo(
     placeholder,
     options,
     value,
-    divideByGroups,
     portalProps = {},
     groupConfig,
   }: SelectProps) => {
@@ -86,20 +84,24 @@ export const Select = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
+      const optionsWithoutGroup = options.filter(o => !o.group);
 
-      return Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
-        <SelectPrimitive.Group className="gkit-select-group" key={options[index].group}>
-          {!groupConfig?.hideText && (
-            <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-              {options[index].group}
-            </SelectPrimitive.Label>
-          )}
-        </SelectPrimitive.Group>,
-        options.map(renderOptionItem),
-        index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
-          <SelectPrimitive.Separator className="gkit-select-separator" />
-        ),
-      ]);
+      return [
+        ...optionsWithoutGroup.map(renderOptionItem),
+        ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
+          <SelectPrimitive.Group className="gkit-select-group" key={options[index].group}>
+            {!groupConfig?.hideText && (
+              <SelectPrimitive.Label className="text-xs gkit-select-group-text">
+                {options[index].group}
+              </SelectPrimitive.Label>
+            )}
+          </SelectPrimitive.Group>,
+          options.map(renderOptionItem),
+          index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
+            <SelectPrimitive.Separator className="gkit-select-separator" />
+          ),
+        ]),
+      ];
     };
 
     const onValueChange = (newValue: string) => {
@@ -144,7 +146,7 @@ export const Select = React.memo(
                 className="gkit-select-viewport"
                 id-qa={classNames({ [`${idQa}-viewport`]: idQa })}
               >
-                {divideByGroups ? renderOptionsByGroups() : options.map(renderOptionItem)}
+                {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
               </SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>
