@@ -13,10 +13,11 @@ type InputsContainerProps = PropsWithChildren<{
   helperText?: React.ReactNode;
   className?: string;
   error?: boolean;
+  idQaForHelperText?: string;
 }>;
 
 export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(function InputsContainer(
-  { children, id, size = 'large', label, helperText, idQa, className, error },
+  { children, id, size = 'large', label, helperText, idQa, className, error, idQaForHelperText },
   ref
 ) {
   return (
@@ -27,7 +28,14 @@ export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(
         </Label>
       )}
       {children}
-      {helperText && <span className={classNames('inputs-container-helper-text', { error })}>{helperText}</span>}
+      {helperText && (
+        <span
+          id-qa={idQaForHelperText || 'helper-text'}
+          className={classNames('inputs-container-helper-text', { error })}
+        >
+          {helperText}
+        </span>
+      )}
     </div>
   );
 });
