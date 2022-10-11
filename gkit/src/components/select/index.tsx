@@ -32,6 +32,7 @@ export type SelectProps = {
   disabled?: boolean;
   options?: SelectOption[];
   value?: Values;
+  valuePrefix?: string;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
 };
@@ -54,6 +55,7 @@ export const Select = React.memo(
     value,
     portalProps = {},
     groupConfig,
+    valuePrefix = '',
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -132,7 +134,10 @@ export const Select = React.memo(
             id-qa={classNames({ [`${idQa}-trigger`]: idQa })}
             id={id}
           >
-            <SelectPrimitive.Value placeholder={placeholder} aria-label={value != null ? String(value) : undefined} />
+            <SelectPrimitive.Value
+              placeholder={placeholder}
+              aria-label={value != null ? valuePrefix + value : undefined}
+            />
             <SelectPrimitive.Icon className="select-chevron">
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
             </SelectPrimitive.Icon>
