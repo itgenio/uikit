@@ -96,7 +96,7 @@
       border-color: var(--gkit-color-light-primary-500);
     }
 
-    &:not(.disabled){
+    &:not(.disabled) {
       &.focus,
       &:focus {
         .pseudo-element-with-border();
@@ -119,7 +119,6 @@
     left: 0;
     background: var(--gkit-color-neutral-0);
     margin: 0.3rem 0;
-    padding: 0.25rem;
     border-radius: 0.75rem;
     list-style-type: none;
     z-index: 1;
@@ -154,5 +153,16 @@
         background: var(--gkit-color-neutral-100);
       }
     }
+  }
+
+  .gkit-multiselect-separator {
+    border-bottom: 1px solid var(--gkit-color-neutral-500);
+    margin-bottom: 0.5rem;
+  }
+
+  .gkit-multiselect-group-text {
+    padding: 0.5rem 1rem;
+    font-weight: @font-weight-bold;
+    color: var(--gkit-color-neutral-500);
   }
 }

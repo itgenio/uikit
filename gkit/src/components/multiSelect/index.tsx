@@ -2,6 +2,7 @@ import './style.less';
 import classNames from 'classnames';
 import React, { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import { groupByPropertyToDict } from '@itgenio/utils';
 import { Checkbox } from '../checkbox';
 import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
@@ -13,7 +14,9 @@ type Value = string | number;
 
 const DROPDOWN_PADDING = 20;
 
-type Option = { label: string; value: Value };
+type Option = { label: string; value: Value; group?: string };
+
+type GroupConfig = { hideText?: boolean; hideSeparator?: boolean };
 
 export type MultiSelectProps = {
   size?: Sizes;
@@ -32,6 +35,7 @@ export type MultiSelectProps = {
   hasSelectAllOption?: boolean;
   inputText?: string;
   renderValues?: (values: Value[]) => React.ReactNode;
+  groupConfig?: GroupConfig;
   idQaForHelperText?: string;
 };
 
@@ -53,6 +57,7 @@ export const MultiSelect = React.memo(
     hasSelectAllOption,
     inputText,
     renderValues: renderValuesProp,
+    groupConfig,
     idQaForHelperText,
   }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
@@ -96,6 +101,48 @@ export const MultiSelect = React.memo(
           {hasValue && !disabled && <span className="multi-select-count">{values.length}</span>}
         </Fragment>
       );
+    };
+
+    const renderOptionItem = ({ label, value }: Option) => (
+      <li
+        id-qa={classNames({ [`${idQa}-option-${value}`]: idQa })}
+        className={classNames('multi-select-option', size)}
+        key={value}
+        onChange={e => {
+          e.stopPropagation();
+
+          onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
+        }}
+      >
+        <Checkbox className="multi-select-checkbox" checked={values.includes(value)}>
+          {label}
+        </Checkbox>
+      </li>
+    );
+
+    const renderOptionsByGroups = () => {
+      const optionsByGroupDict = groupByPropertyToDict(
+        options.filter(o => !!o.group),
+        option => option.group
+      );
+      const optionsWithoutGroup = options.filter(o => !o.group);
+
+      return [
+        ...optionsWithoutGroup.map(renderOptionItem),
+        ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
+          <li className="gkit-multiselect-group" key={options[index].group}>
+            {!groupConfig?.hideText && (
+              <span className="text-xs gkit-multiselect-group-text">{options[index].group}</span>
+            )}
+          </li>,
+          options.map(renderOptionItem),
+          index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
+            <li key={`${options[index].group}-separator`}>
+              <div className="gkit-multiselect-separator" />
+            </li>
+          ),
+        ]),
+      ];
     };
 
     return (
@@ -159,22 +206,7 @@ export const MultiSelect = React.memo(
               </li>
             )}
 
-            {options.map(({ label, value }) => (
-              <li
-                id-qa={classNames({ [`${idQa}-option-${value}`]: idQa })}
-                className={classNames('multi-select-option', size)}
-                key={value}
-                onChange={e => {
-                  e.stopPropagation();
-
-                  onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
-                }}
-              >
-                <Checkbox className="multi-select-checkbox" checked={values.includes(value)}>
-                  {label}
-                </Checkbox>
-              </li>
-            ))}
+            {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
           </ul>
         )}
       </InputsContainer>
