@@ -35,6 +35,7 @@ export type SelectProps = {
   valuePrefix?: string;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
+  idQaForHelperText?: string;
 };
 
 export const Select = React.memo(
@@ -56,6 +57,7 @@ export const Select = React.memo(
     portalProps = {},
     groupConfig,
     valuePrefix = '',
+    idQaForHelperText,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -117,7 +119,7 @@ export const Select = React.memo(
     };
 
     return (
-      <InputsContainer {...{ id, size, label, helperText, idQa, className, error }}>
+      <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}

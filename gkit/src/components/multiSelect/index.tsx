@@ -36,6 +36,7 @@ export type MultiSelectProps = {
   inputText?: string;
   renderValues?: (values: Value[]) => React.ReactNode;
   groupConfig?: GroupConfig;
+  idQaForHelperText?: string;
 };
 
 export const MultiSelect = React.memo(
@@ -57,6 +58,7 @@ export const MultiSelect = React.memo(
     inputText,
     renderValues: renderValuesProp,
     groupConfig,
+    idQaForHelperText,
   }: MultiSelectProps) => {
     const [open, setOpen] = useState(false);
     const hasValue = values.length > 0;
@@ -145,7 +147,17 @@ export const MultiSelect = React.memo(
 
     return (
       <InputsContainer
-        {...{ ref, id, idQa, size, label, helperText, error, className: classNames('gkit-multi-select', className) }}
+        {...{
+          ref,
+          id,
+          idQa,
+          size,
+          label,
+          helperText,
+          error,
+          idQaForHelperText,
+          className: classNames('gkit-multi-select', className),
+        }}
       >
         <div
           className={classNames('multi-select-content', size, {
