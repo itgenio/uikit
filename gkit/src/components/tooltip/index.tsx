@@ -56,6 +56,7 @@ export function Tooltip({
   defaultOpen,
   open,
   onOpenChange,
+  side = 'bottom',
   delayDuration = 0,
   asChild,
   arrowWidth = 16,
@@ -73,7 +74,7 @@ export function Tooltip({
           {children}
         </TooltipPrimitive.Trigger>
 
-        <TooltipPrimitive.Content id-qa={idQa} className={classNames('gkit-tooltip', className)} {...props}>
+        <TooltipPrimitive.Content id-qa={idQa} className={classNames('gkit-tooltip', className)} side={side} {...props}>
           {content}
 
           <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
