@@ -63,38 +63,22 @@ export function Tooltip({
   ...props
 }: TooltipProps) {
   return (
-    <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
-      <TooltipPrimitive.Trigger
-        className={classNames('gkit-tooltip-trigger', triggerClassName)}
-        asChild={asChild}
-        id-qa={triggerIdQa}
-      >
-        {children}
-      </TooltipPrimitive.Trigger>
+    <TooltipPrimitive.Provider>
+      <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
+        <TooltipPrimitive.Trigger
+          className={classNames('gkit-tooltip-trigger', triggerClassName)}
+          asChild={asChild}
+          id-qa={triggerIdQa}
+        >
+          {children}
+        </TooltipPrimitive.Trigger>
 
-      <TooltipPrimitive.Content id-qa={idQa} className={classNames('gkit-tooltip', className)} {...props}>
-        {content}
+        <TooltipPrimitive.Content id-qa={idQa} className={classNames('gkit-tooltip', className)} {...props}>
+          {content}
 
-        <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
-      </TooltipPrimitive.Content>
-    </TooltipPrimitive.Root>
-  );
-}
-
-type ProviderProps = Pick<
-  TooltipPrimitive.TooltipProviderProps,
-  'delayDuration' | 'skipDelayDuration' | 'disableHoverableContent'
->;
-
-export function TooltipProvider({
-  children,
-  delayDuration,
-  skipDelayDuration,
-  disableHoverableContent,
-}: ProviderProps & PropsWithChildren<{}>) {
-  return (
-    <TooltipPrimitive.Provider {...{ delayDuration, skipDelayDuration, disableHoverableContent }}>
-      {children}
+          <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
+        </TooltipPrimitive.Content>
+      </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );
 }
