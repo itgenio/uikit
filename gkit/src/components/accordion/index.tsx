@@ -22,8 +22,10 @@ export function Accordion({ children, idQa, idQaSummary, className, content }: A
     const content = contentRef.current;
 
     if (accordion.hasAttribute('open')) {
+      content.removeAttribute('data-height');
       content.style.removeProperty('max-height');
       content.classList.add('closed');
+
       setTimeout(() => {
         accordion.removeAttribute('open');
       }, 300);
