@@ -19,9 +19,9 @@ export function Tooltips() {
   };
 
   const states: { trigger: string; props: TooltipProps }[] = [
-    { trigger: 'bottom start', props: { side: 'bottom', align: 'start', defaultOpen: true, content } },
-    { trigger: 'bottom center', props: { side: 'bottom', align: 'center', content } },
-    { trigger: 'bottom end', props: { side: 'bottom', align: 'end', content } },
+    { trigger: 'bottom start', props: { align: 'start', defaultOpen: true, content } },
+    { trigger: 'bottom center', props: { align: 'center', content } },
+    { trigger: 'bottom end', props: { align: 'end', content } },
     { trigger: 'top start', props: { side: 'top', align: 'start', content } },
     { trigger: 'top center', props: { side: 'top', align: 'center', content } },
     { trigger: 'top end', props: { side: 'top', align: 'end', content } },
