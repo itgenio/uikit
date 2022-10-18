@@ -22,8 +22,6 @@ export function Accordion({ children, idQa, idQaSummary, className, content }: A
     const content = contentRef.current;
 
     if (accordion.hasAttribute('open')) {
-      content.removeAttribute('data-height');
-      content.style.removeProperty('max-height');
       content.classList.add('closed');
 
       setTimeout(() => {
@@ -34,15 +32,8 @@ export function Accordion({ children, idQa, idQaSummary, className, content }: A
 
     accordion.setAttribute('open', '');
 
-    if (!content.getAttribute('data-height')) {
-      content.style.maxHeight = 'none';
-      content.setAttribute('data-height', `${content.getBoundingClientRect().height}px`);
-      content.style.removeProperty('max-height');
-    }
-
     setTimeout(() => {
       content.classList.remove('closed');
-      content.style.maxHeight = content.getAttribute('data-height');
     }, 0);
   };
 
