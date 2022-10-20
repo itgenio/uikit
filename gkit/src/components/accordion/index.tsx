@@ -1,7 +1,8 @@
 import './style.less';
 
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import classNames from 'classnames';
-import React, { PropsWithChildren, ReactNode, useRef } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { ChevronDownIcon } from '../icons';
 
 type AccordionProps = PropsWithChildren<{
@@ -12,42 +13,24 @@ type AccordionProps = PropsWithChildren<{
 }>;
 
 export function Accordion({ children, idQa, idQaSummary, className, content }: AccordionProps) {
-  const summaryRef = useRef(null);
-  const contentRef = useRef(null);
-
-  const handleClick = e => {
-    e.preventDefault();
-
-    const accordion = summaryRef.current.parentNode;
-    const content = contentRef.current;
-
-    if (accordion.hasAttribute('open')) {
-      content.classList.add('closed');
-
-      setTimeout(() => {
-        accordion.removeAttribute('open');
-      }, 300);
-      return;
-    }
-
-    accordion.setAttribute('open', '');
-
-    setTimeout(() => {
-      content.classList.remove('closed');
-    }, 0);
-  };
-
   return (
-    <details id-qa={idQa} className="gkit-accordion">
-      <summary id-qa={idQaSummary} onClick={handleClick} ref={summaryRef}>
-        {children}
+    <AccordionPrimitive.Root id-qa={idQa} type="multiple" className="gkit-accordion">
+      <AccordionPrimitive.Item value="1" className="accordion-item">
+        <AccordionPrimitive.Trigger className="accordion-trigger" id-qa={idQaSummary}>
+          <div className="accordion-panel">
+            <div className="accordion-panel-body">{children}</div>
 
-        <ChevronDownIcon />
-      </summary>
-      <div ref={contentRef} className="content-container closed">
-        <div className={classNames('content', className)}>{content}</div>
-      </div>
-    </details>
+            <ChevronDownIcon id-qa="chevron-icon" />
+          </div>
+        </AccordionPrimitive.Trigger>
+
+        <AccordionPrimitive.Content className="content-container">
+          <div className={classNames('content', className)} id-qa="content">
+            {content}
+          </div>
+        </AccordionPrimitive.Content>
+      </AccordionPrimitive.Item>
+    </AccordionPrimitive.Root>
   );
 }
 
