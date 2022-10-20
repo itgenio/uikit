@@ -14,6 +14,8 @@ type TriggerProps = { triggerClassName?: string; triggerIdQa?: string } & Pick<
   'asChild'
 >;
 
+type PortalProps = Pick<TooltipPrimitive.TooltipPortalProps, 'forceMount' | 'container'>;
+
 type ContentProps = Pick<
   TooltipPrimitive.TooltipContentProps,
   | 'onEscapeKeyDown'
@@ -38,6 +40,7 @@ type ArrowProps = {
 
 export type TooltipProps = RootProps &
   TriggerProps &
+  PortalProps &
   ContentProps &
   ArrowProps &
   PropsWithChildren<{
@@ -56,6 +59,8 @@ export function Tooltip({
   defaultOpen,
   open,
   onOpenChange,
+  forceMount,
+  container,
   side = 'bottom',
   delayDuration = 0,
   asChild,
@@ -74,11 +79,18 @@ export function Tooltip({
           {children}
         </TooltipPrimitive.Trigger>
 
-        <TooltipPrimitive.Content id-qa={idQa} className={classNames('gkit-tooltip', className)} side={side} {...props}>
-          {content}
+        <TooltipPrimitive.Portal forceMount={forceMount} container={container}>
+          <TooltipPrimitive.Content
+            id-qa={idQa}
+            className={classNames('gkit-tooltip', className)}
+            side={side}
+            {...props}
+          >
+            {content}
 
-          <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
-        </TooltipPrimitive.Content>
+            <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );
