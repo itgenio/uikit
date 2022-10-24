@@ -93,10 +93,10 @@ export const Select = React.memo(
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
         ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
-          <SelectPrimitive.Group className="gkit-select-group" key={options[index].group}>
+          <SelectPrimitive.Group className="gkit-select-group" key={options[0].group}>
             {!groupConfig?.hideText && (
               <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                {options[index].group}
+                {options[0].group}
               </SelectPrimitive.Label>
             )}
           </SelectPrimitive.Group>,
