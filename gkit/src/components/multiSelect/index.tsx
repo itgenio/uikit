@@ -16,7 +16,7 @@ const DROPDOWN_PADDING = 20;
 
 type Option = { label: string; value: Value; group?: string };
 
-type GroupConfig = { hideText?: boolean; hideSeparator?: boolean };
+type GroupConfig = { hideText?: boolean; hideSeparator?: boolean; showWithoutGroupSeparator?: boolean };
 
 export type MultiSelectProps = {
   size?: Sizes;
@@ -129,6 +129,11 @@ export const MultiSelect = React.memo(
 
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
+        groupConfig?.showWithoutGroupSeparator && (
+          <li key="without-group-separator">
+            <div className="gkit-multiselect-separator" />
+          </li>
+        ),
         ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
           <li className="gkit-multiselect-group" key={options[0].group}>
             {!groupConfig?.hideText && <span className="text-xs gkit-multiselect-group-text">{options[0].group}</span>}

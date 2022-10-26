@@ -14,7 +14,7 @@ type Values = string | number;
 
 export type SelectOption = { label: string; value: Values; group?: string };
 
-export type GroupConfig = { hideText?: boolean; hideSeparator?: boolean };
+export type GroupConfig = { hideText?: boolean; hideSeparator?: boolean; showWithoutGroupSeparator?: boolean };
 
 export type SelectProps = {
   label?: string;
@@ -92,6 +92,7 @@ export const Select = React.memo(
 
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
+        groupConfig?.showWithoutGroupSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
         ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
           <SelectPrimitive.Group className="gkit-select-group" key={options[0].group}>
             {!groupConfig?.hideText && (
