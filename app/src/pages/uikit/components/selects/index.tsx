@@ -55,7 +55,7 @@ export function Selects() {
     {
       title: 'DivideByGroups with separator for without group',
       options: optionsWithGroups,
-      props: { groupConfig: { hideSeparator: true, showSeparatorForOptionsWithoutGroup: true } },
+      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
     },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },

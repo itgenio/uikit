@@ -57,7 +57,7 @@ export function MultiSelects() {
     { state: 'Disabled', props: { disabled: true } },
     {
       state: 'DivideByGroups with separator for without group',
-      props: { groupConfig: { hideSeparator: true, showSeparatorForOptionsWithoutGroup: true } },
+      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
     },
     {
       state: 'Custom Render Values',
