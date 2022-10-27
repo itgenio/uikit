@@ -52,6 +52,11 @@ export function Selects() {
     { title: 'Focused', props: { focus: true } },
     { title: 'Filled', props: { filled: true } },
     { title: 'DivideByGroups', options: optionsWithGroups },
+    {
+      title: 'DivideByGroups with separator for without group',
+      options: optionsWithGroups,
+      props: { groupConfig: { hideSeparator: true, showSeparatorForOptionsWithoutGroup: true } },
+    },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
   ];
