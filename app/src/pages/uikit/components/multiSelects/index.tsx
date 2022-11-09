@@ -10,7 +10,7 @@ type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => Mu
 const options: NonNullable<MultiSelectProps['options']> = Array.from({ length: 60 }, (_, i) => {
   const index = i + 1;
 
-  return { label: `Option ${index}`, value: index, group: index % 2 === 0 ? 'Even' : 'Odd' };
+  return { label: `Option ${index}`, value: index, group: index > 5 ? (index % 2 === 0 ? 'Even' : 'Odd') : undefined };
 });
 
 export function MultiSelects() {
@@ -55,6 +55,10 @@ export function MultiSelects() {
     { state: 'Focused', props: { focus: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true } },
+    {
+      state: 'DivideByGroups with separator for without group',
+      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
+    },
     {
       state: 'Custom Render Values',
       customProps: {
