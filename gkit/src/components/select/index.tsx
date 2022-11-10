@@ -1,7 +1,7 @@
 import './style.less';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon } from '../icons';
@@ -124,6 +124,7 @@ export const Select = React.memo(
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
           open={disabled ? false : undefined}
+          onOpenChange={setOpen}
         >
           <SelectPrimitive.Trigger
             className={classNames('gkit-select', 'input-wrapper', size, {
@@ -145,17 +146,20 @@ export const Select = React.memo(
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal {...portalProps} className={classNames('gkit-select-portal', portalProps.className)}>
-            <SelectPrimitive.Content
-              className="gkit-select-dropdown"
-              id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
-            >
-              <SelectPrimitive.Viewport
-                className="gkit-select-viewport"
-                id-qa={classNames({ [`${idQa}-viewport`]: idQa })}
+            <Fragment>
+              <Overlay open={open} />
+              <SelectPrimitive.Content
+                className="gkit-select-dropdown"
+                id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
               >
-                {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
-              </SelectPrimitive.Viewport>
-            </SelectPrimitive.Content>
+                <SelectPrimitive.Viewport
+                  className="gkit-select-viewport"
+                  id-qa={classNames({ [`${idQa}-viewport`]: idQa })}
+                >
+                  {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
+                </SelectPrimitive.Viewport>
+              </SelectPrimitive.Content>
+            </Fragment>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
       </InputsContainer>
@@ -164,3 +168,25 @@ export const Select = React.memo(
 );
 
 Select.displayName = 'Select';
+
+/* Workaround for touch events propagating to underlying elements https://github.com/radix-ui/primitives/issues/1658 */
+const Overlay = ({ open }: { open: boolean }) => {
+  const [visible, setVisible] = useState(open);
+
+  useEffect(() => {
+    if (!open) {
+      const timer = setTimeout(() => {
+        setVisible(false);
+      }, 10);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+
+    setVisible(true);
+
+    return () => {};
+  }, [open]);
+
+  return visible ? <div className="gkit-select-overlay" onClick={e => e.stopPropagation()} /> : null;
+};
