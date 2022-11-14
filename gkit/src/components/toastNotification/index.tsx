@@ -1,8 +1,11 @@
 import './style.less';
+
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import classNames from 'classnames';
-import React, { CSSProperties, PropsWithChildren } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import { ErrorCircleFilledIcon, DismissIcon } from '../icons';
+
+type Variants = 'success' | 'warning' | 'error' | 'info';
 
 type ToastPrimitiveProps = Pick<
   ToastPrimitive.ToastProviderProps,
@@ -11,7 +14,7 @@ type ToastPrimitiveProps = Pick<
 
 type ViewportProps = Pick<ToastPrimitive.ToastViewportProps, 'asChild' | 'hotkey' | 'label'>;
 
-type RootProps = Pick<
+export type NotificationProps = { id: string; title: string; variant: Variants; content: ReactNode } & Pick<
   ToastPrimitive.ToastProps,
   | 'asChild'
   | 'type'
@@ -20,6 +23,8 @@ type RootProps = Pick<
   | 'open'
   | 'onOpenChange'
   | 'onEscapeKeyDown'
+  | 'onPause'
+  | 'onResume'
   | 'onSwipeStart'
   | 'onSwipeMove'
   | 'onSwipeEnd'
@@ -29,94 +34,61 @@ type RootProps = Pick<
 type TitleProps = Pick<ToastPrimitive.ToastTitleProps, 'asChild'>;
 type CloseProps = Pick<ToastPrimitive.ToastCloseProps, 'asChild'>;
 
-type Variants = 'success' | 'warning' | 'error' | 'info';
-
 type ToastNotificationProps = ToastPrimitiveProps &
-  RootProps &
+  NotificationProps &
   TitleProps &
   CloseProps &
-  ViewportProps &
-  PropsWithChildren<{
+  ViewportProps & {
     idQa?: string;
-    title: string;
-    variant?: Variants;
     className?: string;
-    content: React.ReactNode;
     durationRoot?: number;
-  }>;
+    notifications: NotificationProps[];
+    renderLimit?: number;
+  };
 
 export const ToastNotification = ({
-  children,
   className,
   idQa,
-  asChild,
-  title,
-  variant = 'error',
+  notifications,
+  renderLimit = 3,
   duration,
-  content,
   label,
   swipeDirection,
   swipeThreshold,
   hotkey,
-  type,
   durationRoot,
-  defaultOpen,
-  open,
-  onOpenChange,
-  onEscapeKeyDown,
-  onSwipeStart,
-  onSwipeMove,
-  onSwipeEnd,
-  forceMount,
 }: ToastNotificationProps) => {
-  const [savedCount, setSavedCount] = React.useState(0);
-
   return (
     <ToastPrimitive.Provider {...{ duration, label, swipeDirection, swipeThreshold }}>
-      <div onClick={() => setSavedCount(count => count + 1)}>{children}</div>
+      {notifications.map(({ title, content, variant, ...notificationProps }, index) => {
+        const style: CSSProperties = { ['--index' as string]: index };
+        //.slice(0, renderLimit)
+        return (
+          <ToastPrimitive.Root
+            key={index}
+            style={style}
+            id-qa={idQa}
+            className={classNames(`gkit-toast-notification gkit-toast-notification-${index}`)}
+            duration={durationRoot}
+            {...notificationProps}
+          >
+            <div className={classNames('toast-inner', className, variant)}>
+              <ErrorCircleFilledIcon className="toast-error-circle-icon" />
 
-      {Array.from({ length: savedCount })
-        .map((_, index) => {
-          const style: CSSProperties = { ['--index' as string]: index };
+              <div className="toast-content-wrapper">
+                <ToastPrimitive.Title className="toast-title">
+                  {title}
+                  <ToastPrimitive.Close className="toast-close">
+                    <DismissIcon className="toast-dismiss-icon" />
+                  </ToastPrimitive.Close>
+                </ToastPrimitive.Title>
 
-          return (
-            <ToastPrimitive.Root
-              key={index}
-              style={style}
-              id-qa={idQa}
-              className={classNames(`gkit-toast-notification gkit-toast-notification-${index}`)}
-              {...{
-                asChild,
-                type,
-                defaultOpen,
-                open,
-                onOpenChange,
-                onEscapeKeyDown,
-                onSwipeStart,
-                onSwipeMove,
-                onSwipeEnd,
-                forceMount,
-              }}
-              duration={durationRoot}
-            >
-              <div className={classNames('toast-inner', className, variant)}>
-                <ErrorCircleFilledIcon className="toast-error-circle-icon" />
-
-                <div className="toast-content-wrapper">
-                  <ToastPrimitive.Title className="toast-title">
-                    {title}
-                    <ToastPrimitive.Close onClick={() => setSavedCount(count => count - 1)} className="toast-close">
-                      <DismissIcon className="toast-dismiss-icon" />
-                    </ToastPrimitive.Close>
-                  </ToastPrimitive.Title>
-
-                  {content}
-                </div>
+                {content}
               </div>
-            </ToastPrimitive.Root>
-          );
-        })
-        .slice(0, 3)}
+            </div>
+          </ToastPrimitive.Root>
+        );
+      })}
 
       <ToastPrimitive.Viewport className="toast-viewport" hotkey={hotkey} />
     </ToastPrimitive.Provider>

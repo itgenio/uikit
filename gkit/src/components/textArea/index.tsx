@@ -32,6 +32,7 @@ export type TextAreaProps = {
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   autoFocus?: boolean;
+  idQaForHelperText?: string;
 };
 
 export function TextArea({
@@ -59,6 +60,7 @@ export function TextArea({
   onFocus,
   onBlur,
   autoFocus,
+  idQaForHelperText,
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
 
@@ -77,7 +79,7 @@ export function TextArea({
   }, [autoFocus]);
 
   return (
-    <InputsContainer {...{ id, size, label, helperText, idQa, className }}>
+    <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
       <div
         className={classNames('gkit-text-area-wrapper', size, {
           hover,

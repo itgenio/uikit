@@ -2,60 +2,105 @@
 @import (reference) "../../ui";
 
 .gkit-accordion {
-  width: 43.5rem;
-  padding: 2rem 1.75rem;
   border-radius: 8px;
-  border: 1px solid var(--gkit-color-neutral-200);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 6px 6px -6px rgba(0, 0, 0, 0.15);
   background-color: var(--gkit-color-neutral-0);
+  box-shadow: 1px 6px 6px -6px rgb(0 0 0 / 15%), 0 0 1px 0 rgb(0 0 0 / 30%);
+  transition: box-shadow 360ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
 
-  summary {
-    list-style-type: none;
-    .text-base();
-    font-weight: @font-weight-bold;
-    cursor: pointer;
-    position: relative;
-    color: var(--gkit-color-neutral-900);
-    display: flex;
-    align-items: center;
+  &:hover {
+    box-shadow: 0 4px 12px 2px rgb(0 0 0 / 10%);
+  }
 
-    .accordion-title {
-      .text-xl();
-
-      &.icon {
-        .text-base();
-      }
+  div {
+    p {
+      .text-sm();
+      font-weight: @font-weight-normal;
+      color: var(--gkit-color-neutral-500);
     }
+  }
 
-    .chevron-down-icon {
-      transition: transform 0.5s;
-      width: 1rem;
-      height: 1rem;
-    }
+  .chevron-down-icon {
+    transform: rotateX(0deg);
+    transition: 0.3s ease-out;
+  }
 
-    div {
+  & div [data-state="open"] .chevron-down-icon {
+    transform: rotateX(-180deg);
+    transition: 0.3s ease-out;
+  }
+
+  .accordion-item {
+    .accordion-trigger {
       width: 100%;
 
-      p {
-        .text-sm();
+      .accordion-panel {
+        cursor: pointer;
+        .text-base();
+        font-weight: @font-weight-bold;
+        color: var(--gkit-color-neutral-900);
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem;
+
+        .accordion-panel-body {
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          .accordion-title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .text-xl();
+
+            &.icon {
+              .text-base();
+            }
+          }
+        }
+      }
+    }
+
+    .content-container {
+      overflow: hidden;
+
+      .content {
+        padding: 0 1.5rem 1rem;
         font-weight: @font-weight-normal;
-        color: var(--gkit-color-neutral-500);
+        .text-base();
+        color: var(--gkit-color-neutral-600);
+      }
+
+      &[data-state="open"] {
+        animation: accordionOpen 0.3s ease-out;
+      }
+
+      &[data-state="closed"] {
+        animation: accordionClose 0.3s ease-out;
       }
     }
   }
+}
 
-  &[open] {
-    background-color: var(--gkit-color-neutral-0);
-    font-weight: @font-weight-normal;
-    .text-base();
-    color: var(--gkit-color-neutral-600);
+@keyframes accordionOpen {
+  from {
+    height: 0;
   }
 
-  &[open] summary .chevron-down-icon {
-    transform: scale(1, -1);
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordionClose {
+  from {
+    height: var(--radix-accordion-content-height);
   }
 
-  .accordion-text {
-    margin-top: 1rem;
+  to {
+    height: 0;
   }
 }

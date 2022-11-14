@@ -25,6 +25,7 @@ export type TextFieldProps = PropsWithChildren<{
   required?: boolean;
   idQa?: string;
   idQaForInput?: string;
+  idQaForHelperText?: string;
   name?: string;
   autoComplete?: string;
   autoFocus?: boolean;
@@ -57,6 +58,7 @@ export const TextField = forwardRef(function TextField(
     required,
     idQa,
     idQaForInput,
+    idQaForHelperText,
     name,
     autoComplete,
     autoFocus,
@@ -76,7 +78,7 @@ export const TextField = forwardRef(function TextField(
     <InputsContainer
       ref={ref}
       className={classNames('gkit-text-field', className)}
-      {...{ id, size, label, idQa, helperText }}
+      {...{ id, size, label, idQa, helperText, error, idQaForHelperText }}
     >
       <div
         className={classNames('text-field-wrapper', size, {

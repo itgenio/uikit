@@ -11,9 +11,12 @@ const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
 });
 
 const optionsWithGroups = defaultOptions.map((option, i) => {
-  option.group = i % 2 ? 'Odd' : 'Even';
+  if (i > 15) return option;
 
-  return option;
+  return {
+    ...option,
+    group: i % 2 ? 'Odd' : 'Even',
+  };
 });
 
 type State = { title: string; props?: SelectProps; options?: SelectProps['options'] };
@@ -48,7 +51,12 @@ export function Selects() {
     { title: 'Hover', props: { hover: true } },
     { title: 'Focused', props: { focus: true } },
     { title: 'Filled', props: { filled: true } },
-    { title: 'DivideByGroups', props: { divideByGroups: true }, options: optionsWithGroups },
+    { title: 'DivideByGroups', options: optionsWithGroups },
+    {
+      title: 'DivideByGroups with separator for without group',
+      options: optionsWithGroups,
+      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
+    },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
   ];

@@ -4,26 +4,43 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-type RootProps = Pick<TooltipPrimitive.TooltipProps, 'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange'>;
+type RootProps = Pick<
+  TooltipPrimitive.TooltipProps,
+  'defaultOpen' | 'open' | 'delayDuration' | 'onOpenChange' | 'disableHoverableContent'
+>;
 
 type TriggerProps = { triggerClassName?: string; triggerIdQa?: string } & Pick<
   TooltipPrimitive.TooltipTriggerProps,
   'asChild'
 >;
 
+type PortalProps = Pick<TooltipPrimitive.TooltipPortalProps, 'forceMount' | 'container'>;
+
 type ContentProps = Pick<
   TooltipPrimitive.TooltipContentProps,
-  'side' | 'align' | 'sideOffset' | 'alignOffset' | 'avoidCollisions' | 'collisionTolerance'
+  | 'onEscapeKeyDown'
+  | 'onPointerDownOutside'
+  | 'forceMount'
+  | 'side'
+  | 'sideOffset'
+  | 'align'
+  | 'alignOffset'
+  | 'avoidCollisions'
+  | 'collisionBoundary'
+  | 'collisionPadding'
+  | 'arrowPadding'
+  | 'sticky'
+  | 'hideWhenDetached'
 >;
 
 type ArrowProps = {
   arrowWidth?: TooltipPrimitive.TooltipArrowProps['width'];
   arrowHeight?: TooltipPrimitive.TooltipArrowProps['height'];
-  arrowOffset?: TooltipPrimitive.TooltipArrowProps['offset'];
 };
 
 export type TooltipProps = RootProps &
   TriggerProps &
+  PortalProps &
   ContentProps &
   ArrowProps &
   PropsWithChildren<{
@@ -42,42 +59,39 @@ export function Tooltip({
   defaultOpen,
   open,
   onOpenChange,
+  forceMount,
+  container,
+  side = 'bottom',
   delayDuration = 0,
   asChild,
-  side,
-  align,
-  sideOffset,
-  alignOffset,
-  avoidCollisions,
-  collisionTolerance,
   arrowWidth = 16,
   arrowHeight = 7,
-  arrowOffset = 6,
+  ...props
 }: TooltipProps) {
   return (
-    <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
-      <TooltipPrimitive.Trigger
-        className={classNames('gkit-tooltip-trigger', triggerClassName)}
-        asChild={asChild}
-        id-qa={triggerIdQa}
-      >
-        {children}
-      </TooltipPrimitive.Trigger>
+    <TooltipPrimitive.Provider>
+      <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
+        <TooltipPrimitive.Trigger
+          className={classNames('gkit-tooltip-trigger', triggerClassName)}
+          asChild={asChild}
+          id-qa={triggerIdQa}
+        >
+          {children}
+        </TooltipPrimitive.Trigger>
 
-      <TooltipPrimitive.Content
-        id-qa={idQa}
-        className={classNames('gkit-tooltip', className)}
-        {...{ side, align, sideOffset, alignOffset, avoidCollisions, collisionTolerance }}
-      >
-        {content}
+        <TooltipPrimitive.Portal forceMount={forceMount} container={container}>
+          <TooltipPrimitive.Content
+            id-qa={idQa}
+            className={classNames('gkit-tooltip', className)}
+            side={side}
+            {...props}
+          >
+            {content}
 
-        <TooltipPrimitive.Arrow
-          className="gkit-tooltip-arrow"
-          width={arrowWidth}
-          height={arrowHeight}
-          offset={arrowOffset}
-        />
-      </TooltipPrimitive.Content>
-    </TooltipPrimitive.Root>
+            <TooltipPrimitive.Arrow className="gkit-tooltip-arrow" width={arrowWidth} height={arrowHeight} />
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Portal>
+      </TooltipPrimitive.Root>
+    </TooltipPrimitive.Provider>
   );
 }
