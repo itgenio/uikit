@@ -14,12 +14,12 @@
 
     &.small {
       border-radius: 0.625rem;
-      padding: 0.625rem 0.75rem;
+      padding: calc(0.625rem - 1px) 0.75rem;
     }
 
     &.large {
       border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
+      padding: calc(0.625rem - 1px) 1rem;
     }
 
     .multi-select-label {
@@ -61,12 +61,21 @@
         align-items: center;
         justify-content: center;
         width: max-content;
-        font-weight: 600;
-        padding: 0 0.5rem;
+        font-weight: @font-weight-bold;
         border-radius: 1rem;
         background-color: var(--gkit-color-neutral-100);
         color: var(--gkit-color-neutral-800);
         text-align: center;
+
+        &.small {
+          .text-xs();
+          padding: 0.125rem 0.625rem;
+        }
+
+        &.large {
+          .text-sm();
+          padding: 0.25rem 0.75rem;
+        }
 
         .gkit-svg-icon {
           width: 0.75rem;
@@ -86,7 +95,7 @@
 
     .multi-select-chevron {
       display: flex;
-      color: var(--gkit-color-neutral-700);
+      color: var(--gkit-color-neutral-500);
       justify-content: flex-end;
       flex-grow: 1;
       flex-shrink: 1;

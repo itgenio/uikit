@@ -104,7 +104,7 @@ export const MultiSelect = React.memo(
         <Fragment>
           {hasValue && !disabled && (
             <span
-              className="multi-select-count"
+              className={classNames('multi-select-count', size)}
               onClick={e => {
                 e.stopPropagation();
 
