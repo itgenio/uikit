@@ -7,22 +7,32 @@ import { MultiSelect, MultiSelectProps } from '@itgenio/gkit/multiSelect';
 
 type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => MultiSelectProps['renderValues'] };
 
-const options: NonNullable<MultiSelectProps['options']> = Array.from({ length: 60 }, (_, i) => {
-  const index = i + 1;
+const getOptions = (withObjValues = false): NonNullable<MultiSelectProps['options']> =>
+  Array.from({ length: 60 }, (_, i) => {
+    const index = i + 1;
 
-  return { label: `Option ${index}`, value: index, group: index > 5 ? (index % 2 === 0 ? 'Even' : 'Odd') : undefined };
-});
+    return {
+      label: `Option ${index}`,
+      value: withObjValues ? { key: index, someData: `data-${index}` } : index,
+      group: index > 5 ? (index % 2 === 0 ? 'Even' : 'Odd') : undefined,
+      isDisabled: withObjValues && index == 3,
+    };
+  });
 
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<MultiSelectProps['values']>([1]);
+  const [objValues, setObjValues] = useState<MultiSelectProps['values']>([{ key: 1, someData: 'data' }]);
 
   const renderState = (state: string, props: MultiSelectProps, customProps: CustomProps, index: number) => {
+    const isOptionsWithObjState = state === 'Options with objects and disabled option';
+
     return (
       <Fragment key={index}>
         <div>{state}</div>
         {sizes.map(size => {
           const p = { ...props, size };
+
           return (
             <MultiSelect
               key={size}
@@ -32,11 +42,11 @@ export function MultiSelects() {
               hasSelectAllOption
               helperText="Desc"
               inputText="inputText"
-              options={options}
-              values={value}
+              options={isOptionsWithObjState ? getOptions(true) : getOptions()}
+              values={isOptionsWithObjState ? objValues : value}
               selectAllOptionLabel="All Selected"
               onChange={values => {
-                setValue(values);
+                isOptionsWithObjState ? setObjValues(values) : setValue(values);
               }}
             />
           );
@@ -59,6 +69,7 @@ export function MultiSelects() {
       state: 'DivideByGroups with separator for without group',
       props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
     },
+    { state: 'Options with objects and disabled option' },
     {
       state: 'Custom Render Values',
       customProps: {
@@ -66,7 +77,7 @@ export function MultiSelects() {
           return values.map(value => {
             return (
               <Badge type="secondary" key={value} size={size}>
-                {options.find(({ value: v }) => v === value)?.label}
+                {getOptions().find(({ value: v }) => v === value)?.label}
                 <button
                   onClick={e => {
                     e.stopPropagation();

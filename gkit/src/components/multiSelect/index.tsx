@@ -9,12 +9,11 @@ import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
-
-type Value = string | number;
+type Value = string | number | ({ key: string | number } & { [k: string | number]: any });
 
 const DROPDOWN_PADDING = 20;
 
-type Option = { label: string; value: Value; group?: string };
+type Option = { label: string; value: Value; group?: string; isDisabled?: boolean };
 
 type GroupConfig = { hideText?: boolean; hideSeparator?: boolean; separateNotGrouped?: boolean };
 
@@ -103,22 +102,36 @@ export const MultiSelect = React.memo(
       );
     };
 
-    const renderOptionItem = ({ label, value }: Option) => (
-      <li
-        id-qa={classNames({ [`${idQa}-option-${value}`]: idQa })}
-        className={classNames('multi-select-option', size)}
-        key={value}
-        onChange={e => {
-          e.stopPropagation();
+    const renderOptionItem = ({ label, value, isDisabled }: Option) => {
+      const isValueObj = typeof value === 'object';
 
-          onChange(values.includes(value) ? values.filter(v => v !== value) : [...values, value]);
-        }}
-      >
-        <Checkbox className="multi-select-checkbox" checked={values.includes(value)}>
-          {label}
-        </Checkbox>
-      </li>
-    );
+      const isIncludeValue = isValueObj
+        ? !!values.find(v => typeof v === 'object' && v.key === value.key)
+        : values.includes(value);
+
+      return (
+        <li
+          id-qa={classNames({ [`${idQa}-option-${isValueObj ? value.key : value}`]: idQa })}
+          className={classNames('multi-select-option', size)}
+          key={isValueObj ? value.key : value}
+          onChange={e => {
+            e.stopPropagation();
+
+            onChange(
+              isIncludeValue
+                ? values.filter(
+                    v => (isValueObj && typeof v === 'object' ? v.key !== value.key : v !== value) && !isDisabled
+                  )
+                : [...values, value]
+            );
+          }}
+        >
+          <Checkbox className="multi-select-checkbox" checked={isIncludeValue} disabled={isDisabled}>
+            {label}
+          </Checkbox>
+        </li>
+      );
+    };
 
     const renderOptionsByGroups = () => {
       const optionsByGroupDict = groupByPropertyToDict(
@@ -192,6 +205,8 @@ export const MultiSelect = React.memo(
                 id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
                 className={classNames('multi-select-option', size)}
                 onClick={() => {
+                  options = options.filter(option => !option.isDisabled);
+
                   onChange(values.length === options.length ? [] : options.map(({ value }) => value));
                 }}
               >
@@ -199,7 +214,7 @@ export const MultiSelect = React.memo(
                   className="multi-select-checkbox"
                   checked={hasValue}
                   onChange={({ target: { checked } }) => {
-                    onChange(!checked ? options.map(({ value }) => value) : []);
+                    onChange(!checked ? options.map(({ value, isDisabled }) => !isDisabled && value) : []);
                   }}
                   icon={<SubtractFilledIcon />}
                   checkedIcon={values.length === options.length ? <CheckmarkFilledIcon /> : <SubtractFilledIcon />}
