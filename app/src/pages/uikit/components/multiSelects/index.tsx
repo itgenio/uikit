@@ -74,15 +74,15 @@ export function MultiSelects() {
       state: 'Custom Render Values',
       customProps: {
         closureRenderValue: size => values => {
-          return values.map((value: number) => {
+          return values.map(value => {
             return (
-              <Badge type="secondary" key={value} size={size}>
-                {getOptions().find(({ value: v }) => v === value)?.label}
+              <Badge type="secondary" key={value as number} size={size}>
+                {getOptions().find(({ value: v }) => v === (value as number))?.label}
                 <button
                   onClick={e => {
                     e.stopPropagation();
 
-                    setValue(prevState => prevState?.filter(v => v !== value));
+                    setValue(prevState => prevState?.filter(v => v !== (value as number)));
                   }}
                 >
                   <DismissIcon />
