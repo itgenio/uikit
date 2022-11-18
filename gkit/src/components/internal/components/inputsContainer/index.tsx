@@ -21,7 +21,7 @@ export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(
   ref
 ) {
   return (
-    <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className)}>
+    <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className, size)}>
       {label && (
         <Label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
