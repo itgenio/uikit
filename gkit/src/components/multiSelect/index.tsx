@@ -28,11 +28,11 @@ export type MultiSelectOption<T extends Object = {}> = {
   isDisabled?: boolean;
 };
 
-type Props<Options, Values> = {
-  options?: Options;
-  values?: Values;
-  onChange?: (selectedValues: Values) => void;
-  renderValues?: (values: Values) => React.ReactNode;
+export type MultiSelectProps<Option extends MultiSelectOption> = {
+  options?: Option[];
+  values?: Option['value'][];
+  onChange?: (selectedValues: Option['value'][]) => void;
+  renderValues?: (values: Option['value'][]) => React.ReactNode;
   size?: Sizes;
   label?: string;
   idQa?: string;
@@ -49,9 +49,7 @@ type Props<Options, Values> = {
   idQaForHelperText?: string;
 };
 
-export type MultiSelectProps<Options extends MultiSelectOption[]> = Props<Options, Options[number]['value'][]>;
-
-export function MultiSelect<T extends MultiSelectOption[]>({
+export function MultiSelect<T extends MultiSelectOption>({
   size,
   label,
   idQa,
@@ -126,7 +124,7 @@ export function MultiSelect<T extends MultiSelectOption[]>({
     );
   };
 
-  const renderOptionItem = ({ label, value, isDisabled }: T[number]) => {
+  const renderOptionItem = ({ label, value, isDisabled }: T) => {
     const isValueObj = typeof value === 'object';
 
     const isIncludeValue =
@@ -231,7 +229,6 @@ export function MultiSelect<T extends MultiSelectOption[]>({
               id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
               className={classNames('multi-select-option', size)}
               onClick={() => {
-                // @ts-expect-error
                 options = options.filter(option => !option.isDisabled);
 
                 onChange(values.length === options.length ? [] : options.map(({ value }) => value));

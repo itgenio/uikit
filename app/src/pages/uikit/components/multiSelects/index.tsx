@@ -6,7 +6,7 @@ import { DismissIcon } from '@itgenio/gkit/icons';
 import { MultiSelect, MultiSelectOption, MultiSelectProps } from '@itgenio/gkit/multiSelect';
 
 type Option = MultiSelectOption<{ someData: string }>;
-type Props = MultiSelectProps<Option[]>;
+type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
 
