@@ -3,12 +3,15 @@ import './style.less';
 import React, { Fragment, useState } from 'react';
 import { Badge } from '@itgenio/gkit/badge';
 import { DismissIcon } from '@itgenio/gkit/icons';
-import { MultiSelect, MultiSelectProps } from '@itgenio/gkit/multiSelect';
+import { MultiSelect, MultiSelectOption, MultiSelectProps } from '@itgenio/gkit/multiSelect';
 
-type CustomProps = { closureRenderValue?: (size: MultiSelectProps['size']) => MultiSelectProps['renderValues'] };
+type Option = MultiSelectOption<{ someData: string }>;
+type Props = MultiSelectProps<Option[]>;
 
-const getOptions = (withObjValues = false): NonNullable<MultiSelectProps['options']> =>
-  Array.from({ length: 60 }, (_, i) => {
+type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
+
+const getOptions = (withObjValues = false): Option[] => {
+  return Array.from({ length: 60 }, (_, i) => {
     const index = i + 1;
 
     return {
@@ -18,13 +21,14 @@ const getOptions = (withObjValues = false): NonNullable<MultiSelectProps['option
       isDisabled: withObjValues && index == 3,
     };
   });
+};
 
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
-  const [value, setValue] = useState<MultiSelectProps['values']>([1]);
-  const [objValues, setObjValues] = useState<MultiSelectProps['values']>([{ key: 1, someData: 'data' }]);
+  const [value, setValue] = useState<Props['values']>([1]);
+  const [objValues, setObjValues] = useState<Props['values']>([{ key: 1, someData: 'data' }]);
 
-  const renderState = (state: string, props: MultiSelectProps, customProps: CustomProps, index: number) => {
+  const renderState = (state: string, props: Props, customProps: CustomProps, index: number) => {
     const isOptionsWithObjState = state === 'Options with objects and disabled option';
 
     return (
@@ -57,7 +61,7 @@ export function MultiSelects() {
 
   const states: {
     state: string;
-    props?: MultiSelectProps;
+    props?: Props;
     customProps?: CustomProps;
   }[] = [
     { state: 'Normal' },
