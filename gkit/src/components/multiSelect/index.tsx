@@ -4,7 +4,13 @@ import React, { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'rea
 import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { Checkbox } from '../checkbox';
-import { SubtractFilledIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, CheckmarkFilledIcon } from '../icons';
+import {
+  SubtractFilledIcon,
+  ChevronDownFilledIcon,
+  ChevronUpFilledIcon,
+  CheckmarkFilledIcon,
+  DismissFilledIcon,
+} from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -101,9 +107,21 @@ export function MultiSelect<T extends MultiSelectOption[]>({
 
     return (
       <Fragment>
-        {inputText}
+        {hasValue && !disabled && (
+          <span
+            className={classNames('multi-select-count', size)}
+            onClick={e => {
+              e.stopPropagation();
 
-        {hasValue && !disabled && <span className="multi-select-count">{values.length}</span>}
+              onChange([]);
+            }}
+          >
+            {values.length}
+            <DismissFilledIcon />
+          </span>
+        )}
+
+        {inputText}
       </Fragment>
     );
   };
