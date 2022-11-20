@@ -81,12 +81,12 @@ export function MultiSelects() {
           return values.map(value => {
             return (
               <Badge type="secondary" key={value as number} size={size}>
-                {getOptions().find(({ value: v }) => v === (value as number))?.label}
+                {getOptions().find(({ value: v }) => v === value)?.label}
                 <button
                   onClick={e => {
                     e.stopPropagation();
 
-                    setValue(prevState => prevState?.filter(v => v !== (value as number)));
+                    setValue(prevState => prevState?.filter(v => v !== value));
                   }}
                 >
                   <DismissIcon />
