@@ -68,3 +68,4 @@ export * from './clock';
 export * from './play';
 export * from './arrowRight';
 export * from './documentPercent';
+export * from './videoClipMultiple';
