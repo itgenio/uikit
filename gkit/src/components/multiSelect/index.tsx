@@ -21,6 +21,7 @@ type Sizes = 'small' | 'large';
 type GroupConfig = { hideText?: boolean; hideSeparator?: boolean; separateNotGrouped?: boolean };
 
 type Key = string | number;
+
 export type MultiSelectOption<T extends Object = {}> = {
   label: string;
   value: Key | ({ key: Key } & T);
@@ -134,18 +135,20 @@ export function MultiSelect<T extends MultiSelectOption>({
           })
         : values.includes(value);
 
+    const optionValue = isValueObj ? value.key : value;
+
     return (
       <li
-        id-qa={classNames({ [`${idQa}-option-${isValueObj ? value.key : value}`]: idQa })}
+        id-qa={classNames({ [`${idQa}-option-${optionValue}`]: idQa })}
         className={classNames('multi-select-option', size)}
-        key={isValueObj ? value.key : value}
+        key={optionValue}
         onChange={e => {
           e.stopPropagation();
 
           onChange(
             isIncludeValue
               ? values.filter(v => {
-                  return (isValueObj && typeof v === 'object' ? v.key !== value.key : v !== value) && !isDisabled;
+                  return (typeof v === 'object' ? v.key !== optionValue : v !== value) && !isDisabled;
                 })
               : [...values, value]
           );
@@ -254,5 +257,3 @@ export function MultiSelect<T extends MultiSelectOption>({
     </InputsContainer>
   );
 }
-
-MultiSelect.displayName = 'MultiSelect';
