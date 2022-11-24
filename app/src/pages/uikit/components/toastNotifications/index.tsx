@@ -38,7 +38,7 @@ export function ToastNotifications() {
       <div className="grid">
         <ToastNotification
           notifications={notifications}
-          onClose={notification => {
+          onClose={(notification: NotificationProps) => {
             setNotifications(notifications => notifications.filter(n => n !== notification));
           }}
         />
