@@ -15,7 +15,9 @@ export function ToastNotifications() {
       <Button
         key={type}
         type={type}
-        onClick={() => setNotifications(notifications => [...notifications, { variant, title, content }])}
+        onClick={() =>
+          setNotifications(notifications => [...notifications, { id: +new Date(), variant, title, content }])
+        }
       >
         {title}
       </Button>
@@ -34,7 +36,12 @@ export function ToastNotifications() {
       {states.map(({ props }) => renderState(props))}
 
       <div className="grid">
-        <ToastNotification notifications={notifications} />
+        <ToastNotification
+          notifications={notifications}
+          onClose={notification => {
+            setNotifications(notifications => notifications.filter(n => n !== notification));
+          }}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import './style.less';
 
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import classNames from 'classnames';
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { ErrorCircleFilledIcon, DismissIcon } from '../icons';
 
 type Variants = 'success' | 'warning' | 'error' | 'info';
@@ -44,32 +44,45 @@ type ToastNotificationProps = ToastPrimitiveProps &
     durationRoot?: number;
     notifications: NotificationProps[];
     renderLimit?: number;
+    onClose: (notification: NotificationProps) => void;
   };
 
 export const ToastNotification = ({
   className,
   idQa,
   notifications,
-  renderLimit = 3,
+  renderLimit = 5,
   duration,
   label,
   swipeDirection,
   swipeThreshold,
   hotkey,
   durationRoot,
+  onClose,
 }: ToastNotificationProps) => {
+  const [isShowAll, setShowAll] = useState(false);
+
   return (
     <ToastPrimitive.Provider {...{ duration, label, swipeDirection, swipeThreshold }}>
-      {notifications.map(({ title, content, variant, ...notificationProps }, index) => {
-        const style: CSSProperties = { ['--index' as string]: index };
-        //.slice(0, renderLimit)
+      {notifications.reverse().map((notification, index) => {
+        const { id, title, content, variant, ...notificationProps } = notification;
+        const i = notifications.length - 1 - index;
+
         return (
           <ToastPrimitive.Root
-            key={index}
-            style={style}
+            key={id}
+            style={{ ['--index' as string]: i }}
             id-qa={idQa}
             className={classNames(`gkit-toast-notification gkit-toast-notification-${index}`)}
+            hidden={i >= renderLimit && !isShowAll}
             duration={durationRoot}
+            onPause={() => setShowAll(true)}
+            onResume={() => setShowAll(false)}
+            onOpenChange={open => {
+              if (!open) {
+                onClose(notification);
+              }
+            }}
             {...notificationProps}
           >
             <div className={classNames('toast-inner', className, variant)}>

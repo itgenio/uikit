@@ -107,7 +107,7 @@
   }
 
   &:not(:last-child) {
-    --i: calc(~"var(--index) +" 1);
+    --i: calc(~"var(--index)");
     --height-stack: calc(~"var(--stack-gap) *" var(--i));
     --width-stack: calc(0.05 ~"* var(--i)");
     transform: translate3d(0, calc(1px ~"- var(--height-stack)"), 0) scale(calc(1 ~"- var(--width-stack)"));
