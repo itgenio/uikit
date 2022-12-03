@@ -12,10 +12,10 @@ export type NotificationProps = {
   title: string;
   variant: Variants;
   content: ReactNode;
-} & ToastPrimitive.ToastProps;
+};
 
 type ToastNotificationProps = ToastPrimitive.ToastProviderProps &
-  NotificationProps &
+  ToastPrimitive.ToastProps &
   ToastPrimitive.ToastTitleProps &
   ToastPrimitive.ToastCloseProps &
   ToastPrimitive.ToastViewportProps & {
@@ -52,7 +52,7 @@ export const ToastNotification = ({
             key={id}
             style={{ ['--index' as string]: sortIndex }}
             id-qa={idQa}
-            className={classNames(`gkit-toast-notification gkit-toast-notification-${index}`)}
+            className={`gkit-toast-notification gkit-toast-notification-${index}`}
             hidden={sortIndex >= renderLimit}
             duration={durationRoot}
             onOpenChange={open => {

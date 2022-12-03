@@ -1,7 +1,18 @@
 import './style.less';
 import React, { useState } from 'react';
-import { Button, ButtonProps } from '@itgenio/gkit/button';
+import { Button } from '@itgenio/gkit/button';
 import { ToastNotification, NotificationProps } from '@itgenio/gkit/toastNotification';
+
+export type Types =
+  | 'primary'
+  | 'secondary'
+  | 'tertiaryPrimary'
+  | 'tertiaryNeutral'
+  | 'danger'
+  | 'blue'
+  | 'green'
+  | 'purple'
+  | 'orange';
 
 export function ToastNotifications() {
   const [notifications, setNotifications] = useState<NotificationProps[]>([]);
@@ -10,30 +21,28 @@ export function ToastNotifications() {
     <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolorem excepturi ipsum magni obcaecati</div>
   );
 
-  const renderState = ({ type, variant, title }: { type: string; variant: string; title: string }) => {
+  const renderState = (type: Types, props: NotificationProps, index: number) => {
     return (
       <Button
-        key={type}
+        key={index}
         type={type}
-        onClick={() =>
-          setNotifications(notifications => [...notifications, { id: +new Date(), variant, title, content }])
-        }
+        onClick={() => setNotifications(notifications => [...notifications, { ...props }])}
       >
-        {title}
+        {props.title}
       </Button>
     );
   };
 
-  const states: { props?: ButtonProps }[] = [
-    { props: { type: 'green', variant: 'success', title: 'Success' } },
-    { props: { type: 'danger', variant: 'error', title: 'Error' } },
-    { props: { type: 'orange', variant: 'warning', title: 'Warning' } },
-    { props: { type: 'blue', variant: 'info', title: 'Info' } },
+  const states: { type: Types; props: NotificationProps }[] = [
+    { type: 'green', props: { id: Date.now().toString(), variant: 'success', title: 'Success', content } },
+    { type: 'danger', props: { id: Date.now().toString(), variant: 'error', title: 'Error', content } },
+    { type: 'orange', props: { id: Date.now().toString(), variant: 'warning', title: 'Warning', content } },
+    { type: 'blue', props: { id: Date.now().toString(), variant: 'info', title: 'Info', content } },
   ];
 
   return (
     <div className="toast-notification">
-      {states.map(({ props }) => renderState(props))}
+      {states.map(({ type, props }, index) => renderState(type, props, index))}
 
       <div className="grid">
         <ToastNotification
