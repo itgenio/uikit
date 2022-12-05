@@ -24,6 +24,7 @@ import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextAreas } from './components/textAreas';
 import { TextFields } from './components/textFields';
+import { ToastNotifications } from './components/toastNotifications';
 import { Toggles } from './components/toggles';
 import { Tooltips } from './components/tooltips';
 
@@ -51,6 +52,7 @@ const components = [
   MultiSelects,
   Emojis,
   InlineNotifications,
+  ToastNotifications,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
