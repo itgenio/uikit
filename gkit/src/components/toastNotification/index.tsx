@@ -27,8 +27,6 @@ type ToastNotificationProps = ToastPrimitive.ToastProviderProps &
     onClose: (notification: NotificationProps) => void;
   };
 
-console.log(123);
-
 export const ToastNotification = ({
   className,
   idQa,
