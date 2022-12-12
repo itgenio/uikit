@@ -37,6 +37,11 @@
 
       &.small {
         .text-sm();
+
+        @media @mobile-portrait {
+          .text-base();
+        }
+
         min-height: 1.25rem;
 
         svg {
