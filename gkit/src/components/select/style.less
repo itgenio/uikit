@@ -19,6 +19,10 @@
     border-radius: 0.625rem;
     padding: calc(0.625rem - 1px) 0.75rem;
     .text-sm();
+
+    @media @mobile-portrait {
+      .text-base();
+    }
   }
 
   &.large {
@@ -101,6 +105,11 @@
 
   &.small {
     .text-sm();
+
+    @media @mobile-portrait {
+      .text-base();
+    }
+
     border-radius: 0.625rem;
   }
 
