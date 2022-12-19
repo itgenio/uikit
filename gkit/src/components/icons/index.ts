@@ -71,3 +71,4 @@ export * from './documentPercent';
 export * from './videoClipMultiple';
 export * from './arrowCircle';
 export * from './personAdd';
+export * from './lockClosed';
