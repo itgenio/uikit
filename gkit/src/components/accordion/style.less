@@ -20,19 +20,19 @@
     }
   }
 
-  .chevron-down-icon {
-    transform: rotateX(0deg);
-    transition: 0.3s ease-out;
-  }
-
-  & div [data-state="open"] .chevron-down-icon {
-    transform: rotateX(-180deg);
-    transition: 0.3s ease-out;
-  }
-
   .accordion-item {
     .accordion-trigger {
       width: 100%;
+
+      .chevron-down-icon {
+        transform: rotateX(0deg);
+        transition: 0.3s ease-out;
+      }
+
+      &[data-state="open"] .chevron-down-icon {
+        transform: rotateX(-180deg);
+        transition: 0.3s ease-out;
+      }
 
       .accordion-panel {
         cursor: pointer;
