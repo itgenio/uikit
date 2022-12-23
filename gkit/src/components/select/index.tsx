@@ -152,7 +152,7 @@ export const Select = React.memo(
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal {...portalProps} className={classNames('gkit-select-portal', portalProps.className)}>
             <Fragment>
-              <Overlay open={open} />
+              <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 className="gkit-select-dropdown"
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
