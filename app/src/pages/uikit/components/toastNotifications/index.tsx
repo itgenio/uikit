@@ -28,6 +28,7 @@ export function ToastNotifications() {
         type={type}
         onClick={() => setNotifications(notifications => [...notifications, { ...props }])}
       >
+        {/* eslint-disable-next-line react/prop-types */}
         {props.title}
       </Button>
     );
