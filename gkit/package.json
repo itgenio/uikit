@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.123-beta.0",
+  "version": "0.0.123-beta.1",
   "description": "GKIT",
   "main": "./index.js",
   "scripts": {
@@ -50,5 +50,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "**/index.ts"
+  ]
 }
