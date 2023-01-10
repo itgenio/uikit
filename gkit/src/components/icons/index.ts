@@ -73,3 +73,5 @@ export * from './arrowCircle';
 export * from './personAdd';
 export * from './lockClosed';
 export * from './open';
+export * from './tile';
+export * from './demoTile';
