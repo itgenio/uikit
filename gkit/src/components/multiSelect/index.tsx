@@ -140,7 +140,7 @@ export function MultiSelect<T extends MultiSelectOption>({
     return (
       <li
         id-qa={classNames({ [`${idQa}-option-${optionValue}`]: idQa })}
-        className={classNames('multi-select-option', size)}
+        className={classNames('multi-select-option', size, { disabled: isDisabled })}
         key={optionValue}
         onChange={e => {
           e.stopPropagation();
