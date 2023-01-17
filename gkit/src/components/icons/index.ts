@@ -73,5 +73,7 @@ export * from './arrowCircle';
 export * from './personAdd';
 export * from './lockClosed';
 export * from './open';
+export * from './tiles';
+export * from './irregularTiles';
 export * from './fontAdd';
 export * from './fontReduce';
