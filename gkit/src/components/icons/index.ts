@@ -75,3 +75,8 @@ export * from './lockClosed';
 export * from './open';
 export * from './tiles';
 export * from './irregularTiles';
+export * from './arrowClockwise';
+export * from './chatMultiple';
+export * from './document';
+export * from './hatGraduation';
+export * from './videoPerson';
