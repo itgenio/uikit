@@ -7,6 +7,10 @@ const sizes = ['small', 'large'] as const;
 const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
+  if (i == 3) {
+    return { label: `Option${index}`, value: String(index), customDropdownOption: <span>Option ({index})</span> };
+  }
+
   return { label: `Option${index}`, value: String(index) };
 });
 
@@ -56,6 +60,17 @@ export function Selects() {
       title: 'DivideByGroups with separator for without group',
       options: optionsWithGroups,
       props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
+    },
+    {
+      title: 'DivideByGroups with custom separator',
+      options: optionsWithGroups,
+      props: {
+        groupConfig: {
+          hideText: true,
+          hideSeparator: true,
+          customSeparators: [{ group: 'Even', separator: <div>Custom separator</div> }, { group: 'Odd' }],
+        },
+      },
     },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
