@@ -75,3 +75,5 @@ export * from './lockClosed';
 export * from './open';
 export * from './tiles';
 export * from './irregularTiles';
+export * from './fontAdd';
+export * from './fontReduce';
