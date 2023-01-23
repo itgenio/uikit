@@ -8,3 +8,4 @@ export * from './birthdayCake';
 export * from './wavingHand';
 export * from './thumbsDown';
 export * from './sparkles';
+export * from './fountainPen';
