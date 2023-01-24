@@ -83,3 +83,4 @@ export * from './document';
 export * from './hatGraduation';
 export * from './videoPerson';
 export * from './homeCheckmark';
+export * from './subrtractCircle';
