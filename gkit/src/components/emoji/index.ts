@@ -9,3 +9,7 @@ export * from './slightlySmilingFace';
 export * from './smilingFaceWithHeartEyes';
 export * from './thinkingFace';
 export * from './unamusedFace';
+export * from './fire';
+export * from './cyclone';
+export * from './laptop';
+export * from './ledger';
