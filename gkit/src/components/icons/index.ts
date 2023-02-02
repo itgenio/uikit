@@ -89,3 +89,4 @@ export * from './subrtractCircle';
 export * from './weatherMoon';
 export * from './weatherSunny';
 export * from './signOut';
+export * from './apps';
