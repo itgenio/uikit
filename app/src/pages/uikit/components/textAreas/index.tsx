@@ -21,6 +21,7 @@ export function TextAreas() {
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
     { state: 'Filled', props: { filled: true } },
+    { state: 'Focused', props: { focus: true } },
     { state: 'Error', props: { error: true } },
     { state: 'Disabled', props: { disabled: true, value: 'text', resize: 'none' } },
     { state: 'AutoFocus', props: { autoFocus: true, value: 'text', onChange: () => {} } },
