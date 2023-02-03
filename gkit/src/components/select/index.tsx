@@ -104,7 +104,7 @@ export const Select = React.memo(
           let customSeparator = undefined;
 
           if (groupConfig?.customSeparators) {
-            customSeparator = groupConfig.customSeparators.find(data => data.group === options[0].group).separator;
+            customSeparator = groupConfig.customSeparators.find(data => data.group === options[0].group)?.separator;
           }
 
           return [
