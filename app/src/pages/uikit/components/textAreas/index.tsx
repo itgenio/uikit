@@ -20,11 +20,11 @@ export function TextAreas() {
   const states: { state: string; props?: TextAreaProps }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
-    { state: 'Focused', props: { focus: true } },
     { state: 'Filled', props: { filled: true } },
     { state: 'Error', props: { error: true } },
-    { state: 'Disabled', props: { disabled: true, value: 'text' } },
+    { state: 'Disabled', props: { disabled: true, value: 'text', resize: 'none' } },
     { state: 'AutoFocus', props: { autoFocus: true, value: 'text', onChange: () => {} } },
+    { state: 'With autoHeight', props: { withAutoHeight: true } },
   ];
 
   return (
