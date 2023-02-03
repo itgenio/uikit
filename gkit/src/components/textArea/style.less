@@ -29,7 +29,7 @@
 
   &.hover,
   &:hover {
-    border-color: var(--gkit-color-light-primary-500);
+    border-color: var(--gkit-color-primary-500);
   }
 
   &.focus,
@@ -63,16 +63,20 @@
     cursor: text;
     border-radius: inherit;
 
-    &.both {
+    &.resize-both {
       resize: both;
     }
 
-    &.horizontal {
+    &.resize-horizontal {
       resize: horizontal;
     }
 
-    &.vertical {
+    &.resize-vertical {
       resize: vertical;
+    }
+
+    &.resize-none {
+      resize: none;
     }
 
     &.disabled,
