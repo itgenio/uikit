@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState, CSSProperties } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -9,7 +9,7 @@ type Sizes = 'small' | 'large';
 export type TextAreaProps = {
   idQa?: string;
   idQaForTextArea?: string;
-  resize?: string;
+  resize?: CSSProperties['resize'];
   maxLength?: number;
   rows?: number;
   cols?: number;
@@ -65,9 +65,10 @@ export function TextArea({
   withAutoHeight = false,
 }: TextAreaProps) {
   const id = useMemo(() => generateId(), []);
-  const [textAreaValue, setValue] = useState(value);
+  //for uncontrollable textarea (without value from props)
+  const [textAreaValue, setTextAreaValue] = useState(value);
 
-  const ref = useRef<HTMLTextAreaElement>();
+  const ref = useRef<HTMLTextAreaElement>(null);
 
   withAutoHeight && (rows = 1);
 
@@ -94,10 +95,10 @@ export function TextArea({
     }
   }, [ref, textAreaValue, withAutoHeight]);
 
-  const onValueChange = e => {
-    withAutoHeight && setValue(e.currentTarget.value);
+  const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
+    withAutoHeight && setTextAreaValue(e.currentTarget.value);
 
-    onChange && onChange(e);
+    onChange?.(e);
   };
 
   return (
@@ -130,7 +131,7 @@ export function TextArea({
             onBlur,
             autoFocus,
           }}
-          className={classNames('gkit-text-area', resize)}
+          className={classNames('gkit-text-area', `resize-${resize}`)}
         />
       </div>
     </InputsContainer>
