@@ -14,11 +14,13 @@ type Values = string | number;
 
 export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
 
+export type CustomGroupLabel = { group: string; label?: React.ReactNode; withoutSeparator?: boolean };
+
 export type GroupConfig = {
   hideText?: boolean;
   hideSeparator?: boolean;
   separateNotGrouped?: boolean;
-  customSeparators?: { group: string; separator?: React.ReactNode }[];
+  customGroupLabels?: CustomGroupLabel[];
 };
 
 export type SelectProps = {
@@ -95,42 +97,40 @@ export const Select = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
+
+      const groupedOptions = Object.entries(optionsByGroupDict);
       const optionsWithoutGroup = options.filter(o => !o.group);
+
+      const showNotGroupedSeparator = groupConfig?.separateNotGrouped && groupedOptions.length > 0;
 
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
-        groupConfig?.separateNotGrouped && <SelectPrimitive.Separator className="gkit-select-separator" />,
-        ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => {
-          let customSeparator = undefined;
+        showNotGroupedSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
+        ...Object.entries(optionsByGroupDict).map(([group, options], index, groupedOptions) => {
+          let customGroupLabel: CustomGroupLabel | undefined = undefined;
 
-          if (groupConfig?.customSeparators) {
-            customSeparator = groupConfig.customSeparators.find(data => data.group === options[0].group)?.separator;
+          if (groupConfig?.customGroupLabels) {
+            customGroupLabel = groupConfig.customGroupLabels.find(data => data.group === group);
           }
 
           return [
-            <SelectPrimitive.Group className="gkit-select-group" key={options[0].group}>
+            <SelectPrimitive.Group className="gkit-select-group" key={group}>
               {!groupConfig?.hideText && (
-                <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                  {options[0].group}
-                </SelectPrimitive.Label>
+                <SelectPrimitive.Label className="text-xs gkit-select-group-text">{group}</SelectPrimitive.Label>
               )}
 
-              {groupConfig?.customSeparators && (
-                <Fragment>
-                  {customSeparator ? (
-                    <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                      {customSeparator}
-                    </SelectPrimitive.Label>
-                  ) : (
-                    <SelectPrimitive.Separator className="gkit-select-separator" />
-                  )}
-                </Fragment>
+              {groupConfig?.customGroupLabels && customGroupLabel?.label && (
+                <SelectPrimitive.Label className="text-xs gkit-select-group-text">
+                  {customGroupLabel?.label}
+                </SelectPrimitive.Label>
               )}
             </SelectPrimitive.Group>,
             options.map(renderOptionItem),
-            index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
-              <SelectPrimitive.Separator className="gkit-select-separator" />
-            ),
+            index !== groupedOptions.length - 1 &&
+              !groupConfig?.hideSeparator &&
+              !(groupConfig?.customGroupLabels && (customGroupLabel?.withoutSeparator || !customGroupLabel?.label)) && (
+                <SelectPrimitive.Separator className="gkit-select-separator" />
+              ),
           ];
         }),
       ];

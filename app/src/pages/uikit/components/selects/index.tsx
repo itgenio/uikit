@@ -35,7 +35,7 @@ export function Selects() {
 
         {sizes.map(size => (
           <Select
-            key={size}
+            key={`${size}_${index + size}`}
             size={size}
             placeholder="Placeholder"
             label="Label"
@@ -62,13 +62,12 @@ export function Selects() {
       props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
     },
     {
-      title: 'DivideByGroups with custom separator',
+      title: 'DivideByGroups with custom labels',
       options: optionsWithGroups,
       props: {
         groupConfig: {
           hideText: true,
-          hideSeparator: true,
-          customSeparators: [{ group: 'Even', separator: <div>Custom separator</div> }, { group: 'Odd' }],
+          customGroupLabels: [{ group: 'Even', label: <div>Custom label</div> }, { group: 'Odd' }],
         },
       },
     },
