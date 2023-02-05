@@ -35,7 +35,7 @@ export function Selects() {
 
         {sizes.map(size => (
           <Select
-            key={`${size}_${index + size}`}
+            key={size}
             size={size}
             placeholder="Placeholder"
             label="Label"
