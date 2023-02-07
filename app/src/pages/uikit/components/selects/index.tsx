@@ -65,11 +65,7 @@ export function Selects() {
       title: 'Group config',
       options: optionsWithGroups,
       props: {
-        groupsConfig: { hideText: true },
-        groupConfig: [
-          { group: 'Even', label: <div>Custom label</div> },
-          { group: 'Odd', hideText: false },
-        ],
+        groupConfig: { Even: { label: <div>Custom label</div>, hideText: true }, Odd: { hideText: false } },
       },
     },
     { title: 'Error', props: { error: true } },

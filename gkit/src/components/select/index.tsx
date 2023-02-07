@@ -20,10 +20,9 @@ export type GroupsConfig = {
   separateNotGrouped?: boolean;
 };
 
-export type GroupConfig = ({ group: string; label?: React.ReactNode } & Pick<
-  GroupsConfig,
-  'hideText' | 'hideSeparator'
->)[];
+export type GroupConfigValues = Pick<GroupsConfig, 'hideText' | 'hideSeparator'> & { label?: React.ReactNode };
+
+export type GroupConfig = Record<string, GroupConfigValues>;
 
 export type SelectProps = {
   label?: string;
@@ -112,28 +111,22 @@ export const Select = React.memo(
         ...optionsWithoutGroup.map(renderOptionItem),
         showNotGroupedSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
         ...Object.entries(optionsByGroupDict).map(([group, options], index, groupedOptions) => {
-          const configForGroup = groupConfig?.find(conf => conf.group === group);
-
-          const hideSeparator = configForGroup
-            ? configForGroup?.hideSeparator ?? !configForGroup?.label
-            : groupsConfig?.hideSeparator;
-
-          const hideText = configForGroup?.hideText ?? groupsConfig?.hideText;
+          const configForGroup = groupConfig?.[group] ?? groupsConfig;
 
           return [
             <SelectPrimitive.Group className="gkit-select-group" key={group}>
-              {!hideText && (
+              {!configForGroup?.hideText && (
                 <SelectPrimitive.Label className="text-xs gkit-select-group-text">{group}</SelectPrimitive.Label>
               )}
 
-              {configForGroup && configForGroup.label && (
+              {configForGroup && (configForGroup as GroupConfigValues).label && (
                 <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                  {configForGroup.label}
+                  {(configForGroup as GroupConfigValues).label}
                 </SelectPrimitive.Label>
               )}
             </SelectPrimitive.Group>,
             options.map(renderOptionItem),
-            index !== groupedOptions.length - 1 && !hideSeparator && (
+            index !== groupedOptions.length - 1 && !configForGroup?.hideSeparator && (
               <SelectPrimitive.Separator className="gkit-select-separator" />
             ),
           ];
