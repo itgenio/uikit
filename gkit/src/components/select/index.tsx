@@ -15,14 +15,12 @@ type Values = string | number;
 export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
 
 export type GroupsConfig = {
-  hideText?: boolean;
+  hideLabel?: boolean;
   hideSeparator?: boolean;
   separateNotGrouped?: boolean;
 };
 
-export type GroupConfigValues = Pick<GroupsConfig, 'hideText' | 'hideSeparator'> & { label?: React.ReactNode };
-
-export type GroupConfig = Record<string, GroupConfigValues>;
+export type GroupConfig = Record<string, { label?: React.ReactNode } & Omit<GroupsConfig, 'separateNotGrouped'>>;
 
 export type SelectProps = {
   label?: string;
@@ -109,23 +107,29 @@ export const Select = React.memo(
 
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
+
         showNotGroupedSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
+
         ...Object.entries(optionsByGroupDict).map(([group, options], index, groupedOptions) => {
           const configForGroup = { ...(groupsConfig ?? {}), ...(groupConfig?.[group] ?? {}) };
 
           return [
             <SelectPrimitive.Group className="gkit-select-group" key={group}>
-              {!configForGroup?.hideText && (
-                <SelectPrimitive.Label className="text-xs gkit-select-group-text">{group}</SelectPrimitive.Label>
-              )}
-
-              {configForGroup && (configForGroup as GroupConfigValues).label && (
-                <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                  {(configForGroup as GroupConfigValues).label}
-                </SelectPrimitive.Label>
+              {!configForGroup?.hideLabel && (
+                <Fragment>
+                  {configForGroup?.label ? (
+                    <SelectPrimitive.Label className="text-xs gkit-select-group-text">
+                      {configForGroup.label}
+                    </SelectPrimitive.Label>
+                  ) : (
+                    <SelectPrimitive.Label className="text-xs gkit-select-group-text">{group}</SelectPrimitive.Label>
+                  )}
+                </Fragment>
               )}
             </SelectPrimitive.Group>,
+
             options.map(renderOptionItem),
+
             index !== groupedOptions.length - 1 && !configForGroup?.hideSeparator && (
               <SelectPrimitive.Separator className="gkit-select-separator" />
             ),
