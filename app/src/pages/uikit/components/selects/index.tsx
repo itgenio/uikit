@@ -55,21 +55,17 @@ export function Selects() {
     { title: 'Hover', props: { hover: true } },
     { title: 'Focused', props: { focus: true } },
     { title: 'Filled', props: { filled: true } },
-    { title: 'DivideByGroups', options: optionsWithGroups },
+    { title: 'Groups config', options: optionsWithGroups },
     {
-      title: 'DivideByGroups with separator for without group',
+      title: 'Groups config with hide separator',
       options: optionsWithGroups,
-      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
+      props: { groupsConfig: { hideSeparator: true, separateNotGrouped: true } },
     },
     {
-      title: 'DivideByGroups with custom separator',
+      title: 'Group config',
       options: optionsWithGroups,
       props: {
-        groupConfig: {
-          hideText: true,
-          hideSeparator: true,
-          customSeparators: [{ group: 'Even', separator: <div>Custom separator</div> }, { group: 'Odd' }],
-        },
+        groupConfig: { Even: { label: <div>Custom label</div> }, Odd: { hideLabel: false } },
       },
     },
     { title: 'Error', props: { error: true } },
