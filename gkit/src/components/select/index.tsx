@@ -111,7 +111,7 @@ export const Select = React.memo(
         ...optionsWithoutGroup.map(renderOptionItem),
         showNotGroupedSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
         ...Object.entries(optionsByGroupDict).map(([group, options], index, groupedOptions) => {
-          const configForGroup = groupConfig?.[group] ?? groupsConfig;
+          const configForGroup = { ...(groupsConfig ?? {}), ...(groupConfig?.[group] ?? {}) };
 
           return [
             <SelectPrimitive.Group className="gkit-select-group" key={group}>
