@@ -12,13 +12,15 @@ type Sizes = 'small' | 'large';
 
 type Values = string | number;
 
-export type SelectOption = { label: string; value: Values; group?: string };
+export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
 
-export type GroupConfig = {
-  hideText?: boolean;
+export type GroupsConfig = {
+  hideLabel?: boolean;
   hideSeparator?: boolean;
   separateNotGrouped?: boolean;
 };
+
+export type GroupConfig = Record<string, { label?: React.ReactNode } & Omit<GroupsConfig, 'separateNotGrouped'>>;
 
 export type SelectProps = {
   label?: string;
@@ -37,6 +39,7 @@ export type SelectProps = {
   options?: SelectOption[];
   value?: Values;
   valuePrefix?: string;
+  groupsConfig?: GroupsConfig;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
   idQaForHelperText?: string;
@@ -60,6 +63,7 @@ export const Select = React.memo(
     options,
     value,
     portalProps = {},
+    groupsConfig,
     groupConfig,
     valuePrefix = '',
     idQaForHelperText,
@@ -80,7 +84,9 @@ export const Select = React.memo(
         value={String(option.value)}
         data-value={option.value}
       >
-        <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
+        <SelectPrimitive.ItemText>
+          {open && option.customDropdownOption ? option.customDropdownOption : option.label}
+        </SelectPrimitive.ItemText>
         {option.value === value && (
           <SelectPrimitive.ItemIndicator>
             <CheckmarkIcon />
@@ -94,24 +100,43 @@ export const Select = React.memo(
         options.filter(o => !!o.group),
         option => option.group
       );
+
+      const groupedOptions = Object.entries(optionsByGroupDict);
       const optionsWithoutGroup = options.filter(o => !o.group);
+
+      const showNotGroupedSeparator =
+        groupsConfig?.separateNotGrouped && groupedOptions.length > 0 && optionsWithoutGroup.length > 0;
 
       return [
         ...optionsWithoutGroup.map(renderOptionItem),
-        groupConfig?.separateNotGrouped && <SelectPrimitive.Separator className="gkit-select-separator" />,
-        ...Object.values(optionsByGroupDict).map((options, index, groupedOptions) => [
-          <SelectPrimitive.Group className="gkit-select-group" key={options[0].group}>
-            {!groupConfig?.hideText && (
-              <SelectPrimitive.Label className="text-xs gkit-select-group-text">
-                {options[0].group}
-              </SelectPrimitive.Label>
-            )}
-          </SelectPrimitive.Group>,
-          options.map(renderOptionItem),
-          index !== groupedOptions.length - 1 && !groupConfig?.hideSeparator && (
-            <SelectPrimitive.Separator className="gkit-select-separator" />
-          ),
-        ]),
+
+        showNotGroupedSeparator && <SelectPrimitive.Separator className="gkit-select-separator" />,
+
+        ...Object.entries(optionsByGroupDict).map(([group, options], index, groupedOptions) => {
+          const configForGroup = { ...(groupsConfig ?? {}), ...(groupConfig?.[group] ?? {}) };
+
+          return [
+            <SelectPrimitive.Group className="gkit-select-group" key={group}>
+              {!configForGroup?.hideLabel && (
+                <Fragment>
+                  {configForGroup?.label ? (
+                    <SelectPrimitive.Label className="text-xs gkit-select-group-text">
+                      {configForGroup.label}
+                    </SelectPrimitive.Label>
+                  ) : (
+                    <SelectPrimitive.Label className="text-xs gkit-select-group-text">{group}</SelectPrimitive.Label>
+                  )}
+                </Fragment>
+              )}
+            </SelectPrimitive.Group>,
+
+            options.map(renderOptionItem),
+
+            index !== groupedOptions.length - 1 && !configForGroup?.hideSeparator && (
+              <SelectPrimitive.Separator className="gkit-select-separator" />
+            ),
+          ];
+        }),
       ];
     };
 

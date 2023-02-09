@@ -7,6 +7,10 @@ const sizes = ['small', 'large'] as const;
 const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
+  if (i == 3) {
+    return { label: `Option${index}`, value: String(index), customDropdownOption: <span>Option ({index})</span> };
+  }
+
   return { label: `Option${index}`, value: String(index) };
 });
 
@@ -52,11 +56,18 @@ export function Selects() {
     { title: 'Hover', props: { hover: true } },
     { title: 'Focused', props: { focus: true } },
     { title: 'Filled', props: { filled: true } },
-    { title: 'DivideByGroups', options: optionsWithGroups },
+    { title: 'Groups config', options: optionsWithGroups },
     {
-      title: 'DivideByGroups with separator for without group',
+      title: 'Groups config with hide separator',
       options: optionsWithGroups,
-      props: { groupConfig: { hideSeparator: true, separateNotGrouped: true } },
+      props: { groupsConfig: { hideSeparator: true, separateNotGrouped: true } },
+    },
+    {
+      title: 'Group config',
+      options: optionsWithGroups,
+      props: {
+        groupConfig: { Even: { label: <div>Custom label</div> }, Odd: { hideLabel: false } },
+      },
     },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
