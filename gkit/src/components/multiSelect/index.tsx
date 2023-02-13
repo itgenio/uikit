@@ -108,6 +108,7 @@ export function MultiSelect<T extends MultiSelectOption>({
       <Fragment>
         {hasValue && !disabled && (
           <span
+            id-qa="multi-select-count"
             className={classNames('multi-select-count', size)}
             onClick={e => {
               e.stopPropagation();
