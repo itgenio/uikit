@@ -51,6 +51,7 @@ export function Selects() {
   };
 
   const states: State[] = [
+    { title: 'Inline', props: { inline: true } },
     { title: 'Normal' },
     { title: 'Hover', props: { hover: true } },
     { title: 'Focused', props: { focus: true } },

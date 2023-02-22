@@ -43,6 +43,7 @@ export type SelectProps = {
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
   idQaForHelperText?: string;
+  inline?: boolean;
 };
 
 export const Select = React.memo(
@@ -66,6 +67,7 @@ export const Select = React.memo(
     groupConfig,
     valuePrefix = '',
     idQaForHelperText,
+    inline,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -157,7 +159,7 @@ export const Select = React.memo(
           onOpenChange={setOpen}
         >
           <SelectPrimitive.Trigger
-            className={classNames('gkit-select', 'input-wrapper', size, {
+            className={classNames(inline ? 'gkit-inline-select' : 'gkit-select', 'input-wrapper', size, {
               hover,
               focus,
               error,
