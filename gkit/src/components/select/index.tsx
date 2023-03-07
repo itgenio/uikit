@@ -42,6 +42,7 @@ export type SelectProps = {
   groupsConfig?: GroupsConfig;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
+  dropdownProps?: SelectPrimitive.SelectContentProps;
   idQaForHelperText?: string;
   inline?: boolean;
 };
@@ -63,6 +64,7 @@ export const Select = React.memo(
     options,
     value,
     portalProps = {},
+    dropdownProps = {},
     groupsConfig,
     groupConfig,
     valuePrefix = '',
@@ -181,7 +183,8 @@ export const Select = React.memo(
             <Fragment>
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
-                className="gkit-select-dropdown"
+                {...dropdownProps}
+                className={classNames('gkit-select-dropdown', dropdownProps.className)}
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
               >
                 <SelectPrimitive.Viewport
