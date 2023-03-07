@@ -7,8 +7,10 @@ const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 const ICONS_PATH_FILTER = new RegExp([`icons`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 const EMOJI_PATH_FILTER = new RegExp([`emoji`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 
-const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig = {}, svgProps = {} }) => {
+const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoConfig = {}, svgProps = {} }) => {
   const svgContent = await fs.promises.readFile(svgFilePath, 'utf8');
+
+  const { plugins: svgoPlugins = [], ...svgoConfig } = fullSvgoConfig;
 
   return await svgrTransform(
     svgContent,
@@ -20,9 +22,9 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig = {}, svgP
       svgoConfig: {
         plugins: [
           { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
-          { name: 'removeAttrs', params: { attrs: 'svg:fill' } },
           'removeXMLNS',
           'prefixIds',
+          ...svgoPlugins,
         ],
         ...svgoConfig,
       },
@@ -47,6 +49,13 @@ module.exports = () => ({
         svgFilePath: args.path,
         svgProps: { className: '{"gkit-svg-icon" + (props.className ? " " + props.className : "")}' },
         svgrConfig: { replaceAttrValues: { '#212121': 'currentColor' } },
+        svgoConfig: {
+          plugins: [
+            // Для иконок можно удалить, т.к. он лишний,
+            // для эмодзи оставляем, т.к. они отображаются не корректно, если удалить
+            { name: 'removeAttrs', params: { attrs: 'svg:fill' } },
+          ],
+        },
       });
 
       return {
