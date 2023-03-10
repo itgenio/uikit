@@ -90,3 +90,4 @@ export * from './weatherMoon';
 export * from './weatherSunny';
 export * from './signOut';
 export * from './apps';
+export * from './archive';
