@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { useLayoutEffect, useMemo, useRef, useState, CSSProperties } from 'react';
+import React, { CSSProperties, useLayoutEffect, useMemo, useState } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -67,33 +67,26 @@ export function TextArea({
   const id = useMemo(() => generateId(), []);
   //for uncontrollable textarea (without value from props)
   const [textAreaValue, setTextAreaValue] = useState(value);
-
-  const ref = useRef<HTMLTextAreaElement>(null);
+  const [textAreaElement, setTextAreaNode] = useState<HTMLTextAreaElement>(null);
 
   withAutoHeight && (rows = 1);
 
   useLayoutEffect(() => {
-    if (!autoFocus) return;
+    if (!autoFocus || !textAreaElement) return;
 
-    const textAreaElement = ref.current;
-
-    if (!textAreaElement) return;
-
-    const pos = ref.current.value.length;
+    const pos = textAreaElement.value.length;
 
     textAreaElement.setSelectionRange(pos, pos);
-  }, [autoFocus]);
+  }, [autoFocus, textAreaElement]);
 
   useLayoutEffect(() => {
     if (!withAutoHeight) return;
 
-    const textAreaRef = ref.current;
-
-    if (textAreaRef) {
-      textAreaRef.style.height = '0px';
-      textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
+    if (textAreaElement) {
+      textAreaElement.style.height = '0px';
+      textAreaElement.style.height = `${textAreaElement.scrollHeight}px`;
     }
-  }, [ref, textAreaValue, withAutoHeight]);
+  }, [textAreaElement, textAreaValue, withAutoHeight]);
 
   const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
     withAutoHeight && setTextAreaValue(e.currentTarget.value);
@@ -114,12 +107,12 @@ export function TextArea({
       >
         <textarea
           id-qa={idQaForTextArea}
-          ref={ref}
+          ref={node => setTextAreaNode(node)}
           onChange={onValueChange}
           {...{
             id,
             onKeyPress,
-            value: withAutoHeight ? textAreaValue : value,
+            value,
             maxLength,
             placeholder,
             disabled,
