@@ -17,3 +17,6 @@ export * from './ledger';
 export * from './thumbsDown';
 export * from './sparkles';
 export * from './fountainPen';
+export * from './nerdFace';
+export * from './cardIndexDividers';
+export * from './books';
