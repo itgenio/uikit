@@ -20,3 +20,5 @@ export * from './fountainPen';
 export * from './nerdFace';
 export * from './cardIndexDividers';
 export * from './books';
+export * from './heartGreen';
+export * from './spiralCalendar';
