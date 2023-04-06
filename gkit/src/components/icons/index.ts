@@ -91,3 +91,4 @@ export * from './weatherSunny';
 export * from './signOut';
 export * from './apps';
 export * from './archive';
+export * from './checkmarkCircle';
