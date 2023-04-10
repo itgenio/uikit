@@ -91,4 +91,8 @@ export * from './weatherSunny';
 export * from './signOut';
 export * from './apps';
 export * from './archive';
+export * from './alertUrgent';
+export * from './guardian';
+export * from './peopleSwap';
+export * from './emoji';
 export * from './checkmarkCircle';

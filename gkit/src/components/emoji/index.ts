@@ -22,3 +22,5 @@ export * from './cardIndexDividers';
 export * from './books';
 export * from './heartGreen';
 export * from './spiralCalendar';
+export * from './thumbsUp';
+export * from './googleCalendar';
