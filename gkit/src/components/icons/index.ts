@@ -95,3 +95,4 @@ export * from './alertUrgent';
 export * from './guardian';
 export * from './peopleSwap';
 export * from './emoji';
+export * from './checkmarkCircle';
