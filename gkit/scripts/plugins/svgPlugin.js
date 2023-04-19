@@ -21,7 +21,15 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
       plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
       svgoConfig: {
         plugins: [
-          { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                removeViewBox: false,
+                moveElemsAttrsToGroup: false,
+              },
+            },
+          },
           'removeXMLNS',
           'prefixIds',
           ...svgoPlugins,
