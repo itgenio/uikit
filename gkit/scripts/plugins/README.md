@@ -3,20 +3,24 @@
 ## SVGPlugin
 
 ### Плагин moveElemsAttrsToGroup для SVGO
+
 При сборке отключаем плагин `moveElemsAttrsToGroup` для SVGO, чтобы не объединять аттрибуты дочерних элементов у парента
 
 Пример:
 
 Элементы
+
 ```TypeScript
 <g filter="url(#filter2_i_20020_2909)">
   <rect x="25.9568" y="10.7305" width="5.82021" height="9.0435" rx="2.9101" transform="rotate(90 25.9568 10.7305)" fill="url(#paint6_linear_20020_2909)"/>
   <rect x="25.9568" y="10.7305" width="5.82021" height="9.0435" rx="2.9101" transform="rotate(90 25.9568 10.7305)" fill="url(#paint7_radial_20020_2909)"/>
 </g>
 ```
+
 Будут собраны в:
 
 С включенным плагином
+
 ```TypeScript
 a.createElement(
   'g',
@@ -42,6 +46,7 @@ a.createElement(
 ```
 
 С отключенным плагином
+
 ```TypeScript
 a.createElement(
     'g',
