@@ -24,3 +24,4 @@ export * from './heartGreen';
 export * from './spiralCalendar';
 export * from './thumbsUp';
 export * from './googleCalendar';
+export * from './huggingFace';
