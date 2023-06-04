@@ -226,6 +226,7 @@ export function MultiSelect<T extends MultiSelectOption>({
         </div>
       </div>
 
+      {/* TODO: Нужно переделать на портал */}
       {canShowDropdown && (
         <ul ref={dropdownRef} id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} className="multi-select-dropdown">
           {hasSelectAllOption && (
