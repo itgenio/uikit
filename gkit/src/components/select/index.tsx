@@ -158,7 +158,11 @@ export const Select = React.memo(
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
           open={disabled ? false : undefined}
-          onOpenChange={setOpen}
+          onOpenChange={newOpen => {
+            if (!open && disabled) return;
+
+            setOpen(newOpen);
+          }}
         >
           <SelectPrimitive.Trigger
             className={classNames(inline ? 'gkit-inline-select' : 'gkit-select', 'input-wrapper', size, {
