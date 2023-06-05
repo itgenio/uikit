@@ -25,3 +25,4 @@ export * from './spiralCalendar';
 export * from './thumbsUp';
 export * from './googleCalendar';
 export * from './huggingFace';
+export * from './faceHoldingBackTears';
