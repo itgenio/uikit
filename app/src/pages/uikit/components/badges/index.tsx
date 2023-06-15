@@ -5,7 +5,7 @@ import { StarIcon, DismissIcon } from '@itgenio/gkit/icons';
 
 export function Badges() {
   const sizes = ['small', 'large'] as const;
-  const colors = ['neutral', 'green', 'blue', 'purple', 'orange', 'danger'] as const;
+  const colors = ['neutral', 'green', 'blue', 'purple', 'orange', 'danger', 'white'] as const;
 
   const renderState = (state: string, props: BadgeProps, index: number) => {
     return (
@@ -75,6 +75,9 @@ export function Badges() {
         </div>
         <div>
           <span className="title">Danger</span>
+        </div>
+        <div>
+          <span className="title">White</span>
         </div>
         {states.map(({ state, props = {} }, index) => renderState(state, props, index))}
       </div>

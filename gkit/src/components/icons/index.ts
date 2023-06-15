@@ -96,3 +96,6 @@ export * from './guardian';
 export * from './peopleSwap';
 export * from './emoji';
 export * from './checkmarkCircle';
+export * from './list';
+export * from './emojiSad';
+export * from './arrowSync';
