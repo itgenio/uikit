@@ -99,3 +99,4 @@ export * from './checkmarkCircle';
 export * from './list';
 export * from './emojiSad';
 export * from './arrowSync';
+export * from './info';
