@@ -7,12 +7,14 @@ import {
   ModalExampleDefault,
   ModalExampleDefaultAsBlock,
   ModalExampleDefaultFullScreen,
+  ModalExampleIgnoreClickOverlay,
   ModalExampleWithContentInPortal,
   ModalExampleWithLazyLoadedContent,
 } from './examples';
 
 const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
   { name: 'Default', Modal: ModalExampleDefault },
+  { name: 'Ignore click on overlay', Modal: ModalExampleIgnoreClickOverlay },
   { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
   { name: 'With content in portal', Modal: ModalExampleWithContentInPortal },
   { name: 'With lazy loaded content', Modal: ModalExampleWithLazyLoadedContent },

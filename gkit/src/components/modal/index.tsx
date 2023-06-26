@@ -13,6 +13,7 @@ export type ModalProps = PropsWithChildren<{
   asBlock?: boolean;
   fullScreen?: boolean;
   preventBodyScroll?: boolean;
+  ignoreOverlayClick?: boolean;
   idQa?: string;
   idQaContent?: string;
 }>;
@@ -24,13 +25,14 @@ export function Modal({
   asBlock,
   fullScreen,
   preventBodyScroll = true,
+  ignoreOverlayClick,
   idQa,
   idQaContent,
   children,
 }: ModalProps) {
   usePreventBodyScroll(preventBodyScroll && open);
 
-  // Для блока не обязательно передавать props.open, поэтому явно проверяем на false
+  // Для блока необязательно передавать props.open, поэтому явно проверяем на false
   if (open === false) return null;
 
   if (asBlock) {
@@ -47,7 +49,7 @@ export function Modal({
     <Portal>
       <ModalInternal className={className} asBlock={false} idQa={idQa}>
         <ModalWrapperInternal>
-          <ModalOverlayInternal onClose={onClose} />
+          <ModalOverlayInternal onClose={onClose} ignoreOverlayClick={ignoreOverlayClick} />
 
           <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
             {children}
