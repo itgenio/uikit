@@ -27,6 +27,31 @@ export const ModalExampleDefault = () => {
     </div>
   );
 };
+export const ModalExampleIgnoreClickOverlay = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(o => !o)}>Open</Button>
+
+      <Modal open={open} onClose={() => setOpen(false)} ignoreOverlayClick>
+        <Modal.Header>
+          <Modal.Title title="Complex" />
+        </Modal.Header>
+
+        <Modal.Body>
+          <Modal.Text>Какой-то длинный текст</Modal.Text>
+        </Modal.Body>
+
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
+
+          <Button type="danger">Not OK</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 export const ModalExampleDefaultAsBlock = () => {
   return (
