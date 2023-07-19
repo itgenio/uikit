@@ -36,6 +36,7 @@ export type SelectProps = {
   filled?: boolean;
   error?: boolean;
   disabled?: boolean;
+  disabledList?: Values[];
   options?: SelectOption[];
   value?: Values;
   valuePrefix?: string;
@@ -60,6 +61,7 @@ export const Select = React.memo(
     filled,
     error,
     disabled,
+    disabledList = [],
     placeholder,
     options,
     value,
@@ -85,6 +87,7 @@ export const Select = React.memo(
         key={index}
         value={String(option.value)}
         data-value={option.value}
+        disabled={disabledList.includes(option.value)}
       >
         <SelectPrimitive.ItemText>
           {open && option.customDropdownOption ? option.customDropdownOption : option.label}
