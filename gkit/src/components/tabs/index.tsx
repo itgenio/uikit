@@ -12,15 +12,16 @@ export type TabsProps<T = any, C extends typeof Tab = typeof Tab> = {
   className?: string;
   idQa?: string;
   size?: Sizes;
+  isChips?: boolean;
 };
 
-type TabPropsAll = { value: any; label?: string; idQa?: string } & any;
+type TabPropsAll = { value: any; label?: string; idQa?: string; isChips?: boolean } & any;
 
 export type TabProps = React.PropsWithChildren<Pick<TabPropsAll, 'value'>>;
 
-export function Tabs({ children, onChange, value, className, idQa }: TabsProps) {
+export function Tabs({ children, onChange, value, className, idQa, isChips }: TabsProps) {
   return (
-    <div className={classNames('gkit-tabs', className)} id-qa={idQa}>
+    <div className={classNames('gkit-tabs', className, { isChips })} id-qa={idQa}>
       {React.Children.map(
         children,
         child =>
@@ -36,10 +37,20 @@ export function Tabs({ children, onChange, value, className, idQa }: TabsProps) 
   );
 }
 
-export function Tab({ children, value, onClick, label, selected, idQa, size = 'normal', ...props }: TabProps & any) {
+export function Tab({
+  children,
+  value,
+  isChips,
+  onClick,
+  label,
+  selected,
+  idQa,
+  size = 'normal',
+  ...props
+}: TabProps & any) {
   return (
     <div
-      className={classNames('gkit-tab', size, { selected })}
+      className={classNames(isChips ? 'gkit-chips' : 'gkit-tab', size, { selected })}
       data-value={value}
       onClick={() => onClick?.(value)}
       id-qa={idQa}
