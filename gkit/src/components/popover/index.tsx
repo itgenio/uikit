@@ -4,42 +4,15 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { DismissIcon } from '../icons';
 
-type RootProps = Pick<PopoverPrimitive.PopoverProps, 'defaultOpen' | 'open' | 'onOpenChange' | 'modal'>;
-
-type TriggerProps = Pick<PopoverPrimitive.PopoverTriggerProps, 'asChild'>;
-
-type PortalProps = Pick<PopoverPrimitive.PopoverPortalProps, 'forceMount' | 'container'>;
-
-type ContentProps = Pick<
-  PopoverPrimitive.PopoverContentProps,
-  | 'onOpenAutoFocus'
-  | 'onCloseAutoFocus'
-  | 'onEscapeKeyDown'
-  | 'onPointerDownOutside'
-  | 'onFocusOutside'
-  | 'onInteractOutside'
-  | 'forceMount'
-  | 'side'
-  | 'sideOffset'
-  | 'align'
-  | 'alignOffset'
-  | 'avoidCollisions'
-  | 'collisionBoundary'
-  | 'collisionPadding'
-  | 'arrowPadding'
-  | 'sticky'
-  | 'hideWhenDetached'
->;
-
 type ArrowProps = {
   arrowWidth?: PopoverPrimitive.PopoverArrowProps['width'];
   arrowHeight?: PopoverPrimitive.PopoverArrowProps['height'];
 };
 
-export type PopoverProps = RootProps &
-  TriggerProps &
-  PortalProps &
-  ContentProps &
+export type PopoverProps = PopoverPrimitive.PopoverProps &
+  PopoverPrimitive.PopoverTriggerProps &
+  PopoverPrimitive.PopoverPortalProps &
+  PopoverPrimitive.PopoverContentProps &
   ArrowProps &
   PropsWithChildren<{
     idQa?: string;
@@ -57,6 +30,7 @@ export function Popover({
   onOpenChange,
   modal,
   asChild,
+  container,
   onOpenAutoFocus,
   onCloseAutoFocus,
   onEscapeKeyDown,
@@ -80,7 +54,7 @@ export function Popover({
   return (
     <PopoverPrimitive.Root {...{ defaultOpen, open, onOpenChange, modal }}>
       <PopoverPrimitive.Trigger asChild={asChild}>{children}</PopoverPrimitive.Trigger>
-      <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Portal container={container}>
         <PopoverPrimitive.Content
           id-qa={idQa}
           className={classNames('gkit-popover-content', className)}
