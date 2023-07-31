@@ -15,6 +15,7 @@ const SIMPLE_STATES: { state: string; props: TextFieldProps }[] = [
   { state: 'Disabled', props: { disabled: true } },
   { state: 'Disabled with text', props: { disabled: true, value: 'Some text' } },
   { state: 'Datalist', props: { dataList: ['Hello', 'World', 'Gavana'] } },
+  { state: 'Required', props: { required: true } },
 ];
 
 const Item = ({ title, children }: PropsWithChildren<{ title: string }>) => {

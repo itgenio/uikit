@@ -26,6 +26,7 @@ const TYPES: RequiredButtonProps['type'][] = [
   'purple',
   'orange',
   'danger',
+  'dangerSecondary',
 ];
 
 export function Buttons() {

@@ -80,7 +80,7 @@ export const TextField = forwardRef(function TextField(
     <InputsContainer
       ref={ref}
       className={classNames('gkit-text-field', className)}
-      {...{ id, size, label, idQa, helperText, error, idQaForHelperText }}
+      {...{ id, size, label, idQa, required, helperText, error, idQaForHelperText }}
     >
       <div
         className={classNames('text-field-wrapper', size, {

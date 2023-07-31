@@ -46,6 +46,7 @@ export type SelectProps = {
   dropdownProps?: SelectPrimitive.SelectContentProps;
   idQaForHelperText?: string;
   inline?: boolean;
+  required?: boolean;
 };
 
 export const Select = React.memo(
@@ -72,6 +73,7 @@ export const Select = React.memo(
     valuePrefix = '',
     idQaForHelperText,
     inline,
+    required,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -156,7 +158,7 @@ export const Select = React.memo(
     };
 
     return (
-      <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
+      <InputsContainer {...{ id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
