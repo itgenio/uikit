@@ -27,3 +27,7 @@ export * from './googleCalendar';
 export * from './huggingFace';
 export * from './faceHoldingBackTears';
 export * from './information';
+export * from './palette';
+export * from './teddyBear';
+export * from './globeArfica';
+export * from './backPack';
