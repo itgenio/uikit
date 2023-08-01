@@ -36,13 +36,17 @@ export type SelectProps = {
   filled?: boolean;
   error?: boolean;
   disabled?: boolean;
+  disabledList?: Values[];
   options?: SelectOption[];
   value?: Values;
   valuePrefix?: string;
   groupsConfig?: GroupsConfig;
   groupConfig?: GroupConfig;
   portalProps?: SelectPrimitive.SelectPortalProps;
+  dropdownProps?: SelectPrimitive.SelectContentProps;
   idQaForHelperText?: string;
+  inline?: boolean;
+  required?: boolean;
 };
 
 export const Select = React.memo(
@@ -58,14 +62,18 @@ export const Select = React.memo(
     filled,
     error,
     disabled,
+    disabledList = [],
     placeholder,
     options,
     value,
     portalProps = {},
+    dropdownProps = {},
     groupsConfig,
     groupConfig,
     valuePrefix = '',
     idQaForHelperText,
+    inline,
+    required,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -81,6 +89,7 @@ export const Select = React.memo(
         key={index}
         value={String(option.value)}
         data-value={option.value}
+        disabled={disabledList.includes(option.value)}
       >
         <SelectPrimitive.ItemText>
           {open && option.customDropdownOption ? option.customDropdownOption : option.label}
@@ -149,15 +158,19 @@ export const Select = React.memo(
     };
 
     return (
-      <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
+      <InputsContainer {...{ id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
           open={disabled ? false : undefined}
-          onOpenChange={setOpen}
+          onOpenChange={newOpen => {
+            if (!open && disabled) return;
+
+            setOpen(newOpen);
+          }}
         >
           <SelectPrimitive.Trigger
-            className={classNames('gkit-select', 'input-wrapper', size, {
+            className={classNames(inline ? 'gkit-inline-select' : 'gkit-select', 'input-wrapper', size, {
               hover,
               focus,
               error,
@@ -179,7 +192,8 @@ export const Select = React.memo(
             <Fragment>
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
-                className="gkit-select-dropdown"
+                {...dropdownProps}
+                className={classNames('gkit-select-dropdown', dropdownProps.className)}
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
               >
                 <SelectPrimitive.Viewport

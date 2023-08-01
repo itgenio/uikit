@@ -11,6 +11,7 @@ type Types =
   | 'tertiaryPrimary'
   | 'tertiaryNeutral'
   | 'danger'
+  | 'dangerSecondary'
   | 'blue'
   | 'green'
   | 'purple'

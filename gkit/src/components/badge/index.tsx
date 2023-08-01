@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
 type Sizes = 'small' | 'large';
-type Colors = 'neutral' | 'green' | 'blue' | 'purple' | 'orange' | 'danger';
+type Colors = 'neutral' | 'green' | 'blue' | 'purple' | 'orange' | 'danger' | 'white';
 type Type = 'secondary' | 'primary';
 
 export type BadgeProps = PropsWithChildren<{

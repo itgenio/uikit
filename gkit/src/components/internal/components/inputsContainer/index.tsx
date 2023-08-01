@@ -14,10 +14,11 @@ type InputsContainerProps = PropsWithChildren<{
   className?: string;
   error?: boolean;
   idQaForHelperText?: string;
+  required?: boolean;
 }>;
 
 export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(function InputsContainer(
-  { children, id, size = 'large', label, helperText, idQa, className, error, idQaForHelperText },
+  { children, id, size = 'large', label, required, helperText, idQa, className, error, idQaForHelperText },
   ref
 ) {
   return (
@@ -25,6 +26,7 @@ export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(
       {label && (
         <Label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
+          {required && '*'}
         </Label>
       )}
       {children}

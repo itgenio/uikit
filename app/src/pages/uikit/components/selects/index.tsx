@@ -51,6 +51,7 @@ export function Selects() {
   };
 
   const states: State[] = [
+    { title: 'Inline', props: { inline: true } },
     { title: 'Normal' },
     { title: 'Hover', props: { hover: true } },
     { title: 'Focused', props: { focus: true } },
@@ -68,6 +69,7 @@ export function Selects() {
         groupConfig: { Even: { label: <div>Custom label</div> }, Odd: { hideLabel: false } },
       },
     },
+    { title: 'Disabled List', props: { disabledList: ['1', '2', '3'] } },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
   ];

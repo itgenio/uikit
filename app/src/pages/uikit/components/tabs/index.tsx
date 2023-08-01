@@ -40,6 +40,26 @@ export function TabsExample() {
           </Tabs>
         </section>
       </div>
+
+      <section className="bg-neutral-0">
+        <Tabs isChips value={t} onChange={newVal => setT(newVal)}>
+          {tabs.map(tab => (
+            <Tab isChips key={tab} value={tab} idQa={tab}>
+              {tab}
+            </Tab>
+          ))}
+        </Tabs>
+      </section>
+
+      <section className="bg-neutral-0">
+        <Tabs isChips size="small" value={t} onChange={newVal => setT(newVal)}>
+          {tabs.map(tab => (
+            <Tab size="small" isChips key={tab} value={tab} idQa={tab}>
+              {tab}
+            </Tab>
+          ))}
+        </Tabs>
+      </section>
     </div>
   );
 }
