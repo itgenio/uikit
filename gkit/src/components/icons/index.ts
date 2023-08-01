@@ -100,3 +100,6 @@ export * from './list';
 export * from './emojiSad';
 export * from './arrowSync';
 export * from './info';
+export * from './attach';
+export * from './send';
+export * from './code';
