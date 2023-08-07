@@ -66,11 +66,12 @@ export function Tooltip({
   asChild,
   arrowWidth = 16,
   arrowHeight = 7,
+  disableHoverableContent,
   ...props
 }: TooltipProps) {
   return (
-    <TooltipPrimitive.Provider>
-      <TooltipPrimitive.Root {...{ delayDuration, defaultOpen, open, onOpenChange }}>
+    <TooltipPrimitive.Provider {...{ delayDuration, disableHoverableContent }}>
+      <TooltipPrimitive.Root {...{ defaultOpen, open, onOpenChange, delayDuration, disableHoverableContent }}>
         <TooltipPrimitive.Trigger
           className={classNames('gkit-tooltip-trigger', triggerClassName)}
           asChild={asChild}
