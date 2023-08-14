@@ -1,10 +1,12 @@
 import './style.less';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionTitle } from '@itgenio/gkit/accordion';
 import { CheckIcon } from './checkIcon';
 
 export function Accordions() {
+  const [value, setValue] = useState('acc-1');
+
   const content = (
     <div>
       Мы вынуждены отталкиваться от того, что социально-экономическое развитие в значительной степени обусловливает
@@ -26,6 +28,20 @@ export function Accordions() {
         <CheckIcon />
         <AccordionTitle idQa="id-qa title" icon status="Пройдено">
           1. Знакомство с HTML
+        </AccordionTitle>
+      </Accordion>
+
+      <Accordion
+        idQa="id-qa accordion 2"
+        idQaSummary="id-qa summary 2"
+        content={content}
+        value={value}
+        itemValue="acc-1"
+        onValueChange={setValue}
+      >
+        <CheckIcon />
+        <AccordionTitle idQa="id-qa title" icon status="Пройдено">
+          {`2.Контролируемый компонент: ${value ? 'open' : 'close'}`}
         </AccordionTitle>
       </Accordion>
     </div>
