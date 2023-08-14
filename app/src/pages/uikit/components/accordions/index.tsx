@@ -5,7 +5,7 @@ import { Accordion, AccordionTitle } from '@itgenio/gkit/accordion';
 import { CheckIcon } from './checkIcon';
 
 export function Accordions() {
-  const [values, setValues] = useState<string[]>([]);
+  const [value, setValue] = useState('acc-1');
 
   const content = (
     <div>
@@ -35,13 +35,13 @@ export function Accordions() {
         idQa="id-qa accordion 2"
         idQaSummary="id-qa summary 2"
         content={content}
-        values={values}
+        value={value}
         itemValue="acc-1"
-        onValueChange={setValues}
+        onValueChange={setValue}
       >
         <CheckIcon />
         <AccordionTitle idQa="id-qa title" icon status="Пройдено">
-          2.Контролируемый компонент
+          {`2.Контролируемый компонент: ${value ? 'open' : 'close'}`}
         </AccordionTitle>
       </Accordion>
     </div>
