@@ -103,3 +103,7 @@ export * from './info';
 export * from './attach';
 export * from './send';
 export * from './code';
+export * from './mic';
+export * from './desktop';
+export * from './arrowSwap';
+export * from './arrowExpand';

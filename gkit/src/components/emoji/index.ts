@@ -28,3 +28,4 @@ export * from './huggingFace';
 export * from './faceHoldingBackTears';
 export * from './information';
 export * from './noEntry';
+export * from './manRunning';
