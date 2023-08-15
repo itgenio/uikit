@@ -10,12 +10,31 @@ type AccordionProps = PropsWithChildren<{
   idQaSummary?: string;
   className?: string;
   content: ReactNode;
+  value?: string;
+  onValueChange?: (val: string) => void;
+  itemValue?: string;
 }>;
 
-export function Accordion({ children, idQa, idQaSummary, className, content }: AccordionProps) {
+export function Accordion({
+  children,
+  idQa,
+  idQaSummary,
+  className,
+  content,
+  value,
+  itemValue,
+  onValueChange,
+}: AccordionProps) {
   return (
-    <AccordionPrimitive.Root id-qa={idQa} type="multiple" className="gkit-accordion">
-      <AccordionPrimitive.Item value="1" className="accordion-item">
+    <AccordionPrimitive.Root
+      id-qa={idQa}
+      type="single"
+      className="gkit-accordion"
+      value={value}
+      onValueChange={onValueChange}
+      collapsible
+    >
+      <AccordionPrimitive.Item value={itemValue ?? '1'} className="accordion-item">
         <AccordionPrimitive.Trigger className="accordion-trigger" id-qa={idQaSummary}>
           <div className="accordion-panel">
             <div className="accordion-panel-body">{children}</div>

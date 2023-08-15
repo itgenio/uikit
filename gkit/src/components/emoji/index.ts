@@ -31,3 +31,5 @@ export * from './palette';
 export * from './teddyBear';
 export * from './globeArfica';
 export * from './backPack';
+export * from './noEntry';
+export * from './manRunning';
