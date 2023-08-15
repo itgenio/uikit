@@ -107,3 +107,4 @@ export * from './mic';
 export * from './desktop';
 export * from './arrowSwap';
 export * from './arrowExpand';
+export * from './important';
