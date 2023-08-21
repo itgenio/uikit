@@ -39,6 +39,7 @@ export function Tabs({ children, onChange, value, className, idQa, isChips }: Ta
 
 export function Tab({
   children,
+  className,
   value,
   isChips,
   onClick,
@@ -50,7 +51,7 @@ export function Tab({
 }: TabProps & any) {
   return (
     <div
-      className={classNames(isChips ? 'gkit-chips' : 'gkit-tab', size, { selected })}
+      className={classNames(isChips ? 'gkit-chips' : 'gkit-tab', className, size, { selected })}
       data-value={value}
       onClick={() => onClick?.(value)}
       id-qa={idQa}

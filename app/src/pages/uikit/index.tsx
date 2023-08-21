@@ -59,7 +59,7 @@ const components = [
 
 const DEFAULT = 0;
 
-const SCHEMAS = ['blue', 'green', 'purple', 'orange'] as const;
+const SCHEMAS = ['blue', 'green'] as const;
 
 export function UikitDemo() {
   const names = components.map(c => c.displayName);
