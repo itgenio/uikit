@@ -5,7 +5,7 @@ import * as gkitEmojis from '@itgenio/gkit/emoji';
 import { Tooltip } from '@itgenio/gkit/tooltip';
 import { STEP, Slider } from '../slider';
 
-const DEFAULT_SIZE = 24;
+const DEFAULT_SIZE = 40;
 
 const EMOJIS = Object.entries(gkitEmojis)
   .filter(([key, value]) => typeof value === 'function' && key.endsWith('Emoji'))
