@@ -19,7 +19,7 @@ export function Colors() {
               {name}
             </p>
             <div className="modes">
-              <div className="shadow-md">
+              <div className="shadow-md light-mode">
                 {nums.map(n => (
                   <div
                     key={`${name}${n}`}
