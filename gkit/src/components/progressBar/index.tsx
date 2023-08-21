@@ -12,8 +12,10 @@ export const PROGRESS_BAR_CHECKPOINT_CSS_PREFIX = `--${PROGRESS_BAR_CHECKPOINT_C
 
 export const PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM = 0.25;
 
+type BaseProps = { className?: string; idQa?: string };
+
 export type ProgressBarCheckpointInternalProps = { withoutProgressLine?: boolean; index: number; zIndex: number };
-export type ProgressBarCheckpointProps = {
+export type ProgressBarCheckpointProps = BaseProps & {
   CheckpointElement?: FunctionComponent<ProgressBarCustomCheckpointElementProps> | null;
   progress?: number;
   withoutBeforeSibling?: boolean;
@@ -23,18 +25,18 @@ export type ProgressBarCheckpointProps = {
 export type ProgressBarCustomCheckpointElementProps = ProgressBarCheckpointProps &
   ProgressBarCheckpointInternalProps & { done: boolean };
 
-export type ProgressBarProps = {
+export type ProgressBarProps = BaseProps & {
   startCheckpoint?: ProgressBarCheckpointProps;
   checkpoints: ProgressBarCheckpointProps[];
   withSequentialProgress?: boolean;
 };
 
 export const ProgressBar = React.memo(
-  ({ checkpoints, startCheckpoint = {}, withSequentialProgress = true }: ProgressBarProps) => {
+  ({ className, checkpoints, startCheckpoint = {}, withSequentialProgress = true, idQa }: ProgressBarProps) => {
     const hasFirstCheckpointProgress = checkpoints[0]?.progress !== undefined;
 
     return (
-      <div className="gkit-progress-bar">
+      <div className={classNames('gkit-progress-bar', className)} id-qa={idQa}>
         <CheckpointInternal
           progress={hasFirstCheckpointProgress && PROGRESS_BAR_MAX_PROGRESS}
           CheckpointElement={hasFirstCheckpointProgress ? undefined : ProgressBarCheckpointElementWrap}
@@ -75,22 +77,26 @@ ProgressBar.displayName = 'ProgressBar';
 
 const CheckpointInternal = React.memo(
   ({ CheckpointElement, ...props }: ProgressBarCheckpointProps & ProgressBarCheckpointInternalProps) => {
-    const { progress, withoutBeforeSibling, withoutAfterSibling, withoutProgressLine, index, zIndex } = props;
+    const { className, progress, withoutBeforeSibling, withoutAfterSibling, withoutProgressLine, index, zIndex, idQa } =
+      props;
 
     const progressWidth = `${Math.min(Math.max(PROGRESS_BAR_MIN_PROGRESS, progress ?? 0), PROGRESS_BAR_MAX_PROGRESS)}%`;
     const isCheckpointDone = progress === PROGRESS_BAR_MAX_PROGRESS;
 
     return (
       <div
-        className={classNames(PROGRESS_BAR_CHECKPOINT_CN, { 'without-progress-line': withoutProgressLine })}
+        className={classNames(PROGRESS_BAR_CHECKPOINT_CN, className, {
+          'without-progress-line': withoutProgressLine,
+        })}
         style={{
           [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-z-index`]: zIndex,
           [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-border-size`]: `${PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM}rem`,
         }}
         data-checkpoint-index={index}
+        id-qa={idQa}
       >
         {!withoutProgressLine && (
-          <div className="progress-line">
+          <div className="progress-line" id-qa={classNames({ [`${idQa}-progress-line`]: !!idQa })}>
             {!withoutBeforeSibling && <div className={classNames('progress-before', { filled: !!progress })} />}
 
             <div
@@ -106,7 +112,10 @@ const CheckpointInternal = React.memo(
           // Checkpoint element can be null
           <Fragment>{CheckpointElement && <CheckpointElement {...props} done={isCheckpointDone} />}</Fragment>
         ) : (
-          <ProgressBarCheckpointElementWrap done={isCheckpointDone}>
+          <ProgressBarCheckpointElementWrap
+            done={isCheckpointDone}
+            idQa={classNames({ [`${idQa}-checkpoint-wrap`]: !!idQa })}
+          >
             <ProgressBarCheckpointDefaultElement title={`${index}`} done={isCheckpointDone} />
           </ProgressBarCheckpointElementWrap>
         )}
@@ -118,12 +127,13 @@ const CheckpointInternal = React.memo(
 CheckpointInternal.displayName = 'CheckpointInternal';
 
 export const ProgressBarCheckpointElementWrap = React.memo(
-  ({ className, done, children }: PropsWithChildren<{ className?: string; title?: string; done: boolean }>) => {
+  ({ className, idQa, done, children }: PropsWithChildren<BaseProps & { done: boolean }>) => {
     return (
       <div
         className={classNames('progress-bar-checkpoint-element-wrap', className, {
           'progress-bar-checkpoint-element-done': done,
         })}
+        id-qa={idQa}
       >
         {children}
       </div>
