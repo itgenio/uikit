@@ -1,0 +1,89 @@
+.gkit-progress-bar {
+  display: flex;
+
+  .progress-bar-checkpoint {
+    @checkpoint-element-border-size: var(--progress-bar-checkpoint-border-size);
+
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    position: relative;
+    z-index: var(--progress-bar-checkpoint-z-index);
+
+    &.without-progress-line {
+      flex-grow: unset;
+    }
+
+    .progress-line {
+      @progress-background: var(--gkit-color-neutral-200);
+      @progress-filled-background: var(--gkit-color-primary-400);
+
+      @progress-line-height: 0.5rem;
+      @progress-line-siblings-size: calc(@checkpoint-element-border-size / 2);
+
+      width: 100%;
+      height: @progress-line-height;
+      background: @progress-background;
+      position: relative;
+
+      .progress-before,
+      .progress-after {
+        width: calc(@progress-line-siblings-size + 0.0625rem);
+        height: @progress-line-height;
+        position: absolute;
+        top: 0;
+        background: @progress-background;
+
+        &.filled {
+          background: @progress-filled-background;
+        }
+      }
+
+      .progress-before {
+        left: calc(@progress-line-siblings-size * -1);
+      }
+
+      .progress-after {
+        right: calc(@progress-line-siblings-size * -1);
+      }
+
+      .progress-filled {
+        width: var(--progress-bar-checkpoint-width);
+        height: 100%;
+        background: @progress-filled-background;
+      }
+    }
+
+    .progress-bar-checkpoint-element-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 4rem;
+      border: @checkpoint-element-border-size solid var(--gkit-color-neutral-200);
+      background: var(--gkit-color-neutral-50);
+      position: relative;
+      
+      &.progress-bar-checkpoint-element-done {
+        background: var(--gkit-color-light-neutral-50);
+        border-color: var(--gkit-color-primary-400);
+      }
+
+      .progress-bar-checkpoint-element-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--gkit-color-neutral-400);
+      }
+
+      .progress-bar-checkpoint-element-done-icon {
+        color: var(--gkit-color-primary-400);
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+      }
+    }
+  }
+}

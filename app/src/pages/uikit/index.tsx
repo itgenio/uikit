@@ -18,6 +18,7 @@ import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
 import { Panels } from './components/panels';
 import { Popovers } from './components/popovers';
+import { ProgressBars } from './components/progressBars';
 import { RadioButtons } from './components/radioButtons';
 import { Selects } from './components/selects';
 import { Switchers } from './components/switchers';
@@ -53,6 +54,7 @@ const components = [
   Emojis,
   InlineNotifications,
   ToastNotifications,
+  ProgressBars,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
