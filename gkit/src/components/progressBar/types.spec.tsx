@@ -34,10 +34,10 @@ ProgressBar({
 //#region Несколько чекпоинтов
 ProgressBar({
   checkpoints: [
-    // @ts-expect-error qwe должен быть строкой, ошибка
+    // @ts-expect-error id должен быть строкой, ошибка
     { CheckpointComponent: Component1, CheckpointComponentProps: { id: 1 } },
-    // @ts-expect-error qwe должен быть числом, ошибка
-    { CheckpointComponent: Component2, CheckpointComponentProps: { id: '1', title: 'qwe' } },
+    // @ts-expect-error id должен быть числом, ошибка
+    { CheckpointComponent: Component2, CheckpointComponentProps: { id: '1', title: '2' } },
   ],
 });
 
@@ -46,7 +46,7 @@ ProgressBar({
     // Передан null, ошибки нет
     { CheckpointComponent: null },
     // Все пропсы соответствуют типам, ошибки нет
-    { CheckpointComponent: Component2, CheckpointComponentProps: { id: 1, title: 'qwe' } },
+    { CheckpointComponent: Component2, CheckpointComponentProps: { id: 1, title: '2' } },
   ],
 });
 //#endregion
