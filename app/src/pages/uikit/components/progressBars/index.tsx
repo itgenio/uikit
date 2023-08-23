@@ -9,7 +9,7 @@ import {
   ProgressBarProps,
 } from '@itgenio/gkit/progressBar';
 
-const CustomCheckpointElement = ({ done }: ProgressBarCustomCheckpointElementProps) => {
+const CustomCheckpointElement = ({ done, asd }: ProgressBarCustomCheckpointElementProps<{ asd: string }>) => {
   return (
     <ProgressBarCheckpointElementWrap done={done}>
       {done ? (
@@ -31,11 +31,14 @@ const CustomCheckpointElement = ({ done }: ProgressBarCustomCheckpointElementPro
           }}
         />
       )}
+
+      {asd}
     </ProgressBarCheckpointElementWrap>
   );
 };
 
 export function ProgressBars() {
+  // @ts-expect-error generic type
   const states: { state: string; props: ProgressBarProps }[] = [
     { state: 'No progress', props: { checkpoints: [{}, {}, {}] } },
     { state: 'First progress', props: { checkpoints: [{ progress: 40 }, {}, {}] } },
@@ -45,7 +48,7 @@ export function ProgressBars() {
       state: 'Checkpoints with custom elements',
       props: {
         checkpoints: [
-          { CheckpointElement: CustomCheckpointElement, progress: 100 },
+          { CheckpointElement: CustomCheckpointElement, CheckpointComponentProps: { asd: 'qwe' }, progress: 100 },
           { CheckpointElement: CustomCheckpointElement, progress: 50 },
           { CheckpointElement: CustomCheckpointElement },
         ],
@@ -53,7 +56,7 @@ export function ProgressBars() {
     },
     {
       state: 'CheckpointElement === null, for second checkpoint',
-      props: { checkpoints: [{ progress: 100 }, { CheckpointElement: null, progress: 100 }, { progress: 50 }] },
+      props: { checkpoints: [{ progress: 100 }, { progress: 100 }, { progress: 50 }] },
     },
     {
       state: 'withSequentialProgress === true, (by default)',
