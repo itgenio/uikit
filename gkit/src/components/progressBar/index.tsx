@@ -12,11 +12,19 @@ export const PROGRESS_BAR_CHECKPOINT_CSS_PREFIX = `--${PROGRESS_BAR_CHECKPOINT_C
 
 export const PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM = 0.25;
 
+type IsAny<T> = 0 extends 1 & T ? true : false;
+
+type AnyFC = FunctionComponent<any>;
+
+type GetCheckpointProps<T extends ProgressBarCheckpointProps<AnyFC>> = T extends T
+  ? ProgressBarCheckpointProps<IsAny<T['CheckpointComponent']> extends true ? undefined : T['CheckpointComponent']>
+  : T;
+
 type BaseProps = { className?: string; idQa?: string };
 
 export type ProgressBarCheckpointInternalProps = { withoutProgressLine?: boolean; index: number; zIndex: number };
 
-export type ProgressBarCheckpointProps<P extends FunctionComponent<any>> = BaseProps & {
+export type ProgressBarCheckpointProps<P extends AnyFC> = BaseProps & {
   CheckpointComponent?: P | null;
   CheckpointComponentProps?: P extends FunctionComponent<ProgressBarCustomCheckpointElementProps<infer R>> ? R : {};
   progress?: number;
@@ -27,25 +35,19 @@ export type ProgressBarCheckpointProps<P extends FunctionComponent<any>> = BaseP
 export type ProgressBarCustomCheckpointElementProps<T> = ProgressBarCheckpointProps<FunctionComponent<T>> &
   ProgressBarCheckpointInternalProps & { done: boolean } & T;
 
-export type ProgressBarProps<
-  S extends FunctionComponent<any>,
-  T extends ProgressBarCheckpointProps<FunctionComponent<any>>
-> = BaseProps & {
+export type ProgressBarProps<S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>> = BaseProps & {
   startCheckpoint?: ProgressBarCheckpointProps<S>;
-  checkpoints: (T extends T ? ProgressBarCheckpointProps<T['CheckpointComponent']> : T)[];
+  checkpoints: GetCheckpointProps<C>[];
   withSequentialProgress?: boolean;
 };
 
-export const ProgressBar = <
-  S extends FunctionComponent<any>,
-  T extends ProgressBarCheckpointProps<FunctionComponent<any>>
->({
+export const ProgressBar = <S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>>({
   className,
   checkpoints,
   startCheckpoint = {},
   withSequentialProgress = true,
   idQa,
-}: ProgressBarProps<S, T>) => {
+}: ProgressBarProps<S, C>) => {
   const hasFirstCheckpointProgress = checkpoints[0]?.progress !== undefined;
 
   return (
