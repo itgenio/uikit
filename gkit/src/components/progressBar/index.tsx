@@ -27,13 +27,19 @@ export type ProgressBarCheckpointProps<P extends FunctionComponent<any>> = BaseP
 export type ProgressBarCustomCheckpointElementProps<T> = ProgressBarCheckpointProps<FunctionComponent<T>> &
   ProgressBarCheckpointInternalProps & { done: boolean } & T;
 
-export type ProgressBarProps<S extends FunctionComponent<any>, T extends FunctionComponent<any>> = BaseProps & {
+export type ProgressBarProps<
+  S extends FunctionComponent<any>,
+  T extends ProgressBarCheckpointProps<FunctionComponent<any>>
+> = BaseProps & {
   startCheckpoint?: ProgressBarCheckpointProps<S>;
-  checkpoints: ProgressBarCheckpointProps<T>[];
+  checkpoints: (T extends T ? ProgressBarCheckpointProps<T['CheckpointComponent']> : T)[];
   withSequentialProgress?: boolean;
 };
 
-export const ProgressBar = <S extends FunctionComponent<any>, T extends FunctionComponent<any>>({
+export const ProgressBar = <
+  S extends FunctionComponent<any>,
+  T extends ProgressBarCheckpointProps<FunctionComponent<any>>
+>({
   className,
   checkpoints,
   startCheckpoint = {},
