@@ -41,7 +41,7 @@ export type ProgressBarProps<S extends AnyFC, C extends ProgressBarCheckpointPro
   withSequentialProgress?: boolean;
 };
 
-export const ProgressBar = <S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>>({
+const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>>({
   className,
   checkpoints,
   startCheckpoint = {},
@@ -86,6 +86,15 @@ export const ProgressBar = <S extends AnyFC, C extends ProgressBarCheckpointProp
     </div>
   );
 };
+
+type ProgressBarFunctionType = typeof ProgressBarInternal;
+type ProgressBarFunctionComponentType = FunctionComponent<Parameters<ProgressBarFunctionType>[0]>;
+
+type ProgressBarType = ProgressBarFunctionType & {
+  [K in keyof ProgressBarFunctionComponentType]: ProgressBarFunctionComponentType[K];
+};
+
+export const ProgressBar: ProgressBarType = React.memo(ProgressBarInternal);
 
 ProgressBar.displayName = 'ProgressBar';
 
