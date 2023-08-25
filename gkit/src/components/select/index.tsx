@@ -47,6 +47,7 @@ export type SelectProps = {
   idQaForHelperText?: string;
   inline?: boolean;
   required?: boolean;
+  startAdornment?: React.ReactNode;
 };
 
 export const Select = React.memo(
@@ -74,6 +75,7 @@ export const Select = React.memo(
     idQaForHelperText,
     inline,
     required,
+    startAdornment,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const id = useMemo(() => generateId(), []);
@@ -180,6 +182,7 @@ export const Select = React.memo(
             id-qa={classNames({ [`${idQa}-trigger`]: idQa })}
             id={id}
           >
+            {startAdornment}
             <SelectPrimitive.Value
               placeholder={placeholder}
               aria-label={value != null ? valuePrefix + value : undefined}

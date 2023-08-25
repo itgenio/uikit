@@ -34,3 +34,6 @@ export * from './backPack';
 export * from './noEntry';
 export * from './manRunning';
 export * from './partyPopper';
+export * from './grinningFace';
+export * from './fileFolder';
+export * from './smirkingFace';

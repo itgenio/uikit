@@ -108,3 +108,7 @@ export * from './desktop';
 export * from './arrowSwap';
 export * from './arrowExpand';
 export * from './important';
+export * from './camera';
+export * from './speaker';
+export * from './arrowForward';
+export * from './arrowImport';
