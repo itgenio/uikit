@@ -37,3 +37,8 @@ export * from './partyPopper';
 export * from './grinningFace';
 export * from './fileFolder';
 export * from './smirkingFace';
+export * from './link';
+export * from './memo';
+export * from './popcorn';
+export * from './openBook';
+export * from './gameDie';
