@@ -33,6 +33,8 @@
   }
 
   .tabs-scroll-btn-wrap {
+    @scroll-btn-shift: -0.0625rem;
+
     display: flex;
     position: sticky;
     top: 0;
@@ -46,26 +48,18 @@
       );
     }
 
-    &.left-scroll-btn {
-      left: -0.0625rem;
+    &.left-scroll-btn .tabs-scroll-btn {
+      left: @scroll-btn-shift;
+      justify-content: flex-start;
 
-      .tabs-scroll-btn {
-        left: inherit;
-        justify-content: flex-start;
-
-        .scroll-btn-gradient(270deg);
-      }
+      .scroll-btn-gradient(270deg);
     }
 
-    &.right-scroll-btn {
-      right: -0.0625rem;
+    &.right-scroll-btn .tabs-scroll-btn {
+      right: @scroll-btn-shift;
+      justify-content: flex-end;
 
-      .tabs-scroll-btn {
-        right: inherit;
-        justify-content: flex-end;
-
-        .scroll-btn-gradient(90deg);
-      }
+      .scroll-btn-gradient(90deg);
     }
 
     .tabs-scroll-btn {
