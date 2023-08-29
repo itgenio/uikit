@@ -62,7 +62,7 @@ export function TabsExample() {
       </section>
 
       <section className="bg-neutral-0" style={{ maxWidth: 400 }}>
-        <Tabs isChips size="small" value={t} onChange={newVal => setT(newVal)}>
+        <Tabs isChips size="small" value={t} onChange={newVal => setT(newVal)} scrollable>
           {tabs.map(tab => (
             <Tab size="small" isChips key={tab} value={tab} idQa={tab}>
               {tab}

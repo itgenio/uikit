@@ -17,19 +17,22 @@ export type TabsProps<T = any, C extends typeof Tab = typeof Tab> = {
   idQa?: string;
   size?: Sizes;
   isChips?: boolean;
+  scrollable?: boolean;
 };
 
 type TabPropsAll = { value: any; label?: string; idQa?: string; isChips?: boolean } & any;
 
 export type TabProps = React.PropsWithChildren<Pick<TabPropsAll, 'value'>>;
 
-export function Tabs({ children, onChange, value, className, idQa, isChips }: TabsProps) {
+export function Tabs({ onChange, value, className, isChips, scrollable, idQa, children }: TabsProps) {
   const tabsWrapRef = useRef<HTMLDivElement>();
 
   const [hasScrollLeft, setHasScrollLeft] = useState(false);
   const [hasScrollRight, setHasScrollRight] = useState(false);
 
   useLayoutEffect(() => {
+    if (!scrollable) return;
+
     const tabsWrapElement = tabsWrapRef.current;
     if (!tabsWrapElement) return;
 
@@ -52,14 +55,23 @@ export function Tabs({ children, onChange, value, className, idQa, isChips }: Ta
       }
     };
 
-    handler();
+    const mutationObserver = new MutationObserver(handler);
+    const resizeObserver = new ResizeObserver(handler);
+
+    mutationObserver.observe(tabsWrapElement, { childList: true, subtree: true });
+    resizeObserver.observe(tabsWrapElement);
 
     tabsWrapElement.addEventListener('scroll', handler);
 
+    handler();
+
     return () => {
+      mutationObserver.disconnect();
+      resizeObserver.disconnect();
+
       tabsWrapElement.removeEventListener('scroll', handler);
     };
-  }, []);
+  }, [scrollable]);
 
   const scrollTabsElement = (scrollValue: number) => {
     const tabsWrapElement = tabsWrapRef.current;
@@ -70,7 +82,7 @@ export function Tabs({ children, onChange, value, className, idQa, isChips }: Ta
 
   return (
     <div className={classNames('gkit-tabs', className, { isChips })} id-qa={idQa}>
-      {hasScrollLeft && (
+      {hasScrollLeft && scrollable && (
         <div className="tabs-scroll-btn-wrap left-scroll-btn" onClick={() => scrollTabsElement(-TABS_SCROLL_VALUE_PX)}>
           <div className="tabs-scroll-btn">
             <ChevronLeftIcon />
@@ -78,7 +90,7 @@ export function Tabs({ children, onChange, value, className, idQa, isChips }: Ta
         </div>
       )}
 
-      <div className="tabs-wrap" ref={tabsWrapRef}>
+      <div className={classNames('tabs-wrap', { scrollable })} ref={tabsWrapRef}>
         {React.Children.map(
           children,
           child =>
@@ -92,7 +104,7 @@ export function Tabs({ children, onChange, value, className, idQa, isChips }: Ta
         )}
       </div>
 
-      {hasScrollRight && (
+      {hasScrollRight && scrollable && (
         <div className="tabs-scroll-btn-wrap right-scroll-btn" onClick={() => scrollTabsElement(TABS_SCROLL_VALUE_PX)}>
           <div className="tabs-scroll-btn">
             <ChevronRightIcon />
