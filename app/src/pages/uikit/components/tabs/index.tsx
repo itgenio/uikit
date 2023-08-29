@@ -2,7 +2,7 @@ import './style.less';
 import React, { useState } from 'react';
 import { Tab, Tabs } from '@itgenio/gkit/tabs';
 
-const tabs = ['menu', 'item 2'];
+const tabs = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
 export function TabsExample() {
   const [t, setT] = useState(tabs[0]);
@@ -52,6 +52,16 @@ export function TabsExample() {
       </section>
 
       <section className="bg-neutral-0">
+        <Tabs isChips size="small" value={t} onChange={newVal => setT(newVal)}>
+          {tabs.map(tab => (
+            <Tab size="small" isChips key={tab} value={tab} idQa={tab}>
+              {tab}
+            </Tab>
+          ))}
+        </Tabs>
+      </section>
+
+      <section className="bg-neutral-0" style={{ maxWidth: 400 }}>
         <Tabs isChips size="small" value={t} onChange={newVal => setT(newVal)}>
           {tabs.map(tab => (
             <Tab size="small" isChips key={tab} value={tab} idQa={tab}>

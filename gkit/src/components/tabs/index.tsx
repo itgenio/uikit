@@ -1,7 +1,11 @@
 import './style.less';
 
 import classNames from 'classnames';
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
+
+export const TABS_SCROLL_PADDING_PX = 10;
+export const TABS_SCROLL_VALUE_PX = 50;
 
 type Sizes = 'small' | 'normal';
 
@@ -20,18 +24,80 @@ type TabPropsAll = { value: any; label?: string; idQa?: string; isChips?: boolea
 export type TabProps = React.PropsWithChildren<Pick<TabPropsAll, 'value'>>;
 
 export function Tabs({ children, onChange, value, className, idQa, isChips }: TabsProps) {
+  const tabsWrapRef = useRef<HTMLDivElement>();
+
+  const [hasScrollLeft, setHasScrollLeft] = useState(false);
+  const [hasScrollRight, setHasScrollRight] = useState(false);
+
+  useLayoutEffect(() => {
+    const tabsWrapElement = tabsWrapRef.current;
+    if (!tabsWrapElement) return;
+
+    const handler = () => {
+      const rect = tabsWrapElement.getBoundingClientRect();
+
+      const scrollLeft = tabsWrapElement.scrollLeft;
+      const scrollWidth = tabsWrapElement.scrollWidth;
+
+      if (scrollLeft - TABS_SCROLL_PADDING_PX > 0) {
+        setHasScrollLeft(true);
+      } else {
+        setHasScrollLeft(false);
+      }
+
+      if (scrollWidth - (scrollLeft + rect.width) > TABS_SCROLL_PADDING_PX) {
+        setHasScrollRight(true);
+      } else {
+        setHasScrollRight(false);
+      }
+    };
+
+    handler();
+
+    tabsWrapElement.addEventListener('scroll', handler);
+
+    return () => {
+      tabsWrapElement.removeEventListener('scroll', handler);
+    };
+  }, []);
+
+  const scrollTabsElement = (scrollValue: number) => {
+    const tabsWrapElement = tabsWrapRef.current;
+    if (!tabsWrapElement) return;
+
+    tabsWrapElement.scrollBy({ left: scrollValue, behavior: 'smooth' });
+  };
+
   return (
     <div className={classNames('gkit-tabs', className, { isChips })} id-qa={idQa}>
-      {React.Children.map(
-        children,
-        child =>
-          child &&
-          React.cloneElement(child, {
-            ...child.props,
-            // @ts-ignore
-            onClick: onChange,
-            selected: value === child.props.value,
-          })
+      {hasScrollLeft && (
+        <div className="tabs-scroll-btn-wrap left-scroll-btn" onClick={() => scrollTabsElement(-TABS_SCROLL_VALUE_PX)}>
+          <div className="tabs-scroll-btn">
+            <ChevronLeftIcon />
+          </div>
+        </div>
+      )}
+
+      <div className="tabs-wrap" ref={tabsWrapRef}>
+        {React.Children.map(
+          children,
+          child =>
+            child &&
+            React.cloneElement(child, {
+              ...child.props,
+              // @ts-ignore
+              onClick: onChange,
+              selected: value === child.props.value,
+            })
+        )}
+      </div>
+
+      {hasScrollRight && (
+        <div className="tabs-scroll-btn-wrap right-scroll-btn" onClick={() => scrollTabsElement(TABS_SCROLL_VALUE_PX)}>
+          <div className="tabs-scroll-btn">
+            <ChevronRightIcon />
+          </div>
+        </div>
       )}
     </div>
   );

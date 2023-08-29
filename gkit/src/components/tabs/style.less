@@ -3,16 +3,81 @@
 
 .gkit-tabs {
   display: flex;
-  gap: 1.5rem;
   font-weight: @font-weight-bold;
-  .text-sm();
+  position: relative;
 
   &.isChips {
-    gap: 0.75rem;
+    .tabs-wrap {
+      gap: 0.75rem;
 
-    &.small {
-      gap: 1.25rem;
-      .text-sm();
+      &.small {
+        gap: 1.25rem;
+        .text-sm();
+      }
+    }
+  }
+
+  .tabs-wrap {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    .text-sm();
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .tabs-scroll-btn-wrap {
+    display: flex;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+
+    .scroll-btn-gradient(@deg) {
+      background: linear-gradient(
+        @deg,
+        color-mix(in srgb, var(--gkit-color-neutral-0), transparent 100%) 0%,
+        color-mix(in srgb, var(--gkit-color-neutral-0), transparent 0%) 100%
+      );
+    }
+
+    &.left-scroll-btn {
+      left: -0.0625rem;
+
+      .tabs-scroll-btn {
+        left: inherit;
+        justify-content: flex-start;
+
+        .scroll-btn-gradient(270deg);
+      }
+    }
+
+    &.right-scroll-btn {
+      right: -0.0625rem;
+
+      .tabs-scroll-btn {
+        right: inherit;
+        justify-content: flex-end;
+
+        .scroll-btn-gradient(90deg);
+      }
+    }
+
+    .tabs-scroll-btn {
+      display: flex;
+      position: absolute;
+      top: 0;
+      background: var(--gkit-color-neutral-200);
+      width: 3.75rem;
+      height: 100%;
+      align-items: center;
+      padding: 0 0.375rem;
+      color: var(--gkit-color-neutral-800);
     }
   }
 }
@@ -71,6 +136,7 @@
   height: 3rem;
   padding: 0.75rem 1rem;
   border-radius: 5.25rem;
+  flex-shrink: 0;
 
   &:not(.selected) {
     border: 1px solid var(--gkit-color-light-neutral-200);
