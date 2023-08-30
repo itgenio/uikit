@@ -37,12 +37,12 @@
   }
 
   .tabs-scroll-btn-wrap {
-    @scroll-btn-shift: -0.0625rem;
-
     display: flex;
     position: sticky;
     top: 0;
-    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
 
     .scroll-btn-gradient(@deg) {
       background: linear-gradient(
@@ -52,15 +52,21 @@
       );
     }
 
+    &.scroll-btn-active {
+      opacity: 1;
+      pointer-events: all;
+      cursor: pointer;
+    }
+
     &.left-scroll-btn .tabs-scroll-btn {
-      left: @scroll-btn-shift;
+      left: 0;
       justify-content: flex-start;
 
       .scroll-btn-gradient(270deg);
     }
 
     &.right-scroll-btn .tabs-scroll-btn {
-      right: @scroll-btn-shift;
+      right: 0;
       justify-content: flex-end;
 
       .scroll-btn-gradient(90deg);

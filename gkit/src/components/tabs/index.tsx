@@ -82,8 +82,11 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
 
   return (
     <div className={classNames('gkit-tabs', className, { isChips })} id-qa={idQa}>
-      {hasScrollLeft && scrollable && (
-        <div className="tabs-scroll-btn-wrap left-scroll-btn" onClick={() => scrollTabsElement(-TABS_SCROLL_VALUE_PX)}>
+      {scrollable && (
+        <div
+          className={classNames('tabs-scroll-btn-wrap', 'left-scroll-btn', { 'scroll-btn-active': hasScrollLeft })}
+          onClick={() => scrollTabsElement(-TABS_SCROLL_VALUE_PX)}
+        >
           <div className="tabs-scroll-btn">
             <ChevronLeftIcon />
           </div>
@@ -104,8 +107,11 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
         )}
       </div>
 
-      {hasScrollRight && scrollable && (
-        <div className="tabs-scroll-btn-wrap right-scroll-btn" onClick={() => scrollTabsElement(TABS_SCROLL_VALUE_PX)}>
+      {scrollable && (
+        <div
+          className={classNames('tabs-scroll-btn-wrap', 'right-scroll-btn', { 'scroll-btn-active': hasScrollRight })}
+          onClick={() => scrollTabsElement(TABS_SCROLL_VALUE_PX)}
+        >
           <div className="tabs-scroll-btn">
             <ChevronRightIcon />
           </div>
