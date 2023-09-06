@@ -42,3 +42,4 @@ export * from './memo';
 export * from './popcorn';
 export * from './openBook';
 export * from './gameDie';
+export * from './smilingFaceWithSmilingEyes';
