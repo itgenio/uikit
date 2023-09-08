@@ -104,41 +104,43 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
 
   return (
     <div className={classNames('gkit-tabs', className, { isChips })} id-qa={idQa}>
-      {scrollable && (
-        <div
-          className={classNames('tabs-scroll-btn-wrap', 'left-scroll-btn', { 'scroll-btn-active': hasScrollLeft })}
-          onClick={() => scrollTabsElement(-1)}
-        >
-          <div className="tabs-scroll-btn">
-            <ChevronLeftIcon />
+      <div className="content-wrap">
+        {scrollable && (
+          <div
+            className={classNames('tabs-scroll-btn-wrap', 'left-scroll-btn', { 'scroll-btn-active': hasScrollLeft })}
+            onClick={() => scrollTabsElement(-1)}
+          >
+            <div className="tabs-scroll-btn">
+              <ChevronLeftIcon />
+            </div>
           </div>
+        )}
+
+        <div className={classNames('tabs-wrap', { scrollable })} ref={tabsWrapRef}>
+          {React.Children.map(children, child => {
+            if (!child) return null;
+
+            return React.cloneElement(child, {
+              ...child.props,
+              // @ts-expect-error
+              onClick: onChange,
+              // @ts-expect-error
+              selected: child.props.selected || value === child.props.value,
+            });
+          })}
         </div>
-      )}
 
-      <div className={classNames('tabs-wrap', { scrollable })} ref={tabsWrapRef}>
-        {React.Children.map(children, child => {
-          if (!child) return null;
-
-          return React.cloneElement(child, {
-            ...child.props,
-            // @ts-expect-error
-            onClick: onChange,
-            // @ts-expect-error
-            selected: child.props.selected || value === child.props.value,
-          });
-        })}
+        {scrollable && (
+          <div
+            className={classNames('tabs-scroll-btn-wrap', 'right-scroll-btn', { 'scroll-btn-active': hasScrollRight })}
+            onClick={() => scrollTabsElement(1)}
+          >
+            <div className="tabs-scroll-btn">
+              <ChevronRightIcon />
+            </div>
+          </div>
+        )}
       </div>
-
-      {scrollable && (
-        <div
-          className={classNames('tabs-scroll-btn-wrap', 'right-scroll-btn', { 'scroll-btn-active': hasScrollRight })}
-          onClick={() => scrollTabsElement(1)}
-        >
-          <div className="tabs-scroll-btn">
-            <ChevronRightIcon />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
