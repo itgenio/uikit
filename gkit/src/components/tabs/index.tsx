@@ -73,11 +73,33 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
     };
   }, [scrollable]);
 
-  const scrollTabsElement = (scrollValue: number) => {
-    const tabsWrapElement = tabsWrapRef.current;
-    if (!tabsWrapElement) return;
+  // По аналогии как в MUI
+  // https://github.com/mui/material-ui/blob/7f81475ea148a416ec8fab252120ce6567c62897/packages/mui-material/src/Tabs/Tabs.js#L462
+  const scrollTabsElement = (direction: -1 | 1) => {
+    const wrapElement = tabsWrapRef.current;
+    if (!wrapElement) return;
 
-    tabsWrapElement.scrollBy({ left: scrollValue, behavior: 'smooth' });
+    const children = [...wrapElement.children];
+    const wrapElementWidth = wrapElement.getBoundingClientRect().width;
+    const wrapElementGap = Number(getComputedStyle(wrapElement).gap.slice(0, -2));
+
+    let scrollSize = 0;
+
+    for (let i = 0; i < children.length; i += 1) {
+      const childWidth = children[i].getBoundingClientRect().width;
+
+      if (scrollSize + childWidth > wrapElementWidth) {
+        if (i === 0) {
+          scrollSize = wrapElementWidth;
+        }
+
+        break;
+      }
+
+      scrollSize += childWidth + wrapElementGap;
+    }
+
+    wrapElement.scrollBy({ left: direction * scrollSize, behavior: 'smooth' });
   };
 
   return (
@@ -85,7 +107,7 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
       {scrollable && (
         <div
           className={classNames('tabs-scroll-btn-wrap', 'left-scroll-btn', { 'scroll-btn-active': hasScrollLeft })}
-          onClick={() => scrollTabsElement(-TABS_SCROLL_VALUE_PX)}
+          onClick={() => scrollTabsElement(-1)}
         >
           <div className="tabs-scroll-btn">
             <ChevronLeftIcon />
@@ -94,23 +116,23 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
       )}
 
       <div className={classNames('tabs-wrap', { scrollable })} ref={tabsWrapRef}>
-        {React.Children.map(
-          children,
-          child =>
-            child &&
-            React.cloneElement(child, {
-              ...child.props,
-              // @ts-ignore
-              onClick: onChange,
-              selected: value === child.props.value,
-            })
-        )}
+        {React.Children.map(children, child => {
+          if (!child) return null;
+
+          return React.cloneElement(child, {
+            ...child.props,
+            // @ts-expect-error
+            onClick: onChange,
+            // @ts-expect-error
+            selected: child.props.selected || value === child.props.value,
+          });
+        })}
       </div>
 
       {scrollable && (
         <div
           className={classNames('tabs-scroll-btn-wrap', 'right-scroll-btn', { 'scroll-btn-active': hasScrollRight })}
-          onClick={() => scrollTabsElement(TABS_SCROLL_VALUE_PX)}
+          onClick={() => scrollTabsElement(1)}
         >
           <div className="tabs-scroll-btn">
             <ChevronRightIcon />
