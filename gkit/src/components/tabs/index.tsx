@@ -81,7 +81,11 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
 
     const children = [...wrapElement.children];
     const wrapElementWidth = wrapElement.getBoundingClientRect().width;
-    const wrapElementGap = Number(getComputedStyle(wrapElement).gap.slice(0, -2));
+
+    const wrapElementGapValues = getComputedStyle(wrapElement).gap.split(' ');
+
+    // В хроме это "10px", а в сафари "10px 10px", поэтому берем последнее
+    const wrapElementGap = Number(wrapElementGapValues.at(-1).slice(0, -2)) || 0;
 
     let scrollSize = 0;
 
