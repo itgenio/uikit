@@ -72,6 +72,7 @@ export function Selects() {
     { title: 'Disabled List', props: { disabledList: ['1', '2', '3'] } },
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
+    { title: 'StartAdornment', props: { startAdornment: <span>Icon</span> } },
   ];
 
   return (
