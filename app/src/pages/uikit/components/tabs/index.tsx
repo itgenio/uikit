@@ -29,17 +29,15 @@ export function TabsExample() {
         </Tabs>
       </section>
 
-      <div className="dark-mode">
-        <section className="bg-neutral-100">
-          <Tabs value={t} onChange={newVal => setT(newVal)}>
-            {tabs.map(tab => (
-              <Tab key={tab} value={tab} idQa={tab}>
-                {tab}
-              </Tab>
-            ))}
-          </Tabs>
-        </section>
-      </div>
+      <section className="bg-neutral-100">
+        <Tabs value={t} onChange={newVal => setT(newVal)}>
+          {tabs.map(tab => (
+            <Tab key={tab} value={tab} idQa={tab}>
+              {tab}
+            </Tab>
+          ))}
+        </Tabs>
+      </section>
 
       <section className="bg-neutral-0">
         <Tabs isChips value={t} onChange={newVal => setT(newVal)}>
