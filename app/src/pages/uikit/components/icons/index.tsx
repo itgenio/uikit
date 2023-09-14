@@ -5,7 +5,7 @@ import * as gkitIcons from '@itgenio/gkit/icons';
 import { Tooltip } from '@itgenio/gkit/tooltip';
 import { STEP, Slider } from '../slider';
 
-const DEFAULT_SIZE = 24;
+const DEFAULT_SIZE = 40;
 
 const ICONS = Object.entries(gkitIcons)
   .filter(([key, value]) => typeof value === 'function' && key.endsWith('Icon'))
