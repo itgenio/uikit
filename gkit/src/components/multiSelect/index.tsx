@@ -234,6 +234,7 @@ export function MultiSelect<T extends MultiSelectOption>({
               id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
               className={classNames('multi-select-option', size)}
               onClick={e => {
+                e.preventDefault();
                 e.stopPropagation();
 
                 options = options.filter(option => !option.isDisabled);
