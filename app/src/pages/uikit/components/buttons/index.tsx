@@ -63,6 +63,11 @@ export function Buttons() {
     { state: 'Pressed', props: { active: true } },
     { state: 'Disabled', props: { disabled: true } },
     { state: 'As Icon', props: { asIcon: true, children: <TestIcon key="testIcon" /> } },
+    { state: 'Text Button', props: { asTextButton: true } },
+    { state: 'Text Button hover', props: { asTextButton: true, hover: true } },
+    { state: 'Text Button focused', props: { asTextButton: true, focus: true } },
+    { state: 'Text Button pressed', props: { asTextButton: true, active: true } },
+    { state: 'Text Button disabled', props: { asTextButton: true, disabled: true } },
   ];
 
   return (

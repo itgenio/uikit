@@ -12,9 +12,12 @@
   //normal
   .text-base();
   .font-bold();
-  border-radius: 0.5rem;
-  padding: 0.5rem 1.5rem;
-  min-width: 6rem;
+
+  &:not(.text-btn) {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    min-width: 6rem;
+  }
 
   &.icon {
     padding: 0.75rem;
@@ -24,13 +27,20 @@
   &.focus,
   &:focus-visible {
     .pseudo-element-with-border();
+
+    &.text-btn {
+      border-radius: 2.375rem;
+    }
   }
 
   &.large {
     .text-lg();
-    border-radius: 0.75rem;
-    padding: 0.625rem 2rem;
-    min-width: 7.5rem;
+
+    &:not(.text-btn) {
+      border-radius: 0.75rem;
+      padding: 0.625rem 2rem;
+      min-width: 7.5rem;
+    }
 
     &.icon {
       padding: 0.875rem;
@@ -40,9 +50,12 @@
 
   &.small {
     .text-sm();
-    border-radius: 0.5rem;
-    padding: 0.375rem 1rem;
-    min-width: 5rem;
+
+    &:not(.text-btn) {
+      border-radius: 0.5rem;
+      padding: 0.375rem 1rem;
+      min-width: 5rem;
+    }
 
     &.icon {
       padding: 0.625rem;
@@ -95,126 +108,238 @@
   }
 
   &.primary {
-    background-color: var(--gkit-color-light-primary-500);
-    color: var(--gkit-color-light-neutral-0);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-light-primary-500);
+      color: var(--gkit-color-light-neutral-0);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-light-primary-500);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-light-primary-600);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-light-primary-600);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-light-primary-600);
+        }
       }
     }
   }
 
   &.secondary {
-    background-color: var(--gkit-color-neutral-0);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-neutral-0);
+      border: 1px solid var(--gkit-color-neutral-200);
+    }
+
     color: var(--gkit-color-neutral-800);
-    border: 1px solid var(--gkit-color-neutral-200);
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-neutral-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-neutral-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-primary-700);
+        }
       }
     }
   }
 
   &.tertiaryPrimary {
-    background-color: transparent;
-    color: var(--gkit-color-primary-700);
+    &:not(.text-btn) {
+      background-color: transparent;
+      color: var(--gkit-color-primary-700);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-primary-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-primary-50);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-primary-50);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-primary-700);
+        }
       }
     }
   }
 
   &.tertiaryNeutral {
-    background-color: transparent;
+    &:not(.text-btn) {
+      background-color: transparent;
+    }
+
     color: var(--gkit-color-neutral-800);
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-neutral-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-neutral-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-primary-700);
+        }
       }
     }
   }
 
   &.blue {
-    background-color: var(--gkit-color-blue-50);
-    color: var(--gkit-color-blue-700);
-    border: 1px solid var(--gkit-color-blue-100);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-blue-50);
+      border: 1px solid var(--gkit-color-blue-100);
+      color: var(--gkit-color-blue-700);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-blue-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-blue-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-blue-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-blue-700);
+        }
       }
     }
   }
 
   &.green {
-    background-color: var(--gkit-color-green-50);
-    color: var(--gkit-color-green-700);
-    border: 1px solid var(--gkit-color-green-100);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-green-50);
+      color: var(--gkit-color-green-700);
+      border: 1px solid var(--gkit-color-green-100);
+    }
+
+    color: var(--gkit-color-green-600);
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-green-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-green-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-green-700);
+        }
       }
     }
   }
 
   &.purple {
-    background-color: var(--gkit-color-purple-50);
-    color: var(--gkit-color-purple-700);
-    border: 1px solid var(--gkit-color-purple-100);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-purple-50);
+      color: var(--gkit-color-purple-700);
+      border: 1px solid var(--gkit-color-purple-100);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-purple-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-purple-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-purple-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-purple-700);
+        }
       }
     }
   }
 
   &.orange {
-    background-color: var(--gkit-color-orange-50);
-    color: var(--gkit-color-orange-700);
-    border: 1px solid var(--gkit-color-orange-100);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-orange-50);
+      color: var(--gkit-color-orange-700);
+      border: 1px solid var(--gkit-color-orange-100);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-orange-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-orange-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-orange-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-orange-700);
+        }
       }
     }
   }
 
   &.danger {
-    background-color: var(--gkit-color-light-danger-500);
-    color: var(--gkit-color-light-neutral-0);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-light-danger-500);
+      color: var(--gkit-color-light-neutral-0);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-light-danger-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-light-danger-600);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-light-danger-600);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-light-danger-700);
+        }
       }
     }
   }
 
   &.dangerSecondary {
-    background-color: var(--gkit-color-light-danger-50);
-    color: var(--gkit-color-light-danger-600);
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-light-danger-50);
+      color: var(--gkit-color-light-danger-600);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-light-danger-600);
+    }
 
     &:not([disabled]) {
       &.hover,
       &:hover {
-        background-color: var(--gkit-color-light-danger-100);
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-light-danger-100);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-light-danger-700);
+        }
       }
     }
   }

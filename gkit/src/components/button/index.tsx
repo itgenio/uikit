@@ -28,6 +28,7 @@ export type ButtonProps = React.PropsWithChildren<{
   className?: string;
   idQa?: string;
   tabIndex?: number;
+  asTextButton?: boolean;
 }> &
   React.DOMAttributes<HTMLButtonElement>;
 
@@ -43,6 +44,7 @@ export const Button = forwardRef(function Button(
     asIcon,
     className,
     idQa,
+    asTextButton,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
@@ -52,7 +54,13 @@ export const Button = forwardRef(function Button(
       ref={ref}
       id-qa={idQa}
       disabled={disabled}
-      className={classNames(BUTTON_CN, className, size, type, { hover, active, focus, icon: asIcon })}
+      className={classNames(BUTTON_CN, className, size, type, {
+        hover,
+        active,
+        focus,
+        icon: asIcon,
+        'text-btn': asTextButton,
+      })}
       {...props}
     >
       {children}
