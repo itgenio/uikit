@@ -112,3 +112,4 @@ export * from './camera';
 export * from './speaker';
 export * from './arrowForward';
 export * from './arrowImport';
+export * from './earthHeart';
