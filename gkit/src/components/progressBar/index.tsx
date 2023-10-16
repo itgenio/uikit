@@ -80,7 +80,7 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
           <CheckpointInternal
             key={index}
             {...checkpoint}
-            progress={isCheckpointsWithoutProgress ? 0 : progress}
+            progress={isCheckpointsWithoutProgress ? PROGRESS_BAR_MIN_PROGRESS : progress}
             index={index + 1}
             zIndex={checkpoints.length - index}
           />
