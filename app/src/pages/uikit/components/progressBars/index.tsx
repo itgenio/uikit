@@ -59,12 +59,30 @@ export function ProgressBars() {
       props: { checkpoints: [{ progress: 100 }, { progress: 100 }, { progress: 50 }] },
     },
     {
-      state: 'withSequentialProgress === true, (by default)',
-      props: { checkpoints: [{ progress: 100 }, { progress: 40 }, { progress: 100 }], withSequentialProgress: true },
+      state: 'withSequentialProgress === true, (by default). [100, 100, undefined, 100, 100]',
+      props: {
+        checkpoints: [
+          { progress: 100 },
+          { progress: 100 },
+          { progress: undefined },
+          { progress: 100 },
+          { progress: 100 },
+        ],
+        withSequentialProgress: true,
+      },
     },
     {
-      state: 'withSequentialProgress === false',
-      props: { checkpoints: [{ progress: 100 }, { progress: 40 }, { progress: 100 }], withSequentialProgress: false },
+      state: 'withSequentialProgress === false. [100, 100, undefined, 100, 100]',
+      props: {
+        checkpoints: [
+          { progress: 100 },
+          { progress: 100 },
+          { progress: undefined },
+          { progress: 100 },
+          { progress: 100 },
+        ],
+        withSequentialProgress: false,
+      },
     },
   ];
 

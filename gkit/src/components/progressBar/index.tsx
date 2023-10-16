@@ -49,6 +49,7 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
   idQa,
 }: ProgressBarProps<S, C>) => {
   const hasFirstCheckpointProgress = checkpoints[0]?.progress !== undefined;
+  let isCheckpointsWithoutProgress = false;
 
   return (
     <div className={classNames('gkit-progress-bar', className)} id-qa={idQa}>
@@ -62,14 +63,16 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
       />
 
       {checkpoints.map(({ progress, ...checkpoint }, index) => {
+        // Если прогресс последовательный, то убираем прогресс для чекпоинтов, которые идут после невыполненных
         if (withSequentialProgress) {
           const prevCheckpoint = checkpoints[index - 1];
 
           if (
+            !isCheckpointsWithoutProgress &&
             prevCheckpoint &&
             (prevCheckpoint.progress === undefined || prevCheckpoint.progress < PROGRESS_BAR_MAX_PROGRESS)
           ) {
-            progress = PROGRESS_BAR_MIN_PROGRESS;
+            isCheckpointsWithoutProgress = true;
           }
         }
 
@@ -77,7 +80,7 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
           <CheckpointInternal
             key={index}
             {...checkpoint}
-            progress={progress}
+            progress={isCheckpointsWithoutProgress ? PROGRESS_BAR_MIN_PROGRESS : progress}
             index={index + 1}
             zIndex={checkpoints.length - index}
           />
@@ -124,8 +127,8 @@ const CheckpointInternal = React.memo(
           'without-progress-line': withoutProgressLine,
         })}
         style={{
-          [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-z-index`]: zIndex,
-          [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-border-size`]: `${PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM}rem`,
+          [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-z-index` as string]: zIndex,
+          [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-border-size` as string]: `${PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM}rem`,
         }}
         data-checkpoint-index={index}
         id-qa={idQa}
@@ -136,7 +139,7 @@ const CheckpointInternal = React.memo(
 
             <div
               className="progress-filled"
-              style={{ [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-width`]: progressWidth }}
+              style={{ [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-width` as string]: progressWidth }}
             />
 
             {!withoutAfterSibling && <div className={classNames('progress-after', { filled: isCheckpointDone })} />}
