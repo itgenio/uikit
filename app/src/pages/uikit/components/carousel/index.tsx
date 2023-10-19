@@ -16,7 +16,7 @@ export function Carousels() {
 
               <Carousel key={`carousel-${index}`}>
                 {['green', 'red', 'blue', 'yellow'].map(color => {
-                  return <div key={color} style={{ width: 400, height: 200, background: color }} />;
+                  return <div key={color} style={{ width: '100%', maxWidth: 400, height: 200, background: color }} />;
                 })}
               </Carousel>
             </div>
