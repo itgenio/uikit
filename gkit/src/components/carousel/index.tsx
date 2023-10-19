@@ -5,7 +5,6 @@ import React, {
   MouseEvent as ReactMouseEvent,
   ReactNode,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -80,7 +79,7 @@ export const Carousel = React.memo(
       [changeSlideIndex, rightButtonProps]
     );
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const keyDownHandler = (e: KeyboardEvent) => {
         if (e.ctrlKey || e.altKey || e.metaKey || e.shiftKey) return;
 
