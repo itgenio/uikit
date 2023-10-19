@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { Carousel, CarouselProps } from '@itgenio/gkit/carousel';
 
 export function Carousels() {
-  const states: { state: string; props: CarouselProps }[] = [{ state: 'default', props: {} }];
+  const states: { state: string; props: Omit<CarouselProps, 'children'> }[] = [{ state: 'default', props: {} }];
 
   return (
     <div className="carousels">
@@ -15,7 +15,7 @@ export function Carousels() {
               <div>{state}</div>
 
               <Carousel key={`carousel-${index}`}>
-                {['green', 'red', 'blue', 'yellow'].map((color, i) => {
+                {['green', 'red', 'blue', 'yellow'].map(color => {
                   return <div key={color} style={{ width: 400, height: 200, background: color }} />;
                 })}
               </Carousel>
