@@ -27,6 +27,7 @@ export type CarouselProps = {
   autoPlayDelay?: number;
   switchByArrowsDelay?: number;
   animationDelay?: number;
+  swipeable?: boolean;
   leftButtonProps?: CarouselButtonProps;
   rightButtonProps?: CarouselButtonProps;
   children: ReactNode[];
@@ -38,6 +39,7 @@ export const Carousel = React.memo(
     autoPlayDelay = CAROUSEL_SWITCH_AUTO_PLAY_DELAY_MS,
     switchByArrowsDelay = CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS,
     animationDelay = CAROUSEL_ANIMATION_DELAY_MS,
+    swipeable = true,
     leftButtonProps: leftButtonPropsWithCustom = {},
     rightButtonProps: rightButtonPropsWithCustom = {},
     children,
@@ -116,6 +118,8 @@ export const Carousel = React.memo(
     }, [changeSlideIndex, switchByArrowsDelay]);
 
     useLayoutEffect(() => {
+      if (!swipeable) return;
+
       const carouselElement = carouselRef.current;
       if (!carouselElement) return;
 
@@ -125,10 +129,10 @@ export const Carousel = React.memo(
 
           changeSlideIndex(sign);
 
-          carouselElement.removeEventListener('pointerup', pointerUpHandler);
+          document.removeEventListener('pointerup', pointerUpHandler);
         };
 
-        carouselElement.addEventListener('pointerup', pointerUpHandler);
+        document.addEventListener('pointerup', pointerUpHandler);
       };
 
       carouselElement.addEventListener('pointerdown', pointerDownHandler);
@@ -136,7 +140,7 @@ export const Carousel = React.memo(
       return () => {
         carouselElement.removeEventListener('pointerdown', pointerDownHandler);
       };
-    }, [changeSlideIndex]);
+    }, [changeSlideIndex, swipeable]);
 
     useLayoutEffect(() => {
       if (!autoPlay || !autoPlayDelay) return;
@@ -152,7 +156,7 @@ export const Carousel = React.memo(
 
     return (
       <div className="gkit-carousel" style={{ [CAROUSEL_ANIMATION_DELAY_VAR as string]: `${animationDelay / 1000}s` }}>
-        <div ref={carouselRef} className="carousel">
+        <div ref={carouselRef} className={classNames('carousel', { 'non-user-select': swipeable })}>
           {React.Children.map(children, (child, index) => {
             return <div className={classNames('carousel-item', { active: currentSlideIndex === index })}>{child}</div>;
           })}

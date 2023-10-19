@@ -7,7 +7,12 @@
     display: flex;
     position: relative;
 
+    &.non-user-select {
+      user-select: none;
+    }
+
     .carousel-item {
+      width: 100%;
       position: absolute;
       top: 0;
       left: 0;
