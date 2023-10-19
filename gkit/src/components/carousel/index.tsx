@@ -124,7 +124,7 @@ export const Carousel = React.memo(
 
       const pointerDownHandler = (downEvent: MouseEvent) => {
         const pointerUpHandler = (upEvent: MouseEvent) => {
-          const sign = Math.sign(upEvent.clientX - downEvent.clientX);
+          const sign = Math.sign(downEvent.clientX - upEvent.clientX);
 
           changeSlideIndex(sign);
 
