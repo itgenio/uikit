@@ -12,6 +12,7 @@ import React, {
 } from 'react';
 import { Button, ButtonProps } from '../button';
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
+import { useEvent } from '../internal/hooks/useEvent';
 
 export const CAROUSEL_SWITCH_AUTO_PLAY_DELAY_MS = 5000;
 export const CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS = 300;
@@ -27,6 +28,7 @@ export type CarouselProps = {
   switchByArrowsDelay?: number;
   animationDelay?: number;
   swipeable?: boolean;
+  onChange?: (index: number) => void;
   leftButtonProps?: CarouselButtonProps;
   rightButtonProps?: CarouselButtonProps;
   children: ReactNode[];
@@ -39,6 +41,7 @@ export const Carousel = React.memo(
     switchByArrowsDelay = CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS,
     animationDelay = CAROUSEL_ANIMATION_DELAY_MS,
     swipeable = true,
+    onChange: onChangeProp,
     leftButtonProps: leftButtonPropsWithCustom = {},
     rightButtonProps: rightButtonPropsWithCustom = {},
     children,
@@ -46,7 +49,21 @@ export const Carousel = React.memo(
     const { hidden: leftButtonHidden, ...leftButtonProps } = leftButtonPropsWithCustom;
     const { hidden: rightButtonHidden, ...rightButtonProps } = rightButtonPropsWithCustom;
 
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const onChange = useEvent((index: number) => {
+      onChangeProp?.(index);
+    });
+
+    // Для обновления использовать setCurrentSlideIndex
+    const [currentSlideIndex, _setCurrentSlideIndex] = useState(0);
+
+    const setCurrentSlideIndex = useCallback(
+      (index: number) => {
+        _setCurrentSlideIndex(index);
+
+        onChange?.(index);
+      },
+      [onChange]
+    );
 
     const slidesCount = children.length;
     const pointers = useMemo(() => Array.from({ length: slidesCount }), [slidesCount]);
@@ -54,29 +71,32 @@ export const Carousel = React.memo(
     const carouselRef = useRef<HTMLDivElement>();
     const switchByArrowsTimeRef = useRef(0);
 
-    const changeSlideIndex = useCallback(
+    const moveSlideByValue = useCallback(
       (value: number) => {
-        setCurrentSlideIndex((currentSlideIndex + value + slidesCount) % slidesCount);
+        const newIndex = (currentSlideIndex + value + slidesCount) % slidesCount;
+        if (newIndex === currentSlideIndex) return;
+
+        setCurrentSlideIndex(newIndex);
       },
-      [currentSlideIndex, slidesCount]
+      [currentSlideIndex, setCurrentSlideIndex, slidesCount]
     );
 
     const onLeftBtnClicked = useCallback(
       (e: ReactMouseEvent<HTMLButtonElement>) => {
-        changeSlideIndex(-1);
+        moveSlideByValue(-1);
 
         leftButtonProps.onClick?.(e);
       },
-      [changeSlideIndex, leftButtonProps]
+      [moveSlideByValue, leftButtonProps]
     );
 
     const onRightBtnClicked = useCallback(
       (e: ReactMouseEvent<HTMLButtonElement>) => {
-        changeSlideIndex(1);
+        moveSlideByValue(1);
 
         rightButtonProps.onClick?.(e);
       },
-      [changeSlideIndex, rightButtonProps]
+      [moveSlideByValue, rightButtonProps]
     );
 
     useLayoutEffect(() => {
@@ -89,17 +109,15 @@ export const Carousel = React.memo(
         if (activeElements.length > 0) return;
 
         if (e.code === 'ArrowLeft') {
-          changeSlideIndex(-1);
+          moveSlideByValue(-1);
           switchByArrowsTimeRef.current = Date.now();
 
           return;
         }
 
         if (e.code === 'ArrowRight') {
-          changeSlideIndex(1);
+          moveSlideByValue(1);
           switchByArrowsTimeRef.current = Date.now();
-
-          return;
         }
       };
 
@@ -114,7 +132,7 @@ export const Carousel = React.memo(
         document.removeEventListener('keydown', keyDownHandler);
         document.removeEventListener('keyup', keyUpHandler);
       };
-    }, [changeSlideIndex, switchByArrowsDelay]);
+    }, [moveSlideByValue, switchByArrowsDelay]);
 
     useLayoutEffect(() => {
       if (!swipeable) return;
@@ -126,7 +144,7 @@ export const Carousel = React.memo(
         const pointerUpHandler = (upEvent: MouseEvent) => {
           const sign = Math.sign(downEvent.clientX - upEvent.clientX);
 
-          changeSlideIndex(sign);
+          moveSlideByValue(sign);
 
           document.removeEventListener('pointerup', pointerUpHandler);
         };
@@ -139,19 +157,19 @@ export const Carousel = React.memo(
       return () => {
         carouselElement.removeEventListener('pointerdown', pointerDownHandler);
       };
-    }, [changeSlideIndex, swipeable]);
+    }, [moveSlideByValue, swipeable]);
 
     useLayoutEffect(() => {
       if (!autoPlay || !autoPlayDelay) return;
 
       const interval = setInterval(() => {
-        changeSlideIndex(1);
+        moveSlideByValue(1);
       }, autoPlayDelay);
 
       return () => {
         clearInterval(interval);
       };
-    }, [autoPlay, autoPlayDelay, changeSlideIndex]);
+    }, [autoPlay, autoPlayDelay, moveSlideByValue]);
 
     return (
       <div className="gkit-carousel" style={{ [CAROUSEL_ANIMATION_DELAY_VAR as string]: `${animationDelay / 1000}s` }}>
