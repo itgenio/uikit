@@ -20,6 +20,7 @@ export const CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS = 300;
 export const CAROUSEL_ANIMATION_DELAY_MS = 1000;
 export const CAROUSEL_ANIMATION_DELAY_VAR = '--gkit-carousel-animation-delay';
 
+export type CarouselOnChange = { oldIndex: number; newIndex: number; fromAutoPlay: boolean };
 export type CarouselButtonProps = ButtonProps & { hidden?: boolean };
 
 export type CarouselProps = {
@@ -28,7 +29,7 @@ export type CarouselProps = {
   switchByArrowsDelay?: number;
   animationDelay?: number;
   swipeable?: boolean;
-  onChange?: (index: number) => void;
+  onChange?: (params: CarouselOnChange) => void;
   leftButtonProps?: CarouselButtonProps;
   rightButtonProps?: CarouselButtonProps;
   children: ReactNode[];
@@ -49,20 +50,22 @@ export const Carousel = React.memo(
     const { hidden: leftButtonHidden, ...leftButtonProps } = leftButtonPropsWithCustom;
     const { hidden: rightButtonHidden, ...rightButtonProps } = rightButtonPropsWithCustom;
 
-    const onChange = useEvent((index: number) => {
-      onChangeProp?.(index);
+    const onChange = useEvent((params: CarouselOnChange) => {
+      onChangeProp?.(params);
     });
 
     // Для обновления использовать setCurrentSlideIndex
     const [currentSlideIndex, _setCurrentSlideIndex] = useState(0);
 
     const setCurrentSlideIndex = useCallback(
-      (index: number) => {
-        _setCurrentSlideIndex(index);
+      (newIndex: number, fromAutoPlay = false) => {
+        const oldIndex = currentSlideIndex;
 
-        onChange?.(index);
+        _setCurrentSlideIndex(newIndex);
+
+        onChange({ oldIndex, newIndex, fromAutoPlay });
       },
-      [onChange]
+      [currentSlideIndex, onChange]
     );
 
     const slidesCount = children.length;
@@ -72,11 +75,11 @@ export const Carousel = React.memo(
     const switchByArrowsTimeRef = useRef(0);
 
     const moveSlideByValue = useCallback(
-      (value: number) => {
+      (value: number, fromAutoPlay: boolean = false) => {
         const newIndex = (currentSlideIndex + value + slidesCount) % slidesCount;
         if (newIndex === currentSlideIndex) return;
 
-        setCurrentSlideIndex(newIndex);
+        setCurrentSlideIndex(newIndex, fromAutoPlay);
       },
       [currentSlideIndex, setCurrentSlideIndex, slidesCount]
     );
@@ -163,7 +166,7 @@ export const Carousel = React.memo(
       if (!autoPlay || !autoPlayDelay) return;
 
       const interval = setInterval(() => {
-        moveSlideByValue(1);
+        moveSlideByValue(1, true);
       }, autoPlayDelay);
 
       return () => {
