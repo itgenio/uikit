@@ -5,7 +5,11 @@ import { Carousel, CarouselOnChange, CarouselProps } from '@itgenio/gkit/carouse
 
 export function Carousels() {
   const states: { state: string; props: Omit<CarouselProps, 'children'> }[] = [
-    { state: 'default', props: { onChange: (params: CarouselOnChange) => console.log(params) } },
+    { state: 'default', props: { onChange: (params: CarouselOnChange) => console.log('default', params) } },
+    {
+      state: 'autoPlay === false',
+      props: { autoPlay: false, onChange: (params: CarouselOnChange) => console.log('autoPlay === false', params) },
+    },
   ];
 
   return (

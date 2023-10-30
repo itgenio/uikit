@@ -13,12 +13,15 @@ import React, {
 import { Button, ButtonProps } from '../button';
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
 import { useEvent } from '../internal/hooks/useEvent';
+import { canSwipeByEvents } from './utils';
 
 export const CAROUSEL_SWITCH_AUTO_PLAY_DELAY_MS = 5000;
 export const CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS = 300;
 
 export const CAROUSEL_ANIMATION_DELAY_MS = 1000;
 export const CAROUSEL_ANIMATION_DELAY_VAR = '--gkit-carousel-animation-delay';
+
+export const CAROUSEL_SWIPE_THRESHOLD_VALUE = 5;
 
 export type CarouselOnChange = { oldIndex: number; newIndex: number; fromAutoPlay: boolean };
 export type CarouselButtonProps = ButtonProps & { hidden?: boolean };
@@ -102,6 +105,7 @@ export const Carousel = React.memo(
       [moveSlideByValue, rightButtonProps]
     );
 
+    // Переключение слайда по стрелкам
     useLayoutEffect(() => {
       const keyDownHandler = (e: KeyboardEvent) => {
         if (e.ctrlKey || e.altKey || e.metaKey || e.shiftKey) return;
@@ -137,28 +141,79 @@ export const Carousel = React.memo(
       };
     }, [moveSlideByValue, switchByArrowsDelay]);
 
+    // Свайп слайда мышкой/тачем
     useLayoutEffect(() => {
       if (!swipeable) return;
 
       const carouselElement = carouselRef.current;
       if (!carouselElement) return;
 
-      const pointerDownHandler = (downEvent: MouseEvent) => {
-        const pointerUpHandler = (upEvent: MouseEvent) => {
-          const sign = Math.sign(downEvent.clientX - upEvent.clientX);
+      const mouseDownHandler = (downEvent: MouseEvent) => {
+        const mouseUpHandler = (upEvent: MouseEvent) => {
+          const moveValue = downEvent.clientX - upEvent.clientX;
 
-          moveSlideByValue(sign);
+          if (canSwipeByEvents(downEvent, upEvent)) {
+            const sign = Math.sign(moveValue);
 
-          document.removeEventListener('pointerup', pointerUpHandler);
+            moveSlideByValue(sign);
+          }
+
+          document.removeEventListener('mouseup', mouseUpHandler);
         };
 
-        document.addEventListener('pointerup', pointerUpHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
       };
 
-      carouselElement.addEventListener('pointerdown', pointerDownHandler);
+      const touchStartHandler = (startEvent: TouchEvent) => {
+        const startTouch = startEvent.touches[0];
+        if (!startTouch) return;
+
+        const clearMoveAndEndEvents = () => {
+          // @ts-expect-error passive unexpected
+          document.removeEventListener('touchmove', touchMoveHandler, { passive: false });
+          document.removeEventListener('touchend', touchEndHandler);
+        };
+
+        const touchMoveHandler = (moveEvent: TouchEvent) => {
+          const moveTouch = moveEvent.touches[0];
+          if (!moveTouch) return;
+
+          if (canSwipeByEvents(startTouch, moveTouch)) {
+            if (moveEvent.cancelable) {
+              moveEvent.preventDefault();
+            }
+
+            return false;
+          }
+
+          clearMoveAndEndEvents();
+        };
+
+        const touchEndHandler = (endEvent: TouchEvent) => {
+          const endTouch = endEvent.changedTouches[0];
+
+          if (endTouch && canSwipeByEvents(startTouch, endTouch)) {
+            const sign = Math.sign(startTouch.clientX - endTouch.clientX);
+
+            moveSlideByValue(sign);
+          }
+
+          clearMoveAndEndEvents();
+        };
+
+        document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+        document.addEventListener('touchend', touchEndHandler);
+      };
+
+      // Desktop
+      carouselElement.addEventListener('mousedown', mouseDownHandler);
+
+      // Mobile/tablets
+      carouselElement.addEventListener('touchstart', touchStartHandler);
 
       return () => {
-        carouselElement.removeEventListener('pointerdown', pointerDownHandler);
+        carouselElement.removeEventListener('mousedown', mouseDownHandler);
+        carouselElement.removeEventListener('touchstart', touchStartHandler);
       };
     }, [moveSlideByValue, swipeable]);
 
