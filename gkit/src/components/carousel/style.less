@@ -1,0 +1,69 @@
+.gkit-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .carousel {
+    display: flex;
+    position: relative;
+
+    &.non-user-select {
+      user-select: none;
+    }
+
+    .carousel-item {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--gkit-carousel-animation-delay);
+
+      &.active {
+        position: relative;
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+
+    .pointers {
+      display: flex;
+      gap: 0.5rem;
+
+      .pointer {
+        width: 0.75rem;
+        height: 0.75rem;
+        background-color: var(--gkit-color-neutral-300);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &.selected {
+          background-color: var(--gkit-color-neutral-900);
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+
+      .chevron-left-icon,
+      .chevron-right-icon {
+        @size: 1.25rem;
+
+        width: @size;
+        height: @size;
+        font-size: @size;
+      }
+    }
+  }
+}

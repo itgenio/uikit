@@ -7,6 +7,7 @@ import { Accordions } from './components/accordions';
 import { Badges } from './components/badges';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
+import { Carousels } from './components/carousel';
 import { Checkboxes } from './components/checkboxes';
 import { Colors } from './components/colors';
 import { Dropdowns } from './components/dropdowns';
@@ -55,6 +56,7 @@ const components = [
   InlineNotifications,
   ToastNotifications,
   ProgressBars,
+  Carousels,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
