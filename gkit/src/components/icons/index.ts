@@ -113,3 +113,5 @@ export * from './speaker';
 export * from './arrowForward';
 export * from './arrowImport';
 export * from './earthHeart';
+export * from './arrowDown';
+export * from './arrowUp';
