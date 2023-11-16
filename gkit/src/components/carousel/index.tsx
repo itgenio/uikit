@@ -27,6 +27,8 @@ export type CarouselOnChange = { oldIndex: number; newIndex: number; fromAutoPla
 export type CarouselButtonProps = ButtonProps & { hidden?: boolean };
 
 export type CarouselProps = {
+  className?: string;
+  slideIndex?: number;
   autoPlay?: boolean;
   autoPlayDelay?: number;
   switchByArrowsDelay?: number;
@@ -35,11 +37,14 @@ export type CarouselProps = {
   onChange?: (params: CarouselOnChange) => void;
   leftButtonProps?: CarouselButtonProps;
   rightButtonProps?: CarouselButtonProps;
+  idQa?: string;
   children: ReactNode[];
 };
 
 export const Carousel = React.memo(
   ({
+    className,
+    slideIndex,
     autoPlay = true,
     autoPlayDelay = CAROUSEL_SWITCH_AUTO_PLAY_DELAY_MS,
     switchByArrowsDelay = CAROUSEL_SWITCH_BY_ARROWS_DELAY_MS,
@@ -48,6 +53,7 @@ export const Carousel = React.memo(
     onChange: onChangeProp,
     leftButtonProps: leftButtonPropsWithCustom = {},
     rightButtonProps: rightButtonPropsWithCustom = {},
+    idQa,
     children,
   }: CarouselProps) => {
     const { hidden: leftButtonHidden, ...leftButtonProps } = leftButtonPropsWithCustom;
@@ -58,11 +64,14 @@ export const Carousel = React.memo(
     });
 
     // Для обновления использовать setCurrentSlideIndex
-    const [currentSlideIndex, _setCurrentSlideIndex] = useState(0);
+    const [_currentSlideIndex, _setCurrentSlideIndex] = useState(slideIndex ?? 0);
+
+    const currentSlideIndex = slideIndex ?? _currentSlideIndex;
 
     const setCurrentSlideIndex = useCallback(
       (newIndex: number, fromAutoPlay = false) => {
         const oldIndex = currentSlideIndex;
+        if (oldIndex === newIndex) return;
 
         _setCurrentSlideIndex(newIndex);
 
@@ -230,14 +239,22 @@ export const Carousel = React.memo(
     }, [autoPlay, autoPlayDelay, moveSlideByValue]);
 
     return (
-      <div className="gkit-carousel" style={{ [CAROUSEL_ANIMATION_DELAY_VAR as string]: `${animationDelay / 1000}s` }}>
-        <div ref={carouselRef} className={classNames('carousel', { 'non-user-select': swipeable })}>
+      <div
+        className={classNames('gkit-carousel', className)}
+        style={{ [CAROUSEL_ANIMATION_DELAY_VAR as string]: `${animationDelay / 1000}s` }}
+        id-qa={idQa}
+      >
+        <div
+          ref={carouselRef}
+          className={classNames('carousel', { 'non-user-select': swipeable })}
+          id-qa={classNames({ [`${idQa}-carousel`]: !!idQa })}
+        >
           {React.Children.map(children, (child, index) => {
             return <div className={classNames('carousel-item', { active: currentSlideIndex === index })}>{child}</div>;
           })}
         </div>
 
-        <div className="navigation">
+        <div className="navigation" id-qa={classNames({ [`${idQa}-navigation`]: !!idQa })}>
           <div className="pointers">
             {pointers.map((_, index) => {
               return (
@@ -245,12 +262,13 @@ export const Carousel = React.memo(
                   key={`pointer-${index}`}
                   className={classNames('pointer', { selected: currentSlideIndex === index })}
                   onClick={() => setCurrentSlideIndex(index)}
+                  id-qa={classNames({ [`${idQa}-pointer-${index}`]: !!idQa })}
                 />
               );
             })}
           </div>
 
-          <div className="buttons">
+          <div className="buttons" id-qa={classNames({ [`${idQa}-buttons`]: !!idQa })}>
             {!leftButtonHidden && (
               <Button type="secondary" size="small" asIcon {...leftButtonProps} onClick={onLeftBtnClicked}>
                 <ChevronLeftIcon />
