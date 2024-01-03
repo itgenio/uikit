@@ -113,6 +113,7 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
           <div
             className={classNames('tabs-scroll-btn-wrap', 'left-scroll-btn', { 'scroll-btn-active': hasScrollLeft })}
             onClick={() => scrollTabsElement(-1)}
+            id-qa={classNames({ [`${idQa}-scroll-btn-left`]: !!idQa })}
           >
             <div className="tabs-scroll-btn">
               <ChevronLeftIcon />
@@ -138,6 +139,7 @@ export function Tabs({ onChange, value, className, isChips, scrollable, idQa, ch
           <div
             className={classNames('tabs-scroll-btn-wrap', 'right-scroll-btn', { 'scroll-btn-active': hasScrollRight })}
             onClick={() => scrollTabsElement(1)}
+            id-qa={classNames({ [`${idQa}-scroll-btn-right`]: !!idQa })}
           >
             <div className="tabs-scroll-btn">
               <ChevronRightIcon />
