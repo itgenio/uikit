@@ -115,3 +115,5 @@ export * from './arrowImport';
 export * from './earthHeart';
 export * from './arrowDown';
 export * from './arrowUp';
+export * from './pin';
+export * from './pinOff';
