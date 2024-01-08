@@ -218,8 +218,9 @@ export const Select = React.memo(
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
+
           <SelectPrimitive.Portal {...portalProps} className={classNames('gkit-select-portal', portalProps.className)}>
-            <div className="custom">
+            <Fragment>
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 {...dropdownProps}
@@ -244,7 +245,7 @@ export const Select = React.memo(
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
                 </SelectPrimitive.Viewport>
               </SelectPrimitive.Content>
-            </div>
+            </Fragment>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
       </InputsContainer>
