@@ -73,6 +73,7 @@ export function Selects() {
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
     { title: 'StartAdornment', props: { startAdornment: <span>Icon</span> } },
+    { title: 'With search', props: { withSearch: true, searchPlaceholder: 'Search' } },
   ];
 
   return (
