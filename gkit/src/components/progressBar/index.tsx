@@ -56,6 +56,7 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
       <CheckpointInternal
         progress={hasFirstCheckpointProgress && PROGRESS_BAR_MAX_PROGRESS}
         CheckpointComponent={hasFirstCheckpointProgress ? undefined : ProgressBarCheckpointElementWrap}
+        idQa={classNames({ [`${idQa}-checkpoint-0`]: !!idQa })}
         {...startCheckpoint}
         withoutProgressLine
         index={0}
@@ -76,12 +77,15 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
           }
         }
 
+        const checkpointIndex = index + 1;
+
         return (
           <CheckpointInternal
             key={index}
+            idQa={classNames({ [`${idQa}-checkpoint-${checkpointIndex}`]: !!idQa })}
             {...checkpoint}
             progress={isCheckpointsWithoutProgress ? PROGRESS_BAR_MIN_PROGRESS : progress}
-            index={index + 1}
+            index={checkpointIndex}
             zIndex={checkpoints.length - index}
           />
         );
@@ -160,7 +164,7 @@ const CheckpointInternal = React.memo(
         ) : (
           <ProgressBarCheckpointElementWrap
             done={isCheckpointDone}
-            idQa={classNames({ [`${idQa}-checkpoint-wrap`]: !!idQa })}
+            idQa={classNames({ [`${idQa}-goal`]: !!idQa })}
           >
             <ProgressBarCheckpointDefaultElement title={`${index}`} done={isCheckpointDone} />
           </ProgressBarCheckpointElementWrap>

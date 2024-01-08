@@ -94,7 +94,7 @@ export function ProgressBars() {
             <div className="progress-bar-state">
               <div>{state}</div>
 
-              <ProgressBar key={`progress-bar-${index}`} {...props} />
+              <ProgressBar key={`progress-bar-${index}`} idQa="progress-bar" {...props} />
             </div>
 
             {index < states.length - 1 && <hr />}
