@@ -4,7 +4,7 @@ import { Select, SelectProps, SelectOption } from '@itgenio/gkit/select';
 
 const sizes = ['small', 'large'] as const;
 
-const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
+export const defaultSelectOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
   if (i == 3) {
@@ -14,7 +14,7 @@ const defaultOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   return { label: `Option${index}`, value: String(index) };
 });
 
-const optionsWithGroups = defaultOptions.map((option, i) => {
+const optionsWithGroups = defaultSelectOptions.map((option, i) => {
   if (i > 15) return option;
 
   return {
@@ -28,7 +28,7 @@ type State = { title: string; props?: SelectProps; options?: SelectProps['option
 export function Selects() {
   const [value, setValue] = useState<string | number | undefined>(undefined);
 
-  const renderState = ({ title, props, options = defaultOptions }: State, index: number) => {
+  const renderState = ({ title, props, options = defaultSelectOptions }: State, index: number) => {
     return (
       <Fragment key={index}>
         <div>{title}</div>

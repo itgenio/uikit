@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from '@itgenio/gkit/button';
 import { Modal } from '@itgenio/gkit/modal';
+import { Select } from '@itgenio/gkit/select';
+import { defaultSelectOptions } from '../../selects';
 
 export const ModalExampleDefault = () => {
   const [open, setOpen] = useState(false);
+
+  const [value, setValue] = useState<string | number | undefined>(undefined);
 
   return (
     <div>
@@ -16,6 +20,13 @@ export const ModalExampleDefault = () => {
 
         <Modal.Body>
           <Modal.Text>Какой-то длинный текст</Modal.Text>
+          <Select
+            value={value}
+            options={defaultSelectOptions}
+            onChange={value => setValue(value)}
+            withSearch
+            placeholder="Select value"
+          />
         </Modal.Body>
 
         <Modal.Footer className="modal-footer-flex" idQa="modal-footer">

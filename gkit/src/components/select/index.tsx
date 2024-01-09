@@ -180,7 +180,6 @@ export const Select = React.memo(
     };
 
     const onSearchValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-      e.stopPropagation();
       const { value } = e.target;
 
       setSearchValue(value);
