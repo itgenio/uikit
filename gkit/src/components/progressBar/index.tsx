@@ -135,16 +135,16 @@ const CheckpointInternal = React.memo(
           [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-border-size` as string]: `${PROGRESS_BAR_CHECKPOINT_BORDER_SIZE_REM}rem`,
         }}
         data-checkpoint-index={index}
-        id-qa={idQa}
       >
         {!withoutProgressLine && (
-          <div className="progress-line" id-qa={classNames({ [`${idQa}-progress-line`]: !!idQa })}>
+          <div className="progress-line" id-qa="progress-line">
             {!withoutBeforeSibling && <div className={classNames('progress-before', { filled: !!progress })} />}
 
             <div
               className="progress-filled"
               style={{ [`${PROGRESS_BAR_CHECKPOINT_CSS_PREFIX}-width` as string]: progressWidth }}
-              id-qa={classNames({ [`progress-bar-filled-line-${progressWidth}`]: !!idQa })}
+              id-qa="progress-line-filled"
+              data-filled={progressWidth}
             />
 
             {!withoutAfterSibling && <div className={classNames('progress-after', { filled: isCheckpointDone })} />}
@@ -163,7 +163,7 @@ const CheckpointInternal = React.memo(
             )}
           </Fragment>
         ) : (
-          <ProgressBarCheckpointElementWrap done={isCheckpointDone} idQa={classNames({ [`${idQa}-goal`]: !!idQa })}>
+          <ProgressBarCheckpointElementWrap done={isCheckpointDone} idQa={idQa}>
             <ProgressBarCheckpointDefaultElement title={`${index}`} done={isCheckpointDone} />
           </ProgressBarCheckpointElementWrap>
         )}
