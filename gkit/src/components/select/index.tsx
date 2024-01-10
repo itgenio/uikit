@@ -99,9 +99,7 @@ export const Select = React.memo(
     }, [withSearch, searchValue]);
 
     if (withSearch && searchValue.length > 0) {
-      options = options.filter(
-        option => option.label.toLowerCase().includes(searchValue.toLowerCase()) || value === option.value
-      );
+      options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
 
     const renderOptionItem = (option: SelectOption, index: number) => (
