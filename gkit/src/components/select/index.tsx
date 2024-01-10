@@ -98,6 +98,14 @@ export const Select = React.memo(
       searchValue.length > 0 && setTimeout(() => selectSearchRef.current?.focus(), 0);
     }, [withSearch, searchValue]);
 
+    useEffect(() => {
+      if (!withSearch) return;
+
+      if (!open && searchValue.length > 0) {
+        setSearchValue('');
+      }
+    }, [open, searchValue.length, withSearch]);
+
     if (withSearch && searchValue.length > 0) {
       options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
