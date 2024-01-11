@@ -40,7 +40,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       'react',
       'react-dom',
       'classnames',
-      'focus-trap-react',
+      'react-focus-lock',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-select',
       '@radix-ui/react-toggle-group',
