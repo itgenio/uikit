@@ -9,9 +9,11 @@ import {
   ProgressBarProps,
 } from '@itgenio/gkit/progressBar';
 
-const CustomCheckpointElement = ({ done, asd }: ProgressBarCustomCheckpointElementProps<{ asd: string }>) => {
+const CustomCheckpointElement = ({ done, asd, idQa }: ProgressBarCustomCheckpointElementProps<{ asd: string }>) => {
+  console.log(asd);
+
   return (
-    <ProgressBarCheckpointElementWrap done={done}>
+    <ProgressBarCheckpointElementWrap done={done} idQa={`${idQa}-qwe`}>
       {done ? (
         <ArrowCircleRightFilledIcon
           style={{
@@ -31,8 +33,6 @@ const CustomCheckpointElement = ({ done, asd }: ProgressBarCustomCheckpointEleme
           }}
         />
       )}
-
-      {asd}
     </ProgressBarCheckpointElementWrap>
   );
 };
@@ -41,16 +41,25 @@ export function ProgressBars() {
   // @ts-expect-error generic type
   const states: { state: string; props: ProgressBarProps }[] = [
     { state: 'No progress', props: { checkpoints: [{}, {}, {}] } },
-    { state: 'First progress', props: { checkpoints: [{ progress: 40 }, {}, {}] } },
+    {
+      state: 'First progress',
+      props: { checkpoints: [{ progress: 40 }, {}, {}] },
+    },
     { state: 'First done, second progress', props: { checkpoints: [{ progress: 100 }, { progress: 40 }, {}] } },
     { state: 'All done', props: { checkpoints: [{ progress: 100 }, { progress: 100 }, { progress: 100 }] } },
     {
       state: 'Checkpoints with custom elements',
       props: {
+        idQa: 'custom-progress-bar',
         checkpoints: [
-          { CheckpointElement: CustomCheckpointElement, CheckpointComponentProps: { asd: 'qwe' }, progress: 100 },
-          { CheckpointElement: CustomCheckpointElement, progress: 50 },
-          { CheckpointElement: CustomCheckpointElement },
+          {
+            idQa: 'my',
+            CheckpointComponent: CustomCheckpointElement,
+            CheckpointComponentProps: { asd: 'qwe' },
+            progress: 100,
+          },
+          { CheckpointComponent: CustomCheckpointElement, progress: 50 },
+          { CheckpointComponent: CustomCheckpointElement },
         ],
       },
     },
@@ -94,7 +103,7 @@ export function ProgressBars() {
             <div className="progress-bar-state">
               <div>{state}</div>
 
-              <ProgressBar key={`progress-bar-${index}`} idQa="progress-bar" {...props} />
+              <ProgressBar key={`progress-bar-${index}`} {...props} />
             </div>
 
             {index < states.length - 1 && <hr />}
