@@ -42,12 +42,12 @@ export type ProgressBarProps<S extends AnyFC, C extends ProgressBarCheckpointPro
 };
 
 const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>>({
-                                                                                             className,
-                                                                                             checkpoints,
-                                                                                             startCheckpoint = {},
-                                                                                             withSequentialProgress = true,
-                                                                                             idQa,
-                                                                                           }: ProgressBarProps<S, C>) => {
+  className,
+  checkpoints,
+  startCheckpoint = {},
+  withSequentialProgress = true,
+  idQa,
+}: ProgressBarProps<S, C>) => {
   const hasFirstCheckpointProgress = checkpoints[0]?.progress !== undefined;
   let isCheckpointsWithoutProgress = false;
 
