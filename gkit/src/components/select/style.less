@@ -132,6 +132,22 @@
   overflow: auto;
   min-width: 100%;
   border: 1px solid var(--gkit-color-neutral-200);
+
+  .gkit-select-search {
+    margin: 0.25rem;
+    color: var(--gkit-color-neutral-500);
+    background: var(--gkit-color-neutral-50);
+    min-width: 100px;
+
+    .text-field-wrapper {
+      gap: 0.5rem;
+    }
+
+    .search-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
 }
 
 .gkit-select-option {
@@ -142,6 +158,10 @@
   align-items: center;
   white-space: pre-wrap;
   padding: 0.5rem 1rem;
+
+  &.hidden {
+    visibility: hidden;
+  }
 
   .checkmark-icon {
     margin-left: 0.5rem;
@@ -189,17 +209,15 @@
   isolation: isolate;
 }
 
-.gkit-select-search {
-  margin: 0.25rem;
-  color: var(--gkit-color-neutral-500);
-  background: var(--gkit-color-neutral-50);
-
-  .text-field-wrapper {
-    gap: 0.5rem;
+.gkit-select-portal {
+  &:not(.open) {
+    position: fixed;
   }
 
-  .search-icon {
-    width: 1.25rem;
-    height: 1.25rem;
+  &:has(.gkit-select-search) {
+    & > div {
+      left: unset !important;
+      justify-content: unset !important;
+    }
   }
 }

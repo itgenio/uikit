@@ -42,7 +42,7 @@ export function Selects() {
             helperText="Desc"
             options={options}
             value={value}
-            onChange={value => setValue(value)}
+            onChange={setValue}
             {...props}
           />
         ))}
@@ -73,7 +73,7 @@ export function Selects() {
     { title: 'Error', props: { error: true } },
     { title: 'Disabled', props: { disabled: true } },
     { title: 'StartAdornment', props: { startAdornment: <span>Icon</span> } },
-    { title: 'With search', props: { withSearch: true, searchPlaceholder: 'Search' } },
+    { title: 'With search', props: { search: { active: true, props: { placeholder: 'Search' } } } },
   ];
 
   return (

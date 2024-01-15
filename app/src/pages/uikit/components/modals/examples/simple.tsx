@@ -7,8 +7,6 @@ import { defaultSelectOptions } from '../../selects';
 export const ModalExampleDefault = () => {
   const [open, setOpen] = useState(false);
 
-  const [value, setValue] = useState<string | number | undefined>(undefined);
-
   return (
     <div>
       <Button onClick={() => setOpen(o => !o)}>Open</Button>
@@ -20,13 +18,6 @@ export const ModalExampleDefault = () => {
 
         <Modal.Body>
           <Modal.Text>Какой-то длинный текст</Modal.Text>
-          <Select
-            value={value}
-            options={defaultSelectOptions}
-            onChange={value => setValue(value)}
-            withSearch
-            placeholder="Select value"
-          />
         </Modal.Body>
 
         <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
@@ -127,6 +118,40 @@ export const ModalExampleDefaultFullScreen = () => {
               <Modal.Text key={index}>{text}</Modal.Text>
             ))}
           </div>
+        </Modal.Body>
+
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
+
+          <Button type="danger">Not OK</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
+export const ModalExampleWithSelect = () => {
+  const [open, setOpen] = useState(false);
+
+  const [value, setValue] = useState<string | number | undefined>(undefined);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(o => !o)}>Open</Button>
+
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal.Header>
+          <Modal.Title title="Complex" />
+        </Modal.Header>
+
+        <Modal.Body>
+          <Select
+            value={value}
+            options={defaultSelectOptions}
+            onChange={setValue}
+            search={{ active: true, props: { placeholder: 'search' } }}
+            placeholder="Select value"
+          />
         </Modal.Body>
 
         <Modal.Footer className="modal-footer-flex" idQa="modal-footer">

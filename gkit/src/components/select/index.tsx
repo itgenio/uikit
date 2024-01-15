@@ -2,12 +2,11 @@ import './style.less';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
-import { CheckmarkIcon, ChevronUpFilledIcon, ChevronDownFilledIcon, SearchIcon } from '../icons';
+import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
-import { TextField } from '../textField';
+import { TextField, TextFieldProps } from '../textField';
 
 type Sizes = 'small' | 'large';
 
@@ -49,8 +48,7 @@ export type SelectProps = {
   inline?: boolean;
   required?: boolean;
   startAdornment?: React.ReactNode;
-  withSearch?: boolean;
-  searchPlaceholder?: string;
+  search?: { active: boolean; props?: TextFieldProps };
 };
 
 export const Select = React.memo(
@@ -79,8 +77,7 @@ export const Select = React.memo(
     inline,
     required,
     startAdornment,
-    withSearch,
-    searchPlaceholder,
+    search,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -89,24 +86,22 @@ export const Select = React.memo(
     const selectSearchRef = useRef<HTMLInputElement | null>(null);
     const canShowDropdown = open && !disabled;
 
-    useOnClickOutside(ref, () => setOpen(false));
-
     //prevent loses focus
     useEffect(() => {
-      if (!withSearch) return;
+      if (!search) return;
 
-      searchValue.length > 0 && setTimeout(() => selectSearchRef.current?.focus(), 0);
-    }, [withSearch, searchValue]);
+      setTimeout(() => selectSearchRef.current?.focus(), 0);
+    }, [search, searchValue]);
 
     useEffect(() => {
-      if (!withSearch) return;
+      if (!search) return;
 
       if (!open && searchValue.length > 0) {
         setSearchValue('');
       }
-    }, [open, searchValue.length, withSearch]);
+    }, [open, searchValue.length, search]);
 
-    if (withSearch && searchValue.length > 0) {
+    if (search && searchValue.length > 0) {
       options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
 
@@ -186,13 +181,14 @@ export const Select = React.memo(
     };
 
     const onSearchValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-
-      setSearchValue(value);
+      setSearchValue(e.target.value);
     }, []);
 
     return (
-      <InputsContainer {...{ id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
+      <InputsContainer
+        ref={ref}
+        {...{ id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}
+      >
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
@@ -224,8 +220,11 @@ export const Select = React.memo(
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
 
-          <SelectPrimitive.Portal {...portalProps} className={classNames('gkit-select-portal', portalProps.className)}>
-            <Fragment>
+          <SelectPrimitive.Portal
+            {...portalProps}
+            container={portalProps.container ?? (search ? ref?.current : undefined)}
+          >
+            <div className={classNames('gkit-select-portal', { open: canShowDropdown })}>
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 {...dropdownProps}
@@ -236,7 +235,7 @@ export const Select = React.memo(
                   className="gkit-select-viewport"
                   id-qa={classNames({ [`${idQa}-viewport`]: idQa })}
                 >
-                  {withSearch && (
+                  {search?.active && (
                     <TextField
                       inputRef={selectSearchRef}
                       className="gkit-select-search"
@@ -244,13 +243,13 @@ export const Select = React.memo(
                       autoFocus
                       value={searchValue}
                       onChange={onSearchValueChange}
-                      placeholder={searchPlaceholder}
+                      {...search.props}
                     />
                   )}
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
                 </SelectPrimitive.Viewport>
               </SelectPrimitive.Content>
-            </Fragment>
+            </div>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
       </InputsContainer>
