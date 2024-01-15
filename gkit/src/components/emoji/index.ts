@@ -44,3 +44,7 @@ export * from './openBook';
 export * from './gameDie';
 export * from './smilingFaceWithSmilingEyes';
 export * from './video';
+export * from './partyingFace';
+export * from './smilingFaceWithSunglasses';
+export * from './pensiveFace';
+export * from './redQuestionMark';
