@@ -117,3 +117,4 @@ export * from './arrowDown';
 export * from './arrowUp';
 export * from './pin';
 export * from './pinOff';
+export * from './link';
