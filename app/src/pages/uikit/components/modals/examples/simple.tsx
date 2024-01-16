@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Button } from '@itgenio/gkit/button';
 import { Checkbox } from '@itgenio/gkit/checkbox';
 import { Modal } from '@itgenio/gkit/modal';
-import { MultiSelect, MultiSelectProps } from '@itgenio/gkit/multiSelect';
+import { MultiSelect } from '@itgenio/gkit/multiSelect';
 import { Select } from '@itgenio/gkit/select';
 import { getMultiSelectOptions } from '../../multiSelects';
 import { defaultSelectOptions } from '../../selects';
@@ -137,7 +137,7 @@ export const ModalExampleWithSelect = () => {
   const [open, setOpen] = useState(false);
 
   const [value, setValue] = useState<string | number | undefined>(undefined);
-  const [values, setValues] = useState<MultiSelectProps<string>>([]);
+  const [values, setValues] = useState<string[]>([]);
   const [withSearch, setWithSearch] = useState(false);
 
   const onCheckboxChange = useCallback(() => setWithSearch(prevState => !prevState), []);
