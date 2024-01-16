@@ -3,7 +3,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { groupByPropertyToDict } from '@itgenio/utils';
-import { useComposedRefs } from '../../hooks/useComposedRefs';
+import { useComposedRefs } from '../hooks';
 import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
