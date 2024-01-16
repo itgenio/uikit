@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from '@itgenio/gkit/button';
+import { Checkbox } from '@itgenio/gkit/checkbox';
 import { Modal } from '@itgenio/gkit/modal';
+import { MultiSelect, MultiSelectProps } from '@itgenio/gkit/multiSelect';
 import { Select } from '@itgenio/gkit/select';
+import { getMultiSelectOptions } from '../../multiSelects';
 import { defaultSelectOptions } from '../../selects';
 
 export const ModalExampleDefault = () => {
@@ -134,6 +137,12 @@ export const ModalExampleWithSelect = () => {
   const [open, setOpen] = useState(false);
 
   const [value, setValue] = useState<string | number | undefined>(undefined);
+  const [values, setValues] = useState<MultiSelectProps<string>>([]);
+  const [withSearch, setWithSearch] = useState(false);
+
+  const onCheckboxChange = useCallback(() => setWithSearch(prevState => !prevState), []);
+
+  const searchProps = withSearch ? { active: true, props: { placeholder: 'search' } } : undefined;
 
   return (
     <div>
@@ -145,12 +154,25 @@ export const ModalExampleWithSelect = () => {
         </Modal.Header>
 
         <Modal.Body>
+          <Checkbox checked={withSearch} onChange={onCheckboxChange}>
+            With search in select/multiSelect
+          </Checkbox>
           <Select
             value={value}
             options={defaultSelectOptions}
             onChange={setValue}
-            search={{ active: true, props: { placeholder: 'search' } }}
+            search={searchProps}
             placeholder="Select value"
+          />
+          <MultiSelect
+            hasSelectAllOption
+            inputText="Select value"
+            options={getMultiSelectOptions()}
+            values={values}
+            selectAllOptionLabel="All Selected"
+            onChange={setValues}
+            search={searchProps}
+            size="large"
           />
         </Modal.Body>
 

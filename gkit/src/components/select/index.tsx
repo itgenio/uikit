@@ -3,6 +3,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { groupByPropertyToDict } from '@itgenio/utils';
+import { useComposedRefs } from '../../hooks/useComposedRefs';
 import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
@@ -80,13 +81,16 @@ export const Select = React.memo(
     search,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValueLocal, setSearchValue] = useState('');
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
     const selectSearchRef = useRef<HTMLInputElement | null>(null);
+    const composedSearchRef = useComposedRefs(selectSearchRef, search?.props?.inputRef);
     const canShowDropdown = open && !disabled;
 
-    //prevent loses focus
+    const searchValue = search?.props?.value !== undefined ? search.props.value.toString() : searchValueLocal;
+
+    //prevent loss of focus when typing
     useEffect(() => {
       if (!search) return;
 
@@ -94,7 +98,7 @@ export const Select = React.memo(
     }, [search, searchValue]);
 
     useEffect(() => {
-      if (!search) return;
+      if (!search?.active) return;
 
       if (!open && searchValue.length > 0) {
         setSearchValue('');
@@ -180,9 +184,14 @@ export const Select = React.memo(
       onChange(option.value);
     };
 
-    const onSearchValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue(e.target.value);
-    }, []);
+    const onSearchValueChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value);
+
+        search.props?.onChange && search.props.onChange(e);
+      },
+      [search?.props]
+    );
 
     return (
       <InputsContainer
@@ -237,10 +246,9 @@ export const Select = React.memo(
                 >
                   {search?.active && (
                     <TextField
-                      inputRef={selectSearchRef}
-                      className="gkit-select-search"
+                      inputRef={composedSearchRef}
+                      className={classNames('gkit-select-search', search.props?.className)}
                       startAdornment={<SearchIcon />}
-                      autoFocus
                       value={searchValue}
                       onChange={onSearchValueChange}
                       {...search.props}

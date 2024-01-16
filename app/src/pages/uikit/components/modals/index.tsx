@@ -19,7 +19,7 @@ const EXAMPLES: { name: string; Modal: FunctionComponent }[] = [
   { name: 'Full screen', Modal: ModalExampleDefaultFullScreen },
   { name: 'With content in portal', Modal: ModalExampleWithContentInPortal },
   { name: 'With lazy loaded content', Modal: ModalExampleWithLazyLoadedContent },
-  { name: 'With select', Modal: ModalExampleWithSelect },
+  { name: 'With select, multiselect', Modal: ModalExampleWithSelect },
   { name: 'Default as block', Modal: ModalExampleDefaultAsBlock },
   { name: 'As block with footer', Modal: ModalExampleAsBlockWithFooter },
   { name: 'As block full screen', Modal: ModalExampleAsBlockFullScreen },
