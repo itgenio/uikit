@@ -8,9 +8,7 @@ type ContainerProps = Pick<
   'dir' | 'open' | 'onOpenChange' | 'defaultOpen' | 'modal'
 >;
 
-type TriggerPickProps = Pick<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'asChild'>;
-
-type TriggerProps = TriggerPickProps & PropsWithChildren<{ className?: string }>;
+type TriggerProps = Omit<DropdownMenuPrimitive.DropdownMenuTriggerProps, 'className' | 'asChild'>;
 
 type ContentProps = Pick<
   DropdownMenuPrimitive.DropdownMenuContentProps,
@@ -32,10 +30,15 @@ type ContentProps = Pick<
   | 'avoidCollisions'
 >;
 
-type DropdownProps = ContainerProps &
-  TriggerProps &
-  ContentProps &
-  PropsWithChildren<{ idQa?: string; classNameContent?: string; content: React.ReactNode }>;
+type DropdownProps = PropsWithChildren<{
+  className?: string;
+  idQa?: string;
+  classNameContent?: string;
+  content: React.ReactNode;
+  triggerProps?: TriggerProps;
+}> &
+  ContainerProps &
+  ContentProps;
 
 export const Dropdown = ({
   children,
@@ -64,10 +67,11 @@ export const Dropdown = ({
   align,
   alignOffset,
   avoidCollisions,
+  triggerProps = {},
 }: DropdownProps) => {
   return (
     <DropdownMenuPrimitive.Root {...{ dir, open, onOpenChange, defaultOpen, modal }}>
-      <DropdownMenuPrimitive.Trigger id-qa={idQa} className={classNames(className)} asChild={asChild}>
+      <DropdownMenuPrimitive.Trigger {...triggerProps} className={className} asChild={asChild} id-qa={idQa}>
         {children}
       </DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Content
