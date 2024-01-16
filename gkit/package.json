@@ -4,6 +4,7 @@
   "description": "GKIT",
   "main": "./index.js",
   "scripts": {
+    "start": "npm run watch",
     "build": "npm run clean && cross-env NODE_ENV=production ts-node ./scripts/build.js",
     "watch": "npm run clean && ts-node ./scripts/build.js",
     "tsc": "ts-node ./scripts/buildTypes.js",
