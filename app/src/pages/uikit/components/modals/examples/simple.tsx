@@ -136,7 +136,7 @@ export const ModalExampleDefaultFullScreen = () => {
 export const ModalExampleWithSelect = () => {
   const [open, setOpen] = useState(false);
 
-  const [value, setValue] = useState<SelectOption['value'] | undefined>(defaultSelectOptions[0].value);
+  const [value, setValue] = useState<SelectOption['value'] | undefined>(undefined);
   const [values, setValues] = useState<MultiSelectOption<{ someData: string }>['value'][]>([]);
   const [withSearch, setWithSearch] = useState(false);
 
