@@ -10,15 +10,15 @@ type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
 
-export const getMultiSelectOptions = (isOptionsWithObjState = false): Option[] => {
+export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   return Array.from({ length: 60 }, (_, i) => {
     const index = i + 1;
 
     return {
       label: `Option ${index}`,
-      value: isOptionsWithObjState ? { key: index, someData: `data-${index}` } : index,
+      value: withObjValues ? { key: index, someData: `data-${index}` } : index,
       group: index > 5 ? (index % 2 === 0 ? 'Even' : 'Odd') : undefined,
-      isDisabled: isOptionsWithObjState && index == 3,
+      isDisabled: withObjValues && index == 3,
     };
   });
 };
@@ -46,7 +46,7 @@ export function MultiSelects() {
               hasSelectAllOption
               helperText="Desc"
               inputText="inputText"
-              options={isOptionsWithObjState ? getMultiSelectOptions(true) : getMultiSelectOptions()}
+              options={getMultiSelectOptions(isOptionsWithObjState)}
               values={isOptionsWithObjState ? objValues : value}
               selectAllOptionLabel="All Selected"
               onChange={values => {
