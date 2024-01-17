@@ -211,11 +211,11 @@
 }
 
 .gkit-select-portal {
-  &:not(.open) {
-    position: fixed;
-  }
+  &.with-search {
+    &:not(.open) {
+      position: fixed;
+    }
 
-  &:has(.gkit-select-search) {
     & > div {
       left: unset !important;
       justify-content: unset !important;

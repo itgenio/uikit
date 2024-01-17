@@ -76,8 +76,10 @@ export function MultiSelect<T extends MultiSelectOption>({
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
   const hasValue = values.length > 0;
-  const [searchValueLocal, setSearchValue] = useState('');
+  const [searchValueLocal, setSearchValue] = useState(undefined);
+
   const searchValue = search?.props?.value !== undefined ? search.props.value.toString() : searchValueLocal;
+  const hasValueInSearch = searchValue && searchValue.length > 0;
 
   const ref = useRef(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -108,10 +110,10 @@ export function MultiSelect<T extends MultiSelectOption>({
   useEffect(() => {
     if (!search?.active) return;
 
-    if (!open && searchValue.length > 0) {
+    if (!open && hasValueInSearch) {
       setSearchValue('');
     }
-  }, [open, searchValue.length, search]);
+  }, [open, hasValueInSearch, search?.active]);
 
   const onSearchValueChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,7 +124,7 @@ export function MultiSelect<T extends MultiSelectOption>({
     [search?.props]
   );
 
-  if (search?.active && searchValue.length > 0) {
+  if (search?.active && hasValueInSearch) {
     options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
   }
 
@@ -261,12 +263,12 @@ export function MultiSelect<T extends MultiSelectOption>({
               startAdornment={<SearchIcon />}
               {...search.props}
               className={classNames('gkit-multi-select-search', search.props?.className)}
-              value={searchValue}
+              value={searchValue ?? ''}
               onChange={onSearchValueChange}
             />
           )}
 
-          {hasSelectAllOption && searchValue.length === 0 && (
+          {hasSelectAllOption && !hasValueInSearch && (
             <li
               id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
               className={classNames('multi-select-option', size)}
