@@ -96,7 +96,7 @@ export const Select = React.memo(
       if (!search?.active || searchValue === undefined || !selectSearchRef.current) return;
 
       setTimeout(() => selectSearchRef.current.focus(), 0);
-    }, [search?.active, searchValue, selectSearchRef.current]);
+    }, [search?.active, searchValue]);
 
     useEffect(() => {
       if (!search?.active) return;
