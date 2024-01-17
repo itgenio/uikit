@@ -10,15 +10,15 @@ type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
 
-export const getMultiSelectOptions = (withObjValues = false): Option[] => {
+export const getMultiSelectOptions = (isOptionsWithObjState = false): Option[] => {
   return Array.from({ length: 60 }, (_, i) => {
     const index = i + 1;
 
     return {
       label: `Option ${index}`,
-      value: withObjValues ? { key: index, someData: `data-${index}` } : index,
+      value: isOptionsWithObjState ? { key: index, someData: `data-${index}` } : index,
       group: index > 5 ? (index % 2 === 0 ? 'Even' : 'Odd') : undefined,
-      isDisabled: withObjValues && index == 3,
+      isDisabled: isOptionsWithObjState && index == 3,
     };
   });
 };

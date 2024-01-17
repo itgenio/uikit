@@ -12,7 +12,7 @@ import React, {
 } from 'react';
 import { Button, ButtonProps } from '../button';
 import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
-import { useEvent } from '../internal/hooks/useEvent';
+import { useEvent } from '../internal/hooks';
 import { canSwipeByEvents } from './utils';
 
 export const CAROUSEL_SWITCH_AUTO_PLAY_DELAY_MS = 5000;

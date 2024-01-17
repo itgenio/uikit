@@ -117,12 +117,12 @@ export function MultiSelect<T extends MultiSelectOption>({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
 
-      search.props?.onChange && search.props.onChange(e);
+      search.props?.onChange?.(e);
     },
     [search?.props]
   );
 
-  if (search && searchValue.length > 0) {
+  if (search?.active && searchValue.length > 0) {
     options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
   }
 
@@ -258,11 +258,11 @@ export function MultiSelect<T extends MultiSelectOption>({
         <ul ref={dropdownRef} id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} className="multi-select-dropdown">
           {search?.active && (
             <TextField
-              className={classNames('gkit-multi-select-search', search.props?.className)}
               startAdornment={<SearchIcon />}
+              {...search.props}
+              className={classNames('gkit-multi-select-search', search.props?.className)}
               value={searchValue}
               onChange={onSearchValueChange}
-              {...search.props}
             />
           )}
 

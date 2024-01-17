@@ -3,9 +3,9 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { groupByPropertyToDict } from '@itgenio/utils';
-import { useComposedRefs } from '../hooks';
 import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
+import { useComposedRefs } from '../internal/hooks';
 import { generateId } from '../internal/utils/generateId';
 import { TextField, TextFieldProps } from '../textField';
 
@@ -105,7 +105,7 @@ export const Select = React.memo(
       }
     }, [open, searchValue.length, search]);
 
-    if (search && searchValue.length > 0) {
+    if (search?.active && searchValue.length > 0) {
       options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
 
@@ -188,7 +188,7 @@ export const Select = React.memo(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
 
-        search.props?.onChange && search.props.onChange(e);
+        search.props?.onChange?.(e);
       },
       [search?.props]
     );
@@ -246,12 +246,12 @@ export const Select = React.memo(
                 >
                   {search?.active && (
                     <TextField
+                      startAdornment={<SearchIcon />}
+                      {...search.props}
                       inputRef={composedSearchRef}
                       className={classNames('gkit-select-search', search.props?.className)}
-                      startAdornment={<SearchIcon />}
                       value={searchValue}
                       onChange={onSearchValueChange}
-                      {...search.props}
                     />
                   )}
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
