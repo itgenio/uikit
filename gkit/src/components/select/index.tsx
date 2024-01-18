@@ -52,6 +52,8 @@ export type SelectProps = {
   search?: { active: boolean; props?: TextFieldProps };
 };
 
+const GKIT_SELECT_DROPDOWN_CLASS = 'gkit-select-dropdown';
+
 export const Select = React.memo(
   ({
     size = 'large',
@@ -113,7 +115,9 @@ export const Select = React.memo(
     useEffect(() => {
       if (!search?.active || !open) return;
 
-      const portalElement = ref.current.querySelector('.gkit-select-dropdown').parentElement;
+      const portalElement = ref.current?.querySelector(`.${GKIT_SELECT_DROPDOWN_CLASS}`)?.parentElement;
+
+      if (!portalElement) return;
 
       portalElement.className = 'gkit-select-portal-with-search';
     }, [search?.active, open]);
@@ -243,7 +247,7 @@ export const Select = React.memo(
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 {...dropdownProps}
-                className={classNames('gkit-select-dropdown', dropdownProps.className)}
+                className={classNames(GKIT_SELECT_DROPDOWN_CLASS, dropdownProps.className)}
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
               >
                 <SelectPrimitive.Viewport
