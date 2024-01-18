@@ -125,7 +125,7 @@
   padding: 0.25rem;
   position: absolute;
   //in front of the modal
-  z-index: calc(var(--gkit-modal-z-index) + 1);
+  z-index: var(--gkit-modal-z-index);
   background: var(--gkit-color-neutral-0);
   border-radius: 0.75rem;
   margin-top: 5px;
@@ -159,10 +159,6 @@
   align-items: center;
   white-space: pre-wrap;
   padding: 0.5rem 1rem;
-
-  &.hidden {
-    visibility: hidden;
-  }
 
   .checkmark-icon {
     margin-left: 0.5rem;
@@ -210,15 +206,7 @@
   isolation: isolate;
 }
 
-.gkit-select-portal {
-  &.with-search {
-    &:not(.open) {
-      position: fixed;
-    }
-
-    & > div {
-      left: unset !important;
-      justify-content: unset !important;
-    }
-  }
+.gkit-select-portal-with-search {
+  left: unset !important;
+  justify-content: unset !important;
 }

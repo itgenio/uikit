@@ -76,9 +76,9 @@ export function MultiSelect<T extends MultiSelectOption>({
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
   const hasValue = values.length > 0;
-  const [searchValueLocal, setSearchValue] = useState(undefined);
+  const [searchValueLocal, setSearchValue] = useState<string | undefined>(undefined);
 
-  const searchValue = search?.props?.value !== undefined ? search.props.value.toString() : searchValueLocal;
+  const searchValue = search?.props?.value?.toString() ?? searchValueLocal;
   const hasValueInSearch = searchValue && searchValue.length > 0;
 
   const ref = useRef(null);
@@ -261,7 +261,7 @@ export function MultiSelect<T extends MultiSelectOption>({
           {search?.active && (
             <TextField
               startAdornment={<SearchIcon />}
-              {...search.props}
+              {...(search.props ?? {})}
               className={classNames('gkit-multi-select-search', search.props?.className)}
               value={searchValue ?? ''}
               onChange={onSearchValueChange}

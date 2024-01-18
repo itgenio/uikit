@@ -81,14 +81,14 @@ export const Select = React.memo(
     search,
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
-    const [searchValueLocal, setSearchValue] = useState(undefined);
+    const [searchValueLocal, setSearchValue] = useState<string | undefined>(undefined);
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
     const selectSearchRef = useRef<HTMLInputElement | null>(null);
     const composedSearchRef = useComposedRefs(selectSearchRef, search?.props?.inputRef);
     const canShowDropdown = open && !disabled;
 
-    const searchValue = search?.props?.value !== undefined ? search.props.value.toString() : searchValueLocal;
+    const searchValue = search?.props?.value?.toString() ?? searchValueLocal;
     const hasValueInSearch = searchValue && searchValue.length > 0;
 
     //prevent loss of focus when typing
@@ -109,6 +109,14 @@ export const Select = React.memo(
     if (search?.active && hasValueInSearch) {
       options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
+
+    useEffect(() => {
+      if (!search?.active || !open) return;
+
+      const portalElement = ref.current.querySelector('.gkit-select-dropdown').parentElement;
+
+      portalElement.className = 'gkit-select-portal-with-search';
+    }, [search?.active, open]);
 
     const renderOptionItem = (option: SelectOption, index: number) => (
       <SelectPrimitive.Item
@@ -195,10 +203,7 @@ export const Select = React.memo(
     );
 
     return (
-      <InputsContainer
-        ref={ref}
-        {...{ id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}
-      >
+      <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
@@ -234,7 +239,7 @@ export const Select = React.memo(
             {...portalProps}
             container={portalProps.container ?? (search && ref?.current ? ref.current : undefined)}
           >
-            <div className={classNames('gkit-select-portal', { open: canShowDropdown, 'with-search': !!search })}>
+            <Fragment>
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 {...dropdownProps}
@@ -248,7 +253,7 @@ export const Select = React.memo(
                   {search?.active && (
                     <TextField
                       startAdornment={<SearchIcon />}
-                      {...search.props}
+                      {...(search.props ?? {})}
                       inputRef={composedSearchRef}
                       className={classNames('gkit-select-search', search.props?.className)}
                       value={searchValue ?? ''}
@@ -258,7 +263,7 @@ export const Select = React.memo(
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
                 </SelectPrimitive.Viewport>
               </SelectPrimitive.Content>
-            </div>
+            </Fragment>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
       </InputsContainer>
