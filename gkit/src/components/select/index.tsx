@@ -2,6 +2,7 @@ import './style.less';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
@@ -84,21 +85,21 @@ export const Select = React.memo(
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [searchValueLocal, setSearchValue] = useState<string | undefined>(undefined);
+    const [isSearchMobileFocused, setSearchFocused] = useState(false);
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
     const selectSearchRef = useRef<HTMLInputElement | null>(null);
     const composedSearchRef = useComposedRefs(selectSearchRef, search?.props?.inputRef);
     const canShowDropdown = open && !disabled;
 
+    useOnClickOutside(selectSearchRef, e => {
+      if (!search?.active || !isSearchMobileFocused || (e.target as Node)?.nodeName === 'INPUT') return;
+
+      setSearchFocused(false);
+    });
+
     const searchValue = search?.props?.value?.toString() ?? searchValueLocal;
     const hasValueInSearch = searchValue && searchValue.length > 0;
-
-    //prevent loss of focus when typing
-    useEffect(() => {
-      if (!search?.active || searchValue === undefined || !selectSearchRef.current) return;
-
-      setTimeout(() => selectSearchRef.current.focus(), 0);
-    }, [search?.active, searchValue]);
 
     useEffect(() => {
       if (!search?.active) return;
@@ -188,6 +189,8 @@ export const Select = React.memo(
     };
 
     const onValueChange = (newValue: string) => {
+      setSearchFocused(false);
+
       const option = options.find(option => String(option.value) === newValue);
 
       if (!option) {
@@ -201,19 +204,52 @@ export const Select = React.memo(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
 
+        if (isSearchMobileFocused) {
+          setTimeout(() => selectSearchRef?.current?.focus());
+        }
+
         search.props?.onChange?.(e);
+      },
+      [isSearchMobileFocused, search?.props]
+    );
+
+    const onSearchTouchStart = useCallback(
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
+        e.stopPropagation();
+        setSearchFocused(true);
+
+        search?.props?.onTouchStart?.(e);
       },
       [search?.props]
     );
+
+    const onKeyDownContent = useCallback(
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (search?.active) {
+          const node = e.target as HTMLInputElement;
+
+          if (node.nodeName === 'INPUT') {
+            //return focus when typing https://github.com/radix-ui/primitives/blob/main/packages/react/select/src/Select.tsx#L750
+            setTimeout(() => node.focus(), 1);
+          }
+        }
+
+        dropdownProps.onKeyDown?.(e);
+      },
+      [dropdownProps, search?.active]
+    );
+
+    //In the mobile version, the first time click on a search field, the dropdown closes - prevent it (isSearchMobileFocused)
+    const isOpen = disabled ? false : search?.active && isSearchMobileFocused ? true : undefined;
 
     return (
       <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
-          open={disabled ? false : undefined}
+          open={isOpen}
           onOpenChange={newOpen => {
-            if (!open && disabled) return;
+            if ((!open && disabled) || (search?.active && isSearchMobileFocused)) return;
 
             setOpen(newOpen);
           }}
@@ -249,6 +285,7 @@ export const Select = React.memo(
                 {...dropdownProps}
                 className={classNames(GKIT_SELECT_DROPDOWN_CLASS, dropdownProps.className)}
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
+                onKeyDown={onKeyDownContent}
               >
                 <SelectPrimitive.Viewport
                   className="gkit-select-viewport"
@@ -262,6 +299,7 @@ export const Select = React.memo(
                       className={classNames('gkit-select-search', search.props?.className)}
                       value={searchValue ?? ''}
                       onChange={onSearchValueChange}
+                      onTouchStart={onSearchTouchStart}
                     />
                   )}
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
