@@ -10,8 +10,9 @@ import { useComposedRefs } from '../internal/hooks';
 import { generateId } from '../internal/utils/generateId';
 import { TextField, TextFieldProps } from '../textField';
 
-type Sizes = 'small' | 'large';
+export const SELECT_DROPDOWN_CN = 'gkit-select-dropdown';
 
+type Sizes = 'small' | 'large';
 type Values = string | number;
 
 export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
@@ -52,8 +53,6 @@ export type SelectProps = {
   startAdornment?: React.ReactNode;
   search?: { active: boolean; props?: TextFieldProps };
 };
-
-const GKIT_SELECT_DROPDOWN_CLASS = 'gkit-select-dropdown';
 
 export const Select = React.memo(
   ({
@@ -116,8 +115,7 @@ export const Select = React.memo(
     useEffect(() => {
       if (!search?.active || !open) return;
 
-      const portalElement = ref.current?.querySelector(`.${GKIT_SELECT_DROPDOWN_CLASS}`)?.parentElement;
-
+      const portalElement = ref.current?.querySelector(`.${SELECT_DROPDOWN_CN}`)?.parentElement;
       if (!portalElement) return;
 
       portalElement.className = 'gkit-select-portal-with-search';
@@ -283,7 +281,7 @@ export const Select = React.memo(
               <Overlay open={canShowDropdown} />
               <SelectPrimitive.Content
                 {...dropdownProps}
-                className={classNames(GKIT_SELECT_DROPDOWN_CLASS, dropdownProps.className)}
+                className={classNames(SELECT_DROPDOWN_CN, dropdownProps.className)}
                 id-qa={classNames({ [`${idQa}-dropdown`]: idQa })}
                 onKeyDown={onKeyDownContent}
               >
