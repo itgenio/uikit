@@ -135,20 +135,13 @@
   border: 1px solid var(--gkit-color-neutral-200);
 
   .gkit-select-search {
-    //В мобильной версии работает некорректно, пока оставляем только для десктопа. Как вариант, можно будет добавить/переписать селект на кастомный, как multiselect
-    display: none;
-
-    @media @fullhd, @desktop {
-      display: block;
-    }
-
     margin: 0.25rem;
     color: var(--gkit-color-neutral-500);
-    background: var(--gkit-color-neutral-50);
     min-width: 100px;
 
     .text-field-wrapper {
       gap: 0.5rem;
+      background: var(--gkit-color-neutral-50);
     }
 
     .search-icon {
@@ -225,7 +218,7 @@
     justify-content: unset !important;
 
     .gkit-select-search {
-      display: block;
+      display: flex;
     }
   }
 }
