@@ -214,6 +214,17 @@
 }
 
 .gkit-select-portal-with-search {
-  left: unset !important;
-  justify-content: unset !important;
+  .gkit-select-search {
+    //В мобильной версии работает некорректно, пока оставляем только для десктопа. Как вариант, можно будет добавить/переписать селект на кастомный, как multiselect
+    display: none;
+  }
+
+  @media @fullhd, @desktop {
+    left: unset !important;
+    justify-content: unset !important;
+
+    .gkit-select-search {
+      display: block;
+    }
+  }
 }
