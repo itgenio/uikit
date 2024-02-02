@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const svgrTransform = require('@svgr/core').transform;
+const uniqueIdsPlugin = require('./uniqueIdsPlugin').plugin;
 
 const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 
@@ -19,6 +20,7 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
       titleProp: true,
       dimensions: false,
       plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+      jsx: { babelConfig: { plugins: [uniqueIdsPlugin] } },
       svgoConfig: {
         plugins: [
           {
@@ -31,7 +33,7 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
             },
           },
           'removeXMLNS',
-          'prefixIds',
+          // 'prefixIds', // Не используем. Для генерации id используется плагин uniqueIdsPlugin
           ...svgoPlugins,
         ],
         ...svgoConfig,
