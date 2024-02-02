@@ -2,7 +2,6 @@ import './style.less';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { CheckmarkIcon, ChevronDownFilledIcon, ChevronUpFilledIcon, SearchIcon } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
@@ -84,18 +83,11 @@ export const Select = React.memo(
   }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [searchValueLocal, setSearchValue] = useState<string | undefined>(undefined);
-    const [isSearchMobileFocused, setSearchFocused] = useState(false);
     const id = useMemo(() => generateId(), []);
     const ref = useRef<HTMLDivElement>(null);
     const selectSearchRef = useRef<HTMLInputElement | null>(null);
     const composedSearchRef = useComposedRefs(selectSearchRef, search?.props?.inputRef);
     const canShowDropdown = open && !disabled;
-
-    useOnClickOutside(selectSearchRef, e => {
-      if (!search?.active || !isSearchMobileFocused || (e.target as Node)?.nodeName === 'INPUT') return;
-
-      setSearchFocused(false);
-    });
 
     const searchValue = search?.props?.value?.toString() ?? searchValueLocal;
     const hasValueInSearch = searchValue && searchValue.length > 0;
@@ -187,8 +179,6 @@ export const Select = React.memo(
     };
 
     const onValueChange = (newValue: string) => {
-      setSearchFocused(false);
-
       const option = options.find(option => String(option.value) === newValue);
 
       if (!option) {
@@ -202,21 +192,7 @@ export const Select = React.memo(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
 
-        if (isSearchMobileFocused) {
-          setTimeout(() => selectSearchRef?.current?.focus());
-        }
-
         search.props?.onChange?.(e);
-      },
-      [isSearchMobileFocused, search?.props]
-    );
-
-    const onSearchTouchStart = useCallback(
-      (e: React.KeyboardEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        setSearchFocused(true);
-
-        search?.props?.onTouchStart?.(e);
       },
       [search?.props]
     );
@@ -227,7 +203,7 @@ export const Select = React.memo(
           const node = e.target as HTMLInputElement;
 
           if (node.nodeName === 'INPUT') {
-            //return focus when typing https://github.com/radix-ui/primitives/blob/main/packages/react/select/src/Select.tsx#L750
+            //return focus when typing https://github.com/radix-ui/primitives/blob/main/packages/react/select/src/Select.tsx#L529
             setTimeout(() => node.focus(), 1);
           }
         }
@@ -237,17 +213,14 @@ export const Select = React.memo(
       [dropdownProps, search?.active]
     );
 
-    //In the mobile version, the first time click on a search field, the dropdown closes - prevent it (isSearchMobileFocused)
-    const isOpen = disabled ? false : search?.active && isSearchMobileFocused ? true : undefined;
-
     return (
       <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
-          open={isOpen}
+          open={disabled ? false : undefined}
           onOpenChange={newOpen => {
-            if ((!open && disabled) || (search?.active && isSearchMobileFocused)) return;
+            if (!open && disabled) return;
 
             setOpen(newOpen);
           }}
@@ -297,7 +270,6 @@ export const Select = React.memo(
                       className={classNames('gkit-select-search', search.props?.className)}
                       value={searchValue ?? ''}
                       onChange={onSearchValueChange}
-                      onTouchStart={onSearchTouchStart}
                     />
                   )}
                   {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
