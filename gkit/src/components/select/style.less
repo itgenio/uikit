@@ -124,7 +124,8 @@
 .gkit-select-dropdown {
   padding: 0.25rem;
   position: absolute;
-  z-index: 1;
+  //in front of the modal
+  z-index: var(--gkit-modal-z-index);
   background: var(--gkit-color-neutral-0);
   border-radius: 0.75rem;
   margin-top: 5px;
@@ -132,6 +133,22 @@
   overflow: auto;
   min-width: 100%;
   border: 1px solid var(--gkit-color-neutral-200);
+
+  .gkit-select-search {
+    margin: 0.25rem;
+    color: var(--gkit-color-neutral-500);
+    min-width: 100px;
+
+    .text-field-wrapper {
+      gap: 0.5rem;
+      background: var(--gkit-color-neutral-50);
+    }
+
+    .search-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
 }
 
 .gkit-select-option {
@@ -187,4 +204,21 @@
 
   z-index: 1;
   isolation: isolate;
+}
+
+.gkit-select-portal-with-search {
+  .gkit-select-search {
+    //В мобильной версии работает некорректно, пока оставляем только для десктопа. Как вариант, можно будет добавить/переписать селект на кастомный, как multiselect
+    //Возможно, будет добавлен в radix https://github.com/radix-ui/primitives/issues/1342
+    display: none;
+  }
+
+  @media @fullhd, @desktop {
+    left: unset !important;
+    justify-content: unset !important;
+
+    .gkit-select-search {
+      display: flex;
+    }
+  }
 }

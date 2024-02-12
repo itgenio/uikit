@@ -37,6 +37,7 @@ export type TextFieldProps = PropsWithChildren<{
   endAdornment?: React.ReactNode;
   inputRef?: ForwardedRef<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onTouchStart?: React.KeyboardEventHandler<HTMLInputElement>;
 }>;
 
 export const TextField = forwardRef(function TextField(
@@ -71,6 +72,7 @@ export const TextField = forwardRef(function TextField(
     endAdornment,
     inputRef,
     onKeyDown,
+    onTouchStart,
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -115,6 +117,7 @@ export const TextField = forwardRef(function TextField(
             name,
             autoComplete,
             onKeyDown,
+            onTouchStart,
           }}
         />
 

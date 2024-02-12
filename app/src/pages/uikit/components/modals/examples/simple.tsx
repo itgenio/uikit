@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from '@itgenio/gkit/button';
+import { Checkbox } from '@itgenio/gkit/checkbox';
 import { Modal } from '@itgenio/gkit/modal';
+import { MultiSelect, MultiSelectOption } from '@itgenio/gkit/multiSelect';
+import { Select, SelectOption } from '@itgenio/gkit/select';
+import { getMultiSelectOptions } from '../../multiSelects';
+import { defaultSelectOptions } from '../../selects';
 
 export const ModalExampleDefault = () => {
   const [open, setOpen] = useState(false);
@@ -116,6 +121,59 @@ export const ModalExampleDefaultFullScreen = () => {
               <Modal.Text key={index}>{text}</Modal.Text>
             ))}
           </div>
+        </Modal.Body>
+
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
+
+          <Button type="danger">Not OK</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
+export const ModalExampleWithSelect = () => {
+  const [open, setOpen] = useState(false);
+
+  const [value, setValue] = useState<SelectOption['value'] | undefined>(undefined);
+  const [values, setValues] = useState<MultiSelectOption<{ someData: string }>['value'][]>([]);
+  const [withSearch, setWithSearch] = useState(false);
+
+  const onCheckboxChange = useCallback(() => setWithSearch(prevState => !prevState), []);
+
+  const searchProps = withSearch ? { active: true, props: { placeholder: 'search' } } : undefined;
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(o => !o)}>Open</Button>
+
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal.Header>
+          <Modal.Title title="Complex" />
+        </Modal.Header>
+
+        <Modal.Body>
+          <Checkbox checked={withSearch} onChange={onCheckboxChange}>
+            With search in select/multiSelect
+          </Checkbox>
+          <Select
+            value={value}
+            options={defaultSelectOptions}
+            onChange={setValue}
+            search={searchProps}
+            placeholder="Select value"
+          />
+          <MultiSelect
+            hasSelectAllOption
+            inputText="Select value"
+            options={getMultiSelectOptions()}
+            values={values}
+            selectAllOptionLabel="All Selected"
+            onChange={setValues}
+            search={searchProps}
+            size="large"
+          />
         </Modal.Body>
 
         <Modal.Footer className="modal-footer-flex" idQa="modal-footer">

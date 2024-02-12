@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { Checkbox } from '../checkbox';
@@ -10,9 +10,11 @@ import {
   ChevronUpFilledIcon,
   CheckmarkFilledIcon,
   DismissFilledIcon,
+  SearchIcon,
 } from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
+import { TextField, TextFieldProps } from '../textField';
 
 const DROPDOWN_PADDING = 20;
 
@@ -48,6 +50,7 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   inputText?: string;
   groupConfig?: GroupConfig;
   idQaForHelperText?: string;
+  search?: { active: boolean; props?: TextFieldProps };
 };
 
 export function MultiSelect<T extends MultiSelectOption>({
@@ -69,9 +72,14 @@ export function MultiSelect<T extends MultiSelectOption>({
   renderValues: renderValuesProp,
   groupConfig,
   idQaForHelperText,
+  search,
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
   const hasValue = values.length > 0;
+  const [searchValueLocal, setSearchValue] = useState<string | undefined>(undefined);
+
+  const searchValue = search?.props?.value?.toString() ?? searchValueLocal;
+  const hasValueInSearch = searchValue && searchValue.length > 0;
 
   const ref = useRef(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -98,6 +106,27 @@ export function MultiSelect<T extends MultiSelectOption>({
       dropdownElement.style.top = `calc(100% - ${rect.bottom - window.innerHeight + DROPDOWN_PADDING}px)`;
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!search?.active) return;
+
+    if (!open && hasValueInSearch) {
+      setSearchValue('');
+    }
+  }, [open, hasValueInSearch, search?.active]);
+
+  const onSearchValueChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
+
+      search.props?.onChange?.(e);
+    },
+    [search?.props]
+  );
+
+  if (search?.active && hasValueInSearch) {
+    options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+  }
 
   const renderValues = () => {
     if (renderValuesProp) {
@@ -229,7 +258,17 @@ export function MultiSelect<T extends MultiSelectOption>({
       {/* TODO: Нужно переделать на портал */}
       {canShowDropdown && (
         <ul ref={dropdownRef} id-qa={classNames({ [`${idQa}-dropdown`]: idQa })} className="multi-select-dropdown">
-          {hasSelectAllOption && (
+          {search?.active && (
+            <TextField
+              startAdornment={<SearchIcon />}
+              {...(search.props ?? {})}
+              className={classNames('gkit-multi-select-search', search.props?.className)}
+              value={searchValue ?? ''}
+              onChange={onSearchValueChange}
+            />
+          )}
+
+          {hasSelectAllOption && !hasValueInSearch && (
             <li
               id-qa={classNames({ [`${idQa}-option-select-all`]: idQa })}
               className={classNames('multi-select-option', size)}

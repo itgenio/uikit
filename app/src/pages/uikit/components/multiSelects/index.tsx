@@ -10,7 +10,7 @@ type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
 
-const getOptions = (withObjValues = false): Option[] => {
+export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   return Array.from({ length: 60 }, (_, i) => {
     const index = i + 1;
 
@@ -46,7 +46,7 @@ export function MultiSelects() {
               hasSelectAllOption
               helperText="Desc"
               inputText="inputText"
-              options={isOptionsWithObjState ? getOptions(true) : getOptions()}
+              options={getMultiSelectOptions(isOptionsWithObjState)}
               values={isOptionsWithObjState ? objValues : value}
               selectAllOptionLabel="All Selected"
               onChange={values => {
@@ -81,7 +81,7 @@ export function MultiSelects() {
           return values.map(value => {
             return (
               <Badge type="secondary" key={value as number} size={size}>
-                {getOptions().find(({ value: v }) => v === value)?.label}
+                {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
                 <button
                   onClick={e => {
                     e.stopPropagation();
@@ -97,6 +97,7 @@ export function MultiSelects() {
         },
       },
     },
+    { state: 'With search', props: { search: { active: true, props: { placeholder: 'Search' } } } },
   ];
 
   return (
