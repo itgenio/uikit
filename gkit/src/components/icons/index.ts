@@ -119,3 +119,4 @@ export * from './pin';
 export * from './pinOff';
 export * from './link';
 export * from './chatWarning';
+export * from './timeline';
