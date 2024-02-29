@@ -40,7 +40,7 @@ const getClosureRenderValue =
             onClick={e => {
               e.stopPropagation();
 
-              setValue(prevState => prevState?.filter(v => v !== value));
+              setValue((prevState: Props['values']) => prevState?.filter(v => v !== value));
             }}
           >
             <DismissIcon />
