@@ -51,6 +51,11 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   groupConfig?: GroupConfig;
   idQaForHelperText?: string;
   search?: { active: boolean; props?: TextFieldProps };
+  renderValuesInline?:
+    | {
+        coeffForShowCount?: number;
+      }
+    | boolean;
 };
 
 export function MultiSelect<T extends MultiSelectOption>({
@@ -73,6 +78,7 @@ export function MultiSelect<T extends MultiSelectOption>({
   groupConfig,
   idQaForHelperText,
   search,
+  renderValuesInline,
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
   const hasValue = values.length > 0;
@@ -83,6 +89,8 @@ export function MultiSelect<T extends MultiSelectOption>({
 
   const ref = useRef(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
+  const [contentNode, setContentNode] = useState<HTMLDivElement | null>(null);
+
   const id = useMemo(() => generateId(), []);
 
   const canShowDropdown = open && !disabled;
@@ -130,6 +138,47 @@ export function MultiSelect<T extends MultiSelectOption>({
 
   const renderValues = () => {
     if (renderValuesProp) {
+      const width = contentNode?.clientWidth;
+
+      if (renderValuesInline && width && options.length > 0 && values.length > 0) {
+        const isRenderValuesInlineWithConfig = typeof renderValuesInline === 'object';
+
+        //If children will have nodes (not strings), enter a coeff to  correct calc the field length
+        const customCoeff = isRenderValuesInlineWithConfig ? renderValuesInline.coeffForShowCount || 1 : 1;
+
+        const calc = (width * customCoeff) / 10;
+
+        const { valuesForRender, counter } = values.reduce<{
+          valuesForRender: MultiSelectProps<MultiSelectOption>['values'];
+          counter: number;
+          labels: string;
+        }>(
+          (acc, value) => {
+            const label = options.find(option => option.value === value)?.label;
+
+            if (label) {
+              acc.labels += `${label}, `;
+            }
+
+            if (acc.labels.length < calc) {
+              acc.valuesForRender.push(value);
+            } else {
+              acc.counter++;
+            }
+
+            return acc;
+          },
+          { valuesForRender: [], counter: 0, labels: '' }
+        );
+
+        return (
+          <Fragment>
+            {renderValuesProp(valuesForRender)}
+            {counter > 0 ? `+ ${counter}` : ''}
+          </Fragment>
+        );
+      }
+
       return renderValuesProp(values);
     }
 
@@ -231,7 +280,9 @@ export function MultiSelect<T extends MultiSelectOption>({
         helperText,
         error,
         idQaForHelperText,
-        className: classNames('gkit-multi-select', className),
+        className: classNames('gkit-multi-select', className, {
+          'full-width': renderValuesProp && renderValuesInline,
+        }),
       }}
     >
       <div
@@ -247,6 +298,11 @@ export function MultiSelect<T extends MultiSelectOption>({
           setOpen(!open);
         }}
         id={id}
+        ref={node => {
+          if (node) {
+            setContentNode(node);
+          }
+        }}
       >
         <div className={classNames('multi-select-label', size, { disabled, selected: hasValue })}>{renderValues()}</div>
 

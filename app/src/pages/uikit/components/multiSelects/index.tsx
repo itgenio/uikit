@@ -23,6 +23,29 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   });
 };
 
+const getClosureRenderValue = (setValue: React.Dispatch<any>, withBadge?: boolean) => size => values => {
+  return values.map(value => {
+    if (!withBadge) {
+      return values.map(value => `${getMultiSelectOptions().find(({ value: v }) => v === value)?.label}, `);
+    }
+
+    return (
+      <Badge type="secondary" key={value as number} size={size}>
+        {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
+        <button
+          onClick={e => {
+            e.stopPropagation();
+
+            setValue(prevState => prevState?.filter(v => v !== value));
+          }}
+        >
+          <DismissIcon />
+        </button>
+      </Badge>
+    );
+  });
+};
+
 export function MultiSelects() {
   const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<Props['values']>([1]);
@@ -76,28 +99,19 @@ export function MultiSelects() {
     { state: 'Options with objects and disabled option' },
     {
       state: 'Custom Render Values',
-      customProps: {
-        closureRenderValue: size => values => {
-          return values.map(value => {
-            return (
-              <Badge type="secondary" key={value as number} size={size}>
-                {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
-                <button
-                  onClick={e => {
-                    e.stopPropagation();
-
-                    setValue(prevState => prevState?.filter(v => v !== value));
-                  }}
-                >
-                  <DismissIcon />
-                </button>
-              </Badge>
-            );
-          });
-        },
-      },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue, true) },
     },
     { state: 'With search', props: { search: { active: true, props: { placeholder: 'Search' } } } },
+    {
+      state: 'Render values inline with counter',
+      props: { renderValuesInline: true },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue) },
+    },
+    {
+      state: 'Render values inline with counter (with coeffForShowCount)',
+      props: { renderValuesInline: { coeffForShowCount: 0.9 } },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue, true) },
+    },
   ];
 
   return (
