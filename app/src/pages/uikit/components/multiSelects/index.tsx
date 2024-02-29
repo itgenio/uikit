@@ -9,6 +9,7 @@ type Option = MultiSelectOption<{ someData: string }>;
 type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
+const sizes = ['small', 'large'] as const;
 
 export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   return Array.from({ length: 60 }, (_, i) => {
@@ -23,31 +24,33 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   });
 };
 
-const getClosureRenderValue = (setValue: React.Dispatch<any>, withBadge?: boolean) => size => values => {
-  return values.map(value => {
-    if (!withBadge) {
-      return values.map(value => `${getMultiSelectOptions().find(({ value: v }) => v === value)?.label}, `);
-    }
+const getClosureRenderValue =
+  (setValue: React.Dispatch<Props['values']>, withBadge?: boolean) =>
+  (size: typeof sizes[number]) =>
+  (values: Props['values']) => {
+    return values.map(value => {
+      if (!withBadge) {
+        return values.map(value => `${getMultiSelectOptions().find(({ value: v }) => v === value)?.label}, `);
+      }
 
-    return (
-      <Badge type="secondary" key={value as number} size={size}>
-        {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
-        <button
-          onClick={e => {
-            e.stopPropagation();
+      return (
+        <Badge type="secondary" key={value as number} size={size}>
+          {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
+          <button
+            onClick={e => {
+              e.stopPropagation();
 
-            setValue(prevState => prevState?.filter(v => v !== value));
-          }}
-        >
-          <DismissIcon />
-        </button>
-      </Badge>
-    );
-  });
-};
+              setValue(prevState => prevState?.filter(v => v !== value));
+            }}
+          >
+            <DismissIcon />
+          </button>
+        </Badge>
+      );
+    });
+  };
 
 export function MultiSelects() {
-  const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<Props['values']>([1]);
   const [objValues, setObjValues] = useState<Props['values']>([{ key: 1, someData: 'data' }]);
 
