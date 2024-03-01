@@ -25,14 +25,14 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
 };
 
 const getClosureRenderValue =
-  (setValue: React.Dispatch<Props['values']>, withBadge?: boolean) =>
+  (setValue: React.Dispatch<(prevState: Props['values']) => void>, withBadge?: boolean) =>
   (size: Props['size']) =>
   (values: Props['values']) => {
     if (!withBadge) {
-      return values.map(value => getMultiSelectOptions().find(({ value: v }) => v === value)?.label).join(', ');
+      return (values ?? []).map(value => getMultiSelectOptions().find(({ value: v }) => v === value)?.label).join(', ');
     }
 
-    return values.map(value => {
+    return (values ?? []).map(value => {
       return (
         <Badge type="secondary" key={value as number} size={size}>
           {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
