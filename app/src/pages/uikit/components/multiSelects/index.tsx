@@ -26,7 +26,7 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
 
 const getClosureRenderValue =
   (setValue: React.Dispatch<Props['values']>, withBadge?: boolean) =>
-  (size: typeof sizes[number]) =>
+  (size: Props['size']) =>
   (values: Props['values']) => {
     return values.map(value => {
       if (!withBadge) {
