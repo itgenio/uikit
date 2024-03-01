@@ -28,11 +28,11 @@ const getClosureRenderValue =
   (setValue: React.Dispatch<Props['values']>, withBadge?: boolean) =>
   (size: Props['size']) =>
   (values: Props['values']) => {
-    return values.map(value => {
-      if (!withBadge) {
-        return values.map(value => `${getMultiSelectOptions().find(({ value: v }) => v === value)?.label}, `);
-      }
+    if (!withBadge) {
+      return values.map(value => getMultiSelectOptions().find(({ value: v }) => v === value)?.label).join(', ');
+    }
 
+    return values.map(value => {
       return (
         <Badge type="secondary" key={value as number} size={size}>
           {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
@@ -40,7 +40,7 @@ const getClosureRenderValue =
             onClick={e => {
               e.stopPropagation();
 
-              setValue((prevState: Props['values'] | undefined) => (prevState ?? []).filter(v => v !== value));
+              setValue((prevState: Props['values']) => (prevState ?? []).filter(v => v !== value));
             }}
           >
             <DismissIcon />
