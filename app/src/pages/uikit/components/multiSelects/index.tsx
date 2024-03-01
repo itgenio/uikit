@@ -1,6 +1,6 @@
 import './style.less';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, SetStateAction, useState } from 'react';
 import { Badge } from '@itgenio/gkit/badge';
 import { DismissIcon } from '@itgenio/gkit/icons';
 import { MultiSelect, MultiSelectOption, MultiSelectProps } from '@itgenio/gkit/multiSelect';
@@ -25,7 +25,7 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
 };
 
 const getClosureRenderValue =
-  (setValue: React.Dispatch<(prevState: Props['values']) => void>, withBadge?: boolean) =>
+  (setValue: React.Dispatch<SetStateAction<Props['values'] | undefined>>, withBadge?: boolean) =>
   (size: Props['size']) =>
   (values: Props['values']) => {
     if (!withBadge) {
