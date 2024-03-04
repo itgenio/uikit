@@ -48,3 +48,4 @@ export * from './partyingFace';
 export * from './smilingFaceWithSunglasses';
 export * from './pensiveFace';
 export * from './redQuestionMark';
+export * from './custom';
