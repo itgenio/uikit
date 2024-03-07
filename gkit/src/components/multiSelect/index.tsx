@@ -53,6 +53,7 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   search?: { active: boolean; props?: TextFieldProps };
   renderValuesInline?:
     | {
+        //If children will have nodes (not strings), enter a coeff to correct calc the field length
         coeffForShowCount?: number;
       }
     | boolean;
@@ -143,10 +144,11 @@ export function MultiSelect<T extends MultiSelectOption>({
       if (renderValuesInline && width && options.length > 0 && values.length > 0) {
         const isRenderValuesInlineWithConfig = typeof renderValuesInline === 'object';
 
-        //If children will have nodes (not strings), enter a coeff to  correct calc the field length
         const customCoeff = isRenderValuesInlineWithConfig ? renderValuesInline.coeffForShowCount || 1 : 1;
 
-        const calc = (width * customCoeff) / 10;
+        const averageLetterWidth = 10;
+
+        const maxAverageLettersInField = (width * customCoeff) / averageLetterWidth;
 
         const { valuesForRender, counter } = values.reduce<{
           valuesForRender: MultiSelectProps<MultiSelectOption>['values'];
@@ -160,7 +162,7 @@ export function MultiSelect<T extends MultiSelectOption>({
               acc.labels += `${label}, `;
             }
 
-            if (acc.labels.length < calc) {
+            if (acc.labels.length < maxAverageLettersInField) {
               acc.valuesForRender.push(value);
             } else {
               acc.counter++;
