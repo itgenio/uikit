@@ -53,7 +53,7 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   search?: { active: boolean; props?: TextFieldProps };
   renderValuesInline?:
     | {
-        //If children will have nodes (not strings), enter a coeff to correct calc the field length
+        /** If children will have nodes (not strings), enter a coeff to correct calc the field length */
         coeffForShowCount?: number;
       }
     | boolean;
