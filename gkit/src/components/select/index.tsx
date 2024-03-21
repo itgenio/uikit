@@ -113,25 +113,28 @@ export const Select = React.memo(
       portalElement.className = 'gkit-select-portal-with-search';
     }, [search?.active, open]);
 
-    const renderOptionItem = (option: SelectOption, index: number) => (
-      <SelectPrimitive.Item
-        id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
-        className={classNames('gkit-select-option', size)}
-        key={index}
-        value={String(option.value)}
-        data-value={option.value}
-        disabled={disabledList.includes(option.value)}
-      >
-        <SelectPrimitive.ItemText>
-          {open && option.customDropdownOption ? option.customDropdownOption : option.label}
-        </SelectPrimitive.ItemText>
-        {option.value === value && (
-          <SelectPrimitive.ItemIndicator>
-            <CheckmarkIcon />
-          </SelectPrimitive.ItemIndicator>
-        )}
-      </SelectPrimitive.Item>
-    );
+    const renderOptionItem = (option: SelectOption, index: number) => {
+      return (
+        <SelectPrimitive.Item
+          id-qa={classNames({ [`${idQa}-option-${option.value}`]: idQa })}
+          className={classNames('gkit-select-option', size)}
+          key={index}
+          value={String(option.value)}
+          data-value={option.value}
+          disabled={disabledList.includes(option.value)}
+        >
+          <SelectPrimitive.ItemText>
+            {open && option.customDropdownOption ? option.customDropdownOption : option.label}
+          </SelectPrimitive.ItemText>
+
+          {option.value === value && (
+            <SelectPrimitive.ItemIndicator>
+              <CheckmarkIcon />
+            </SelectPrimitive.ItemIndicator>
+          )}
+        </SelectPrimitive.Item>
+      );
+    };
 
     const renderOptionsByGroups = () => {
       const optionsByGroupDict = groupByPropertyToDict(
@@ -178,6 +181,19 @@ export const Select = React.memo(
       ];
     };
 
+    const renderOptions = () => {
+      // Оптимизация. Когда селект закрыт, то нужно отрисовывать только выбранный элемент
+      if (!open) {
+        return options.map((option, index) => {
+          if (option.value !== value) return null;
+
+          return renderOptionItem(option, index);
+        });
+      }
+
+      return options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem);
+    };
+
     const onValueChange = (newValue: string) => {
       const option = options.find(option => String(option.value) === newValue);
 
@@ -213,17 +229,22 @@ export const Select = React.memo(
       [dropdownProps, search?.active]
     );
 
+    const onOpenChange = useCallback(
+      (newOpen: boolean) => {
+        if (!open && disabled) return;
+
+        setOpen(newOpen);
+      },
+      [disabled, open]
+    );
+
     return (
       <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
           open={disabled ? false : undefined}
-          onOpenChange={newOpen => {
-            if (!open && disabled) return;
-
-            setOpen(newOpen);
-          }}
+          onOpenChange={onOpenChange}
         >
           <SelectPrimitive.Trigger
             className={classNames(inline ? 'gkit-inline-select' : 'gkit-select', 'input-wrapper', size, {
@@ -237,10 +258,12 @@ export const Select = React.memo(
             id={id}
           >
             {startAdornment}
+
             <SelectPrimitive.Value
               placeholder={placeholder}
               aria-label={value != null ? valuePrefix + value : undefined}
             />
+
             <SelectPrimitive.Icon className="select-chevron">
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
             </SelectPrimitive.Icon>
@@ -272,7 +295,8 @@ export const Select = React.memo(
                       onChange={onSearchValueChange}
                     />
                   )}
-                  {options.some(({ group }) => !!group) ? renderOptionsByGroups() : options.map(renderOptionItem)}
+
+                  {renderOptions()}
                 </SelectPrimitive.Viewport>
               </SelectPrimitive.Content>
             </Fragment>
