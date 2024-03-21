@@ -1,6 +1,6 @@
 import './style.less';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, SetStateAction, useState } from 'react';
 import { Badge } from '@itgenio/gkit/badge';
 import { DismissIcon } from '@itgenio/gkit/icons';
 import { MultiSelect, MultiSelectOption, MultiSelectProps } from '@itgenio/gkit/multiSelect';
@@ -9,6 +9,7 @@ type Option = MultiSelectOption<{ someData: string }>;
 type Props = MultiSelectProps<Option>;
 
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
+const sizes = ['small', 'large'] as const;
 
 export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   return Array.from({ length: 60 }, (_, i) => {
@@ -23,8 +24,33 @@ export const getMultiSelectOptions = (withObjValues = false): Option[] => {
   });
 };
 
+const getClosureRenderValue =
+  (setValue: React.Dispatch<SetStateAction<Props['values'] | undefined>>, withBadge?: boolean) =>
+  (size: Props['size']) =>
+  (values: Props['values']) => {
+    if (!withBadge) {
+      return (values ?? []).map(value => getMultiSelectOptions().find(({ value: v }) => v === value)?.label).join(', ');
+    }
+
+    return (values ?? []).map(value => {
+      return (
+        <Badge type="secondary" key={value as number} size={size}>
+          {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
+          <button
+            onClick={e => {
+              e.stopPropagation();
+
+              setValue((prevState: Props['values']) => (prevState ?? []).filter(v => v !== value));
+            }}
+          >
+            <DismissIcon />
+          </button>
+        </Badge>
+      );
+    });
+  };
+
 export function MultiSelects() {
-  const sizes = ['small', 'large'] as const;
   const [value, setValue] = useState<Props['values']>([1]);
   const [objValues, setObjValues] = useState<Props['values']>([{ key: 1, someData: 'data' }]);
 
@@ -76,28 +102,19 @@ export function MultiSelects() {
     { state: 'Options with objects and disabled option' },
     {
       state: 'Custom Render Values',
-      customProps: {
-        closureRenderValue: size => values => {
-          return values.map(value => {
-            return (
-              <Badge type="secondary" key={value as number} size={size}>
-                {getMultiSelectOptions().find(({ value: v }) => v === value)?.label}
-                <button
-                  onClick={e => {
-                    e.stopPropagation();
-
-                    setValue(prevState => prevState?.filter(v => v !== value));
-                  }}
-                >
-                  <DismissIcon />
-                </button>
-              </Badge>
-            );
-          });
-        },
-      },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue, true) },
     },
     { state: 'With search', props: { search: { active: true, props: { placeholder: 'Search' } } } },
+    {
+      state: 'Render values inline with counter',
+      props: { renderValuesInline: true },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue) },
+    },
+    {
+      state: 'Render values inline with counter (with coeffForShowCount)',
+      props: { renderValuesInline: { coeffForShowCount: 0.9 } },
+      customProps: { closureRenderValue: getClosureRenderValue(setValue, true) },
+    },
   ];
 
   return (

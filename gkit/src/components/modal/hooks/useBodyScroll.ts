@@ -6,6 +6,7 @@ export const usePreventBodyScroll = (isEnabled: boolean) => {
 
     const currentOverflow = getComputedStyle(document.body).overflow;
 
+    //Error: react-remove-scroll-bar: cannot calculate scrollbar size because it is removed (overflow:hidden on body)
     document.body.style.overflow = 'hidden';
 
     return () => {
