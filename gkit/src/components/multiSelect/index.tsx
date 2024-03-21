@@ -142,13 +142,18 @@ export function MultiSelect<T extends MultiSelectOption>({
       const width = contentNode?.clientWidth;
 
       if (renderValuesInline && width && options.length > 0 && values.length > 0) {
+        const { paddingLeft, paddingRight } = window.getComputedStyle(contentNode);
+
+        const pLeft = +paddingLeft.replace('px', '');
+        const pRight = +paddingRight.replace('px', '');
+
         const isRenderValuesInlineWithConfig = typeof renderValuesInline === 'object';
 
         const customCoeff = isRenderValuesInlineWithConfig ? renderValuesInline.coeffForShowCount || 1 : 1;
 
         const averageLetterWidth = 10;
 
-        const maxAverageLettersInField = (width * customCoeff) / averageLetterWidth;
+        const maxAverageLettersInField = ((width - pLeft - pRight) * customCoeff) / averageLetterWidth;
 
         const { valuesForRender, counter } = values.reduce<{
           valuesForRender: MultiSelectProps<MultiSelectOption>['values'];
