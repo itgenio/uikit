@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import { groupByPropertyToDict } from '@itgenio/utils';
+import { Badge } from '../badge';
 import { Checkbox } from '../checkbox';
 import {
   SubtractFilledIcon,
@@ -167,7 +168,7 @@ export function MultiSelect<T extends MultiSelectOption>({
               acc.labels += `${label}, `;
             }
 
-            if (acc.labels.length < maxAverageLettersInField) {
+            if (acc.valuesForRender.length < 1 || acc.labels.length < maxAverageLettersInField) {
               acc.valuesForRender.push(value);
             } else {
               acc.counter++;
@@ -181,12 +182,12 @@ export function MultiSelect<T extends MultiSelectOption>({
         return (
           <Fragment>
             {renderValuesProp(valuesForRender)}
-            {counter > 0 ? `+ ${counter}` : ''}
+            {counter > 0 ? <Badge size={size}>+{counter}</Badge> : ''}
           </Fragment>
         );
       }
 
-      return renderValuesProp(values);
+      return inputText && !hasValue ? inputText : renderValuesProp(values);
     }
 
     return (
