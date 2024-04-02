@@ -182,7 +182,7 @@ export function MultiSelect<T extends MultiSelectOption>({
         return (
           <Fragment>
             {renderValuesProp(valuesForRender)}
-            {counter > 0 ? <Badge size={size}>+{counter}</Badge> : ''}
+            {counter > 0 && <Badge size={size}>+{counter}</Badge>}
           </Fragment>
         );
       }
