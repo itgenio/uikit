@@ -2,7 +2,7 @@ import './style.less';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { DismissIcon } from '../icons';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
 
 type ArrowProps = {
   arrowWidth?: PopoverPrimitive.PopoverArrowProps['width'];

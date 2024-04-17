@@ -2,7 +2,8 @@ import './style.less';
 
 import classNames from 'classnames';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
+import { ChevronLeftIcon } from '@itgenio/icons/chevronLeftIcon';
+import { ChevronRightIcon } from '@itgenio/icons/chevronRightIcon';
 
 export const TABS_SCROLL_PADDING_PX = 10;
 export const TABS_SCROLL_VALUE_PX = 50;

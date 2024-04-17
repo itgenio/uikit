@@ -41,6 +41,8 @@ const isProduction = process.env.NODE_ENV === 'production';
       'react-dom',
       'classnames',
       'react-focus-lock',
+      '@itgenio/icons',
+      '@itgenio/utils',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-select',
       '@radix-ui/react-toggle-group',
@@ -48,7 +50,6 @@ const isProduction = process.env.NODE_ENV === 'production';
       '@radix-ui/react-tooltip',
       '@radix-ui/react-toast',
       'use-onclickoutside',
-      '@itgenio/utils',
     ],
     plugins: [lessLoader(), svgPlugin(), writePlugin()],
   }).catch(e => console.error(e.message));

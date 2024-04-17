@@ -2,8 +2,8 @@ import './style.less';
 
 import classNames from 'classnames';
 import React from 'react';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
 import { ModalProps } from '../..';
-import { DismissIcon } from '../../../icons';
 
 type Props = Pick<ModalProps, 'fullScreen' | 'onClose' | 'idQa' | 'children'>;
 
