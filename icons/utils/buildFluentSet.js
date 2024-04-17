@@ -30,7 +30,7 @@ const SOURCES_FOLDER = 'fluentui-system-icons-main';
       acc[name] = { folder: folderPath, icons: {} };
     }
 
-    if (!acc[name][type]) {
+    if (!acc[name].icons[type]) {
       acc[name].icons[type] = [];
     }
 
