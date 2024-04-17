@@ -6,6 +6,8 @@
 !src/**
 !scripts
 !scripts/**
+!utils
+!utils/**
 !index.d.ts
 !package-lock.json
 !package.json

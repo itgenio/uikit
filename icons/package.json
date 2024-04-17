@@ -9,7 +9,8 @@
     "watch": "npm run clean && ts-node ./scripts/build.js",
     "tsc": "ts-node ./scripts/buildTypes.js",
     "prepack": "npm run build && npm run tsc",
-    "clean": "ts-node ./scripts/clean.js"
+    "clean": "ts-node ./scripts/clean.js",
+    "build-fluent-set": "node ./utils/buildFluentSet.js"
   },
   "author": "Nikita Kroe",
   "license": "MIT",

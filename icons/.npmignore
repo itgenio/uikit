@@ -1,5 +1,6 @@
 src/
 scripts/
+utils/
 tsconfig.build.json
 tsconfig.json
 package-lock.json
