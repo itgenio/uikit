@@ -9,6 +9,7 @@ import { DismissFilledIcon } from '@itgenio/icons/dismissFilledIcon';
 import { SearchIcon } from '@itgenio/icons/searchIcon';
 import { SubtractFilledIcon } from '@itgenio/icons/subtractFilledIcon';
 import { groupByPropertyToDict } from '@itgenio/utils';
+import { Badge } from '../badge';
 import { Checkbox } from '../checkbox';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
@@ -165,7 +166,7 @@ export function MultiSelect<T extends MultiSelectOption>({
               acc.labels += `${label}, `;
             }
 
-            if (acc.labels.length < maxAverageLettersInField) {
+            if (acc.valuesForRender.length < 1 || acc.labels.length < maxAverageLettersInField) {
               acc.valuesForRender.push(value);
             } else {
               acc.counter++;
@@ -179,12 +180,12 @@ export function MultiSelect<T extends MultiSelectOption>({
         return (
           <Fragment>
             {renderValuesProp(valuesForRender)}
-            {counter > 0 ? `+ ${counter}` : ''}
+            {counter > 0 && <Badge size={size}>+{counter}</Badge>}
           </Fragment>
         );
       }
 
-      return renderValuesProp(values);
+      return inputText && !hasValue ? inputText : renderValuesProp(values);
     }
 
     return (
