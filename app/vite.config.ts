@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     dynamicImport({
       onFiles(files) {
+        // Для иконок фильтруем только иконки, т.к при билде падает ошибка
         return files.filter(file => {
           return (
             !file.includes('node_modules/@itgenio/icons') ||
