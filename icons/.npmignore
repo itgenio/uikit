@@ -1,0 +1,6 @@
+src/
+scripts/
+tsconfig.build.json
+tsconfig.json
+package-lock.json
+iconsList.js

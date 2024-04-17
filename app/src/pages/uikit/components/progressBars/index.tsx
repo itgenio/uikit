@@ -1,13 +1,14 @@
 import './style.less';
 
 import React, { Fragment } from 'react';
-import { ArrowRightIcon, ArrowCircleRightFilledIcon } from '@itgenio/gkit/icons';
 import {
   ProgressBar,
   ProgressBarCheckpointElementWrap,
   ProgressBarCustomCheckpointElementProps,
   ProgressBarProps,
 } from '@itgenio/gkit/progressBar';
+import { ArrowCircleRightFilledIcon } from '@itgenio/icons/arrowCircleRightFilledIcon';
+import { ArrowRightIcon } from '@itgenio/icons/arrowRightIcon';
 
 const CustomCheckpointElement = ({ done, asd, idQa }: ProgressBarCustomCheckpointElementProps<{ asd: string }>) => {
   console.log(asd);
