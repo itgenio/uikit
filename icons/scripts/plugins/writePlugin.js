@@ -3,6 +3,8 @@ const path = require('path');
 const { groupByPropertyToDict } = require('@itgenio/utils');
 
 const JS_EXT = '.js';
+const TS_DEC_EXT = '.d.ts';
+const ICONS_LIST_FILENAME = 'iconsList';
 
 module.exports = () => ({
   name: 'write',
@@ -52,7 +54,7 @@ module.exports = () => ({
 
               promises.push(
                 fs.promises.writeFile(
-                  path.resolve(outDir, `${fileNameWithoutExt}.d.ts`),
+                  path.resolve(outDir, `${fileNameWithoutExt}${TS_DEC_EXT}`),
                   `/// <reference types="react" />
 import { SvgIconProps } from './types';
 export declare function ${componentName}({ className, ...props }?: Partial<SvgIconProps>): JSX.Element;
@@ -68,11 +70,18 @@ export declare function ${componentName}({ className, ...props }?: Partial<SvgIc
         })
       );
 
-      const iconsListContent = `var iconsList = ${JSON.stringify(iconsList)};
+      await Promise.allSettled([
+        fs.promises.writeFile(
+          path.resolve(outDir, `${ICONS_LIST_FILENAME}${JS_EXT}`),
+          `var iconsList = ${JSON.stringify(iconsList)};
 export { iconsList };
-`;
-
-      await fs.promises.writeFile(path.resolve(outDir, 'iconsList.js'), iconsListContent);
+`
+        ),
+        fs.promises.writeFile(
+          path.resolve(outDir, `${ICONS_LIST_FILENAME}${TS_DEC_EXT}`),
+          `export declare var iconsList: [string, string][];`
+        ),
+      ]);
     });
   },
 });
