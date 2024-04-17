@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/icons",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "description": "Icons",
   "main": "./index.js",
   "scripts": {
