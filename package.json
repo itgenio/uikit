@@ -5,7 +5,7 @@
   "description": "The monorepo for gkit",
   "main": "index.js",
   "scripts": {
-    "build-preview": "cd gkit && npm i && npm run prepack && cd ../app && npm i && npm run build",
+    "build-preview": "cd gkit && npm i && npm run prepack && cd ../icons && npm i && npm run prepack && cd ../app && npm i && npm run build",
     "format": "pretty-quick",
     "check-format": "pretty-quick --check",
     "lint": "eslint './app/src/**/*.tsx' './gkit/src/**/*.tsx' './gkit/src/**/*.ts'"
