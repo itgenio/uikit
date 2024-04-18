@@ -71,7 +71,9 @@ const MemoIcons = React.memo(({ icons, number }: { icons: Function[]; number: nu
           </div>
         }
       >
-        <AccordionTitle>Set {number}</AccordionTitle>
+        <AccordionTitle>
+          Set {number}. {`[${icons[0].name[0]} - ${icons[icons.length - 1].name[0]}]`}
+        </AccordionTitle>
       </Accordion>
     </Fragment>
   );
