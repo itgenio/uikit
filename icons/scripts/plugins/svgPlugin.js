@@ -76,7 +76,6 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
 module.exports = () => ({
   name: 'svg',
   setup(build) {
-    // Icons
     build.onLoad({ filter: ICONS_PATH_FILTER }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,

@@ -10,11 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 (async () => {
   const { globby } = await import('globby');
 
-  const entryPoints = await globby([
-    'src/index.ts', // global styles
-    'src/custom/svg',
-    'src/fluent/svg',
-  ]);
+  const entryPoints = await globby(['src/index.ts', 'src/custom/svg', 'src/fluent/svg']);
 
   await build({
     watch: isProduction
