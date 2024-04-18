@@ -10,8 +10,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { ChevronLeftIcon } from '@itgenio/icons/chevronLeftIcon';
+import { ChevronRightIcon } from '@itgenio/icons/chevronRightIcon';
 import { Button, ButtonProps } from '../button';
-import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
 import { useEvent } from '../internal/hooks';
 import { canSwipeByEvents } from './utils';
 

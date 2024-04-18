@@ -2,8 +2,8 @@ import './style.less';
 
 import React, { Fragment, SetStateAction, useState } from 'react';
 import { Badge } from '@itgenio/gkit/badge';
-import { DismissIcon } from '@itgenio/gkit/icons';
 import { MultiSelect, MultiSelectOption, MultiSelectProps } from '@itgenio/gkit/multiSelect';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
 
 type Option = MultiSelectOption<{ someData: string }>;
 type Props = MultiSelectProps<Option>;

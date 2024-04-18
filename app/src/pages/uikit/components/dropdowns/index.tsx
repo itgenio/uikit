@@ -9,7 +9,9 @@ import {
   DropdownRadioGroup,
   DropdownRadioItem,
 } from '@itgenio/gkit/dropdown';
-import { ChevronDownFilledIcon, CheckmarkIcon, CircleIcon } from '@itgenio/gkit/icons';
+import { CheckmarkIcon } from '@itgenio/icons/checkmarkIcon';
+import { ChevronDownFilledIcon } from '@itgenio/icons/chevronDownFilledIcon';
+import { CircleIcon } from '@itgenio/icons/circleIcon';
 
 export function Dropdowns() {
   const content = (

@@ -1,7 +1,8 @@
 import './style.less';
 import React, { Fragment } from 'react';
 import { Badge, BadgeProps } from '@itgenio/gkit/badge';
-import { StarIcon, DismissIcon } from '@itgenio/gkit/icons';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
+import { StarIcon } from '@itgenio/icons/starIcon';
 
 export function Badges() {
   const sizes = ['small', 'large'] as const;

@@ -2,7 +2,8 @@ import './style.less';
 
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { ErrorCircleFilledIcon, DismissIcon } from '../icons';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
+import { ErrorCircleFilledIcon } from '@itgenio/icons/errorCircleFilledIcon';
 
 type Variants = 'success' | 'warning' | 'error' | 'info';
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { DismissCircleIcon, EyeIcon, EyeOffIcon } from '@itgenio/gkit/icons';
 import { TextField } from '@itgenio/gkit/textField';
+import { DismissCircleIcon } from '@itgenio/icons/dismissCircleIcon';
+import { EyeIcon } from '@itgenio/icons/eyeIcon';
+import { EyeOffIcon } from '@itgenio/icons/eyeOffIcon';
 
 export const TextFieldPassword = () => {
   const [value, setValue] = useState('');

@@ -3,7 +3,7 @@ import './style.less';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import classNames from 'classnames';
 import React, { PropsWithChildren, ReactNode } from 'react';
-import { ChevronDownIcon } from '../icons';
+import { ChevronDownIcon } from '@itgenio/icons/chevronDownIcon';
 
 type AccordionProps = PropsWithChildren<{
   idQa?: string;

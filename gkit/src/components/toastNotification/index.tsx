@@ -3,7 +3,8 @@ import './style.less';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import classNames from 'classnames';
 import React, { Fragment, ReactNode, useRef, useState } from 'react';
-import { ErrorCircleFilledIcon, DismissIcon } from '../icons';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
+import { ErrorCircleFilledIcon } from '@itgenio/icons/errorCircleFilledIcon';
 import { Portal } from '../portal';
 
 type Variants = 'success' | 'warning' | 'error' | 'info';

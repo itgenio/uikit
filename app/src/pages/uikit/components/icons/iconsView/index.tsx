@@ -1,9 +1,9 @@
 import './style.less';
 
 import React, { CSSProperties, Fragment, useCallback, useMemo, useState } from 'react';
-import * as gkitIcons from '@itgenio/gkit/icons';
 import { TextField } from '@itgenio/gkit/textField';
 import { Tooltip } from '@itgenio/gkit/tooltip';
+import { DismissIcon } from '@itgenio/icons/dismissIcon';
 import { STEP, Slider } from '../../slider';
 
 const DEFAULT_SIZE = 40;
@@ -38,7 +38,7 @@ export const IconsView = React.memo(({ icons }: Props) => {
       <TextField
         className="search"
         value={searchValue}
-        endAdornment={<gkitIcons.DismissIcon onClick={() => setSearchValue('')} />}
+        endAdornment={<DismissIcon onClick={() => setSearchValue('')} />}
         onChange={e => setSearchValue(e.target.value)}
         size="small"
       />

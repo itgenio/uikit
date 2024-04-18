@@ -2,17 +2,15 @@ import './style.less';
 import classNames from 'classnames';
 import React, { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import { CheckmarkFilledIcon } from '@itgenio/icons/checkmarkFilledIcon';
+import { ChevronDownFilledIcon } from '@itgenio/icons/chevronDownFilledIcon';
+import { ChevronUpFilledIcon } from '@itgenio/icons/chevronUpFilledIcon';
+import { DismissFilledIcon } from '@itgenio/icons/dismissFilledIcon';
+import { SearchIcon } from '@itgenio/icons/searchIcon';
+import { SubtractFilledIcon } from '@itgenio/icons/subtractFilledIcon';
 import { groupByPropertyToDict } from '@itgenio/utils';
 import { Badge } from '../badge';
 import { Checkbox } from '../checkbox';
-import {
-  SubtractFilledIcon,
-  ChevronDownFilledIcon,
-  ChevronUpFilledIcon,
-  CheckmarkFilledIcon,
-  DismissFilledIcon,
-  SearchIcon,
-} from '../icons';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 import { TextField, TextFieldProps } from '../textField';

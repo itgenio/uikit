@@ -2,7 +2,7 @@ import './style.less';
 
 import classNames from 'classnames';
 import React, { Fragment, FunctionComponent, PropsWithChildren } from 'react';
-import { CheckmarkCircleFilledIcon } from '../icons';
+import { CheckmarkCircleFilledIcon } from '@itgenio/icons/checkmarkCircleFilledIcon';
 
 export const PROGRESS_BAR_MIN_PROGRESS = 0;
 export const PROGRESS_BAR_MAX_PROGRESS = 100;

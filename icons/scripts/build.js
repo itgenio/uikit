@@ -12,9 +12,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 
   const entryPoints = await globby([
     'src/index.ts', // global styles
-    'src/components/emoji/index.ts', // emoji
-    'src/components/*/index.tsx', // components
-    '!src/components/internal', // exclude internal components
+    'src/custom/svg',
+    'src/fluent/svg',
   ]);
 
   await build({
@@ -35,21 +34,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     minify: true,
     bundle: true,
     write: false, // check writePlugin
-    external: [
-      'react',
-      'react-dom',
-      'classnames',
-      'react-focus-lock',
-      '@itgenio/icons',
-      '@itgenio/utils',
-      '@radix-ui/react-dropdown-menu',
-      '@radix-ui/react-select',
-      '@radix-ui/react-toggle-group',
-      '@radix-ui/react-popover',
-      '@radix-ui/react-tooltip',
-      '@radix-ui/react-toast',
-      'use-onclickoutside',
-    ],
+    external: ['react', 'react-dom', '@itgenio/utils'],
     plugins: [lessLoader(), svgPlugin(), writePlugin()],
   }).catch(e => console.error(e.message));
 })();

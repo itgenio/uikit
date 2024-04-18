@@ -5,7 +5,7 @@ const uniqueIdsPlugin = require('./uniqueIdsPlugin').plugin;
 
 const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 
-const EMOJI_PATH_FILTER = new RegExp([`emoji`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
+const ICONS_PATH_FILTER = new RegExp([`svg`, `\\w+\\.svg$`].join(escapedPathSep));
 
 const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoConfig = {}, svgProps = {} }) => {
   const svgContent = await fs.promises.readFile(svgFilePath, 'utf8');
@@ -18,7 +18,30 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
       expandProps: 'start',
       titleProp: true,
       dimensions: false,
-      plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+      exportType: 'named',
+      plugins: [
+        (code, config, state) => {
+          const filePath = state.filePath;
+
+          let iconNameParts = path.basename(filePath).replace('.svg', '').split('_');
+
+          const isRegular = iconNameParts.at(-1) === 'regular';
+
+          iconNameParts.splice(iconNameParts.length - 2, isRegular ? 2 : 1);
+          iconNameParts.push('icon');
+
+          const componentName = iconNameParts.map(part => part[0].toUpperCase() + part.slice(1)).join('');
+          const className = iconNameParts.join('-');
+
+          state.componentName = componentName;
+          config.svgProps.className = `{"gkit-svg-icon ${className}" + (props.className ? " " + props.className : "")}`;
+
+          return code;
+        },
+        '@svgr/plugin-svgo',
+        '@svgr/plugin-jsx',
+        code => code.replace('as ReactComponent ', ' '),
+      ],
       jsx: { babelConfig: { plugins: [uniqueIdsPlugin] } },
       svgoConfig: {
         plugins: [
@@ -52,11 +75,14 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
 module.exports = () => ({
   name: 'svg',
   setup(build) {
-    // Emoji
-    build.onLoad({ filter: EMOJI_PATH_FILTER }, async args => {
+    // Icons
+    build.onLoad({ filter: ICONS_PATH_FILTER }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,
-        svgProps: { className: '{"gkit-emoji" + (props.className ? " " + props.className : "")}' },
+        svgrConfig: { replaceAttrValues: { '#212121': 'currentColor' } },
+        svgoConfig: {
+          plugins: [{ name: 'removeAttrs', params: { attrs: 'svg:fill' } }],
+        },
       });
 
       return {
