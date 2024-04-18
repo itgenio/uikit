@@ -2,7 +2,7 @@ const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgPlugin = require('./plugins/svgPlugin');
-const writePlugin = require('./plugins/writePlugin');
+const { writePlugin } = require('./plugins/writePlugin');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
