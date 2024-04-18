@@ -2,10 +2,8 @@
 
 ## Добавление новой иконки
 
-Оригинал необходимой иконки можно найти здесь: https://github.com/microsoft/fluentui-system-icons/find/main
+Оригинал нужной иконки можно найти здесь: https://github.com/microsoft/fluentui-system-icons/find/main
 
-При добавлении новой иконки оригинальный svg-файл нужно положить в папку `assets`.
+Иконки добавляются в исходном виде в папку SVG, нужно убрать только префикс "ic*fluent*"
 
-При сборке у иконки автоматически заменяется цвет `#212121` на `currentColor`.
-
-Сборкой иконок занимается плагин `gkit\scripts\plugins\svgPlugin.js`
+Обязательное соблюдение формата названия иконки: name_size_type.svg
