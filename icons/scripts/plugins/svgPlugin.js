@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const svgrTransform = require('@svgr/core').transform;
 const uniqueIdsPlugin = require('./uniqueIdsPlugin').plugin;
+const { FLUENT_ICON_PREFIX } = require('./writePlugin');
 
 const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 
@@ -23,7 +24,7 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
         (code, config, state) => {
           const filePath = state.filePath;
 
-          let iconNameParts = path.basename(filePath).replace('.svg', '').split('_');
+          let iconNameParts = path.basename(filePath).replace(FLUENT_ICON_PREFIX, '').replace('.svg', '').split('_');
 
           const isRegular = iconNameParts.at(-1) === 'regular';
 
@@ -75,7 +76,6 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
 module.exports = () => ({
   name: 'svg',
   setup(build) {
-    // Icons
     build.onLoad({ filter: ICONS_PATH_FILTER }, async args => {
       const contents = await getContents({
         svgFilePath: args.path,

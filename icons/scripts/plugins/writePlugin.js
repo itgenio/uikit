@@ -1,87 +1,96 @@
 const fs = require('fs');
 const path = require('path');
-const { groupByPropertyToDict } = require('@itgenio/utils');
+const { groupByPropertyToDict, chunkArray } = require('@itgenio/utils');
 
 const JS_EXT = '.js';
 const TS_DEC_EXT = '.d.ts';
 const ICONS_LIST_FILENAME = 'iconsList';
+const FLUENT_ICON_PREFIX = 'ic_fluent_';
 
-module.exports = () => ({
-  name: 'write',
-  setup(build) {
-    const outDir = path.resolve(process.cwd());
+module.exports = {
+  FLUENT_ICON_PREFIX,
+  writePlugin: () => ({
+    name: 'write',
+    setup(build) {
+      const outDir = path.resolve(process.cwd());
 
-    build.onEnd(async result => {
-      const files = result.outputFiles;
+      build.onEnd(async result => {
+        const files = result.outputFiles;
 
-      const filesDict = groupByPropertyToDict(files, file => file.path);
+        const filesDict = groupByPropertyToDict(files, file => file.path);
 
-      const iconsList = [];
+        const iconsList = [];
 
-      await Promise.allSettled(
-        files.map(async file => {
-          const filePath = file.path;
-          let fileContent = file.text;
+        const filesChunks = chunkArray(files, 100);
 
-          const fileDir = path.dirname(filePath);
-          let fileName = path.basename(filePath);
-          const fileNameWithoutExt = fileName.replace(JS_EXT, '');
+        for (const chunk of filesChunks) {
+          await Promise.allSettled(
+            chunk.map(async file => {
+              const filePath = file.path;
+              let fileContent = file.text;
 
-          const fileNameParts = fileName.replace(JS_EXT, '').split('_');
+              const fileDir = path.dirname(filePath);
+              let fileName = path.basename(filePath).replace(FLUENT_ICON_PREFIX, '');
 
-          const isRegular = fileNameParts.at(-1) === 'regular';
+              const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
-          fileNameParts.splice(fileNameParts.length - 2, isRegular ? 2 : 1);
-          fileNameParts.push('icon');
+              const fileNameParts = fileName.replace(JS_EXT, '').split('_');
 
-          const promises = [];
+              const isRegular = fileNameParts.at(-1) === 'regular';
 
-          if (filePath.endsWith(JS_EXT)) {
-            const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
-            const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
+              fileNameParts.splice(fileNameParts.length - 2, isRegular ? 2 : 1);
+              fileNameParts.push('icon');
 
-            if (cssFile) {
-              fileContent = `import '${cssFileRelativePath}';\n${fileContent}`;
-            }
+              const promises = [];
 
-            if (fileNameWithoutExt !== 'index') {
-              const componentName = fileNameParts.map(part => part[0].toUpperCase() + part.slice(1)).join('');
-              const fileNameWithoutExt = componentName[0].toLowerCase() + componentName.slice(1);
+              if (filePath.endsWith(JS_EXT)) {
+                const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
+                const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
 
-              iconsList.push([fileNameWithoutExt, componentName]);
+                if (cssFile) {
+                  fileContent = `import '${cssFileRelativePath}';\n${fileContent}`;
+                }
 
-              fileName = `${fileNameWithoutExt}${JS_EXT}`;
+                if (fileNameWithoutExt !== 'index') {
+                  const componentName = fileNameParts.map(part => part[0].toUpperCase() + part.slice(1)).join('');
+                  const fileNameWithoutExt = componentName[0].toLowerCase() + componentName.slice(1);
 
-              promises.push(
-                fs.promises.writeFile(
-                  path.resolve(outDir, `${fileNameWithoutExt}${TS_DEC_EXT}`),
-                  `/// <reference types="react" />
-import { SvgIconProps } from './types';
-export declare function ${componentName}({ className, ...props }?: Partial<SvgIconProps>): JSX.Element;
-              `
-                )
-              );
-            }
-          }
+                  iconsList.push([fileNameWithoutExt, componentName]);
 
-          promises.push(fs.promises.writeFile(path.resolve(outDir, fileName), fileContent));
+                  fileName = `${fileNameWithoutExt}${JS_EXT}`;
 
-          await Promise.allSettled(promises);
-        })
-      );
+                  promises.push(
+                    fs.promises.writeFile(
+                      path.resolve(outDir, `${fileNameWithoutExt}${TS_DEC_EXT}`),
+                      `/// <reference types="react" />
+  import { SvgIconProps } from './types';
+  export declare function ${componentName}({ className, ...props }?: Partial<SvgIconProps>): JSX.Element;
+                `
+                    )
+                  );
+                }
+              }
 
-      await Promise.allSettled([
-        fs.promises.writeFile(
-          path.resolve(outDir, `${ICONS_LIST_FILENAME}${JS_EXT}`),
-          `var iconsList = ${JSON.stringify(iconsList)};
-export { iconsList };
-`
-        ),
-        fs.promises.writeFile(
-          path.resolve(outDir, `${ICONS_LIST_FILENAME}${TS_DEC_EXT}`),
-          `export declare var iconsList: [string, string][];`
-        ),
-      ]);
-    });
-  },
-});
+              promises.push(fs.promises.writeFile(path.resolve(outDir, fileName), fileContent));
+
+              await Promise.allSettled(promises);
+            })
+          );
+        }
+
+        await Promise.allSettled([
+          fs.promises.writeFile(
+            path.resolve(outDir, `${ICONS_LIST_FILENAME}${JS_EXT}`),
+            `var iconsList = ${JSON.stringify(iconsList)};
+  export { iconsList };
+  `
+          ),
+          fs.promises.writeFile(
+            path.resolve(outDir, `${ICONS_LIST_FILENAME}${TS_DEC_EXT}`),
+            `export declare var iconsList: [string, string][];`
+          ),
+        ]);
+      });
+    },
+  }),
+};

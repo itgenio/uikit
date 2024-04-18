@@ -47,10 +47,7 @@ const SOURCES_FOLDER = 'fluentui-system-icons-main';
         if (sizes.includes(size)) {
           const postfix = `_${size}_${iconType}.svg`;
 
-          newIcons.push([
-            `${iconName.replace('ic_fluent_', '')}${postfix}`,
-            path.resolve(data.folder, `${iconName}${postfix}`),
-          ]);
+          newIcons.push([`${iconName}${postfix}`, path.resolve(data.folder, `${iconName}${postfix}`)]);
 
           break;
         }

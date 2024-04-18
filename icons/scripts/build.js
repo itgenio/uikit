@@ -2,7 +2,7 @@ const path = require('path');
 const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgPlugin = require('./plugins/svgPlugin');
-const writePlugin = require('./plugins/writePlugin');
+const { writePlugin } = require('./plugins/writePlugin');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
@@ -10,11 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 (async () => {
   const { globby } = await import('globby');
 
-  const entryPoints = await globby([
-    'src/index.ts', // global styles
-    'src/custom/svg',
-    'src/fluent/svg',
-  ]);
+  const entryPoints = await globby(['src/index.ts', 'src/custom/svg', 'src/fluent/svg']);
 
   await build({
     watch: isProduction
