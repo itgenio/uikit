@@ -5,7 +5,6 @@ const uniqueIdsPlugin = require('./uniqueIdsPlugin').plugin;
 
 const escapedPathSep = [...path.sep].map(char => `\\${char}`).join('');
 
-const ICONS_PATH_FILTER = new RegExp([`icons`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 const EMOJI_PATH_FILTER = new RegExp([`emoji`, `assets`, `\\w+\\.svg$`].join(escapedPathSep));
 
 const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoConfig = {}, svgProps = {} }) => {
@@ -53,27 +52,6 @@ const getContents = async ({ svgFilePath, svgrConfig = {}, svgoConfig: fullSvgoC
 module.exports = () => ({
   name: 'svg',
   setup(build) {
-    // Icons
-    build.onLoad({ filter: ICONS_PATH_FILTER }, async args => {
-      const contents = await getContents({
-        svgFilePath: args.path,
-        svgProps: { className: '{"gkit-svg-icon" + (props.className ? " " + props.className : "")}' },
-        svgrConfig: { replaceAttrValues: { '#212121': 'currentColor' } },
-        svgoConfig: {
-          plugins: [
-            // Для иконок можно удалить, т.к. он лишний,
-            // для эмодзи оставляем, т.к. они отображаются не корректно, если удалить
-            { name: 'removeAttrs', params: { attrs: 'svg:fill' } },
-          ],
-        },
-      });
-
-      return {
-        contents,
-        loader: 'tsx',
-      };
-    });
-
     // Emoji
     build.onLoad({ filter: EMOJI_PATH_FILTER }, async args => {
       const contents = await getContents({
