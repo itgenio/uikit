@@ -25,24 +25,25 @@ export const IconsView = React.memo(({ iconsSets }: Props) => {
 
   return (
     <div className="icons" style={{ ['--parent-icon-size' as string]: `${currentSize}px` }}>
-      <div className="sizes">
-        <span>Current size: {currentSize}</span>
+      <div className="header">
+        <div className="sizes">
+          <span>Current size: {currentSize}</span>
 
-        <Slider
-          onClickMinus={onClickMinus}
-          onClickPlus={onClickPlus}
-          value={currentSize}
-          onChangeInput={onChangeInput}
+          <Slider
+            onClickMinus={onClickMinus}
+            onClickPlus={onClickPlus}
+            value={currentSize}
+            onChangeInput={onChangeInput}
+          />
+        </div>
+        <TextField
+          className="search"
+          value={searchValue}
+          endAdornment={<DismissIcon onClick={() => setSearchValue('')} />}
+          onChange={e => setSearchValue(e.target.value)}
+          size="small"
         />
       </div>
-
-      <TextField
-        className="search"
-        value={searchValue}
-        endAdornment={<DismissIcon onClick={() => setSearchValue('')} />}
-        onChange={e => setSearchValue(e.target.value)}
-        size="small"
-      />
 
       {filteredIconsSets.map((filteredIcons, index) => {
         return <MemoIcons key={index} icons={filteredIcons} number={index + 1} />;
