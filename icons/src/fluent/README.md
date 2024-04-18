@@ -2,6 +2,8 @@
 
 ## Добавление новой иконки
 
+Пак обновлен: 17.04.2024
+
 Оригинал нужной иконки можно найти здесь: https://github.com/microsoft/fluentui-system-icons/find/main
 
 Иконки добавляются в исходном виде в папку SVG, нужно убрать только префикс "ic*fluent*"
@@ -13,5 +15,3 @@ reorder_20_filled.svg
 reorder_20_filled.svg
 text_box_settings_24_regular.svg
 text_box_settings_24_filled.svg
-
-Последнее обновление: 17.04.2024
