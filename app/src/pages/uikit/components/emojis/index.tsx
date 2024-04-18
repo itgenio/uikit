@@ -10,7 +10,7 @@ const EMOJIS = Object.entries(gkitEmojis)
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export function Emojis() {
-  return <IconsView icons={EMOJIS} />;
+  return <IconsView iconsSets={[EMOJIS]} />;
 }
 
 Emojis.displayName = 'Emojis';

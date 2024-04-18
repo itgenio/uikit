@@ -2,9 +2,10 @@ import './style.less';
 
 import React from 'react';
 import { iconsList } from '@itgenio/icons/iconsList';
+import { chunkArray } from '@itgenio/utils';
 import { IconsView } from './iconsView';
 
-const ICONS = iconsList
+const ALL_ICONS = iconsList
   .sort(([, a], [, b]) => a.localeCompare(b))
   .map(([fileName, iconName]) => {
     const LazyComponent = React.lazy(() => {
@@ -26,8 +27,10 @@ const ICONS = iconsList
     return component;
   });
 
+const ICONS_CHUNKS = chunkArray(ALL_ICONS, 100);
+
 export function Icons() {
-  return <IconsView icons={ICONS} />;
+  return <IconsView iconsSets={ICONS_CHUNKS} />;
 }
 
 Icons.displayName = 'Icons';

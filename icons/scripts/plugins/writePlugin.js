@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { groupByPropertyToDict } = require('@itgenio/utils');
+const { groupByPropertyToDict, chunkArray } = require('@itgenio/utils');
 
 const JS_EXT = '.js';
 const TS_DEC_EXT = '.d.ts';
@@ -18,57 +18,61 @@ module.exports = () => ({
 
       const iconsList = [];
 
-      await Promise.allSettled(
-        files.map(async file => {
-          const filePath = file.path;
-          let fileContent = file.text;
+      const filesChunks = chunkArray(files, 100);
 
-          const fileDir = path.dirname(filePath);
-          let fileName = path.basename(filePath);
-          const fileNameWithoutExt = fileName.replace(JS_EXT, '');
+      for (const chunk of filesChunks) {
+        await Promise.allSettled(
+          chunk.map(async file => {
+            const filePath = file.path;
+            let fileContent = file.text;
 
-          const fileNameParts = fileName.replace(JS_EXT, '').split('_');
+            const fileDir = path.dirname(filePath);
+            let fileName = path.basename(filePath);
+            const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
-          const isRegular = fileNameParts.at(-1) === 'regular';
+            const fileNameParts = fileName.replace(JS_EXT, '').split('_');
 
-          fileNameParts.splice(fileNameParts.length - 2, isRegular ? 2 : 1);
-          fileNameParts.push('icon');
+            const isRegular = fileNameParts.at(-1) === 'regular';
 
-          const promises = [];
+            fileNameParts.splice(fileNameParts.length - 2, isRegular ? 2 : 1);
+            fileNameParts.push('icon');
 
-          if (filePath.endsWith(JS_EXT)) {
-            const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
-            const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
+            const promises = [];
 
-            if (cssFile) {
-              fileContent = `import '${cssFileRelativePath}';\n${fileContent}`;
-            }
+            if (filePath.endsWith(JS_EXT)) {
+              const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
+              const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
 
-            if (fileNameWithoutExt !== 'index') {
-              const componentName = fileNameParts.map(part => part[0].toUpperCase() + part.slice(1)).join('');
-              const fileNameWithoutExt = componentName[0].toLowerCase() + componentName.slice(1);
+              if (cssFile) {
+                fileContent = `import '${cssFileRelativePath}';\n${fileContent}`;
+              }
 
-              iconsList.push([fileNameWithoutExt, componentName]);
+              if (fileNameWithoutExt !== 'index') {
+                const componentName = fileNameParts.map(part => part[0].toUpperCase() + part.slice(1)).join('');
+                const fileNameWithoutExt = componentName[0].toLowerCase() + componentName.slice(1);
 
-              fileName = `${fileNameWithoutExt}${JS_EXT}`;
+                iconsList.push([fileNameWithoutExt, componentName]);
 
-              promises.push(
-                fs.promises.writeFile(
-                  path.resolve(outDir, `${fileNameWithoutExt}${TS_DEC_EXT}`),
-                  `/// <reference types="react" />
+                fileName = `${fileNameWithoutExt}${JS_EXT}`;
+
+                promises.push(
+                  fs.promises.writeFile(
+                    path.resolve(outDir, `${fileNameWithoutExt}${TS_DEC_EXT}`),
+                    `/// <reference types="react" />
 import { SvgIconProps } from './types';
 export declare function ${componentName}({ className, ...props }?: Partial<SvgIconProps>): JSX.Element;
               `
-                )
-              );
+                  )
+                );
+              }
             }
-          }
 
-          promises.push(fs.promises.writeFile(path.resolve(outDir, fileName), fileContent));
+            promises.push(fs.promises.writeFile(path.resolve(outDir, fileName), fileContent));
 
-          await Promise.allSettled(promises);
-        })
-      );
+            await Promise.allSettled(promises);
+          })
+        );
+      }
 
       await Promise.allSettled([
         fs.promises.writeFile(

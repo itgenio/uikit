@@ -1,6 +1,7 @@
 import './style.less';
 
 import React, { CSSProperties, Fragment, useCallback, useMemo, useState } from 'react';
+import { Accordion, AccordionTitle } from '@itgenio/gkit/accordion';
 import { TextField } from '@itgenio/gkit/textField';
 import { Tooltip } from '@itgenio/gkit/tooltip';
 import { DismissIcon } from '@itgenio/icons/dismissIcon';
@@ -8,9 +9,9 @@ import { STEP, Slider } from '../../slider';
 
 const DEFAULT_SIZE = 40;
 
-type Props = { icons: Function[] };
+type Props = { iconsSets: Function[][] };
 
-export const IconsView = React.memo(({ icons }: Props) => {
+export const IconsView = React.memo(({ iconsSets }: Props) => {
   const [searchValue, setSearchValue] = useState('');
   const [currentSize, setCurrentSize] = useState(DEFAULT_SIZE);
 
@@ -18,12 +19,12 @@ export const IconsView = React.memo(({ icons }: Props) => {
   const onClickPlus = useCallback(() => setCurrentSize(s => s + STEP), []);
   const onChangeInput = useCallback(e => setCurrentSize(e.target.valueAsNumber), []);
 
-  const filteredIcons = useMemo(() => {
-    return icons.filter(Icon => new RegExp(searchValue, 'gi').test(Icon.name));
-  }, [icons, searchValue]);
+  const filteredIconsSets = useMemo(() => {
+    return iconsSets.map(set => set.filter(Icon => new RegExp(searchValue, 'gi').test(Icon.name)));
+  }, [iconsSets, searchValue]);
 
   return (
-    <div className="icons">
+    <div className="icons" style={{ ['--parent-icon-size' as string]: `${currentSize}px` }}>
       <div className="sizes">
         <span>Current size: {currentSize}</span>
 
@@ -43,25 +44,35 @@ export const IconsView = React.memo(({ icons }: Props) => {
         size="small"
       />
 
-      <div className="board" style={{ '--icon-size': `${currentSize}px` } as CSSProperties}>
-        <MemoIcons icons={filteredIcons} />
-      </div>
+      {filteredIconsSets.map((filteredIcons, index) => {
+        return <MemoIcons key={index} icons={filteredIcons} number={index + 1} />;
+      })}
     </div>
   );
 });
 
 IconsView.displayName = 'IconsView';
 
-const MemoIcons = React.memo(({ icons }: { icons: Function[] }) => {
+const MemoIcons = React.memo(({ icons, number }: { icons: Function[]; number: number }) => {
+  if (icons.length === 0) return null;
+
   return (
     <Fragment>
-      {icons.map(Icon => {
-        return (
-          <Tooltip key={Icon.name} content={Icon.name}>
-            <Icon />
-          </Tooltip>
-        );
-      })}
+      <Accordion
+        content={
+          <div className="board" style={{ '--icon-size': `var(--parent-icon-size)` } as CSSProperties}>
+            {icons.map(Icon => {
+              return (
+                <Tooltip key={Icon.name} content={Icon.name}>
+                  <Icon />
+                </Tooltip>
+              );
+            })}
+          </div>
+        }
+      >
+        <AccordionTitle>Set {number}</AccordionTitle>
+      </Accordion>
     </Fragment>
   );
 });
