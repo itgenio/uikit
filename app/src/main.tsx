@@ -1,13 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import '@itgenio/gkit/index.css';
 import '@itgenio/icons/index.css';
 import './stylesheets/index.less';
 import { UikitDemo } from './pages/uikit';
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <UikitDemo />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
