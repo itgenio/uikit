@@ -22,7 +22,7 @@ type Props = {
 export const Loader = React.memo(({ text, className, size = 'normal', type = 'primary', isLoading = true }: Props) => {
   return isLoading ? (
     <span className={classNames(LOADER_CN, className, ClassByType[type], size)}>
-      <span className="gkit-loader-circle"></span>
+      <span className="gkit-loader-circle" />
       {!text ? null : <span className="gkit-loader-text">{text}</span>}
     </span>
   ) : null;
