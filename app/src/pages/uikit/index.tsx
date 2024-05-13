@@ -15,6 +15,7 @@ import { Emojis } from './components/emojis';
 import { Icons } from './components/icons';
 import { InlineNotifications } from './components/inlineNotifications';
 import { Links } from './components/links';
+import { Loaders } from './components/loaders';
 import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
 import { Panels } from './components/panels';
@@ -57,6 +58,7 @@ const components = [
   ToastNotifications,
   ProgressBars,
   Carousels,
+  Loaders,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;

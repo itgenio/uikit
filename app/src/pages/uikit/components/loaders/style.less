@@ -1,0 +1,22 @@
+.uikit-page .loaders {
+  @styles-count: 1;
+
+  .grid {
+    display: grid;
+    grid-template-columns: max-content repeat(@styles-count, min-content);
+    grid-template-rows: auto repeat(auto-fit, min-content);
+    row-gap: 0.5rem;
+    column-gap: 2rem;
+    align-items: center;
+
+    .title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

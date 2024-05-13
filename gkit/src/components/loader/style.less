@@ -1,0 +1,57 @@
+@import (reference) "../../variables";
+@import (reference) "../../ui";
+
+.gkit-loader {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  overflow: hidden;
+
+  .gkit-loader-circle {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.125rem solid;
+    border-radius: 50%;
+    animation: loader-rotation 0.8s linear infinite;
+  }
+
+  .text-base();
+
+  &.large {
+    .text-lg();
+
+    .gkit-loader-circle {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &.small {
+    .text-sm();
+
+    .gkit-loader-circle {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &.gkit-loader-primary {
+    .gkit-loader-circle {
+      border-color: var(--gkit-color-green-500);
+    }
+  }
+
+  .gkit-loader-circle {
+    border-bottom-color: transparent !important;
+  }
+}
+
+@keyframes loader-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
