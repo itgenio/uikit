@@ -2,6 +2,8 @@
 @import (reference) "../../ui";
 
 .gkit-loader {
+  --gkit-loader-size: 1.5rem;
+
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
@@ -9,8 +11,9 @@
 
   .gkit-loader-circle {
     display: inline-flex;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--gkit-loader-size);
+    height: var(--gkit-loader-size);
+    font-size: var(--gkit-loader-size);
     border: 0.125rem solid;
     border-radius: 50%;
     animation: loader-rotation 0.8s linear infinite;
@@ -22,8 +25,7 @@
     .text-lg();
 
     .gkit-loader-circle {
-      width: 2rem;
-      height: 2rem;
+      --gkit-loader-size: 2rem;
     }
   }
 
@@ -31,12 +33,11 @@
     .text-sm();
 
     .gkit-loader-circle {
-      width: 1rem;
-      height: 1rem;
+      --gkit-loader-size: 1rem;
     }
   }
 
-  &.gkit-loader-primary {
+  &.primary {
     .gkit-loader-circle {
       border-color: var(--gkit-color-primary-500);
     }
@@ -45,13 +46,14 @@
   .gkit-loader-circle {
     border-bottom-color: transparent !important;
   }
-}
 
-@keyframes loader-rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+  @keyframes loader-rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

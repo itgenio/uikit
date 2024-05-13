@@ -6,7 +6,7 @@ import React from 'react';
 type Sizes = 'small' | 'normal' | 'large';
 
 enum ClassByType {
-  primary = 'gkit-loader-primary',
+  primary = 'primary',
 }
 
 export const LOADER_CN = 'gkit-loader';
