@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 export type Sizes = 'small' | 'normal' | 'large';
-export type Types = 'primary' | 'white';
+export type Types = 'primary';
 
 export const LOADER_CN = 'gkit-loader';
 
