@@ -29,6 +29,7 @@ export function Links() {
     ['Normal', {}],
     ['Hover', { hover: true }],
     ['Disabled', { disabled: true }],
+    ['Without hover', { withoutHover: true }],
   ] as const;
 
   return (

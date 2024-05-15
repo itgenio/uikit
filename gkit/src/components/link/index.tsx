@@ -10,9 +10,10 @@ type Props = React.PropsWithChildren<{
   disabled?: boolean;
   hover?: boolean;
   className?: string;
-  href: string;
+  href?: string;
   rel?: string;
   idQa?: string;
+  withoutHover?: boolean;
 }> &
   React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
@@ -24,12 +25,13 @@ export function Link({
   className,
   href,
   idQa,
-  rel = 'noopener',
+  rel = 'noopener noreferrer',
+  withoutHover = false,
   ...props
 }: Props) {
   return (
     <a
-      className={classNames('gkit-link', className, size, { hover, disabled })}
+      className={classNames('gkit-link', className, size, { hover, disabled, 'without-hover': withoutHover })}
       href={href}
       rel={rel}
       id-qa={idQa}

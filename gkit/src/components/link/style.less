@@ -37,8 +37,10 @@
 
   &.hover,
   &:hover {
-    background-color: var(--gkit-color-blue-50);
-    border-bottom: 1px solid var(--gkit-color-blue-600);
+    &:not(.without-hover) {
+      background-color: var(--gkit-color-blue-50);
+      border-bottom: 1px solid var(--gkit-color-blue-600);
+    }
   }
 
   &.disabled {
