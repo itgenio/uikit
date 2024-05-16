@@ -11,34 +11,31 @@ export type InlineNotificationProps = PropsWithChildren<{
   variant?: Variants;
   className?: string;
   idQa?: string;
-  title: string;
+  title: React.ReactNode;
   onClose?: () => void;
 }>;
 
-export function InlineNotification({
-  children,
-  variant = 'error',
-  className,
-  idQa,
-  title,
-  onClose,
-}: InlineNotificationProps) {
-  return (
-    <div id-qa={idQa} className={classNames('gkit-inline-notification', className, variant)}>
-      <ErrorCircleFilledIcon className="inline-notification-error-circle-icon" />
+export const InlineNotification = React.memo(
+  ({ children, variant = 'error', className, idQa, title, onClose }: InlineNotificationProps) => {
+    return (
+      <div id-qa={idQa} className={classNames('gkit-inline-notification', className, variant)}>
+        <ErrorCircleFilledIcon className="inline-notification-error-circle-icon" />
 
-      <div className="inline-notification-content-wrapper">
-        <div className={classNames('inline-notification-title', className)}>
-          {title}
-          {onClose && (
-            <button onClick={onClose}>
-              <DismissIcon className="inline-notification-dismiss-icon" />
-            </button>
-          )}
+        <div className="inline-notification-content-wrapper">
+          <div className="inline-notification-title">
+            {title}
+            {onClose && (
+              <button onClick={onClose}>
+                <DismissIcon className="inline-notification-dismiss-icon" />
+              </button>
+            )}
+          </div>
+
+          {children}
         </div>
-
-        {children}
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+InlineNotification.displayName = 'InlineNotification';
