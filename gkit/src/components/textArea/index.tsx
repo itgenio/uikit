@@ -14,7 +14,7 @@ export type TextAreaProps = {
   rows?: number;
   cols?: number;
   name?: string;
-  label?: string;
+  label?: React.ReactNode;
   helperText?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
@@ -34,99 +34,106 @@ export type TextAreaProps = {
   autoFocus?: boolean;
   idQaForHelperText?: string;
   withAutoHeight?: boolean;
+  fullWidth?: boolean;
 };
 
-export function TextArea({
-  idQa,
-  idQaForTextArea,
-  size = 'large',
-  label,
-  helperText,
-  resize = 'both',
-  maxLength,
-  cols = 32,
-  rows = 5,
-  name,
-  onChange,
-  value,
-  required,
-  hover,
-  focus,
-  filled,
-  error,
-  disabled,
-  placeholder,
-  className,
-  onKeyPress,
-  onFocus,
-  onBlur,
-  autoFocus,
-  idQaForHelperText,
-  withAutoHeight = false,
-}: TextAreaProps) {
-  const id = useMemo(() => generateId(), []);
-  //for uncontrollable textarea (without value from props)
-  const [textAreaValue, setTextAreaValue] = useState(value);
-  const [textAreaElement, setTextAreaNode] = useState<HTMLTextAreaElement>(null);
+export const TextArea = React.memo(
+  ({
+    idQa,
+    idQaForTextArea,
+    size = 'large',
+    label,
+    helperText,
+    resize = 'both',
+    maxLength,
+    cols = 32,
+    rows = 5,
+    name,
+    onChange,
+    value,
+    required,
+    hover,
+    focus,
+    filled,
+    error,
+    disabled,
+    placeholder,
+    className,
+    onKeyPress,
+    onFocus,
+    onBlur,
+    autoFocus,
+    idQaForHelperText,
+    withAutoHeight = false,
+    fullWidth,
+  }: TextAreaProps) => {
+    const id = useMemo(() => generateId(), []);
+    //for uncontrollable textarea (without value from props)
+    const [textAreaValue, setTextAreaValue] = useState(value);
+    const [textAreaElement, setTextAreaNode] = useState<HTMLTextAreaElement>(null);
 
-  withAutoHeight && (rows = 1);
+    withAutoHeight && (rows = 1);
 
-  useLayoutEffect(() => {
-    if (!autoFocus || !textAreaElement) return;
+    useLayoutEffect(() => {
+      if (!autoFocus || !textAreaElement) return;
 
-    const pos = textAreaElement.value.length;
+      const pos = textAreaElement.value.length;
 
-    textAreaElement.setSelectionRange(pos, pos);
-  }, [autoFocus, textAreaElement]);
+      textAreaElement.setSelectionRange(pos, pos);
+    }, [autoFocus, textAreaElement]);
 
-  useLayoutEffect(() => {
-    if (!withAutoHeight) return;
+    useLayoutEffect(() => {
+      if (!withAutoHeight) return;
 
-    if (textAreaElement) {
-      textAreaElement.style.height = '0px';
-      textAreaElement.style.height = `${textAreaElement.scrollHeight}px`;
-    }
-  }, [textAreaElement, textAreaValue, withAutoHeight]);
+      if (textAreaElement) {
+        textAreaElement.style.height = '0px';
+        textAreaElement.style.height = `${textAreaElement.scrollHeight}px`;
+      }
+    }, [textAreaElement, textAreaValue, withAutoHeight]);
 
-  const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
-    withAutoHeight && setTextAreaValue(e.currentTarget.value);
+    const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
+      withAutoHeight && setTextAreaValue(e.currentTarget.value);
 
-    onChange?.(e);
-  };
+      onChange?.(e);
+    };
 
-  return (
-    <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
-      <div
-        className={classNames('gkit-text-area-wrapper', size, {
-          hover,
-          focus,
-          error,
-          disabled,
-          filled,
-        })}
-      >
-        <textarea
-          id-qa={idQaForTextArea}
-          ref={node => setTextAreaNode(node)}
-          onChange={onValueChange}
-          {...{
-            id,
-            onKeyPress,
-            value,
-            maxLength,
-            placeholder,
+    return (
+      <InputsContainer {...{ id, size, label, helperText, idQa, className, error, idQaForHelperText }}>
+        <div
+          className={classNames('gkit-text-area-wrapper', size, {
+            hover,
+            focus,
+            error,
             disabled,
-            name,
-            rows,
-            cols,
-            required,
-            onFocus,
-            onBlur,
-            autoFocus,
-          }}
-          className={classNames('gkit-text-area', `resize-${resize}`)}
-        />
-      </div>
-    </InputsContainer>
-  );
-}
+            filled,
+            'full-width': fullWidth,
+          })}
+        >
+          <textarea
+            id-qa={idQaForTextArea}
+            ref={node => setTextAreaNode(node)}
+            onChange={onValueChange}
+            {...{
+              id,
+              onKeyPress,
+              value,
+              maxLength,
+              placeholder,
+              disabled,
+              name,
+              rows,
+              cols,
+              required,
+              onFocus,
+              onBlur,
+              autoFocus,
+            }}
+            className={classNames('gkit-text-area', `resize-${resize}`)}
+          />
+        </div>
+      </InputsContainer>
+    );
+  }
+);
+
+TextArea.displayName = 'TextArea';
