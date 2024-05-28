@@ -30,7 +30,7 @@ type ContentProps = Pick<
   | 'avoidCollisions'
 >;
 
-type DropdownProps = PropsWithChildren<{
+export type DropdownProps = PropsWithChildren<{
   className?: string;
   idQa?: string;
   classNameContent?: string;
