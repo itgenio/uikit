@@ -49,3 +49,6 @@ export * from './smilingFaceWithSunglasses';
 export * from './pensiveFace';
 export * from './redQuestionMark';
 export * from './custom';
+export * from './faceWithSteamFromNose';
+export * from './frowningFace';
+export * from './faceWithRollingEyes';
