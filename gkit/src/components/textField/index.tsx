@@ -1,6 +1,14 @@
 import './style.less';
+
 import classNames from 'classnames';
-import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute, PropsWithChildren, useMemo } from 'react';
+import React, {
+  ForwardedRef,
+  forwardRef,
+  HTMLInputTypeAttribute,
+  MouseEventHandler,
+  PropsWithChildren,
+  useMemo,
+} from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -38,6 +46,9 @@ export type TextFieldProps = PropsWithChildren<{
   inputRef?: ForwardedRef<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   onTouchStart?: React.KeyboardEventHandler<HTMLInputElement>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+  onInputClick?: MouseEventHandler<HTMLInputElement>;
+  readOnly?: boolean;
 }>;
 
 export const TextField = forwardRef(function TextField(
@@ -73,6 +84,9 @@ export const TextField = forwardRef(function TextField(
     inputRef,
     onKeyDown,
     onTouchStart,
+    onClick,
+    onInputClick,
+    readOnly,
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -82,7 +96,7 @@ export const TextField = forwardRef(function TextField(
     <InputsContainer
       ref={ref}
       className={classNames('gkit-text-field', className)}
-      {...{ id, size, label, idQa, required, helperText, error, idQaForHelperText }}
+      {...{ id, size, label, idQa, required, helperText, error, idQaForHelperText, onClick }}
     >
       <div
         className={classNames('text-field-wrapper', size, {
@@ -114,10 +128,17 @@ export const TextField = forwardRef(function TextField(
             onBlur,
             maxLength,
             disabled,
+            readOnly,
             name,
             autoComplete,
             onKeyDown,
             onTouchStart,
+            onClick: e => {
+              if (!onInputClick) return;
+
+              e.stopPropagation();
+              onInputClick(e);
+            },
           }}
         />
 
