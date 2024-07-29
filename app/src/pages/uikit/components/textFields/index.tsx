@@ -14,6 +14,7 @@ const SIMPLE_STATES: { state: string; props: TextFieldProps }[] = [
   { state: 'Error', props: { error: true, helperText: 'Helper text', idQaForHelperText: 'id-qa-for-helper-text' } },
   { state: 'Disabled', props: { disabled: true } },
   { state: 'Disabled with text', props: { disabled: true, value: 'Some text' } },
+  { state: 'Readonly', props: { readOnly: true, value: 'Some text' } },
   { state: 'Datalist', props: { dataList: ['Hello', 'World', 'Gavana'] } },
   { state: 'Required', props: { required: true } },
 ];
