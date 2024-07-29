@@ -10,7 +10,10 @@ type Props = Pick<ModalProps, 'children'>;
 
 export const ModalWrapperInternal = React.memo(({ children }: Props) => {
   return (
-    <FocusLock className={`${MODAL_WRAPPER_CN}-focus-lock`}>
+    <FocusLock
+      className={`${MODAL_WRAPPER_CN}-focus-lock`}
+      whiteList={node => !document.getElementById('dynamic-react')?.contains(node)}
+    >
       <div className={MODAL_WRAPPER_CN}>{children}</div>
     </FocusLock>
   );
