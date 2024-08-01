@@ -8,11 +8,14 @@ export type CheckboxProps = PropsWithChildren<{
   hover?: boolean;
   checked?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
   className?: string;
   idQa?: string;
   idQaCheckbox?: string;
   icon?: React.ReactNode;
   checkedIcon?: React.ReactNode;
+  name?: string;
+  id?: string;
 }>;
 
 export function Checkbox({
@@ -23,13 +26,25 @@ export function Checkbox({
   idQa,
   idQaCheckbox,
   onChange = () => {},
+  onClick,
   className,
   icon,
   checkedIcon = <CheckmarkFilledIcon />,
+  name,
+  id,
 }: CheckboxProps) {
   return (
     <label className={classNames('gkit-checkbox', className)} id-qa={idQa}>
-      <input type="checkbox" disabled={disabled} checked={checked} onChange={onChange} id-qa={idQaCheckbox} />
+      <input
+        id={id}
+        type="checkbox"
+        disabled={disabled}
+        checked={checked}
+        onChange={onChange}
+        onClick={onClick}
+        id-qa={idQaCheckbox}
+        name={name}
+      />
 
       <span className={classNames('checkbox-body', { hover })}>{checked ? checkedIcon : icon}</span>
 
