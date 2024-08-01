@@ -53,3 +53,4 @@ export * from './faceWithSteamFromNose';
 export * from './frowningFace';
 export * from './faceWithRollingEyes';
 export * from './snowflake';
+export * from './sportsMedal';

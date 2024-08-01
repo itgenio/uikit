@@ -9,7 +9,6 @@ export type CheckboxProps = PropsWithChildren<{
   checked?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClick?: React.MouseEventHandler<HTMLLabelElement>;
-  onInputClick?: React.MouseEventHandler<HTMLInputElement>;
   className?: string;
   idQa?: string;
   idQaCheckbox?: string;
@@ -28,7 +27,6 @@ export function Checkbox({
   idQaCheckbox,
   onChange = () => {},
   onClick,
-  onInputClick,
   className,
   icon,
   checkedIcon = <CheckmarkFilledIcon />,
@@ -36,14 +34,22 @@ export function Checkbox({
   id,
 }: CheckboxProps) {
   return (
-    <label className={classNames('gkit-checkbox', className)} id-qa={idQa} onClick={onClick}>
+    <label
+      className={classNames('gkit-checkbox', className)}
+      id-qa={idQa}
+      onClick={e => {
+        if (onClick) {
+          e.preventDefault();
+          onClick(e);
+        }
+      }}
+    >
       <input
         id={id}
         type="checkbox"
         disabled={disabled}
         checked={checked}
         onChange={onChange}
-        onClick={onInputClick}
         id-qa={idQaCheckbox}
         name={name}
       />
