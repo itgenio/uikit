@@ -50,7 +50,7 @@ export function Checkbox({
         disabled={disabled}
         checked={checked}
         onChange={onChange}
-        id-qa={idQaCheckbox ?? id}
+        id-qa={idQaCheckbox ?? (idQa ? undefined : id)}
         name={name}
       />
 
