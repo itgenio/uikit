@@ -1,7 +1,7 @@
 import './style.less';
 import { Label } from '@radix-ui/react-label';
 import classNames from 'classnames';
-import React, { forwardRef, MouseEventHandler, PropsWithChildren } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 
 type Sizes = 'small' | 'large';
 
@@ -15,15 +15,14 @@ type InputsContainerProps = PropsWithChildren<{
   error?: boolean;
   idQaForHelperText?: string;
   required?: boolean;
-  onClick?: MouseEventHandler<HTMLDivElement>;
 }>;
 
 export const InputsContainer = forwardRef<HTMLDivElement, InputsContainerProps>(function InputsContainer(
-  { children, id, size = 'large', label, required, helperText, idQa, className, onClick, error, idQaForHelperText },
+  { children, id, size = 'large', label, required, helperText, idQa, className, error, idQaForHelperText },
   ref
 ) {
   return (
-    <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className, size)} onClick={onClick}>
+    <div ref={ref} id-qa={idQa} className={classNames('gkit-inputs-container', className, size)}>
       {label && (
         <Label htmlFor={id} className={classNames('inputs-container-label', size)}>
           {label}
