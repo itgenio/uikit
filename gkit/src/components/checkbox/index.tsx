@@ -14,8 +14,6 @@ export type CheckboxProps = PropsWithChildren<{
   idQaCheckbox?: string;
   icon?: React.ReactNode;
   checkedIcon?: React.ReactNode;
-  name?: string;
-  id?: string;
 }>;
 
 export function Checkbox({
@@ -30,8 +28,6 @@ export function Checkbox({
   className,
   icon,
   checkedIcon = <CheckmarkFilledIcon />,
-  name,
-  id,
 }: CheckboxProps) {
   return (
     <label
@@ -44,15 +40,7 @@ export function Checkbox({
         }
       }}
     >
-      <input
-        id={id}
-        type="checkbox"
-        disabled={disabled}
-        checked={checked}
-        onChange={onChange}
-        id-qa={idQaCheckbox ?? (idQa ? undefined : id)}
-        name={name}
-      />
+      <input type="checkbox" disabled={disabled} checked={checked} onChange={onChange} id-qa={idQaCheckbox} />
 
       <span className={classNames('checkbox-body', { hover })}>{checked ? checkedIcon : icon}</span>
 
