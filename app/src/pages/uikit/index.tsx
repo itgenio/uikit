@@ -23,6 +23,7 @@ import { Popovers } from './components/popovers';
 import { ProgressBars } from './components/progressBars';
 import { RadioButtons } from './components/radioButtons';
 import { Selects } from './components/selects';
+import { Sliders } from './components/sliders';
 import { Switchers } from './components/switchers';
 import { TabsExample } from './components/tabs';
 import { TextAreas } from './components/textAreas';
@@ -59,6 +60,7 @@ const components = [
   ProgressBars,
   Carousels,
   Loaders,
+  Sliders,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
