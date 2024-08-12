@@ -83,7 +83,7 @@ const MemoIcons = React.memo(({ icons, number }: { icons: Function[]; number: nu
 
 MemoIcons.displayName = 'MemoIcons';
 
-export const SliderWithButtons = React.memo(
+const SliderWithButtons = React.memo(
   ({
     onClickMinus,
     onClickPlus,
