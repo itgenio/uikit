@@ -25,7 +25,7 @@ export function Sliders() {
         value,
         idQa: 'slider normal',
         idQaThumb: 'slider normal thumb',
-        max: [8],
+        max: 8,
       },
     ],
     ['Disabled', { disabled: true, defaultValue: [8] }],
