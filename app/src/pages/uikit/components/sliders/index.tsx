@@ -24,7 +24,6 @@ export function Sliders() {
       {
         value,
         idQa: 'slider normal',
-        idQaThumb: 'slider normal thumb',
         max: 8,
       },
     ],
