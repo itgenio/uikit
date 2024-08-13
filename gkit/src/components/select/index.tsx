@@ -17,7 +17,12 @@ export const SELECT_DROPDOWN_CN = 'gkit-select-dropdown';
 type Sizes = 'small' | 'large';
 type Values = string | number;
 
-export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
+export type SelectOption = {
+  label: string | React.ReactNode;
+  value: Values;
+  group?: string;
+  customDropdownOption?: React.ReactNode;
+};
 
 export type GroupsConfig = {
   hideLabel?: boolean;
@@ -98,13 +103,18 @@ export const Select = React.memo(
     useEffect(() => {
       if (!search?.active) return;
 
+      //отключаем поиск, если label не string
+      if (options.some(option => typeof option.label !== 'string')) {
+        search.active = false;
+      }
+
       if (!open && hasValueInSearch) {
         setSearchValue('');
       }
-    }, [open, hasValueInSearch, search?.active]);
+    }, [open, hasValueInSearch, search?.active, search, options]);
 
     if (search?.active && hasValueInSearch) {
-      options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+      options = options.filter(option => (option.label as string).toLowerCase().includes(searchValue.toLowerCase()));
     }
 
     useEffect(() => {
