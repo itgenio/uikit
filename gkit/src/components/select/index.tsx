@@ -247,11 +247,6 @@ export const Select = React.memo(
       [disabled, open]
     );
 
-    const isOptionsIncludeCustomLabel = useMemo(
-      () => options.some(option => !!option.customLabel),
-      [options, options.length]
-    );
-
     return (
       <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
@@ -277,7 +272,7 @@ export const Select = React.memo(
               placeholder={placeholder}
               aria-label={value != null ? valuePrefix + value : undefined}
             >
-              {isOptionsIncludeCustomLabel ? options.find(option => option.value === value)?.customLabel : undefined}
+              {options.find(option => option.value === value)?.customLabel}
             </SelectPrimitive.Value>
 
             <SelectPrimitive.Icon className="select-chevron">
