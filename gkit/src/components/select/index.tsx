@@ -18,10 +18,11 @@ type Sizes = 'small' | 'large';
 type Values = string | number;
 
 export type SelectOption = {
-  label: string | React.ReactNode;
+  label: string;
   value: Values;
   group?: string;
   customDropdownOption?: React.ReactNode;
+  customLabel?: React.ReactNode;
 };
 
 export type GroupsConfig = {
@@ -103,18 +104,13 @@ export const Select = React.memo(
     useEffect(() => {
       if (!search?.active) return;
 
-      //отключаем поиск, если label не string
-      if (options.some(option => typeof option.label !== 'string')) {
-        search.active = false;
-      }
-
       if (!open && hasValueInSearch) {
         setSearchValue('');
       }
-    }, [open, hasValueInSearch, search?.active, search, options]);
+    }, [open, hasValueInSearch, search?.active]);
 
     if (search?.active && hasValueInSearch) {
-      options = options.filter(option => (option.label as string).toLowerCase().includes(searchValue.toLowerCase()));
+      options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
     }
 
     useEffect(() => {
@@ -251,6 +247,11 @@ export const Select = React.memo(
       [disabled, open]
     );
 
+    const isOptionsIncludeCustomLabel = useMemo(
+      () => options.some(option => !!option.customLabel),
+      [options, options.length]
+    );
+
     return (
       <InputsContainer {...{ ref, id, size, label, required, helperText, idQa, className, error, idQaForHelperText }}>
         <SelectPrimitive.Root
@@ -275,7 +276,9 @@ export const Select = React.memo(
             <SelectPrimitive.Value
               placeholder={placeholder}
               aria-label={value != null ? valuePrefix + value : undefined}
-            />
+            >
+              {isOptionsIncludeCustomLabel ? options.find(option => option.value === value)?.customLabel : undefined}
+            </SelectPrimitive.Value>
 
             <SelectPrimitive.Icon className="select-chevron">
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}

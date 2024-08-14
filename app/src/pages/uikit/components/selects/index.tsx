@@ -7,11 +7,25 @@ const sizes = ['small', 'large'] as const;
 export const defaultSelectOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => {
   const index = i + 1;
 
-  if (i == 3) {
-    return { label: `Option${index}`, value: String(index), customDropdownOption: <span>Option ({index})</span> };
+  const baseOption: SelectOption = { label: `Option${index}`, value: String(index) };
+
+  if (i === 3) {
+    return { ...baseOption, customDropdownOption: <span>Option ({index})</span> };
   }
 
-  return { label: `Option${index}`, value: String(index) };
+  if (index === 5) {
+    return {
+      ...baseOption,
+      customDropdownOption: <span>Option with custom label ({index})</span>,
+      customLabel: (
+        <div>
+          <span>CustomLabel</span> <div>({index})</div>
+        </div>
+      ),
+    };
+  }
+
+  return baseOption;
 });
 
 const optionsWithGroups = defaultSelectOptions.map((option, i) => {
