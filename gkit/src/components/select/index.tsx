@@ -17,7 +17,13 @@ export const SELECT_DROPDOWN_CN = 'gkit-select-dropdown';
 type Sizes = 'small' | 'large';
 type Values = string | number;
 
-export type SelectOption = { label: string; value: Values; group?: string; customDropdownOption?: React.ReactNode };
+export type SelectOption = {
+  label: string;
+  value: Values;
+  group?: string;
+  customDropdownOption?: React.ReactNode;
+  customLabel?: React.ReactNode;
+};
 
 export type GroupsConfig = {
   hideLabel?: boolean;
@@ -265,7 +271,9 @@ export const Select = React.memo(
             <SelectPrimitive.Value
               placeholder={placeholder}
               aria-label={value != null ? valuePrefix + value : undefined}
-            />
+            >
+              {options.find(option => option.value === value)?.customLabel}
+            </SelectPrimitive.Value>
 
             <SelectPrimitive.Icon className="select-chevron">
               {canShowDropdown ? <ChevronUpFilledIcon /> : <ChevronDownFilledIcon />}
