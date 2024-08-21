@@ -1,5 +1,3 @@
-import './style.less';
-
 import React from 'react';
 import FocusLock from 'react-focus-lock';
 import { ModalProps } from '../..';
