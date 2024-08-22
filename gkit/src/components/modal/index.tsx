@@ -47,15 +47,15 @@ export function Modal({
 
   return (
     <Portal>
-      <ModalWrapperInternal>
-        <ModalInternal className={className} asBlock={false} idQa={idQa}>
+      <ModalInternal className={className} asBlock={false} idQa={idQa}>
+        <ModalWrapperInternal>
           <ModalOverlayInternal onClose={onClose} ignoreOverlayClick={ignoreOverlayClick} />
 
           <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
             {children}
           </ModalContentInternal>
-        </ModalInternal>
-      </ModalWrapperInternal>
+        </ModalWrapperInternal>
+      </ModalInternal>
     </Portal>
   );
 }
