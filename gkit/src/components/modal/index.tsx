@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { Portal } from '../portal';
 import { ModalHeader, ModalTitle, ModalText, ModalBody, ModalFooter } from './components';
 import { usePreventBodyScroll } from './hooks/useBodyScroll';
-import { ModalInternal, ModalContentInternal, ModalWrapperInternal, ModalOverlayInternal } from './internal';
+import { ModalInternal, ModalContentInternal, ModalFocusLockWrapperInternal, ModalOverlayInternal } from './internal';
 
 export type { ModalHeaderProps, ModalTitleProps, ModalTextProps, ModalBodyProps, ModalFooterProps } from './components';
 
@@ -30,6 +30,8 @@ export function Modal({
   idQaContent,
   children,
 }: ModalProps) {
+  const [element, setElement] = useState<HTMLDivElement>(null);
+
   usePreventBodyScroll(preventBodyScroll && open);
 
   // Для блока необязательно передавать props.open, поэтому явно проверяем на false
@@ -47,14 +49,14 @@ export function Modal({
 
   return (
     <Portal>
-      <ModalInternal className={className} asBlock={false} idQa={idQa}>
-        <ModalWrapperInternal>
+      <ModalInternal className={className} asBlock={false} setElement={setElement} idQa={idQa}>
+        <ModalFocusLockWrapperInternal element={element}>
           <ModalOverlayInternal onClose={onClose} ignoreOverlayClick={ignoreOverlayClick} />
 
           <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
             {children}
           </ModalContentInternal>
-        </ModalWrapperInternal>
+        </ModalFocusLockWrapperInternal>
       </ModalInternal>
     </Portal>
   );
