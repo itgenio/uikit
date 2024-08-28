@@ -13,6 +13,10 @@ export const ModalFocusLockWrapperInternal = React.memo(({ element, children }: 
       whiteList={node => !document.getElementById('dynamic-react')?.contains(node)}
       // https://github.com/theKashey/react-focus-lock/issues/94#issuecomment-589330581
       shards={[element]}
+      //https://github.com/theKashey/react-focus-lock/issues/318
+      focusOptions={{
+        preventScroll: true,
+      }}
     >
       {children}
     </FocusLock>
