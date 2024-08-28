@@ -14,7 +14,11 @@ export const Slider = React.memo(({ idQa, className, ...props }: SliderProps) =>
       <SliderPrimitive.Track className={`${SLIDER_CN}-track`}>
         <SliderPrimitive.Range className={`${SLIDER_CN}-range`} />
       </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className={`${SLIDER_CN}-thumb`} id-qa={classNames({ [`${idQa}-thumb`]: idQa })} />
+      <SliderPrimitive.Thumb
+        className={`${SLIDER_CN}-thumb`}
+        id-qa={classNames({ [`${idQa}-thumb`]: idQa })}
+        aria-label="Volume"
+      />
     </SliderPrimitive.Root>
   );
 });
