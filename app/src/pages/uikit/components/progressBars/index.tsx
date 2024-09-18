@@ -94,6 +94,19 @@ export function ProgressBars() {
         withSequentialProgress: false,
       },
     },
+    {
+      state: 'without start checkpoint',
+      props: {
+        startCheckpoint: null,
+        checkpoints: [
+          { withoutProgressLine: true },
+          { progress: 50, withoutProgressLine: true },
+          { withoutProgressLine: true },
+          {},
+          {},
+        ],
+      },
+    },
   ];
 
   return (
