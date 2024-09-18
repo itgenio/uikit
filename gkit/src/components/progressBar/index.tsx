@@ -36,7 +36,7 @@ export type ProgressBarCustomCheckpointElementProps<T> = ProgressBarCheckpointPr
   ProgressBarCheckpointInternalProps & { done: boolean } & T;
 
 export type ProgressBarProps<S extends AnyFC, C extends ProgressBarCheckpointProps<AnyFC>> = BaseProps & {
-  startCheckpoint?: ProgressBarCheckpointProps<S>;
+  startCheckpoint?: ProgressBarCheckpointProps<S> | null;
   checkpoints: GetCheckpointProps<C>[];
   withSequentialProgress?: boolean;
 };
@@ -48,25 +48,32 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
   withSequentialProgress = true,
   idQa,
 }: ProgressBarProps<S, C>) => {
+  const hasStartCheckpoint = startCheckpoint !== null;
+
   const hasFirstCheckpointProgress = checkpoints[0]?.progress !== undefined;
   let isCheckpointsWithoutProgress = false;
 
   return (
     <div className={classNames('gkit-progress-bar', className)} id-qa={idQa}>
-      <CheckpointInternal
-        progress={hasFirstCheckpointProgress && PROGRESS_BAR_MAX_PROGRESS}
-        CheckpointComponent={hasFirstCheckpointProgress ? undefined : ProgressBarCheckpointElementWrap}
-        idQa={idQa}
-        {...startCheckpoint}
-        withoutProgressLine
-        index={0}
-        zIndex={checkpoints.length + 1}
-      />
+      {hasStartCheckpoint && (
+        <CheckpointInternal
+          progress={hasFirstCheckpointProgress && PROGRESS_BAR_MAX_PROGRESS}
+          CheckpointComponent={hasFirstCheckpointProgress ? undefined : ProgressBarCheckpointElementWrap}
+          idQa={idQa}
+          {...startCheckpoint}
+          withoutProgressLine
+          index={0}
+          zIndex={checkpoints.length + 1}
+        />
+      )}
 
       {checkpoints.map(({ progress, ...checkpoint }, index) => {
         // Если прогресс последовательный, то убираем прогресс для чекпоинтов, которые идут после невыполненных
         if (withSequentialProgress) {
-          const prevCheckpoint = checkpoints[index - 1];
+          const prevIndex = index - 1;
+          const isPrevIndexFirstAndWithoutProgressLine = !hasStartCheckpoint && prevIndex === 0;
+
+          const prevCheckpoint = isPrevIndexFirstAndWithoutProgressLine ? undefined : checkpoints[prevIndex];
 
           if (
             !isCheckpointsWithoutProgress &&
@@ -77,15 +84,24 @@ const ProgressBarInternal = <S extends AnyFC, C extends ProgressBarCheckpointPro
           }
         }
 
-        const checkpointIndex = index + 1;
+        const isFirstCheckpoint = index === 0;
+        const isFirstCheckpointWithoutProgressLine = !hasStartCheckpoint && isFirstCheckpoint;
+
+        const checkpointProgress =
+          isFirstCheckpointWithoutProgressLine && checkpoints[1]?.progress !== undefined
+            ? PROGRESS_BAR_MAX_PROGRESS
+            : isCheckpointsWithoutProgress
+            ? PROGRESS_BAR_MIN_PROGRESS
+            : progress;
 
         return (
           <CheckpointInternal
             key={index}
             idQa={idQa}
             {...checkpoint}
-            progress={isCheckpointsWithoutProgress ? PROGRESS_BAR_MIN_PROGRESS : progress}
-            index={checkpointIndex}
+            progress={checkpointProgress}
+            withoutProgressLine={isFirstCheckpointWithoutProgressLine}
+            index={index + 1}
             zIndex={checkpoints.length - index}
           />
         );
