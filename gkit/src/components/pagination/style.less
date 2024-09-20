@@ -1,0 +1,36 @@
+.gkit-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .pagination-actions {
+    display: flex;
+
+    .pagination-btn .gkit-svg-icon {
+      width: 0.75rem;
+      height: 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .pagination-btn.prev {
+      margin-right: 0.75rem;
+    }
+
+    .pagination-btn.next {
+      margin-left: 0.75rem;
+    }
+
+    .pagination-btn,
+    .pagination-ellipsis {
+      width: 2rem;
+      height: 2rem;
+      user-select: none;
+    }
+
+    .pagination-ellipsis {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
