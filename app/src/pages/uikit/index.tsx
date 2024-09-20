@@ -18,6 +18,7 @@ import { Links } from './components/links';
 import { Loaders } from './components/loaders';
 import { Modals } from './components/modals';
 import { MultiSelects } from './components/multiSelects';
+import { Paginations } from './components/pagination';
 import { Panels } from './components/panels';
 import { Popovers } from './components/popovers';
 import { ProgressBars } from './components/progressBars';
@@ -61,6 +62,7 @@ const components = [
   Carousels,
   Loaders,
   Sliders,
+  Paginations,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
