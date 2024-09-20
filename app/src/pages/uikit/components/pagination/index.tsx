@@ -5,7 +5,9 @@ import { Pagination, PaginationProps } from '@itgenio/gkit/pagination';
 
 const DEFAULT_PROPS = { currentPage: 1, itemsPerPage: 2, totalItemsCount: 10 };
 
-const PaginationWrapper = (props: PaginationProps) => {
+type WrapperProps = Omit<PaginationProps, 'onPageChanged'>;
+
+const PaginationWrapper = (props: WrapperProps) => {
   const [page, setPage] = useState(props.currentPage);
 
   const onPageChanged = (page: number) => {
@@ -18,7 +20,7 @@ const PaginationWrapper = (props: PaginationProps) => {
 };
 
 export function Paginations() {
-  const states: { state: string; props: Omit<PaginationProps, 'onPageChanged'> }[] = [
+  const states: { state: string; props: WrapperProps }[] = [
     { state: 'default', props: { ...DEFAULT_PROPS } },
     { state: 'loading', props: { ...DEFAULT_PROPS, isLoading: true } },
   ];
