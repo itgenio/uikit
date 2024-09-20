@@ -15,7 +15,8 @@ const PaginationWrapper = (props: WrapperProps) => {
 
 export function Paginations() {
   const states: { state: string; props: WrapperProps }[] = [
-    { state: 'default', props: { ...DEFAULT_PROPS } },
+    { state: 'default, 5 pages', props: { ...DEFAULT_PROPS } },
+    { state: 'default, 10 pages', props: { ...DEFAULT_PROPS, totalItemsCount: 20 } },
     { state: 'loading', props: { ...DEFAULT_PROPS, isLoading: true } },
   ];
 
