@@ -10,13 +10,7 @@ type WrapperProps = Omit<PaginationProps, 'onPageChanged'>;
 const PaginationWrapper = (props: WrapperProps) => {
   const [page, setPage] = useState(props.currentPage);
 
-  const onPageChanged = (page: number) => {
-    setPage(page);
-
-    props.onPageChanged(page);
-  };
-
-  return <Pagination {...props} currentPage={page} onPageChanged={onPageChanged} />;
+  return <Pagination {...props} currentPage={page} onPageChanged={setPage} />;
 };
 
 export function Paginations() {
