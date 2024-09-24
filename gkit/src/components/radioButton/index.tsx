@@ -29,6 +29,7 @@ export function RadioButton({
       <input
         type="radio"
         className={classNames('radio-input', { hover })}
+        id-qa={classNames({ [`${idQa}-input`]: idQa })}
         {...{ disabled, checked, onChange, name, value }}
       />
 

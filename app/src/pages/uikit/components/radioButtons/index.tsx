@@ -25,7 +25,7 @@ export function RadioButtons() {
   const states: { state: string; props?: RadioButtonProps }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
-    { state: 'Checked', props: { checked: true } },
+    { state: 'Checked', props: { checked: true, idQa: 'checked' } },
     { state: 'Disabled', props: { disabled: true, checked: false } },
     { state: 'Disabled+Checked', props: { disabled: true, checked: true } },
   ];
