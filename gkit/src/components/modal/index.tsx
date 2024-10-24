@@ -46,6 +46,8 @@ export function Modal({
   return (
     <Backdrop
       className={classNames('gkit-modal', className)}
+      classNameWrapper="modal-wrapper"
+      classNameOverlay="modal-overlay"
       onClick={onClose}
       preventBodyScroll={preventBodyScroll}
       ignoreOverlayClick={ignoreOverlayClick}

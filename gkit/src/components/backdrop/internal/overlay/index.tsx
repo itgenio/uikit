@@ -1,9 +1,10 @@
+import classNames from 'classnames';
 import './style.less';
 
 import React from 'react';
 
-export type BackdropOverlayProps = { onClick?: React.MouseEventHandler<HTMLDivElement> };
+export type BackdropOverlayProps = { className?: string; onClick?: React.MouseEventHandler<HTMLDivElement> };
 
-export const BackdropOverlayInternal = ({ onClick }: BackdropOverlayProps) => {
-  return <div className="backdrop-overlay" onClick={onClick} />;
+export const BackdropOverlayInternal = ({ className, onClick }: BackdropOverlayProps) => {
+  return <div className={classNames('backdrop-overlay', className)} onClick={onClick} />;
 };

@@ -8,6 +8,8 @@ import { BackdropOverlayInternal, BackdropOverlayProps } from './internal/overla
 
 export type BackdropProps = PropsWithChildren<{
   className?: string;
+  classNameWrapper?: string;
+  classNameOverlay?: string;
   onClick?: BackdropOverlayProps['onClick'];
   preventBodyScroll?: boolean;
   ignoreOverlayClick?: boolean;
@@ -16,6 +18,8 @@ export type BackdropProps = PropsWithChildren<{
 
 export const Backdrop = ({
   className,
+  classNameWrapper,
+  classNameOverlay,
   onClick,
   preventBodyScroll = true,
   ignoreOverlayClick,
@@ -29,8 +33,8 @@ export const Backdrop = ({
   return (
     <Portal>
       <BackdropInternal className={className} setElement={setElement} idQa={idQa}>
-        <BackdropFocusLockWrapperInternal element={element}>
-          <BackdropOverlayInternal onClick={!ignoreOverlayClick ? onClick : undefined} />
+        <BackdropFocusLockWrapperInternal className={classNameWrapper} element={element}>
+          <BackdropOverlayInternal className={classNameOverlay} onClick={!ignoreOverlayClick ? onClick : undefined} />
 
           <BackdropContentInternal>{children}</BackdropContentInternal>
         </BackdropFocusLockWrapperInternal>
