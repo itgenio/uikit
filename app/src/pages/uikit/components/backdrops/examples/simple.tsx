@@ -24,9 +24,7 @@ export const BackdropExampleIgnoreClickOverlay = () => {
 
       {open && (
         <Backdrop onClick={onClose} ignoreOverlayClick>
-          <Button onClick={onClose} style={{ zIndex: 1 }}>
-            Open
-          </Button>
+          <Button onClick={onClose}>Open</Button>
         </Backdrop>
       )}
     </div>
