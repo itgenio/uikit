@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { Button, ButtonGroup } from '@itgenio/gkit/button';
 import { DarkModeButton } from '../../components/darkModeButton';
 import { Accordions } from './components/accordions';
+import { Backdrops } from './components/backdrops';
 import { Badges } from './components/badges';
 import { ButtonGroups } from './components/buttonGroup';
 import { Buttons } from './components/buttons';
@@ -63,6 +64,7 @@ const components = [
   Loaders,
   Sliders,
   Paginations,
+  Backdrops,
 ].sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 const DEFAULT = 0;
