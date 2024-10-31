@@ -24,7 +24,7 @@ export const BackdropExampleIgnoreClickOverlay = () => {
 
       {open && (
         <Backdrop onClick={onClose} ignoreOverlayClick>
-          <Button onClick={onClose}>Open</Button>
+          <Button onClick={onClose}>Close</Button>
         </Backdrop>
       )}
     </div>
