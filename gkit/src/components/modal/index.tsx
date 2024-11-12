@@ -51,6 +51,7 @@ export function Modal({
       onClick={onClose}
       preventBodyScroll={preventBodyScroll}
       ignoreOverlayClick={ignoreOverlayClick}
+      idQa={idQa}
     >
       <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
         {children}
