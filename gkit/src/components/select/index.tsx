@@ -252,7 +252,7 @@ export const Select = React.memo(
         <SelectPrimitive.Root
           value={value != null ? String(value) : undefined}
           onValueChange={onValueChange}
-          open={disabled ? false : undefined}
+          open={disabled ? false : open}
           onOpenChange={onOpenChange}
         >
           <SelectPrimitive.Trigger
@@ -263,8 +263,20 @@ export const Select = React.memo(
               disabled,
               filled,
             })}
-            id-qa={classNames({ [`${idQa}-trigger`]: idQa })}
             id={id}
+            onPointerDown={e => {
+              // https://github.com/radix-ui/primitives/issues/1641#issuecomment-2110760141
+              if (e.pointerType === 'touch') {
+                e.preventDefault();
+              }
+            }}
+            onPointerUp={e => {
+              // https://github.com/radix-ui/primitives/issues/1641#issuecomment-2110760141
+              if (e.pointerType === 'touch') {
+                setOpen(o => !o);
+              }
+            }}
+            id-qa={classNames({ [`${idQa}-trigger`]: idQa })}
           >
             {startAdornment}
 
@@ -286,6 +298,7 @@ export const Select = React.memo(
           >
             <Fragment>
               <Overlay open={canShowDropdown} />
+
               <SelectPrimitive.Content
                 {...dropdownProps}
                 className={classNames(SELECT_DROPDOWN_CN, dropdownProps.className)}
