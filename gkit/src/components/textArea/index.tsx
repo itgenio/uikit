@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { CSSProperties, useLayoutEffect, useMemo, useState } from 'react';
+import React, { CSSProperties, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -90,6 +90,14 @@ export const TextArea = React.memo(
         textAreaElement.style.height = `${textAreaElement.scrollHeight}px`;
       }
     }, [textAreaElement, textAreaValue, withAutoHeight]);
+
+    useEffect(() => {
+      if (!withAutoHeight) return;
+
+      if (value !== undefined && value.length === 0) {
+        setTextAreaValue('');
+      }
+    }, [value, withAutoHeight]);
 
     const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
       withAutoHeight && setTextAreaValue(e.currentTarget.value);
