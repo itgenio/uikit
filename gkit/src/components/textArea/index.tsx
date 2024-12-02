@@ -91,16 +91,16 @@ export const TextArea = React.memo(
       }
     }, [textAreaElement, textAreaValue, withAutoHeight]);
 
-    useEffect(() => {
-      if (!withAutoHeight) return;
+    const isControllableState = value !== undefined;
 
-      if (value !== undefined && value.length === 0) {
-        setTextAreaValue('');
-      }
-    }, [value, withAutoHeight]);
+    useEffect(() => {
+      if (!withAutoHeight || !isControllableState) return;
+
+      setTextAreaValue(value);
+    }, [isControllableState, value, withAutoHeight]);
 
     const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
-      withAutoHeight && setTextAreaValue(e.currentTarget.value);
+      !isControllableState && withAutoHeight && setTextAreaValue(e.currentTarget.value);
 
       onChange?.(e);
     };
