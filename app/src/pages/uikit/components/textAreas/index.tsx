@@ -33,8 +33,8 @@ export function TextAreas() {
             <div className="text-area-wrapper" key={`${index}${size}`}>
               <TextArea
                 {...p}
-                value={controllable ? value : props.value}
-                onChange={props.onChange ? e => setValue(e.target.value) : undefined}
+                value={controllable ? value : p.value}
+                onChange={p.onChange ? e => setValue(e.target.value) : undefined}
                 placeholder="Placeholder"
                 key={size}
                 label="Label"
