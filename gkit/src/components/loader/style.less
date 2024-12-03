@@ -3,6 +3,7 @@
 
 .gkit-loader {
   --gkit-loader-size: 1.5rem;
+  min-width: var(--gkit-loader-size);
 
   display: inline-flex;
   gap: 0.5rem;
@@ -24,17 +25,13 @@
   &.large {
     .text-lg();
 
-    .gkit-loader-circle {
-      --gkit-loader-size: 2rem;
-    }
+    --gkit-loader-size: 2rem;
   }
 
   &.small {
     .text-sm();
 
-    .gkit-loader-circle {
-      --gkit-loader-size: 1rem;
-    }
+    --gkit-loader-size: 1rem;
   }
 
   &.primary {
@@ -56,6 +53,4 @@
       transform: rotate(360deg);
     }
   }
-
-  min-width: var(--gkit-loader-size);
 }
