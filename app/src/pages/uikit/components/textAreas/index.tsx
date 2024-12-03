@@ -55,7 +55,7 @@ export function TextAreas() {
   const states: {
     state: string;
     props?: TextAreaProps;
-    settings: Settings;
+    settings?: Settings;
   }[] = [
     { state: 'Normal' },
     { state: 'Hover', props: { hover: true } },
