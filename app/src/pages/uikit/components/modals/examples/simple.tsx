@@ -139,13 +139,7 @@ export const ModalExampleDefaultWideScreen = () => {
   return (
     <div>
       <Button onClick={() => setOpen(o => !o)}>Open</Button>
-      <Modal
-        className="modal-with-long-body-example"
-        style={{ padding: '2rem' }}
-        open={open}
-        onClose={() => setOpen(false)}
-        wideScreen
-      >
+      <Modal className="modal-with-long-body-example" open={open} onClose={() => setOpen(false)} wideScreen>
         <Modal.Header>
           <Modal.Title title="Complex" />
         </Modal.Header>
