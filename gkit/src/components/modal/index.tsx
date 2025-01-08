@@ -12,6 +12,7 @@ export type ModalProps = PropsWithChildren<{
   open?: boolean;
   asBlock?: boolean;
   fullScreen?: boolean;
+  wideScreen?: boolean;
   preventBodyScroll?: boolean;
   ignoreOverlayClick?: boolean;
   idQa?: string;
@@ -24,6 +25,7 @@ export function Modal({
   onClose,
   asBlock,
   fullScreen,
+  wideScreen,
   preventBodyScroll = true,
   ignoreOverlayClick,
   idQa,
@@ -36,7 +38,7 @@ export function Modal({
   if (asBlock) {
     return (
       <ModalInternal className={className} asBlock idQa={idQa}>
-        <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
+        <ModalContentInternal onClose={onClose} fullScreen={fullScreen} wideScreen={wideScreen} idQa={idQaContent}>
           {children}
         </ModalContentInternal>
       </ModalInternal>
@@ -45,7 +47,7 @@ export function Modal({
 
   return (
     <Backdrop
-      className={classNames('gkit-modal', className)}
+      className={classNames('gkit-modal', className, { 'wide-screen': wideScreen })}
       classNameWrapper="modal-wrapper"
       classNameOverlay="modal-overlay"
       onClick={onClose}
@@ -53,7 +55,7 @@ export function Modal({
       ignoreOverlayClick={ignoreOverlayClick}
       idQa={idQa}
     >
-      <ModalContentInternal onClose={onClose} fullScreen={fullScreen} idQa={idQaContent}>
+      <ModalContentInternal onClose={onClose} fullScreen={fullScreen} wideScreen={wideScreen} idQa={idQaContent}>
         {children}
       </ModalContentInternal>
     </Backdrop>

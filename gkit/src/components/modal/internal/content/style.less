@@ -2,6 +2,10 @@
 @import (reference) "../../../../ui";
 
 .gkit-modal {
+  &.wide-screen .modal-wrapper .backdrop-content {
+    align-items: end;
+  }
+
   .modal-content {
     .shadow-lg();
 
@@ -24,6 +28,24 @@
       width: 100%;
       height: calc(100% - @margin * 2);
       margin: @margin;
+    }
+
+    &.wide-screen {
+      max-width: unset;
+      width: 100%;
+      height: calc(100% - 4.25rem);
+      border-radius: 1.5rem 1.5rem 0 0;
+      margin: initial;
+      padding: initial;
+
+      .close-modal-btn {
+        background-color: var(--gkit-color-neutral-0);
+        border-radius: 50%;
+        padding: 0.625rem;
+        top: -3.5rem;
+        width: unset;
+        height: unset;
+      }
     }
 
     .close-modal-btn {

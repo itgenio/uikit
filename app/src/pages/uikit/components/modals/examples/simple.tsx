@@ -133,6 +133,35 @@ export const ModalExampleDefaultFullScreen = () => {
   );
 };
 
+export const ModalExampleDefaultWideScreen = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(o => !o)}>Open</Button>
+      <Modal className="modal-with-long-body-example" open={open} onClose={() => setOpen(false)} wideScreen>
+        <Modal.Header>
+          <Modal.Title title="Complex" />
+        </Modal.Header>
+
+        <Modal.Body>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20rem' }}>
+            {['Какой-то', 'длинный', 'текст', 'со', 'скролом'].map((text, index) => (
+              <Modal.Text key={index}>{text}</Modal.Text>
+            ))}
+          </div>
+        </Modal.Body>
+
+        <Modal.Footer className="modal-footer-flex" idQa="modal-footer">
+          <Button type="secondary">Ok</Button>
+
+          <Button type="danger">Not OK</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
 export const ModalExampleWithSelect = () => {
   const [open, setOpen] = useState(false);
 
