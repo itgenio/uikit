@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { Loader } from '@itgenio/gkit/loader';
 
 export function Loaders() {
-  const sizes = ['small', 'normal', 'large'];
+  const sizes = ['small', 'normal', 'large', 48];
 
   const renderState = (state: string, props: any = {}, content?: any) => {
     return (
