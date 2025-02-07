@@ -8,6 +8,7 @@
   gap: 0.5rem;
   align-items: center;
   overflow: hidden;
+  min-width: var(--gkit-loader-size);
 
   .gkit-loader-circle {
     display: inline-flex;
@@ -24,17 +25,13 @@
   &.large {
     .text-lg();
 
-    .gkit-loader-circle {
-      --gkit-loader-size: 2rem;
-    }
+    --gkit-loader-size: 2rem;
   }
 
   &.small {
     .text-sm();
 
-    .gkit-loader-circle {
-      --gkit-loader-size: 1rem;
-    }
+    --gkit-loader-size: 1rem;
   }
 
   &.primary {

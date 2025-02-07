@@ -1,6 +1,6 @@
 import './style.less';
 import classNames from 'classnames';
-import React, { CSSProperties, useLayoutEffect, useMemo, useState } from 'react';
+import React, { CSSProperties, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 
@@ -91,8 +91,16 @@ export const TextArea = React.memo(
       }
     }, [textAreaElement, textAreaValue, withAutoHeight]);
 
+    const isControllableState = value !== undefined;
+
+    useEffect(() => {
+      if (!withAutoHeight || !isControllableState) return;
+
+      setTextAreaValue(value);
+    }, [isControllableState, value, withAutoHeight]);
+
     const onValueChange = (e?: React.ChangeEvent<HTMLTextAreaElement>) => {
-      withAutoHeight && setTextAreaValue(e.currentTarget.value);
+      !isControllableState && withAutoHeight && setTextAreaValue(e.currentTarget.value);
 
       onChange?.(e);
     };
