@@ -66,4 +66,4 @@ export * from './mobilePhone';
 export * from './musicalNote';
 export * from './shintoShrine';
 export * from './soccerBall';
-export * from './pensiveFaceWithSweat';
+export * from './downcastFaceWithSweat';
