@@ -67,3 +67,4 @@ export * from './musicalNote';
 export * from './shintoShrine';
 export * from './soccerBall';
 export * from './downcastFaceWithSweat';
+export * from './dizzy';
