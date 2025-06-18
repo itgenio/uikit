@@ -24,18 +24,33 @@ export function SwitcherContainer({ children, className, idQa, ...toggleProps }:
 }
 
 type Sizes = 'medium' | 'large';
+type ActiveColor = 'primary' | 'black';
 
 export type SwitcherItemProps = PropsWithChildren<{
   value?: string;
   size?: Sizes;
+  activeColor?: ActiveColor;
   className?: string;
   idQa?: string;
   disabled?: boolean;
 }>;
 
-export function SwitcherItem({ children, idQa, value, size = 'medium', className, disabled }: SwitcherItemProps) {
+export function SwitcherItem({
+  children,
+  idQa,
+  value,
+  size = 'medium',
+  activeColor = 'primary',
+  className,
+  disabled,
+}: SwitcherItemProps) {
   return (
-    <ToggleItem id-qa={idQa} className={classNames('switcher-item', className, size)} value={value} disabled={disabled}>
+    <ToggleItem
+      id-qa={idQa}
+      className={classNames('switcher-item', className, size, activeColor)}
+      value={value}
+      disabled={disabled}
+    >
       {children && <span className="switcher-span">{children}</span>}
     </ToggleItem>
   );
