@@ -29,6 +29,7 @@ export type ButtonProps = React.PropsWithChildren<{
   idQa?: string;
   tabIndex?: number;
   asTextButton?: boolean;
+  withBottomShadow?: boolean;
   nativeButtonType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }> &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'>;
@@ -46,6 +47,7 @@ export const Button = forwardRef(function Button(
     className,
     idQa,
     asTextButton,
+    withBottomShadow,
     nativeButtonType,
     ...props
   }: ButtonProps,
@@ -62,6 +64,7 @@ export const Button = forwardRef(function Button(
         focus,
         icon: asIcon,
         'text-btn': asTextButton,
+        'with-bottom-shadow': withBottomShadow,
       })}
       type={nativeButtonType}
       {...props}
