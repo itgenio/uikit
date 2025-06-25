@@ -6,10 +6,13 @@
 
   &:not(.text-btn) {
     min-width: 4.75rem;
-    width: 100%;
     height: var(--height);
     box-shadow: 0 calc(-1 * var(--bottom-shadow-height)) 0 0 var(--shadow-color) inset;
     padding: var(--padding-top) var(--padding-right) calc(var(--padding-top) + var(--bottom-shadow-height));
+
+    &.full-width {
+      width: 100%;
+    }
 
     &.icon {
       width: var(--width);

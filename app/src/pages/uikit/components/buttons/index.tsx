@@ -67,6 +67,7 @@ export function Buttons() {
     { state: 'withBottomShadow Focused', props: { focus: true, withBottomShadow: true } },
     { state: 'withBottomShadow Pressed', props: { active: true, withBottomShadow: true } },
     { state: 'withBottomShadow Disabled', props: { disabled: true, withBottomShadow: true } },
+    { state: 'withBottomShadow fullWidth', props: { fullWidth: true, withBottomShadow: true } },
     { state: 'As Icon', props: { asIcon: true, children: <TestIcon key="testIcon" /> } },
     {
       state: 'withBottomShadow As Icon',
