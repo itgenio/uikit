@@ -300,6 +300,30 @@
     }
   }
 
+  &.orangePrimary {
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-orange-500);
+      color: var(--gkit-color-neutral-0);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-orange-500);
+    }
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-orange-600);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-orange-600);
+        }
+      }
+    }
+  }
+
   &.danger {
     &:not(.text-btn) {
       background-color: var(--gkit-color-light-danger-500);

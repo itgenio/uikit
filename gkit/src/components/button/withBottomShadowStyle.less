@@ -160,6 +160,17 @@
     }
   }
 
+  &.orangePrimary {
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-orange-500);
+        }
+      }
+    }
+  }
+
   &.danger {
     &:not([disabled]) {
       &.hover,
