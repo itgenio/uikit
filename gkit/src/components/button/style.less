@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  transition: transform 100ms ease-out, background-color 200ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, background-color 200ms ease-out, -webkit-transform 100ms ease-out, box-shadow 50ms ease-in-out;
 
   //normal
   .text-base();
@@ -17,6 +17,10 @@
     border-radius: 0.5rem;
     padding: 0.5rem 1.5rem;
     min-width: 6rem;
+  }
+
+  &.full-width {
+    width: 100%;
   }
 
   &.icon {
@@ -296,6 +300,30 @@
     }
   }
 
+  &.orangePrimary {
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-orange-500);
+      color: var(--gkit-color-neutral-0);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-orange-500);
+    }
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-orange-600);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-orange-600);
+        }
+      }
+    }
+  }
+
   &.danger {
     &:not(.text-btn) {
       background-color: var(--gkit-color-light-danger-500);
@@ -344,3 +372,5 @@
     }
   }
 }
+
+@import "./withBottomShadowStyle";
