@@ -17,7 +17,8 @@ type Types =
   | 'green'
   | 'purple'
   | 'orange'
-  | 'orangePrimary';
+  | 'orangePrimary'
+  | 'black';
 
 export type ButtonProps = React.PropsWithChildren<{
   size?: Sizes;
