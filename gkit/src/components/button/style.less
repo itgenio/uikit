@@ -371,6 +371,30 @@
       }
     }
   }
+
+  &.black {
+    &:not(.text-btn) {
+      background-color: var(--gkit-color-neutral-800);
+      color: var(--gkit-color-neutral-0);
+    }
+
+    &.text-btn {
+      color: var(--gkit-color-neutral-800);
+    }
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-neutral-700);
+        }
+
+        &.text-btn {
+          color: var(--gkit-color-neutral-800);
+        }
+      }
+    }
+  }
 }
 
 @import "./withBottomShadowStyle";

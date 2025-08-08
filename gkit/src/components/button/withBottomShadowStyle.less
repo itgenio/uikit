@@ -194,4 +194,17 @@
       }
     }
   }
+
+  &.black {
+    --shadow-color: var(--gkit-color-neutral-900);
+
+    &:not([disabled]) {
+      &.hover,
+      &:hover {
+        &:not(.text-btn) {
+          background-color: var(--gkit-color-neutral-800);
+        }
+      }
+    }
+  }
 }
