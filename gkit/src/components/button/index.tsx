@@ -1,6 +1,7 @@
 import './style.less';
+
 import classNames from 'classnames';
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ButtonHTMLAttributes, ForwardedRef, forwardRef } from 'react';
 
 export const BUTTON_CN = 'gkit-btn';
 
@@ -15,12 +16,13 @@ type Types =
   | 'blue'
   | 'green'
   | 'purple'
-  | 'orange';
+  | 'orange'
+  | 'orangePrimary'
+  | 'black';
 
 export type ButtonProps = React.PropsWithChildren<{
   size?: Sizes;
   type?: Types;
-  disabled?: boolean;
   hover?: boolean;
   active?: boolean;
   focus?: boolean;
@@ -29,8 +31,11 @@ export type ButtonProps = React.PropsWithChildren<{
   idQa?: string;
   tabIndex?: number;
   asTextButton?: boolean;
+  withBottomShadow?: boolean;
+  fullWidth?: boolean;
+  nativeButtonType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }> &
-  React.DOMAttributes<HTMLButtonElement>;
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'>;
 
 export const Button = forwardRef(function Button(
   {
@@ -45,6 +50,9 @@ export const Button = forwardRef(function Button(
     className,
     idQa,
     asTextButton,
+    withBottomShadow,
+    fullWidth,
+    nativeButtonType,
     ...props
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
@@ -60,7 +68,10 @@ export const Button = forwardRef(function Button(
         focus,
         icon: asIcon,
         'text-btn': asTextButton,
+        'with-bottom-shadow': withBottomShadow,
+        'full-width': fullWidth,
       })}
+      type={nativeButtonType}
       {...props}
     >
       {children}

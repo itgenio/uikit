@@ -14,56 +14,38 @@ import { generateId } from '../internal/utils/generateId';
 
 type Sizes = 'small' | 'large';
 
-export type TextFieldProps = PropsWithChildren<{
-  disabled?: boolean;
-  hover?: boolean;
-  active?: boolean;
-  focus?: boolean;
-  error?: boolean;
-  className?: string;
-  value?: string | number;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
-  size?: Sizes;
-  fullWidth?: boolean;
-  label?: string;
-  helperText?: React.ReactNode;
-  inputType?: HTMLInputTypeAttribute;
-  inputPattern?: string;
-  required?: boolean;
-  idQa?: string;
-  idQaForInput?: string;
-  idQaForHelperText?: string;
-  name?: string;
-  autoComplete?: string;
-  autoFocus?: boolean;
-  dataList?: string[];
-  maxLength?: number;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  inputRef?: ForwardedRef<HTMLInputElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
-  onTouchStart?: React.KeyboardEventHandler<HTMLInputElement>;
-  onClick?: MouseEventHandler<HTMLDivElement>;
-  onInputClick?: MouseEventHandler<HTMLInputElement>;
-  readOnly?: boolean;
-}>;
+export type TextFieldProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onClick'> &
+  PropsWithChildren<{
+    hover?: boolean;
+    active?: boolean;
+    focus?: boolean;
+    error?: boolean;
+    size?: Sizes;
+    fullWidth?: boolean;
+    label?: string;
+    helperText?: React.ReactNode;
+    inputType?: HTMLInputTypeAttribute;
+    inputPattern?: string;
+    idQa?: string;
+    idQaForInput?: string;
+    idQaForHelperText?: string;
+    dataList?: string[];
+    startAdornment?: React.ReactNode;
+    endAdornment?: React.ReactNode;
+    inputRef?: ForwardedRef<HTMLInputElement>;
+    onInputClick?: MouseEventHandler<HTMLInputElement>;
+  }>;
 
 export const TextField = forwardRef(function TextField(
   {
-    value,
     size = 'large',
     fullWidth,
-    placeholder,
     hover,
     disabled,
     active,
     focus,
     error,
     className,
-    onChange,
     label,
     helperText,
     inputType = 'text',
@@ -72,20 +54,12 @@ export const TextField = forwardRef(function TextField(
     idQa,
     idQaForInput,
     idQaForHelperText,
-    name,
-    autoComplete,
-    autoFocus,
     dataList,
-    maxLength,
-    onFocus,
-    onBlur,
     startAdornment,
     endAdornment,
     inputRef,
-    onKeyDown,
-    onTouchStart,
     onInputClick,
-    readOnly,
+    ...inputProps
   }: TextFieldProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -117,21 +91,10 @@ export const TextField = forwardRef(function TextField(
           list={id + 'list'}
           pattern={inputPattern}
           {...{
+            ...inputProps,
             required,
-            value,
             id,
-            onChange,
-            placeholder,
-            autoFocus,
-            onFocus,
-            onBlur,
-            maxLength,
             disabled,
-            readOnly,
-            name,
-            autoComplete,
-            onKeyDown,
-            onTouchStart,
             onClick: e => {
               if (!onInputClick) return;
 
