@@ -39,15 +39,22 @@
         @media @mobile-portrait, @mobile-landscape {
           .text-base();
         }
+
+        &::placeholder {
+          .text-sm();
+        }
       }
 
       &.large {
         .text-base();
         padding: calc(0.75rem - 1px) 0;
+
+        &::placeholder {
+          .text-base();
+        }
       }
 
       &::placeholder {
-        .text-base();
         font-weight: @font-weight-normal;
       }
     }
