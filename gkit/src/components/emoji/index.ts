@@ -71,3 +71,4 @@ export * from './dizzy';
 export * from './package';
 export * from './tearOffCalendar';
 export * from './wrappedGift';
+export * from './handshake';
