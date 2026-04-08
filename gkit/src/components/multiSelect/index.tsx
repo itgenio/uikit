@@ -52,7 +52,8 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   search?: {
     active: boolean;
     props?: TextFieldProps;
-    filterOption?: (option: Option, query: string) => boolean };
+    filterOption?: (option: Option, query: string) => boolean;
+  };
   renderValuesInline?:
     | {
         /** If children will have nodes (not strings), enter a coeff to correct calc the field length */
@@ -139,9 +140,7 @@ export function MultiSelect<T extends MultiSelectOption>({
     const query = searchValue.toLowerCase();
 
     options = options.filter(option =>
-      search.filterOption
-        ? search.filterOption(option, query)
-        : option.label.toLowerCase().includes(query)
+      search.filterOption ? search.filterOption(option, query) : option.label.toLowerCase().includes(query)
     );
   }
 
