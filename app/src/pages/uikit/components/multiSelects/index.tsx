@@ -11,8 +11,10 @@ type Props = MultiSelectProps<Option>;
 type CustomProps = { closureRenderValue?: (size: Props['size']) => Props['renderValues'] };
 const sizes = ['small', 'large'] as const;
 
+const OPTIONS_LENGTH = 60;
+
 export const getMultiSelectOptions = (withObjValues = false): Option[] => {
-  return Array.from({ length: 60 }, (_, i) => {
+  return Array.from({ length: OPTIONS_LENGTH }, (_, i) => {
     const index = i + 1;
 
     return {
@@ -78,6 +80,7 @@ export function MultiSelects() {
               onChange={values => {
                 isOptionsWithObjState ? setObjValues(values) : setValue(values);
               }}
+              scrollToFirstSelectedOnOpen
             />
           );
         })}
@@ -114,6 +117,10 @@ export function MultiSelects() {
       state: 'Render values inline with counter (with coeffForShowCount)',
       props: { renderValuesInline: { coeffForShowCount: 0.9 } },
       customProps: { closureRenderValue: getClosureRenderValue(setValue, true) },
+    },
+    {
+      state: 'With dropdown scroll',
+      props: { optionsScrollConfig: { active: true } },
     },
   ];
 

@@ -14,6 +14,7 @@ import { Checkbox } from '../checkbox';
 import { InputsContainer } from '../internal/components/inputsContainer';
 import { generateId } from '../internal/utils/generateId';
 import { TextField, TextFieldProps } from '../textField';
+import { OptionsScrollConfig, useMultiSelectScrollToSelectedOption } from './useMultiSelectScrollToSelectedOption';
 
 const DROPDOWN_PADDING = 20;
 
@@ -21,7 +22,7 @@ type Sizes = 'small' | 'large';
 
 type GroupConfig = { hideText?: boolean; hideSeparator?: boolean; separateNotGrouped?: boolean };
 
-type Key = string | number;
+export type Key = string | number;
 
 export type MultiSelectOption<T extends Object = {}> = {
   label: string;
@@ -56,6 +57,7 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
         coeffForShowCount?: number;
       }
     | boolean;
+  optionsScrollConfig?: OptionsScrollConfig;
 };
 
 export function MultiSelect<T extends MultiSelectOption>({
@@ -79,6 +81,7 @@ export function MultiSelect<T extends MultiSelectOption>({
   idQaForHelperText,
   search,
   renderValuesInline,
+  optionsScrollConfig,
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
   const hasValue = values.length > 0;
@@ -135,6 +138,14 @@ export function MultiSelect<T extends MultiSelectOption>({
   if (search?.active && hasValueInSearch) {
     options = options.filter(option => option.label.toLowerCase().includes(searchValue.toLowerCase()));
   }
+
+  const { getOptionRef } = useMultiSelectScrollToSelectedOption({
+    optionsScrollConfig,
+    isDropdownOpen: canShowDropdown,
+    dropdownRef,
+    options,
+    values,
+  });
 
   const renderValues = () => {
     if (renderValuesProp) {
@@ -227,6 +238,7 @@ export function MultiSelect<T extends MultiSelectOption>({
         id-qa={classNames({ [`${idQa}-option-${optionValue}`]: idQa })}
         className={classNames('multi-select-option', size, { disabled: isDisabled })}
         key={optionValue}
+        ref={getOptionRef(optionValue)}
         onChange={e => {
           e.stopPropagation();
 
