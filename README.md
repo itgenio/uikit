@@ -14,7 +14,9 @@
 
 ## Релиз пакета
 
-`npm version patch && npm publish`
+`npm login` 
+`publish-beta` - публикация бета версии
+`publish-prod`
 
 ## Описание
 

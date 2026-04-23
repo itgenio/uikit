@@ -1,6 +1,6 @@
 {
   "name": "@itgenio/gkit",
-  "version": "0.0.220",
+  "version": "0.0.221",
   "description": "GKIT",
   "main": "./index.js",
   "scripts": {
@@ -9,7 +9,9 @@
     "watch": "npm run clean && ts-node ./scripts/build.js",
     "tsc": "ts-node ./scripts/buildTypes.js",
     "prepack": "npm run build && npm run tsc",
-    "clean": "ts-node ./scripts/clean.js"
+    "clean": "ts-node ./scripts/clean.js",
+    "publish-beta": "npm version prerelease --preid beta --no-git-tag-version && npm publish --tag beta",
+    "publish-prod": "npm version patch && npm publish"
   },
   "author": "Alex So",
   "license": "MIT",
