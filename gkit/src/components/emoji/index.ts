@@ -72,3 +72,4 @@ export * from './package';
 export * from './tearOffCalendar';
 export * from './wrappedGift';
 export * from './handshake';
+export * from './briefcase';
