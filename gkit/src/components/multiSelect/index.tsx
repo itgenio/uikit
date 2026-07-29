@@ -35,6 +35,8 @@ export type MultiSelectProps<Option extends MultiSelectOption> = {
   options?: Option[];
   values?: Option['value'][];
   onChange?: (selectedValues: Option['value'][]) => void;
+  onClose?: () => void;
+  onClear?: (params: { isDropdownOpen: boolean }) => void;
   renderValues?: (values: Option['value'][]) => React.ReactNode;
   size?: Sizes;
   label?: string;
@@ -77,6 +79,8 @@ export function MultiSelect<T extends MultiSelectOption>({
   options,
   helperText,
   onChange,
+  onClose,
+  onClear,
   selectAllOptionLabel,
   hasSelectAllOption,
   inputText,
@@ -103,6 +107,22 @@ export function MultiSelect<T extends MultiSelectOption>({
   const canShowDropdown = open && !disabled;
 
   useOnClickOutside(ref, () => setOpen(false));
+
+  const wasDropdownShownRef = useRef(false);
+
+  useEffect(() => {
+    if (wasDropdownShownRef.current && !canShowDropdown) {
+      onClose?.();
+    }
+
+    wasDropdownShownRef.current = canShowDropdown;
+  }, [canShowDropdown, onClose]);
+
+  useEffect(() => {
+    if (disabled && open) {
+      setOpen(false);
+    }
+  }, [disabled, open]);
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -217,6 +237,8 @@ export function MultiSelect<T extends MultiSelectOption>({
               e.stopPropagation();
 
               onChange([]);
+
+              onClear?.({ isDropdownOpen: canShowDropdown });
             }}
           >
             {values.length}
@@ -321,7 +343,9 @@ export function MultiSelect<T extends MultiSelectOption>({
         onClick={e => {
           e.stopPropagation();
 
-          setOpen(!open);
+          if (disabled) return;
+
+          setOpen(prev => !prev);
         }}
         id={id}
         ref={node => {
