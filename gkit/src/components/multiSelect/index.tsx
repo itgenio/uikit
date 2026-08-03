@@ -106,23 +106,22 @@ export function MultiSelect<T extends MultiSelectOption>({
 
   const canShowDropdown = open && !disabled;
 
-  useOnClickOutside(ref, () => setOpen(false));
+  const closeDropdown = useCallback(() => {
+    if (!canShowDropdown) return;
 
-  const wasDropdownShownRef = useRef(false);
-
-  useEffect(() => {
-    if (wasDropdownShownRef.current && !canShowDropdown) {
-      onClose?.();
-    }
-
-    wasDropdownShownRef.current = canShowDropdown;
+    setOpen(false);
+    onClose?.();
   }, [canShowDropdown, onClose]);
 
+  useOnClickOutside(ref, closeDropdown);
+
   useEffect(() => {
-    if (disabled && open) {
-      setOpen(false);
-    }
-  }, [disabled, open]);
+    if (!disabled || !open) return;
+
+    setOpen(false);
+
+    onClose?.();
+  }, [disabled, open, onClose]);
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -345,7 +344,11 @@ export function MultiSelect<T extends MultiSelectOption>({
 
           if (disabled) return;
 
-          setOpen(prev => !prev);
+          if (canShowDropdown) {
+            closeDropdown();
+          } else {
+            setOpen(true);
+          }
         }}
         id={id}
         ref={node => {
