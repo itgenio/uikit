@@ -107,21 +107,19 @@ export function MultiSelect<T extends MultiSelectOption>({
   const canShowDropdown = open && !disabled;
 
   const closeDropdown = useCallback(() => {
-    if (!canShowDropdown) return;
+    if (!open) return;
 
     setOpen(false);
     onClose?.();
-  }, [canShowDropdown, onClose]);
+  }, [onClose, open]);
 
   useOnClickOutside(ref, closeDropdown);
 
   useEffect(() => {
     if (!disabled || !open) return;
 
-    setOpen(false);
-
-    onClose?.();
-  }, [disabled, open, onClose]);
+    closeDropdown();
+  }, [closeDropdown, disabled, open]);
 
   useLayoutEffect(() => {
     if (!open) return;
