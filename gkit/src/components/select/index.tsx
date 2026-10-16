@@ -249,9 +249,11 @@ export const Select = React.memo(
       [dropdownProps, open, search?.active]
     );
 
+    const searchOnKeyDown = search?.props?.onKeyDown;
+
     const onSearchKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
-        search?.props?.onKeyDown?.(e);
+        searchOnKeyDown?.(e);
 
         // Radix treats printable keys as list typeahead. Filtering can
         // unmount the matched item before Radix's deferred focus runs.
@@ -268,7 +270,7 @@ export const Select = React.memo(
           e.stopPropagation();
         }
       },
-      [onKeyDownContent, search?.props?.onKeyDown]
+      [onKeyDownContent, searchOnKeyDown]
     );
 
     const onOpenChange = useCallback(
