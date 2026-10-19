@@ -204,6 +204,8 @@ export const Select = React.memo(
     };
 
     const onValueChange = (newValue: string) => {
+      if (options.length === 0) return;
+
       const option = options.find(option => String(option.value) === newValue);
 
       if (!option) {
