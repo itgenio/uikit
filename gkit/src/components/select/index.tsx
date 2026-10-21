@@ -204,6 +204,8 @@ export const Select = React.memo(
     };
 
     const onValueChange = (newValue: string) => {
+      if (options.length === 0) return;
+
       const option = options.find(option => String(option.value) === newValue);
 
       if (!option) {
@@ -223,19 +225,54 @@ export const Select = React.memo(
     );
 
     const onKeyDownContent = useCallback(
-      (e: React.KeyboardEvent<HTMLInputElement>) => {
+      (e: React.KeyboardEvent<HTMLElement>, contentElement = e.currentTarget) => {
         if (search?.active) {
           const node = e.target as HTMLInputElement;
 
           if (node.nodeName === 'INPUT') {
             //return focus when typing https://github.com/radix-ui/primitives/blob/main/packages/react/select/src/Select.tsx#L529
-            setTimeout(() => node.focus(), 1);
+            setTimeout(() => {
+              if (node.isConnected && open) {
+                node.focus();
+              }
+            }, 1);
           }
         }
 
-        dropdownProps.onKeyDown?.(e);
+        const currentTarget = e.currentTarget;
+        e.currentTarget = contentElement;
+
+        try {
+          dropdownProps.onKeyDown?.(e as React.KeyboardEvent<HTMLDivElement>);
+        } finally {
+          e.currentTarget = currentTarget;
+        }
       },
-      [dropdownProps, search?.active]
+      [dropdownProps, open, search?.active]
+    );
+
+    const searchOnKeyDown = search?.props?.onKeyDown;
+
+    const onSearchKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
+        searchOnKeyDown?.(e);
+
+        // Radix treats printable keys as list typeahead. Filtering can
+        // unmount the matched item before Radix's deferred focus runs.
+        // Keep Shift here: Shift+letters and shifted symbols are text input,
+        // and Radix excludes only Ctrl, Alt, and Meta from typeahead.
+        if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+          // Preserve the Content-level callback that would normally receive
+          // this bubbled event, unless the search handler stopped propagation.
+          if (!e.isPropagationStopped()) {
+            const contentElement = e.currentTarget.closest<HTMLDivElement>(`.${SELECT_DROPDOWN_CN}`);
+            onKeyDownContent(e, contentElement ?? e.currentTarget);
+          }
+
+          e.stopPropagation();
+        }
+      },
+      [onKeyDownContent, searchOnKeyDown]
     );
 
     const onOpenChange = useCallback(
@@ -317,6 +354,7 @@ export const Select = React.memo(
                       className={classNames('gkit-select-search', search.props?.className)}
                       value={searchValue ?? ''}
                       onChange={onSearchValueChange}
+                      onKeyDown={onSearchKeyDown}
                     />
                   )}
 
