@@ -73,3 +73,5 @@ export * from './tearOffCalendar';
 export * from './wrappedGift';
 export * from './handshake';
 export * from './briefcase';
+export * from './neutralFace';
+export * from './disappointedFace';
