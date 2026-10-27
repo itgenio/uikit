@@ -3,6 +3,7 @@ const { build } = require('esbuild');
 const { lessLoader } = require('esbuild-plugin-less');
 const svgPlugin = require('./plugins/svgPlugin');
 const writePlugin = require('./plugins/writePlugin');
+const externalEntriesPlugin = require('./plugins/externalEntriesPlugin');
 
 // isProduction flag for watch mode
 const isProduction = process.env.NODE_ENV === 'production';
@@ -14,8 +15,16 @@ const isProduction = process.env.NODE_ENV === 'production';
     'src/index.ts', // global styles
     'src/components/emoji/index.ts', // emoji
     'src/components/*/index.tsx', // components
-    '!src/components/internal', // exclude internal components
+    'src/components/internal/components/*/index.tsx', // internal components with styles
   ]);
+
+  // Каждая точка входа собирается в <имя папки>/index.js, поэтому имена папок должны быть уникальными
+  const entryNames = entryPoints.map(entryPoint => path.basename(path.dirname(entryPoint)));
+  const duplicatedNames = entryNames.filter((name, index) => entryNames.indexOf(name) !== index);
+
+  if (duplicatedNames.length) {
+    throw new Error(`Entry points with the same name: ${duplicatedNames.join(', ')}`);
+  }
 
   await build({
     watch: isProduction
@@ -50,6 +59,9 @@ const isProduction = process.env.NODE_ENV === 'production';
       '@radix-ui/react-toast',
       'use-onclickoutside',
     ],
-    plugins: [lessLoader(), svgPlugin(), writePlugin()],
-  }).catch(e => console.error(e.message));
+    plugins: [externalEntriesPlugin({ entryPoints }), lessLoader(), svgPlugin(), writePlugin()],
+  }).catch(e => {
+    console.error(e.message);
+    process.exitCode = 1;
+  });
 })();
