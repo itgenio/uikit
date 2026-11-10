@@ -19,10 +19,11 @@ const isProduction = process.env.NODE_ENV === 'production';
   ]);
 
   // Каждая точка входа собирается в <имя папки>/index.js, поэтому имена папок должны быть уникальными
-  const entryNames = entryPoints.map(entryPoint => path.basename(path.dirname(entryPoint)));
-  const duplicatedNames = entryNames.filter((name, index) => entryNames.indexOf(name) !== index);
+  const duplicatedNames = entryPoints
+    .map(entryPoint => path.basename(path.dirname(entryPoint)))
+    .filter((name, index, names) => names.indexOf(name) !== index);
 
-  if (duplicatedNames.length) {
+  if (duplicatedNames.length > 0) {
     throw new Error(`Entry points with the same name: ${duplicatedNames.join(', ')}`);
   }
 
