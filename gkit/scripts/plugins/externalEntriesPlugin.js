@@ -21,7 +21,7 @@ module.exports = ({ entryPoints }) => ({
           pluginData: { isExternalEntriesCheck: true },
         });
 
-        if (errors.length || !entryFiles.includes(resolvedPath)) return;
+        if (errors.length > 0 || !entryFiles.includes(resolvedPath)) return;
 
         const entryDir = path.dirname(resolvedPath);
 
