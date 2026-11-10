@@ -24,13 +24,14 @@ module.exports = () => ({
           const fileNameWithoutExt = fileName.replace(JS_EXT, '');
 
           // Если это JS сборка, то нужно импортировать в него CSS сборку
+          // В конец файла, чтобы CSS импортируемых компонентов подключался раньше собственного
           if (filePath.endsWith(JS_EXT)) {
             const cssFileRelativePath = `./${fileNameWithoutExt}.css`;
 
             const cssFile = filesDict[path.resolve(fileDir, cssFileRelativePath)];
 
             if (cssFile) {
-              fileText = `import '${cssFileRelativePath}';\n${fileText}`;
+              fileText = `${fileText}import '${cssFileRelativePath}';\n`;
             }
           }
 
